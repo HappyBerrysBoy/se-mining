@@ -1,0 +1,322 @@
+
+
+            WITH VAL AS
+            (SELECT 
+        SQL_STMT := SQL_STMT || '' || IN_TMN_COD || '' TMN_COD,';
+        SQL_STMT := SQL_STMT || '' || IN_ROUTE || '' ROUTE,';
+        SQL_STMT := SQL_STMT || '' || IN_OPR || '' OPR,';
+        SQL_STMT := SQL_STMT || '' || IN_FROM_DTE || '' FROM_DTE,';
+        SQL_STMT := SQL_STMT || '' || IN_TO_DTE || '' TO_DTE, ';
+        SQL_STMT := SQL_STMT || '' || ROUTE_TPL_NO || '' ROUTE_TPL_NO, ';
+        SQL_STMT := SQL_STMT || '' || OPR_TPL_NO || '' OPR_TPL_NO, ';
+        SQL_STMT := SQL_STMT || '' || EXCEPT_VVD || '' EXCEPT_VVD ';
+        SQL_STMT := SQL_STMT || ' 
+            FROM DUAL),
+        VSUM AS
+            (SELECT
+            A.TMN_COD,
+            A.ROUTE_SEQ,
+            A.ROUTE,
+            A.ROUTE_TPL_NO,
+            A.ROUTE_MST_NO,
+            B.OPR,
+            B.DISP_SEQ OPR_SEQ,
+            A.APPLY_MON,
+            NVL(DIS_LO_F20, 0) DIS_LO_F20,
+            NVL(DIS_LO_F40, 0) DIS_LO_F40,
+            NVL(DIS_LO_F45, 0) DIS_LO_F45,
+            NVL(DIS_LO_E20, 0) DIS_LO_E20,
+            NVL(DIS_LO_E40, 0) DIS_LO_E40,
+            NVL(DIS_LO_E45, 0) DIS_LO_E45,
+            NVL(LOD_LO_F20, 0) LOD_LO_F20,
+            NVL(LOD_LO_F40, 0) LOD_LO_F40,
+            NVL(LOD_LO_F45, 0) LOD_LO_F45,
+            NVL(LOD_LO_E20, 0) LOD_LO_E20,
+            NVL(LOD_LO_E40, 0) LOD_LO_E40,
+            NVL(LOD_LO_E45, 0) LOD_LO_E45,
+            NVL(DIS_T1_F20, 0) DIS_T1_F20,
+            NVL(DIS_T1_F40, 0) DIS_T1_F40,
+            NVL(DIS_T1_F45, 0) DIS_T1_F45,
+            NVL(DIS_T1_E20, 0) DIS_T1_E20,
+            NVL(DIS_T1_E40, 0) DIS_T1_E40,
+            NVL(DIS_T1_E45, 0) DIS_T1_E45,
+            NVL(LOD_T1_F20, 0) LOD_T1_F20,
+            NVL(LOD_T1_F40, 0) LOD_T1_F40,
+            NVL(LOD_T1_F45, 0) LOD_T1_F45,
+            NVL(LOD_T1_E20, 0) LOD_T1_E20,
+            NVL(LOD_T1_E40, 0) LOD_T1_E40,
+            NVL(LOD_T1_E45, 0) LOD_T1_E45,
+            NVL(DIS_T2_F20, 0) DIS_T2_F20,
+            NVL(DIS_T2_F40, 0) DIS_T2_F40,
+            NVL(DIS_T2_F45, 0) DIS_T2_F45,
+            NVL(DIS_T2_E20, 0) DIS_T2_E20,
+            NVL(DIS_T2_E40, 0) DIS_T2_E40,
+            NVL(DIS_T2_E45, 0) DIS_T2_E45,
+            NVL(LOD_T2_F20, 0) LOD_T2_F20,
+            NVL(LOD_T2_F40, 0) LOD_T2_F40,
+            NVL(LOD_T2_F45, 0) LOD_T2_F45,
+            NVL(LOD_T2_E20, 0) LOD_T2_E20,
+            NVL(LOD_T2_E40, 0) LOD_T2_E40,
+            NVL(LOD_T2_E45, 0) LOD_T2_E45,
+            NVL(LOD_S1_F20, 0) LOD_S1_F20,
+            NVL(LOD_S1_F40, 0) LOD_S1_F40,
+            NVL(LOD_S1_F45, 0) LOD_S1_F45,
+            NVL(LOD_S1_E20, 0) LOD_S1_E20,
+            NVL(LOD_S1_E40, 0) LOD_S1_E40,
+            NVL(LOD_S1_E45, 0) LOD_S1_E45,
+            NVL(DIS_S2_F20, 0) DIS_S2_F20,
+            NVL(DIS_S2_F40, 0) DIS_S2_F40,
+            NVL(DIS_S2_F45, 0) DIS_S2_F45,
+            NVL(DIS_S2_E20, 0) DIS_S2_E20,
+            NVL(DIS_S2_E40, 0) DIS_S2_E40,
+            NVL(DIS_S2_E45, 0) DIS_S2_E45,
+            NVL(LOD_S2_F20, 0) LOD_S2_F20,
+            NVL(LOD_S2_F40, 0) LOD_S2_F40,
+            NVL(LOD_S2_F45, 0) LOD_S2_F45,
+            NVL(LOD_S2_E20, 0) LOD_S2_E20,
+            NVL(LOD_S2_E40, 0) LOD_S2_E40,
+            NVL(LOD_S2_E45, 0) LOD_S2_E45
+        FROM
+            (SELECT
+                A.TMN_COD,
+                A.ROUTE,
+                A.ROUTE_TPL_NO,
+                A.ROUTE_MST_NO,
+                A.ROUTE_SEQ,
+                C.OPR_MST_NO,
+                C.OPR_TPL_NO,
+                A.APPLY_MON,
+                SUM(DIS_LO_F20) DIS_LO_F20,
+                SUM(DIS_LO_F40) DIS_LO_F40,
+                SUM(DIS_LO_F45) DIS_LO_F45,
+                SUM(DIS_LO_E20) DIS_LO_E20,
+                SUM(DIS_LO_E40) DIS_LO_E40,
+                SUM(DIS_LO_E45) DIS_LO_E45,
+                SUM(LOD_LO_F20) LOD_LO_F20,
+                SUM(LOD_LO_F40) LOD_LO_F40,
+                SUM(LOD_LO_F45) LOD_LO_F45,
+                SUM(LOD_LO_E20) LOD_LO_E20,
+                SUM(LOD_LO_E40) LOD_LO_E40,
+                SUM(LOD_LO_E45) LOD_LO_E45,
+                SUM(DIS_T1_F20) DIS_T1_F20,
+                SUM(DIS_T1_F40) DIS_T1_F40,
+                SUM(DIS_T1_F45) DIS_T1_F45,
+                SUM(DIS_T1_E20) DIS_T1_E20,
+                SUM(DIS_T1_E40) DIS_T1_E40,
+                SUM(DIS_T1_E45) DIS_T1_E45,
+                SUM(LOD_T1_F20) LOD_T1_F20,
+                SUM(LOD_T1_F40) LOD_T1_F40,
+                SUM(LOD_T1_F45) LOD_T1_F45,
+                SUM(LOD_T1_E20) LOD_T1_E20,
+                SUM(LOD_T1_E40) LOD_T1_E40,
+                SUM(LOD_T1_E45) LOD_T1_E45,
+                SUM(DIS_T2_F20) DIS_T2_F20,
+                SUM(DIS_T2_F40) DIS_T2_F40,
+                SUM(DIS_T2_F45) DIS_T2_F45,
+                SUM(DIS_T2_E20) DIS_T2_E20,
+                SUM(DIS_T2_E40) DIS_T2_E40,
+                SUM(DIS_T2_E45) DIS_T2_E45,
+                SUM(LOD_T2_F20) LOD_T2_F20,
+                SUM(LOD_T2_F40) LOD_T2_F40,
+                SUM(LOD_T2_F45) LOD_T2_F45,
+                SUM(LOD_T2_E20) LOD_T2_E20,
+                SUM(LOD_T2_E40) LOD_T2_E40,
+                SUM(LOD_T2_E45) LOD_T2_E45,
+                SUM(LOD_S1_F20) LOD_S1_F20,
+                SUM(LOD_S1_F40) LOD_S1_F40,
+                SUM(LOD_S1_F45) LOD_S1_F45,
+                SUM(LOD_S1_E20) LOD_S1_E20,
+                SUM(LOD_S1_E40) LOD_S1_E40,
+                SUM(LOD_S1_E45) LOD_S1_E45,
+                SUM(DIS_S2_F20) DIS_S2_F20,
+                SUM(DIS_S2_F40) DIS_S2_F40,
+                SUM(DIS_S2_F45) DIS_S2_F45,
+                SUM(DIS_S2_E20) DIS_S2_E20,
+                SUM(DIS_S2_E40) DIS_S2_E40,
+                SUM(DIS_S2_E45) DIS_S2_E45,
+                SUM(LOD_S2_F20) LOD_S2_F20,
+                SUM(LOD_S2_F40) LOD_S2_F40,
+                SUM(LOD_S2_F45) LOD_S2_F45,
+                SUM(LOD_S2_E20) LOD_S2_E20,
+                SUM(LOD_S2_E40) LOD_S2_E40,
+                SUM(LOD_S2_E45) LOD_S2_E45
+            FROM
+                (SELECT
+                    B.TMN_COD,
+                    B.ROUTE,
+                    B.ROUTE_TPL_NO,
+                    B.ROUTE_MST_NO,
+                    A.OPR,
+                    B.DISP_SEQ ROUTE_SEQ,
+                    A.APPLY_MON,
+                    --
+                    SUM(A.DIS_LO_F20) DIS_LO_F20,
+                    SUM(A.DIS_LO_F40 + A.DIS_LO_F43) DIS_LO_F40,
+                    SUM(A.DIS_LO_F45) DIS_LO_F45,
+                    SUM(A.DIS_LO_E20) DIS_LO_E20,
+                    SUM(A.DIS_LO_E40 + A.DIS_LO_E43) DIS_LO_E40,
+                    SUM(A.DIS_LO_E45) DIS_LO_E45,
+                    --
+                    SUM(A.LOD_LO_F20) LOD_LO_F20,
+                    SUM(A.LOD_LO_F40 + A.LOD_LO_F43) LOD_LO_F40,
+                    SUM(A.LOD_LO_F45) LOD_LO_F45,
+                    SUM(A.LOD_LO_E20) LOD_LO_E20,
+                    SUM(A.LOD_LO_E40 + A.LOD_LO_E43) LOD_LO_E40,
+                    SUM(A.LOD_LO_E45) LOD_LO_E45,
+                    --
+                    SUM(A.DIS_T1_F20) DIS_T1_F20,
+                    SUM(A.DIS_T1_F40 + A.DIS_T1_F43) DIS_T1_F40,
+                    SUM(A.DIS_T1_F45) DIS_T1_F45,
+                    SUM(A.DIS_T1_E20) DIS_T1_E20,
+                    SUM(A.DIS_T1_E40 + A.DIS_T1_E43) DIS_T1_E40,
+                    SUM(A.DIS_T1_E45) DIS_T1_E45,
+                    --
+                    SUM(A.LOD_T1_F20) LOD_T1_F20,
+                    SUM(A.LOD_T1_F40 + A.LOD_T1_F43) LOD_T1_F40,
+                    SUM(A.LOD_T1_F45) LOD_T1_F45,
+                    SUM(A.LOD_T1_E20) LOD_T1_E20,
+                    SUM(A.LOD_T1_E40 + A.LOD_T1_E43) LOD_T1_E40,
+                    SUM(A.LOD_T1_E45) LOD_T1_E45,
+                    --
+                    SUM(A.DIS_T2_F20) DIS_T2_F20,
+                    SUM(A.DIS_T2_F40 + A.DIS_T2_F43) DIS_T2_F40,
+                    SUM(A.DIS_T2_F45) DIS_T2_F45,
+                    SUM(A.DIS_T2_E20) DIS_T2_E20,
+                    SUM(A.DIS_T2_E40 + A.DIS_T2_E43) DIS_T2_E40,
+                    SUM(A.DIS_T2_E45) DIS_T2_E45,
+                    --
+                    SUM(A.LOD_T2_F20) LOD_T2_F20,
+                    SUM(A.LOD_T2_F40 + A.LOD_T2_F43) LOD_T2_F40,
+                    SUM(A.LOD_T2_F45) LOD_T2_F45,
+                    SUM(A.LOD_T2_E20) LOD_T2_E20,
+                    SUM(A.LOD_T2_E40 + A.LOD_T2_E43) LOD_T2_E40,
+                    SUM(A.LOD_T2_E45) LOD_T2_E45,
+                    --
+                    SUM(A.SFT1_F20) LOD_S1_F20,
+                    SUM(A.SFT1_F40 + A.SFT1_F43) LOD_S1_F40,
+                    SUM(A.SFT1_F45) LOD_S1_F45,
+                    SUM(A.SFT1_E20) LOD_S1_E20,
+                    SUM(A.SFT1_E40 + A.SFT1_E43) LOD_S1_E40,
+                    SUM(A.SFT1_E45) LOD_S1_E45,
+                    --
+                    SUM(A.DIS_SFT2_F20) DIS_S2_F20,
+                    SUM(A.DIS_SFT2_F40 + A.DIS_SFT2_F43) DIS_S2_F40,
+                    SUM(A.DIS_SFT2_F45) DIS_S2_F45, 
+                    SUM(A.DIS_SFT2_E20) DIS_S2_E20,
+                    SUM(A.DIS_SFT2_E40 + A.DIS_SFT2_E43) DIS_S2_E40,
+                    SUM(A.DIS_SFT2_E45) DIS_S2_E45,
+                    --
+                    SUM(A.LOD_SFT2_F20) LOD_S2_F20,
+                    SUM(A.LOD_SFT2_F40 + A.LOD_SFT2_F43) LOD_S2_F40,
+                    SUM(A.LOD_SFT2_F45) LOD_S2_F45,
+                    SUM(A.LOD_SFT2_E20) LOD_S2_E20,
+                    SUM(A.LOD_SFT2_E40 + A.LOD_SFT2_E43) LOD_S2_E40,
+                    SUM(A.LOD_SFT2_E45) LOD_S2_E45
+                FROM 
+                    MVIEW_COM_STS_VOLUME A,
+                    COM_COD_ROUTE_MST B,
+                    COM_COD_ROUTE_DTL C,
+                    VAL V
+                WHERE
+                    A.TMN_COD(+) = V.TMN_COD
+                    AND A.ROUTE(+) = NVL(V.ROUTE, A.ROUTE(+))
+                    AND A.OPR(+) = NVL(V.OPR, A.OPR(+))
+                    AND A.APPLY_MON(+) BETWEEN 
+                            (CASE WHEN B.CALC_FROM_MON IS NULL THEN V.FROM_DTE ELSE TO_CHAR(B.CALC_FROM_MON, 'YYYYMM') END) 
+                            AND (CASE WHEN B.CALC_TO_MON IS NULL THEN V.TO_DTE ELSE TO_CHAR(B.CALC_TO_MON, 'YYYYMM') END)
+                    AND A.TMN_COD(+) = C.TMN_COD
+                    AND A.ROUTE(+) = C.SUB_ROUTE
+                    AND B.TMN_COD = C.TMN_COD
+                    AND C.ROUTE_TPL_NO = V.ROUTE_TPL_NO
+                    AND B.ROUTE_TPL_NO = C.ROUTE_TPL_NO
+                    AND B.ROUTE_MST_NO = C.ROUTE_MST_NO
+                    AND NOT EXISTS(SELECT 'X' FROM COM_COD_EXCEPT_VVD B, VAL V
+                                    WHERE
+                                        A.TMN_COD = B.TMN_COD
+                                        AND A.VVD_YEAR = B.VVD_YEAR
+                                        AND A.VVD = B.VVD
+                                        AND V.EXCEPT_VVD = 'Y')
+                GROUP BY
+                    B.TMN_COD,
+                    A.APPLY_MON,
+                    B.ROUTE,
+                    B.ROUTE_TPL_NO,
+                    B.ROUTE_MST_NO,
+                    A.OPR,
+                    B.DISP_SEQ) A,
+                COM_COD_OPR_DTL C,
+                VAL V
+            WHERE
+                A.TMN_COD = C.TMN_COD(+)
+                AND A.OPR = C.SUB_OPR(+)
+                AND C.OPR_TPL_NO(+) = V.OPR_TPL_NO
+                --2019. 3. 5. Del, COM_COD_OPR_DTL의 FROM_DTE와 TO_DTE 기간과 실적을 조인을 할 필요는 없는듯.. 또 나중에 문제 생기려나.. 왜넣었지..
+                --AND A.APPLY_MON BETWEEN TO_CHAR(C.FROM_DTE(+), 'YYYYMM') AND TO_CHAR(C.TO_DTE(+), 'YYYYMM')
+            GROUP BY
+                A.TMN_COD,
+                A.ROUTE,
+                A.ROUTE_TPL_NO,
+                A.ROUTE_MST_NO,
+                A.ROUTE_SEQ,
+                C.OPR_TPL_NO,
+                C.OPR_MST_NO,
+                A.APPLY_MON) A,
+            COM_COD_OPR_MST B,
+            VAL V
+        WHERE
+            A.TMN_COD = B.TMN_COD(+)
+            AND A.OPR_TPL_NO = B.OPR_TPL_NO(+)
+            AND A.OPR_MST_NO = B.OPR_MST_NO(+))
+    SELECT
+        A.*,
+        B.OPR SUB_OPR,
+        B.MIX,
+        (CASE WHEN B.OPR IS NOT NULL THEN 'Y' ELSE 'N' END) VIRTUAL
+    FROM
+        (SELECT * 
+            FROM 
+                (SELECT * 
+                FROM (SELECT * FROM VSUM)
+                UNPIVOT 
+                    (DATA FOR CATEGORY IN (
+                        DIS_LO_F20, DIS_LO_F40, DIS_LO_F45, DIS_LO_E20, DIS_LO_E40, DIS_LO_E45,
+                        LOD_LO_F20, LOD_LO_F40, LOD_LO_F45, LOD_LO_E20, LOD_LO_E40, LOD_LO_E45,
+                        DIS_T1_F20, DIS_T1_F40, DIS_T1_F45, DIS_T1_E20, DIS_T1_E40, DIS_T1_E45,
+                        LOD_T1_F20, LOD_T1_F40, LOD_T1_F45, LOD_T1_E20, LOD_T1_E40, LOD_T1_E45,
+                        DIS_T2_F20, DIS_T2_F40, DIS_T2_F45, DIS_T2_E20, DIS_T2_E40, DIS_T2_E45,
+                        LOD_T2_F20, LOD_T2_F40, LOD_T2_F45, LOD_T2_E20, LOD_T2_E40, LOD_T2_E45,
+                        LOD_S1_F20, LOD_S1_F40, LOD_S1_F45, LOD_S1_E20, LOD_S1_E40, LOD_S1_E45,
+                        DIS_S2_F20, DIS_S2_F40, DIS_S2_F45, DIS_S2_E20, DIS_S2_E40, DIS_S2_E45,
+                        LOD_S2_F20, LOD_S2_F40, LOD_S2_F45, LOD_S2_E20, LOD_S2_E40, LOD_S2_E45
+                        )
+                    )
+                )          
+                PIVOT  
+                    (MAX(DATA) FOR APPLY_MON IN (';
+    SQL_STMT := SQL_STMT || MONTH_INFO;
+    SQL_STMT := SQL_STMT || '                  
+                        )
+                    )) A,
+                COM_COD_ROUTE_MIX B
+            WHERE
+                A.TMN_COD = B.TMN_COD(+)
+                AND A.ROUTE_TPL_NO = B.ROUTE_TPL_NO(+)
+                AND A.CATEGORY = B.CATEGORY(+)
+                AND A.ROUTE_MST_NO = B.ROUTE_MST_NO(+)
+            ORDER BY 
+                ROUTE_SEQ,
+                OPR_SEQ,
+                B.OPR,
+                DECODE( 
+                      A.CATEGORY,
+                     'DIS_LO_F20', 1, 'DIS_LO_F40', 2, 'DIS_LO_F45', 3, 'DIS_LO_E20', 4, 'DIS_LO_E40', 5, 'DIS_LO_E45', 6,
+                     'LOD_LO_F20', 7, 'LOD_LO_F40', 8, 'LOD_LO_F45', 9, 'LOD_LO_E20',10, 'LOD_LO_E40',11, 'LOD_LO_E45',12,
+                     'DIS_T1_F20',13, 'DIS_T1_F40',14, 'DIS_T1_F45',15, 'DIS_T1_E20',16, 'DIS_T1_E40',17, 'DIS_T1_E45',18,
+                     'LOD_T1_F20',19, 'LOD_T1_F40',20, 'LOD_T1_F45',21, 'LOD_T1_E20',22, 'LOD_T1_E40',23, 'LOD_T1_E45',24,
+                     'DIS_T2_F20',25, 'DIS_T2_F40',26, 'DIS_T2_F45',27, 'DIS_T2_E20',28, 'DIS_T2_E40',29, 'DIS_T2_E45',30,
+                     'LOD_T2_F20',31, 'LOD_T2_F40',32, 'LOD_T2_F45',33, 'LOD_T2_E20',34, 'LOD_T2_E40',35, 'LOD_T2_E45',36,
+                     'LOD_S1_F20',37, 'LOD_S1_F40',38, 'LOD_S1_F45',39, 'LOD_S1_E20',40, 'LOD_S1_E40',41, 'LOD_S1_E45',42,
+                     'DIS_S2_F20',43, 'DIS_S2_F40',44, 'DIS_S2_F45',45, 'DIS_S2_E20',46, 'DIS_S2_E40',47, 'DIS_S2_E45',48,
+                     'LOD_S2_F20',49, 'LOD_S2_F40',50, 'LOD_S2_F45',51, 'LOD_S2_E20',52, 'LOD_S2_E40',53, 'LOD_S2_E45',54
+                )
+            ';

@@ -14,10 +14,25 @@
     <script src="https://cdn.steemjs.com/lib/latest/steem.min.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sscjs@latest/dist/ssc.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+
+    <link rel="stylesheet" type="text/css" href="style.css">
   </head>
   <body>
-    <div id="test"></div>
+    <div id="app">
+      <div class="title"><h1>{{ title }}</h1></div>
+      <div>
+        <num-btn v-for="(btn, idx) in numArray" 
+          :idx="idx"
+          :num="btn.num"
+          :styling="btn.styling"
+          @press="pressNum" />
+      </div>
+      <input type="text" style="width:80%;font-size:1.3rem;text-align:center;" v-model="currTime" realonly/>
+    </div>
   </body>
   <script src="const.js"></script>
-  <script src="index.js"></script>
+  <script src="vue/components/num.js"></script>
+  <script src="vue_main.js"></script>
 </html>
