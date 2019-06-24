@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/HappyBerrysBoy/se-mining/issues"
   },
-  "homepage": "https://github.com/HappyBerrysBoy/se-mining#readme"
+  "homepage": "https://github.com/HappyBerrysBoy/se-mining#readme",
+  "dependencies": {
+    "sscjs": "0.0.7"
+  }
 }

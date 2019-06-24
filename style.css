@@ -1,5 +1,14 @@
+#app{
+  width:280px;
+}
+
 .title {
+  width:100%;
   text-align: center;
+}
+
+.btn{
+  margin-right:15px;
 }
 
 .numBtn {
@@ -10,6 +19,15 @@
   text-align: center;
   font-size: 1.7rem;
   float: left;
+}
+
+.numBtn:nth-child(8), 
+.numBtn:nth-child(15), 
+.numBtn:nth-child(22), 
+.numBtn:nth-child(29), 
+.numBtn:nth-child(36), 
+.numBtn:nth-child(43) {
+  clear: both;
 }
 
 .alive {

@@ -2,6 +2,7 @@ new Vue({
   el: '#app',
   data: {
     title: '1 to 49',
+    cntInRow:7,
     lastNum: 49,
     numArray: [],
     currNum: 1,
