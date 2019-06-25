@@ -1,22 +1,22 @@
 const SSC = require('sscjs');
 
-const ssc = new SSC('https://api.steem-engine.com');
-ssc.stream((err, res) => {
-	console.log(err, res);
-});
+const ssc = new SSC('https://api.steem-engine.com/rpc/');
+// ssc.stream((err, res) => {
+//   console.log(err, res);
+// });
 
 /**
-* stream the sidechain (starting from the latest block produced)
-* @param  {Function}  callback callback called everytime a block is retrieved
-* @param  {Number}  pollingTime polling time, default 1 sec
-*/
+ * stream the sidechain (starting from the latest block produced)
+ * @param  {Function}  callback callback called everytime a block is retrieved
+ * @param  {Number}  pollingTime polling time, default 1 sec
+ */
 
 // stream(callback, pollingTime  =  1000)
 
 // example
 ssc.stream((err, result) => {
-	console.log(err, result);
-	/*
+  console.log(err, result);
+  /*
 	{
 	    "blockNumber": 12,
 	    "refSteemBlockNumber": 25797141,
@@ -43,4 +43,4 @@ ssc.stream((err, result) => {
 	    "merkleRoot": "2f1221ae1938bc24f3ed593e8c57ea41882fedc5d31de21da9c9bd613360f3a6"
 	}
 	*/
-})
+});

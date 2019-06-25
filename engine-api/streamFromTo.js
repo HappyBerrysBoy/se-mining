@@ -1,26 +1,91 @@
 const SSC = require('sscjs');
+const { createLogger, format, transports } = require('winston');
+const config = require('../config.json');
 
-// const ssc = new SSC('https://api.steem-engine.com');
-const ssc = new SSC("https://api.steem-engine.com/rpc/");
-ssc.stream((err, res) => {
-	console.log(err, res);
+const ssc = new SSC('https://api.steem-engine.com/rpc/');
+const logger = createLogger({
+  level: 'info',
+  format: format.combine(
+    format.timestamp({
+      format: 'YYYY-MM-DD HH:mm:ss',
+    }),
+    format.errors({ stack: true }),
+    format.splat(),
+    format.json(),
+  ),
+  defaultMeta: { service: 'SE_MINING' },
+  transports: [
+    //
+    // - Write to all logs with level `info` and below to `combined.log`
+    // - Write all logs error (and below) to `error.log`.
+    //
+    new transports.File({ filename: 'error.log', level: 'error' }),
+    new transports.File({ filename: 'systemout.log' }),
+  ],
 });
 
+if (process.env.NODE_ENV !== 'production') {
+  logger.add(
+    new transports.Console({
+      format: format.combine(format.colorize(), format.simple()),
+    }),
+  );
+}
 
 /**
-* stream part of the sidechain
-* @param  {Number}  startBlock the first block to retrieve
-* @param  {Number}  endBlock if passed the stream will stop after the block is retrieved
-* @param  {Function}  callback callback called everytime a block is retrieved
-* @param  {Number}  pollingTime polling time, default 1 sec
-*/
+ * stream part of the sidechain
+ * @param  {Number}  startBlock the first block to retrieve
+ * @param  {Number}  endBlock if passed the stream will stop after the block is retrieved
+ * @param  {Function}  callback callback called everytime a block is retrieved
+ * @param  {Number}  pollingTime polling time, default 1 sec
+ */
 
 // streamFromTo(startBlock, endBlock  =  null, callback, pollingTime  =  1000)
 
+let existTransactions = config.existTransactions;
+
+const lastBlockIdx = 384272;
+
 // example
-ssc.streamFromTo(406256, 406257, (err, result) => {
-	console.log(err, result);
-	/*
+// 412766 : delegation
+ssc.streamFromTo(lastBlockIdx + 1, lastBlockIdx + 300, (err, result) => {
+  if (err) {
+    console.log(err);
+    logger.info('error', err);
+  }
+
+  // console.log(result);
+  // logger.info('info', result);
+
+  const { blockNumber, refSteemBlockNumber, timestamp, transactions } = result;
+
+  if (transactions.length == 0) return;
+
+  console.log(`===== Block Number:${blockNumber} =====`);
+  transactions.forEach(transaction => {
+    const { sender, contract, action, payload } = transaction;
+
+    console.log(
+      `Transaction Info==> Action:${action}, Sender:${sender}, Contract:${contract}, Payload:${payload}`,
+    );
+
+    // if (config.traceTokens.indexOf(payload.symbol) < 0) return;
+
+    if (existTransactions.indexOf(action) > -1) return;
+    existTransactions.push(action);
+
+    // if (action === 'transfer') {
+    // } else if (action === 'create') {
+    // } else if (action === 'delegate') {
+    // } else if (action === 'issue') {
+    // } else if (action === 'buy') {
+    // } else {
+    logger.info('info', {
+      msg: `Transaction Info==> Action:${action}, Sender:${sender}, Contract:${contract}, Payload:${payload}`,
+    });
+    // }
+  });
+  /*
 	{
 	    "blockNumber": 12,
 	    "refSteemBlockNumber": 25797141,
@@ -47,4 +112,4 @@ ssc.streamFromTo(406256, 406257, (err, result) => {
 	    "merkleRoot": "2f1221ae1938bc24f3ed593e8c57ea41882fedc5d31de21da9c9bd613360f3a6"
 	}
 	*/
-})
+});

@@ -1,0 +1,32 @@
+{
+  "steemApi": "https://api.steemit.com",
+  "steemEngineApi": "https://api.steem-engine.com/rpc/",
+  "sctmMiningStartBlockIdx": 383498,
+  "sctmDelegationStartBlockIdx": 412053,
+  "scotPoolName": ["scotpool.miner"],
+  "existTransactions": [
+    "buy",
+    "create",
+    "issue",
+    "transfer",
+    "stake",
+    "delegate",
+    "sell",
+    "withdraw",
+    "removeWithdrawal",
+    "cancel",
+    "unstake",
+    "cancelUnstake"
+  ],
+  "traceTokens": [
+    "AAA",
+    "SCT",
+    "SPT",
+    "JCAR",
+    "GAMER",
+    "SCTM",
+    "PAL",
+    "BLQ",
+    "WEED"
+  ]
+}

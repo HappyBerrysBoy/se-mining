@@ -17,6 +17,8 @@
   },
   "homepage": "https://github.com/HappyBerrysBoy/se-mining#readme",
   "dependencies": {
-    "sscjs": "0.0.7"
+    "sscjs": "0.0.7",
+    "steem": "^0.7.5",
+    "winston": "^3.2.1"
   }
 }
