@@ -83,15 +83,31 @@ steem.api.streamBlock(function(err, blockinfo) {
       });
     }
 
-    // if (action === 'voter') {
-    // } else if (action === 'transfer') {
-    // } else if (action === 'custom_json') {
-    //   // console.log('action :', action);
-    //   // console.log('content :', content);
-    //   logger.info('info', {
-    //     msg: `Transaction Info==> Action:${action}, content:${content}`,
-    //   });
-    // }
+    if (action === 'voter') {
+    } else if (action === 'transfer') {
+    } else if (action === 'custom_json') {
+      // console.log('action :', action);
+      // console.log('content :', content);
+
+      const jsonInfo = JSON.parse(content.json);
+
+      if (content.id === config.customJsonList.mining) {
+        const winner = jsonInfo.winner;
+        const amount = jsonInfo.claim_token_amount;
+        const miningPower = jsonInfo.staked_mining_power;
+        const symbol = jsonInfo.symbol;
+        const blockNum = jsonInfo.block_num;
+        console.log('action :', action);
+        console.log('content :', content);
+        // content :
+        // Object {required_auths: Array(1), required_posting_auths: Array(0), id: "scot_claim", json: "{"symbol":"SCT","type":"mining","N":10,"staked_min…"}
+      } else {
+      }
+      // logger.info('info', {
+      //   msg: `Transaction Info==> Action:${action}, content:${content}`,
+      // });
+      // scot_claim
+    }
   });
 });
 
