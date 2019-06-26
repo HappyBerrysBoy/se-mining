@@ -15,3 +15,4 @@ key.json
 *.ntvs*
 *.njsproj
 *.sln
+*.log

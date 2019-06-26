@@ -1,6 +1,7 @@
 {
   "steemApi": "https://api.steemit.com",
   "steemEngineApi": "https://api.steem-engine.com/rpc/",
+  "blockConfigPath": "config/blockConfig.ini",
   "customJsonList": { "mining": "scot_claim" },
   "sctmMiningStartBlockIdx": 383498,
   "sctmDelegationStartBlockIdx": 412053,
