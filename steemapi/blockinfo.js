@@ -1,19 +1,20 @@
-const steem = require("steem");
-const config = require("../config.json");
-const { createLogger, format, transports } = require("winston");
-const fs = require("fs");
+const steem = require('steem');
+const config = require('../config.json');
+// const { createLogger, format, transports } = require("winston");
+const log = require('log-to-file');
+const fs = require('fs');
 
 const jsonData = {
   lastReadSteemBlock: 33333337,
-  lastReadSscBlock: 400005
+  lastReadSscBlock: 400005,
 };
 
 fs.writeFile(`../${config.blockConfigPath}`, JSON.stringify(jsonData), err => {
   if (err) console.log(err);
-  console.log("The file has been saved!");
+  console.log('The file has been saved!');
 });
 
-fs.readFile(`../${config.blockConfigPath}`, "utf8", function(err, data) {
+fs.readFile(`../${config.blockConfigPath}`, 'utf8', function(err, data) {
   if (err) console.log(err);
   console.log(data);
   const json = JSON.parse(data);
@@ -21,34 +22,12 @@ fs.readFile(`../${config.blockConfigPath}`, "utf8", function(err, data) {
   console.log(json.lastReadSteemBlock);
 });
 
-const logger = createLogger({
-  level: "info",
-  format: format.combine(
-    format.timestamp({
-      format: "YYYY-MM-DD HH:mm:ss"
-    }),
-    format.errors({ stack: true }),
-    format.splat(),
-    format.json()
-  ),
-  defaultMeta: { service: "SE_MINING" },
-  transports: [
-    //
-    // - Write to all logs with level `info` and below to `combined.log`
-    // - Write all logs error (and below) to `error.log`.
-    //
-    new transports.File({ filename: "error.log", level: "error" }),
-    new transports.File({ filename: "custom_json.log" })
-  ]
-});
-
-if (process.env.NODE_ENV !== "production") {
-  logger.add(
-    new transports.Console({
-      format: format.combine(format.colorize(), format.simple())
-    })
-  );
-}
+const date = new Date();
+const year = date.getFullYear() + '';
+const month = (date.getMonth() + 1 + '').padStart(2, '0');
+const day = (date.getDate() + '').padStart(2, '0');
+const hour = (date.getHours() + '').padStart(2, '0');
+const minute = (date.getMinutes() + '').padStart(2, '0');
 
 // steem.api.getBlock(34077381, function(err, blockinfo) {
 //   if (err) {
