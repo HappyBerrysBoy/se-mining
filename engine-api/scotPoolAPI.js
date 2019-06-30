@@ -1,17 +1,17 @@
-const SSC = require('sscjs');
-const steem = require('steem');
-const getJSON = require('get-json');
+const SSC = require("sscjs");
+const steem = require("steem");
+const getJSON = require("get-json");
 
-const ssc = new SSC('https://api.steem-engine.com/rpc/');
+const ssc = new SSC("https://api.steem-engine.com/rpc/");
 
 /**
  * pending claim token 개수 확인
  */
 module.exports.checkPendingClaim = async function(account, symbol) {
-  let url = 'https://scot-api.steem-engine.com/@' + account;
+  let url = "https://scot-api.steem-engine.com/@" + account;
 
   let pendingToken = await getJSON(url);
-  let tokens = await ssc.findOne('tokens', 'tokens', { symbol: symbol });
+  let tokens = await ssc.findOne("tokens", "tokens", { symbol: symbol });
 
   return pendingToken[symbol].pending_token / 10 ** tokens.precision;
 };
@@ -29,18 +29,18 @@ module.exports.claimRewards = async function(wif, account, symbol) {
     wif,
     [],
     [account],
-    'scot_claim_token',
+    "scot_claim_token",
     json,
     function(err, result) {
       if (result != null) console.log(result);
-    },
+    }
   );
 };
 
 module.exports.getTokenBalances = async function(account, symbol) {
-  let result = await ssc.findOne('tokens', 'balances', {
+  let result = await ssc.findOne("tokens", "balances", {
     account: account,
-    symbol: symbol,
+    symbol: symbol
   });
 
   if (result != null) {
@@ -52,15 +52,15 @@ module.exports.getTokenBalances = async function(account, symbol) {
 
 module.exports.stakeToken = async function(wif, account, symbol, amount) {
   let jsonStr = {
-    contractName: 'tokens',
-    contractAction: 'stake',
-    contractPayload: { to: account, symbol: symbol, quantity: amount },
+    contractName: "tokens",
+    contractAction: "stake",
+    contractPayload: { to: account, symbol: symbol, quantity: amount }
   };
   let json = JSON.stringify(jsonStr);
 
-  steem.broadcast.customJson(wif, [account], [], 'ssc-mainnet1', json, function(
+  steem.broadcast.customJson(wif, [account], [], "ssc-mainnet1", json, function(
     err,
-    result,
+    result
   ) {
     if (result != null) {
       console.log(result);
@@ -76,19 +76,19 @@ module.exports.transferToken = async function(
   symbol,
   to,
   amount,
-  memo,
+  memo
 ) {
   let jsonStr = {
-    contractName: 'tokens',
-    contractAction: 'transfer',
-    contractPayload: { symbol: symbol, to: to, quantity: amount, memo: memo },
+    contractName: "tokens",
+    contractAction: "transfer",
+    contractPayload: { symbol: symbol, to: to, quantity: amount, memo: memo }
   };
 
   let json = JSON.stringify(jsonStr);
 
-  steem.broadcast.customJson(wif, [account], [], 'ssc-mainnet1', json, function(
+  steem.broadcast.customJson(wif, [account], [], "ssc-mainnet1", json, function(
     err,
-    result,
+    result
   ) {
     // Required Auths["honeybeerbear"]
     // Required Posting Auths[]

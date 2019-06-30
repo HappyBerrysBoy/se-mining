@@ -1,6 +1,6 @@
-const steem = require('steem');
-const keyConfig = require('../key.json');
-const config = require('../config.json');
+const steem = require("steem");
+const keyConfig = require("../key.json");
+const config = require("../config.json");
 // const { createLogger, format, transports } = require('winston');
 
 // const logger = createLogger({
@@ -32,17 +32,17 @@ const config = require('../config.json');
 //   );
 // }
 
-const jsonStr = [{ symbol: 'SCT' }];
+const jsonStr = [{ symbol: "SCT" }];
 
 // 성공
-// steem api 호출
+// token claim
 steem.broadcast.customJson(
   keyConfig.scotminer_posting,
   [],
   [keyConfig.scotminer_account],
-  'scot_claim_token',
+  "scot_claim_token",
   JSON.stringify(jsonStr),
   function(err, result) {
     console.log(err, result);
-  },
+  }
 );

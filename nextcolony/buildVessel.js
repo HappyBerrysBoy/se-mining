@@ -1,8 +1,5 @@
-const steem = require('steem');
-const keyConfig = require('../key.json');
-const config = require('../config.json');
-
-const post = '5KBxjwEDaLdxJ1DJAC6VJdMgHqoLe8srWXjV8dGG9MyZVQQsMZR';
+const steem = require("steem");
+const key = require("../key.json");
 
 // 성공
 // Nextcolony Build Ship
@@ -19,12 +16,12 @@ const post = '5KBxjwEDaLdxJ1DJAC6VJdMgHqoLe8srWXjV8dGG9MyZVQQsMZR';
 
 // Nextcolony Explore
 steem.broadcast.customJson(
-  post, // posting key
+  key.happyberrysboy_posting, // posting key
   [],
-  ['happyberrysboy'], // account
-  'nextcolony', // 'nextcolony'
-  `{"username":"happyberrysboy","type":"explorespace","command":{"tr_var1":"P-ZA01QNQO29C","tr_var2":"-7","tr_var3":"-179"}}`, // content json stringfy
+  ["happyberrysboy"], // account
+  "nextcolony", // 'nextcolony'
+  `{"username":"happyberrysboy","type":"explorespace","command":{"tr_var1":"P-ZA01QNQO29C","tr_var2":"-5","tr_var3":"-177"}}`, // content json stringfy
   function(err, result) {
     console.log(err, result);
-  },
+  }
 );
