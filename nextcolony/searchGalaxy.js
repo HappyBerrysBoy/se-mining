@@ -1,10 +1,13 @@
-const axios = require("axios");
-const steem = require("steem");
-const key = require("../key.json");
+const axios = require('axios');
+const steem = require('steem');
+const key = require('../key.json');
 
-const account = "happyberrysboy";
-const planetX = -3;
-const planetY = -182;
+const account = 'happyberrysboy';
+// const planetId = 'P-ZA01QNQO29C';   // alpha
+const planetId = 'P-ZO75DZDVRUO'; // Beta
+const type = 'explorespace';
+const planetX = -9;
+const planetY = -180;
 const searchLeft = true;
 const searchRight = true;
 const searchTop = true;
@@ -36,7 +39,7 @@ function chkAvailExplorefromDistance(
   distance,
   explore,
   explored,
-  planets
+  planets,
 ) {
   console.log(`Distance:${distance}`);
 
@@ -76,7 +79,7 @@ function chkAvailExplorefromDistance(
 
 axios
   .get(
-    `https://nextcolony.io/api/loadgalaxy?x=${planetX}&y=${planetY}&height=120&width=120`
+    `https://nextcolony.io/api/loadgalaxy?x=${planetX}&y=${planetY}&height=120&width=120`,
   )
   .then(function(response) {
     // handle success
@@ -104,7 +107,7 @@ axios
         i,
         explore,
         explored,
-        planets
+        planets,
       );
 
       if (Object.keys(targetPoint).length) {
@@ -119,16 +122,16 @@ axios
         key.happyberrysboy_posting, // posting key
         [],
         [account], // account
-        "nextcolony", // 'nextcolony'
-        `{"username":"${account}","type":"explorespace","command":{"tr_var1":"P-ZA01QNQO29C","tr_var2":"${
+        'nextcolony', // 'nextcolony'
+        `{"username":"${account}","type":"${type}","command":{"tr_var1":"${planetId}","tr_var2":"${
           targetPoint.x
         }","tr_var3":"${targetPoint.y}"}}`, // content json stringfy
         function(err, result) {
           console.log(err, result);
-        }
+        },
       );
     } else {
-      console.log("Can not find available explore point");
+      console.log('Can not find available explore point');
     }
   })
   .catch(function(error) {
