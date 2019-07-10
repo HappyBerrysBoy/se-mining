@@ -36,35 +36,6 @@ const buildPriority = {
   shieldgenerator: -1,
 };
 
-// axios
-//   .get(`https://nextcolony.io/api/loadplanets?user=${account}`)
-//   .then(function(response) {
-//     // Nextcolony Explore
-//     if (availExplore) {
-//       steem.broadcast.customJson(
-//         key.happyberrysboy_posting, // posting key
-//         [],
-//         [account], // account
-//         'nextcolony', // 'nextcolony'
-//         `{"username":"${account}","type":"explorespace","command":{"tr_var1":"P-ZA01QNQO29C","tr_var2":"${
-//           targetPoint.x
-//         }","tr_var3":"${targetPoint.y}"}}`, // content json stringfy
-//         function(err, result) {
-//           console.log(err, result);
-//         },
-//       );
-//     } else {
-//       console.log('Can not find available explore point');
-//     }
-//   })
-//   .catch(function(error) {
-//     // handle error
-//     console.log(error);
-//   })
-//   .finally(function() {
-//     // always executed
-//   });
-
 // Planet 정보
 const loadplanets = account => {
   return axios.get(`https://nextcolony.io/api/loadplanets?user=${account}`);
@@ -102,6 +73,8 @@ loadplanets(account)
   })
   .then(planets => {
     planets.forEach(planet => {
+      const currPlanet = planet;
+      console.log(`Curr Planet Info:${currPlanet}`);
       axios
         .all([
           loadqyt(planet.id),
@@ -117,6 +90,9 @@ loadplanets(account)
               const prodInfo = prodInfoData.data;
               const buildingInfo = buildingInfoData.data;
               const shipyardInfo = shipyardInfoData.data;
+
+              console.log(`Curr Planet Info:${currPlanet.id}`);
+              console.log(`Curr Planet Info:${planet.id}`);
 
               //planet = {"img":"co_atm_1.png","level_base":3,"level_coal":12,"level_coaldepot":12,"level_copper":12,"level_copperdepot":12,"level_ore":12,"level_oredepot":12,"level_research":3,"level_ship":14,"level_uranium":15,"level_uraniumdepot":12,"planet_bonus":0.0,"planet_corx":-3,"planet_cory":-182,"planet_crts":1555928508,"planet_id":"P-ZA01QNQO29C","planet_name":"Alpha","planet_rarity":"common","planet_type":"earth","shieldcharge_busy":0,"shieldcharged":0,"shieldprotection_busy":0,"startplanet":1,"total_type":4016,"user":"happyberrysboy"}
               //qytInfo = coal, coaldepot, coalrate, copper, copperdepot......
