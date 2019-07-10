@@ -1,0 +1,3 @@
+{"symbol":"SCT","to":"sct.admin","quantity":"0.005","timestamp":"2019-07-02T06:33:12","block":34302578}
+{"symbol":"SCT","to":"sct.admin","quantity":"0.026","timestamp":"2019-07-02T06:42:00","block":34302754}
+{"symbol":"SCT","to":"sct.admin","quantity":"0.006","timestamp":"2019-07-02T06:42:09","block":34302757}
