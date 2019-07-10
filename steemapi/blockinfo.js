@@ -5,28 +5,28 @@ const config = require('../config.json');
 const fs = require('fs');
 
 const jsonData = {
-  lastReadSteemBlock: 34322774,
+  lastReadSteemBlock: 34334175,
   lastReadSscBlock: 400005,
 };
 
 
 
-// fs.readFile(`${config.blockConfigPath}`, 'utf8', function(err, data) {
-//   if (err) console.log(err);
-//   const json = JSON.parse(data);
-//   console.log(json.lastReadSteemBlock);
-//   jsonData.lastReadSteemBlock = json.lastReadSteemBlock;
-  
-// });
-
+fs.readFile('../logs/block.txt', 'utf8', function(err, data) {
+  if (err) console.log(err);
+  const json = JSON.parse(data);
+  console.log(json.lastReadSteemBlock);
+  jsonData.lastReadSteemBlock = json.lastReadSteemBlock;
   getBlock(jsonData.lastReadSteemBlock);
+});
+
+  
 
 async function getBlock(lastSteemBlock) {
-  console.log( lastSteemBlock)
+    console.log("parameter : " + lastSteemBlock);
     let blockinfo;
     const blockno = {lastReadSteemBlock: 34300626};
     blockno.lastReadSteemBlock = lastSteemBlock;
-
+    console.log("start : " + blockno.lastReadSteemBlock);
     while (true) {
 //      console.log(jsonData.lastReadSteemBlock);
        blockinfo = await steem.api.getBlockAsync(blockno.lastReadSteemBlock);
@@ -54,7 +54,7 @@ async function getBlock(lastSteemBlock) {
                 payload.timestamp = timestamp;
                 payload.block = blockno.lastReadSteemBlock;
 
-                fs.appendFile('./logs/sct_beneficery.txt', JSON.stringify(payload) + '\n', err => {
+                fs.appendFile('../logs/sct_beneficery.txt', JSON.stringify(payload) + '\n', err => {
                   if (err) console.log(err);
                 });
               }
@@ -64,7 +64,7 @@ async function getBlock(lastSteemBlock) {
 
         blockno.lastReadSteemBlock += 1;
   
-        fs.writeFile('./logs/block.txt', JSON.stringify(blockno), err => {
+        fs.writeFile('../logs/block.txt', JSON.stringify(blockno), err => {
           if (err) console.log(err);
           //console.log('The file has been saved!');
         });
