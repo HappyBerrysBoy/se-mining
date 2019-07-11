@@ -32,16 +32,51 @@ const config = require("../config.json");
 //   );
 // }
 
-const jsonStr = [{ symbol: "SCT" }];
-
 // 성공
 // token claim
-steem.broadcast.customJson(
-  keyConfig.scotminer_posting,
-  [],
-  [keyConfig.scotminer_account],
-  "scot_claim_token",
-  JSON.stringify(jsonStr),
+// const jsonStr = [{ symbol: "SCT" }];
+// steem.broadcast.customJson(
+//   keyConfig.scotminer_posting,
+//   [],
+//   [keyConfig.scotminer_account],
+//   "scot_claim_token",
+//   JSON.stringify(jsonStr),
+//   function(err, result) {
+//     console.log(err, result);
+//   }
+// );
+
+// steem posting
+// steem.broadcast.comment(
+//   keyConfig.happyberrysboy_posting, // posting wif
+//   "", // author, leave blank for new post
+//   "sct", // first tag
+//   "happyberrysboy", // username
+//   "test-20190712", // permlink
+//   "test", // Title
+//   "tteesstt", // Body of post
+//   // json metadata (additional tags, app name, etc)
+//   { tags: ["test"], app: "" },
+//   function(err, result) {
+//     if (err) {
+//       console.log(err);
+//       return;
+//     }
+
+//     console.log(result);
+//   }
+// );
+
+// comment
+steem.broadcast.comment(
+  keyConfig.happyberrysboy_posting,
+  "happyberrysboy", // author
+  "test-20190712", // parent permlink
+  "happyberrysboy", // comment account
+  "test-20190712-sub1", // comment permlink
+  "", // title
+  "comment test", // comment
+  { tags: ["test"], app: "" }, // tags
   function(err, result) {
     console.log(err, result);
   }
