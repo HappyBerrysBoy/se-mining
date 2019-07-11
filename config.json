@@ -3,13 +3,12 @@
   "steemEngineApi": "https://api.steem-engine.com/rpc/",
   "blockConfigPath": "./config/blockConfig.ini",
   "customJsonList": {
-    "mining": "scot_claim"
+    "mining": "scot_claim",
+    "mining_type": "mining"
   },
   "sctmMiningStartBlockIdx": 383498,
   "sctmDelegationStartBlockIdx": 412053,
-  "scotPoolName": [
-    "scotpool.miner"
-  ],
+  "scotPoolName": ["scotpool.miner"],
   "existTransactions": [
     "buy",
     "create",
