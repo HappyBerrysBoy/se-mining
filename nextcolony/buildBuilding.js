@@ -14,10 +14,10 @@ const maxBuildQty = {
   oremine: 13,
   coppermine: 13,
   uraniummine: 13,
-  coaldepot: -1,
-  oredepot: -1,
-  copperdepot: -1,
-  uraniumdepot: -1,
+  coaldepot:13,
+  oredepot: 13,
+  copperdepot: 13,
+  uraniumdepot: 13,
   bunker: -1,
   shieldgenerator: -1
 };
