@@ -8,6 +8,7 @@ yarn-error.log*
 selenium-debug.log
 package-lock.json
 key.json
+blockConfig.ini
 
 # Editor directories and files
 .idea
