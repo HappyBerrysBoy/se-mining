@@ -36,8 +36,8 @@ async function getBlock(lastSteemBlock) {
     const year = date.getFullYear() + '';
     const month = (date.getMonth() + 1 + '').padStart(2, '0');
     const day = (date.getDate() + '').padStart(2, '0');
-    const hour = (date.getHours() + '').padStart(2, '0');
-    const minute = (date.getMinutes() + '').padStart(2, '0');
+    // const hour = (date.getHours() + '').padStart(2, '0');
+    // const minute = (date.getMinutes() + '').padStart(2, '0');
     const dateString = `${year}-${month}-${day}`;
 
     console.log(`Start Block Search:${blockno.lastReadSteemBlock}`);
@@ -58,7 +58,7 @@ async function getBlock(lastSteemBlock) {
       console.log(e);
       console.log(`const { timestamp = null, transactions } = blockinfo error`);
       fs.appendFile(
-        `../logs/exceptions(${dateString}).txt`,
+        '../logs/exceptions(' + dateString + ').txt',
         JSON.stringify(blockinfo) + '\n',
         err => {
           if (err) console.log(err);
@@ -69,7 +69,7 @@ async function getBlock(lastSteemBlock) {
       retryCnt++;
       if (retryCnt > 3) {
         fs.appendFile(
-          `../logs/exceptions(${dateString}).txt`,
+          '../logs/exceptions(' + dateString + ').txt',
           'retry count over\n',
           err => {
             if (err) console.log(err);
@@ -96,7 +96,7 @@ async function getBlock(lastSteemBlock) {
         jsonInfo.blocknumber = blockno.lastReadSteemBlock;
 
         fs.appendFile(
-          `../logs/customjson(${dateString}).txt`,
+          '../logs/customjson(' + dateString + ').txt',
           JSON.stringify(content) + '\n',
           err => {
             if (err) console.log(err);
@@ -105,7 +105,7 @@ async function getBlock(lastSteemBlock) {
 
         if (
           content.id === config.customJsonList.mining &&
-          content.type === config.customJsonList.mining_type
+          jsonInfo.type === config.customJsonList.mining_type
         ) {
           const winner = jsonInfo.winner;
           const amount = jsonInfo.claim_token_amount;
@@ -116,7 +116,7 @@ async function getBlock(lastSteemBlock) {
           console.log('content :', jsonInfo);
 
           fs.appendFile(
-            `../logs/mining(${dateString}).txt`,
+            '../logs/mining(' + dateString + ').txt',
             JSON.stringify(jsonInfo) + '\n',
             err => {
               if (err) console.log(err);
