@@ -1,1 +1,1 @@
-{"lastReadSteemBlock":34302824}
+{"lastReadSteemBlock":34544370}
