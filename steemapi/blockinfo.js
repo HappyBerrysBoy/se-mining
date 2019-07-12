@@ -131,7 +131,7 @@ async function getBlock(lastSteemBlock) {
         content.body.indexOf(config.pickTag) > -1
       ) {
         try {
-          console.log(`${config.pickTag} : ${content.body}`);
+          console.log(`${config.pickTag} : ${content.block_num}`);
           const hdata = content.body
             .split(config.pickTag)[1]
             .match(/\((.*?)\)/g);
@@ -233,7 +233,7 @@ async function getBlock(lastSteemBlock) {
             }
           );
 
-          console.log(body);
+          //console.log(body);
         } catch (e) {
           console.log(e);
           steem.broadcast.comment(
