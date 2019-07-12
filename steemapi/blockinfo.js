@@ -36,7 +36,10 @@ async function getBlock(lastSteemBlock) {
     // const minute = (date.getMinutes() + '').padStart(2, '0');
     const dateString = `${year}-${month}-${day}`;
 
-    console.log(`Block No:${blockno.lastReadSteemBlock}`);
+    if (blockno.lastReadSteemBlock % 100 == 0) {
+      console.log(`Block No:${blockno.lastReadSteemBlock}`);
+    }
+
     blockinfo = await steem.api.getBlockAsync(blockno.lastReadSteemBlock);
 
     if (blockinfo == null) {
