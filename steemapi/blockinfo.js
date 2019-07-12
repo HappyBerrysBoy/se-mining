@@ -220,7 +220,7 @@ async function getBlock(lastSteemBlock) {
             steem.formatter
               .commentPermlink(content.author, content.permlink)
               .replace(/\../g, '')
-              .substring(0, 20),
+              .substring(0, 16) + Math.floor(Math.random() * 10000),
             '',
             body,
             content.json_metadata,
