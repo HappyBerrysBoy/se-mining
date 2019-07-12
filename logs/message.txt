@@ -1,1 +1,0 @@
-{"lastSteemBlockNo":33333333,"lastSSCBlockNo":400000}
