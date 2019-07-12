@@ -131,7 +131,7 @@ async function getBlock(lastSteemBlock) {
         content.body.indexOf(config.pickTag) > -1
       ) {
         try {
-          console.log(`${config.pickTag} : ${content.body}`);
+          console.log(`${config.pickTag} : ${content.blocknumber}`);
           const hdata = content.body
             .split(config.pickTag)[1]
             .match(/\((.*?)\)/g);
@@ -169,6 +169,10 @@ async function getBlock(lastSteemBlock) {
               numOfTotalVal += 1;
             }
           });
+
+          if (!numOfTotalVal) {
+            throw "Nan Error Block:" + content.blocknumber;
+          }
 
           if (list.length < pickCnt) {
             pickCnt = list.length;
@@ -233,7 +237,7 @@ async function getBlock(lastSteemBlock) {
             }
           );
 
-          console.log(body);
+          // console.log(body);
         } catch (e) {
           console.log(e);
           steem.broadcast.comment(
