@@ -9,6 +9,8 @@ selenium-debug.log
 package-lock.json
 key.json
 /config/blockConfig.ini
+config/blockConfig.ini
+*blockConfig.ini
 
 # Editor directories and files
 .idea

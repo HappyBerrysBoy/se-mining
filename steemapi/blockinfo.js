@@ -36,7 +36,7 @@ async function getBlock(lastSteemBlock) {
     // const minute = (date.getMinutes() + '').padStart(2, '0');
     const dateString = `${year}-${month}-${day}`;
 
-    console.log(`Start Block Search:${blockno.lastReadSteemBlock}`);
+    console.log(`Block No:${blockno.lastReadSteemBlock}`);
     blockinfo = await steem.api.getBlockAsync(blockno.lastReadSteemBlock);
 
     if (blockinfo == null) {
@@ -214,7 +214,10 @@ async function getBlock(lastSteemBlock) {
             content.author,
             content.permlink,
             'happyberrysboy',
-            steem.formatter.commentPermlink(content.author, content.permlink),
+            steem.formatter
+              .commentPermlink(content.author, content.permlink)
+              .replace(/\../g, '')
+              .substring(0, 20),
             '',
             body,
             content.json_metadata,
@@ -223,9 +226,11 @@ async function getBlock(lastSteemBlock) {
             },
           );
 
+          const logJson = { content: content, result: body };
+
           fs.appendFile(
             '../logs/happypick(' + dateString + ').txt',
-            body + '\n',
+            JSON.stringify(logJson) + '\n',
             err => {
               if (err) console.log(err);
             },
@@ -258,7 +263,7 @@ async function getBlock(lastSteemBlock) {
       //console.log('The file has been saved!');
     });
 
-    sleep(300);
+    sleep(400);
   }
 }
 
