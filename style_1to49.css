@@ -1,5 +1,5 @@
 #app {
-  width: 100%;
+  width: 280px;
 }
 
 .title {
@@ -21,9 +21,9 @@
   float: left;
 }
 
-/* .numBtn:nth-child(13n + 1) {
+.numBtn:nth-child(7n + 1) {
   clear: both;
-} */
+}
 
 .alive {
   background-color: #e94a58;

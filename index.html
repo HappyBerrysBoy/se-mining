@@ -23,18 +23,70 @@
   <body>
     <div id="app">
       <div class="title"><h1>{{ title }}</h1></div>
-      <div>
-        <num-btn v-for="(btn, idx) in numArray" 
-          :idx="idx"
-          :num="btn.num"
-          :styling="btn.styling"
-          @press="pressNum" />
+      <div style="border:2px solid #000;margin:20px;">
+        <center>Gift List</center>
+        <table>
+          <tr>
+            <td>
+              <table steyl="text-align:center;">
+                <tr>
+                  <th>No</th>
+                  <th>Gift</th>
+                  <th>Remain</th>
+                </tr>
+                <tr>
+                  <td>1</td>
+                  <td>100 Steem</td>
+                  <td>5</td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td>50 Steem</td>
+                  <td>10</td>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td>30 Steem</td>
+                  <td>20</td>
+                </tr>
+              </table>
+            </td>
+            <td>
+              <table steyl="text-align:center;">
+                <tr>
+                  <th>No</th>
+                  <th>Gift</th>
+                  <th>Remain</th>
+                </tr>
+                <tr>
+                  <td>1</td>
+                  <td>100 Steem</td>
+                  <td>5</td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td>50 Steem</td>
+                  <td>10</td>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td>30 Steem</td>
+                  <td>20</td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        </table>
       </div>
-      <div style="clear:both;" />
-      <center>Sec:<input type="text" style="margin:10px;width:120px;font-size:1.3rem;text-align:center;" v-model="currTime" realonly/></center>
-      <div style="text-align:center;">
-        <button type="button" class="btn btn-success">Reset</button>
-        <button type="button" class="btn btn-danger">Stop</button>
+      <div style="clear:both;"></div>
+      <div>
+        <div style="text-align:center;width:500px;">
+          <num-btn v-for="(btn, idx) in numArray" 
+            :idx="idx"
+            :num="btn.num"
+            :styling="btn.styling"
+            @press="pressNum" />
+        </div>
       </div>
     </div>
   </body>

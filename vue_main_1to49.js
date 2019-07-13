@@ -1,9 +1,9 @@
 new Vue({
   el: '#app',
   data: {
-    title: 'Steem Pick Me Up',
-    cntInRow: 13,
-    lastNum: 169,
+    title: '1 to 49',
+    cntInRow:7,
+    lastNum: 49,
     numArray: [],
     currNum: 1,
     timer: null,
@@ -22,7 +22,7 @@ new Vue({
       });
     }
 
-    // this.shuffle();
+    this.shuffle();
   },
   methods: {
     start() {
