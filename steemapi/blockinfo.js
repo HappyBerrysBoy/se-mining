@@ -10,7 +10,7 @@ const jsonData = {
   lastReadSscBlock: 400005,
 };
 
-fs.readFile('./config/blockConfig.ini', 'utf8', function(err, data) {
+fs.readFile('../config/blockConfig.ini', 'utf8', function(err, data) {
   if (err) console.log(err);
   const json = JSON.parse(data);
   console.log(json.lastReadSteemBlock);
@@ -57,7 +57,7 @@ async function getBlock(lastSteemBlock) {
       console.log(e);
       console.log(`const { timestamp = null, transactions } = blockinfo error`);
       fs.appendFile(
-        './logs/exceptions(' + dateString + ').txt',
+        '../logs/exceptions(' + dateString + ').txt',
         JSON.stringify(blockinfo) + '\n',
         err => {
           if (err) console.log(err);
@@ -68,7 +68,7 @@ async function getBlock(lastSteemBlock) {
       retryCnt++;
       if (retryCnt > 3) {
         fs.appendFile(
-          './logs/exceptions(' + dateString + ').txt',
+          '../logs/exceptions(' + dateString + ').txt',
           'retry count over\n',
           err => {
             if (err) console.log(err);
@@ -97,7 +97,7 @@ async function getBlock(lastSteemBlock) {
 
           // 용량 많이 잡아먹어서 하루치만
           // fs.appendFile(
-          //   './logs/customjson(' + dateString + ').txt',
+          //   '../logs/customjson(' + dateString + ').txt',
           //   JSON.stringify(content) + '\n',
           //   err => {
           //     if (err) console.log(err);
@@ -117,7 +117,7 @@ async function getBlock(lastSteemBlock) {
             console.log('content :', jsonInfo);
 
             fs.appendFile(
-              './logs/mining(' + dateString + ').txt',
+              '../logs/mining(' + dateString + ').txt',
               JSON.stringify(jsonInfo) + '\n',
               err => {
                 if (err) console.log(err);
@@ -130,7 +130,7 @@ async function getBlock(lastSteemBlock) {
         } catch (e) {
           console.log(e);
           fs.appendFile(
-            './logs/exceptions(' + dateString + ').txt',
+            '../logs/exceptions(' + dateString + ').txt',
             'retry count over\n',
             err => {
               if (err) console.log(err);
@@ -242,7 +242,7 @@ async function getBlock(lastSteemBlock) {
           const logJson = { content: content, result: body };
 
           fs.appendFile(
-            './logs/happypick(' + dateString + ').txt',
+            '../logs/happypick(' + dateString + ').txt',
             JSON.stringify(logJson) + '\n',
             err => {
               if (err) console.log(err);
@@ -269,7 +269,7 @@ async function getBlock(lastSteemBlock) {
 
     blockno.lastReadSteemBlock += 1;
 
-    fs.writeFile('./config/blockConfig.ini', JSON.stringify(blockno), err => {
+    fs.writeFile('../config/blockConfig.ini', JSON.stringify(blockno), err => {
       if (err) console.log(err);
       //console.log('The file has been saved!');
     });
