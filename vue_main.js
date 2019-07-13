@@ -22,6 +22,7 @@ new Vue({
         num: i + '',
         position: i,
         styling: 'alive',
+        prize: Math.floor(Math.random() * 100),
       });
     }
 
@@ -48,6 +49,7 @@ new Vue({
           `Pick ${num} up`,
           function(response) {
             console.log(response);
+            alert(`Prize : ${self.numArray[num].prize} Steem`);
             self.numArray[num].styling = 'dead';
           },
         );
