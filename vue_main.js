@@ -31,7 +31,7 @@ new Vue({
     pressNum(num) {
       this.numArray[num].styling = 'dead';
 
-      const json_claim = JSON.stringify({ symbol: 'ZZAN' });
+      const json_claim = JSON.stringify({ symbol: 'SPT' });
 
       if (window.steem_keychain) {
         window.steem_keychain.requestCustomJson(
