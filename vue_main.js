@@ -34,6 +34,8 @@ new Vue({
         return;
       }
 
+      const self = this;
+
       const type = 'ppopki';
       const json = { id: 'test', num: num, permlink: 'test' };
 
@@ -46,7 +48,7 @@ new Vue({
           `Pick ${num} up`,
           function(response) {
             console.log(response);
-            this.numArray[num].styling = 'dead';
+            self.numArray[num].styling = 'dead';
           },
         );
       }
