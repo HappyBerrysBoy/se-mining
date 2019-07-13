@@ -79,7 +79,7 @@
         </table>  
           <div style="clear:both;"></div>
           <div>
-            <div style="text-align:center;width:500px;">
+            <div style="text-align:center;width:100%;">
               <num-btn v-for="(btn, idx) in numArray" 
                 :idx="idx"
                 :num="btn.num"
@@ -90,20 +90,8 @@
         
       </div>
     </div>
-    <input type="button" value="test" onclick="javascript:test()" />
   </body>
   <script src="const.js"></script>
   <script src="vue/components/num.js"></script>
   <script src="vue_main.js"></script>
-  <script>
-    function test(){
-      try{
-        if(!steem_keychain) return;
-        steem_keychain.requestCustomJson('happyberrysboy','scot_claim_token', 'Posting', JSON.stringify({symbol:'SCT'}), 'Claim LIVVV', function(response){console.log(response);});
-      }catch(e){
-        debugger;
-        console.log(e);
-      }
-    }
-  </script>
 </html>

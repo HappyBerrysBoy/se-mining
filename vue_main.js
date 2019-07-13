@@ -31,20 +31,34 @@ new Vue({
     pressNum(num) {
       this.numArray[num].styling = 'dead';
 
-      const json_claim = JSON.stringify({ symbol: 'SPT' });
-
       if (window.steem_keychain) {
+        const account = 'happyberrysboy';
+        const planetid = 'P-ZA01QNQO29C';
+        const buildname = 'shieldgenerator';
+        const json = `{"username":"${account}","type":"upgrade","command":{"tr_var1":"${planetid}","tr_var2":"${buildname}"}}`;
         window.steem_keychain.requestCustomJson(
           'happyberrysboy',
-          'scot_claim_token',
+          'nextcolony',
           'Posting',
-          json_claim,
-          'Claim ' + 'SPT',
+          json,
+          `Build ${buildname}`,
           function(response) {
-            debugger;
             console.log(response);
           },
         );
+
+        // Keychain Claim Token
+        // const json_claim = JSON.stringify({ symbol: 'SPT' });
+        // window.steem_keychain.requestCustomJson(
+        //   'happyberrysboy',
+        //   'scot_claim_token',
+        //   'Posting',
+        //   json_claim,
+        //   'Claim ' + 'SPT',
+        //   function(response) {
+        //     console.log(response);
+        //   },
+        // );
       }
     },
     shuffle() {

@@ -14,21 +14,20 @@
 .numBtn {
   border: 3px solid #333;
   border-radius: 5px;
-  width: 40px;
-  height: 40px;
+  width: 60px;
+  height: 60px;
   text-align: center;
   font-size: 1.7rem;
   float: left;
+  margin: 0px 5px 5px 0px;
 }
-
-/* .numBtn:nth-child(13n + 1) {
-  clear: both;
-} */
 
 .alive {
   background-color: #e94a58;
 }
 
 .dead {
-  background-color: #888;
+  color: rgba(0, 0, 0, 0);
+  background-color: rgba(0, 0, 0, 0);
+  border: 0px solid #000;
 }
