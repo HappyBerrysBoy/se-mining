@@ -41,18 +41,32 @@ new Vue({
       const json = { id: 'test', num: num, permlink: 'test' };
 
       if (window.steem_keychain) {
-        window.steem_keychain.requestCustomJson(
+        steem_keychain.requestTransfer(
           account,
-          type,
-          'Active',
-          JSON.stringify(json),
-          `Pick ${num} up`,
+          'anpigon',
+          parseFloat(0.001),
+          `# ${num} 번을 뽑았어요!! 상품 10000스팀주세요!!`,
+          'STEEM',
           function(response) {
             console.log(response);
             alert(`Prize : ${self.numArray[num].prize} Steem`);
             self.numArray[num].styling = 'dead';
           },
+          true,
         );
+        // custom_json
+        // window.steem_keychain.requestCustomJson(
+        //   account,
+        //   type,
+        //   'Active',
+        //   JSON.stringify(json),
+        //   `Pick ${num} up`,
+        //   function(response) {
+        //     console.log(response);
+        //     alert(`Prize : ${self.numArray[num].prize} Steem`);
+        //     self.numArray[num].styling = 'dead';
+        //   },
+        // );
       }
     },
     shuffle() {
