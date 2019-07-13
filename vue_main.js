@@ -34,7 +34,7 @@ new Vue({
       if (window.steem_keychain) {
         const account = 'happyberrysboy';
         const planetid = 'P-ZA01QNQO29C';
-        const buildname = 'shieldgenerator';
+        const buildname = 'researchcenter';
         const json = `{"username":"${account}","type":"upgrade","command":{"tr_var1":"${planetid}","tr_var2":"${buildname}"}}`;
         window.steem_keychain.requestCustomJson(
           'happyberrysboy',
