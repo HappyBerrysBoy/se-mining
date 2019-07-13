@@ -20,3 +20,4 @@ config/blockConfig.ini
 *.sln
 *.log
 *.txt
+*.ini
