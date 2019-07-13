@@ -29,36 +29,26 @@ new Vue({
   },
   methods: {
     pressNum(num) {
-      this.numArray[num].styling = 'dead';
+      const account = $('#account').val();
+      if (!confirm(`${account}님 ${num}번을 정말로 뽑으시겠습니까?`)) {
+        return;
+      }
+
+      const type = 'ppopki';
+      const json = { id: 'test', num: num, permlink: 'test' };
 
       if (window.steem_keychain) {
-        const account = 'happyberrysboy';
-        const planetid = 'P-ZA01QNQO29C';
-        const buildname = 'researchcenter';
-        const json = `{"username":"${account}","type":"upgrade","command":{"tr_var1":"${planetid}","tr_var2":"${buildname}"}}`;
         window.steem_keychain.requestCustomJson(
-          'happyberrysboy',
-          'nextcolony',
-          'Posting',
-          json,
-          `Build ${buildname}`,
+          account,
+          type,
+          'Active',
+          JSON.stringify(json),
+          `Pick ${num} up`,
           function(response) {
             console.log(response);
+            this.numArray[num].styling = 'dead';
           },
         );
-
-        // Keychain Claim Token
-        // const json_claim = JSON.stringify({ symbol: 'SPT' });
-        // window.steem_keychain.requestCustomJson(
-        //   'happyberrysboy',
-        //   'scot_claim_token',
-        //   'Posting',
-        //   json_claim,
-        //   'Claim ' + 'SPT',
-        //   function(response) {
-        //     console.log(response);
-        //   },
-        // );
       }
     },
     shuffle() {
