@@ -142,7 +142,7 @@ async function blockMonitoring(blockno) {
         let valList = [];
         let numOfTotalVal = 0;
 
-        let participants = `\n<br>\n내용:${hdata}\n\n참가 리스트\n`;
+        let participants = `\n\n내용:${hdata}\n\n참가 리스트\n`;
         list.forEach((a, idx) => {
           accountList.push(a.split(':')[0].replace(/ /g, ''));
           if (a.indexOf(':') > -1) {

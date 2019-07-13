@@ -1,9 +1,10 @@
 new Vue({
   el: '#app',
   data: {
-    title: 'Steem Pick Me Up',
+    ssc: null,
+    title: '추억의 뽑기',
     cntInRow: 13,
-    lastNum: 169,
+    lastNum: 168,
     numArray: [],
     currNum: 1,
     timer: null,
@@ -12,11 +13,13 @@ new Vue({
     currTime: 0,
   },
   computed: {},
-  created() {},
+  created() {
+    this.ssc = new SSC('https://api.steem-engine.com/rpc/');
+  },
   mounted() {
     for (let i = 0; i < this.lastNum; i++) {
       this.numArray.push({
-        num: i + 1 + '',
+        num: i + '',
         position: i,
         styling: 'alive',
       });
@@ -25,39 +28,24 @@ new Vue({
     // this.shuffle();
   },
   methods: {
-    start() {
-      this.timer = setInterval(this.increment, 1000 / this.divide);
-    },
-    increment() {
-      this.interval++;
-      this.currTime = this.interval / this.divide;
-    },
-    stop() {
-      clearInterval(this.timer);
-      this.timer = null;
-    },
-    reset() {
-      this.stop();
-      this.interval = 0;
-      this.currTime = this.interval / this.divide;
-    },
     pressNum(num) {
-      if (num != this.currNum) return;
+      this.numArray[num].styling = 'dead';
 
-      let selBtn = this.numArray.filter(btn => {
-        return btn.num == this.currNum;
-      });
+      const json_claim = JSON.stringify({ symbol: 'ZZAN' });
 
-      selBtn[0].styling = 'dead';
-
-      if (this.currNum == 1) {
-        this.start();
-      } else if (this.currNum == this.lastNum) {
-        this.stop();
-        alert('Congratulations!!');
+      if (window.steem_keychain) {
+        window.steem_keychain.requestCustomJson(
+          'happyberrysboy',
+          'scot_claim_token',
+          'Posting',
+          json_claim,
+          'Claim ' + 'ZZAN',
+          function(response) {
+            debugger;
+            console.log(response);
+          },
+        );
       }
-
-      this.currNum += 1;
     },
     shuffle() {
       let currentIndex = this.numArray.length,
@@ -78,3 +66,26 @@ new Vue({
     },
   },
 });
+
+// SCOT claim function when pending > 0, autodetect keychain
+// $("#scot_claim_link").click(function() {
+//   if (pendingClaim == 0) {
+//     $("#dialog_warning").text(
+//       "You have 0 " + SCOT + " to claim. Balance refresh may take 30 seconds."
+//     );
+//     $("#dialog_warning").dialog("open");
+//   } else if (window.steem_keychain) {
+//     steem_keychain.requestCustomJson(
+//       account,
+//       "scot_claim_token",
+//       "Posting",
+//       json_claim,
+//       "Claim " + SCOT,
+//       function(response) {
+//         console.log(response);
+//       }
+//     );
+//   } else {
+//     window.open(sc_claim_link);
+//   }
+// });

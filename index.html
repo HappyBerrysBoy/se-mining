@@ -7,14 +7,13 @@
       name="viewport"
       content="width=device-width,initial-scale=1,shrink-to-fit=no"
     />
+    <script src="chrome-extension://cjgjgmnklgekhjlchfpbbcebnedlobeo/js/steem_keychain.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-
     <script src="https://cdn.steemjs.com/lib/latest/steem.min.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sscjs@latest/dist/ssc.min.js"></script>
-
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -22,75 +21,89 @@
   </head>
   <body>
     <div id="app">
-      <div class="title"><h1>{{ title }}</h1></div>
-      <div style="border:2px solid #000;margin:20px;">
-        <center>Gift List</center>
+      <div style="margin:30px;">
         <table>
           <tr>
             <td>
-              <table style="text-align:center;">
-                <tr>
-                  <th>No</th>
-                  <th>Gift</th>
-                  <th>Remain</th>
-                </tr>
-                <tr>
-                  <td>1</td>
-                  <td>100 Steem</td>
-                  <td>5</td>
-                </tr>
-                <tr>
-                  <td>2</td>
-                  <td>50 Steem</td>
-                  <td>10</td>
-                </tr>
-                <tr>
-                  <td>3</td>
-                  <td>30 Steem</td>
-                  <td>20</td>
-                </tr>
-              </table>
+              <div class="title"><h1>{{ title }}</h1></div>
             </td>
             <td>
-              <table style="text-align:center;">
-                <tr>
-                  <th>No</th>
-                  <th>Gift</th>
-                  <th>Remain</th>
-                </tr>
-                <tr>
-                  <td>1</td>
-                  <td>100 Steem</td>
-                  <td>5</td>
-                </tr>
-                <tr>
-                  <td>2</td>
-                  <td>50 Steem</td>
-                  <td>10</td>
-                </tr>
-                <tr>
-                  <td>3</td>
-                  <td>30 Steem</td>
-                  <td>20</td>
-                </tr>
-              </table>
+              <div style="border:2px solid #000;margin:20px;">
+                <center><h4>Gift List</h4></center>
+                <table>
+                  <tr>
+                    <td>
+                      <table style="text-align:center;">
+                        <tr>
+                          <th>No</th>
+                          <th>Gift</th>
+                          <th>Remain</th>
+                        </tr>
+                        <tr>
+                          <td>1</td>
+                          <td>100 Steem</td>
+                          <td>5</td>
+                        </tr>
+                        <tr>
+                          <td>2</td>
+                          <td>50 Steem</td>
+                          <td>10</td>
+                        </tr>
+                        <tr>
+                          <td>3</td>
+                          <td>30 Steem</td>
+                          <td>20</td>
+                        </tr>
+                        <tr>
+                          <td>4</td>
+                          <td>10 Steem</td>
+                          <td>30</td>
+                        </tr>
+                        <tr>
+                          <td>5</td>
+                          <td>5 Steem</td>
+                          <td>40</td>
+                        </tr>
+                        <tr>
+                          <td>6</td>
+                          <td>1 Steem</td>
+                          <td>50</td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                </table>
+              </div>
             </td>
           </tr>
-        </table>
-      </div>
-      <div style="clear:both;"></div>
-      <div>
-        <div style="text-align:center;width:500px;">
-          <num-btn v-for="(btn, idx) in numArray" 
-            :idx="idx"
-            :num="btn.num"
-            :styling="btn.styling"
-            @press="pressNum" />
-        </div>
+        </table>  
+          <div style="clear:both;"></div>
+          <div>
+            <div style="text-align:center;width:500px;">
+              <num-btn v-for="(btn, idx) in numArray" 
+                :idx="idx"
+                :num="btn.num"
+                :styling="btn.styling"
+                @press="pressNum" />
+            </div>
+          </div>
+        
       </div>
     </div>
+    <input type="button" value="test" onclick="javascript:test()" />
   </body>
   <script src="const.js"></script>
   <script src="vue/components/num.js"></script>
   <script src="vue_main.js"></script>
+  <script>
+    function test(){
+      try{
+        if(!steem_keychain) return;
+        steem_keychain.requestCustomJson('happyberrysboy','scot_claim_token', 'Posting', JSON.stringify({symbol:'SCT'}), 'Claim LIVVV', function(response){debugger; console.log(response);});
+      }catch(e){
+        debugger;
+        console.log(e);
+      }
+    }
+  </script>
 </html>
