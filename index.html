@@ -99,7 +99,7 @@
     function test(){
       try{
         if(!steem_keychain) return;
-        steem_keychain.requestCustomJson('happyberrysboy','scot_claim_token', 'Posting', JSON.stringify({symbol:'SCT'}), 'Claim LIVVV', function(response){debugger; console.log(response);});
+        steem_keychain.requestCustomJson('happyberrysboy','scot_claim_token', 'Posting', JSON.stringify({symbol:'SCT'}), 'Claim LIVVV', function(response){console.log(response);});
       }catch(e){
         debugger;
         console.log(e);

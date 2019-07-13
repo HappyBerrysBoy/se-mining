@@ -39,7 +39,7 @@ new Vue({
           'scot_claim_token',
           'Posting',
           json_claim,
-          'Claim ' + 'ZZAN',
+          'Claim ' + 'SPT',
           function(response) {
             debugger;
             console.log(response);
@@ -66,26 +66,3 @@ new Vue({
     },
   },
 });
-
-// SCOT claim function when pending > 0, autodetect keychain
-// $("#scot_claim_link").click(function() {
-//   if (pendingClaim == 0) {
-//     $("#dialog_warning").text(
-//       "You have 0 " + SCOT + " to claim. Balance refresh may take 30 seconds."
-//     );
-//     $("#dialog_warning").dialog("open");
-//   } else if (window.steem_keychain) {
-//     steem_keychain.requestCustomJson(
-//       account,
-//       "scot_claim_token",
-//       "Posting",
-//       json_claim,
-//       "Claim " + SCOT,
-//       function(response) {
-//         console.log(response);
-//       }
-//     );
-//   } else {
-//     window.open(sc_claim_link);
-//   }
-// });
