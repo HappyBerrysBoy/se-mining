@@ -7,14 +7,13 @@
       name="viewport"
       content="width=device-width,initial-scale=1,shrink-to-fit=no"
     />
+    <script src="chrome-extension://cjgjgmnklgekhjlchfpbbcebnedlobeo/js/steem_keychain.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-
     <script src="https://cdn.steemjs.com/lib/latest/steem.min.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sscjs@latest/dist/ssc.min.js"></script>
-
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -22,19 +21,74 @@
   </head>
   <body>
     <div id="app">
-      <div class="title"><h1>{{ title }}</h1></div>
-      <div>
-        <num-btn v-for="(btn, idx) in numArray" 
-          :idx="idx"
-          :num="btn.num"
-          :styling="btn.styling"
-          @press="pressNum" />
-      </div>
-      <div style="clear:both;" />
-      <center>Sec:<input type="text" style="margin:10px;width:120px;font-size:1.3rem;text-align:center;" v-model="currTime" realonly/></center>
-      <div style="text-align:center;">
-        <button type="button" class="btn btn-success">Reset</button>
-        <button type="button" class="btn btn-danger">Stop</button>
+      <div style="margin:30px;">
+        <table>
+          <tr>
+            <td>
+              <div class="title"><h1>{{ title }}</h1></div>
+              <input type="text" id="account" value="" />
+            </td>
+            <td>
+              <div style="border:2px solid #000;margin:20px;">
+                <center><h4>Gift List</h4></center>
+                <table>
+                  <tr>
+                    <td>
+                      <table style="text-align:center;">
+                        <tr>
+                          <th>No</th>
+                          <th>Gift</th>
+                          <th>Remain</th>
+                        </tr>
+                        <tr>
+                          <td>1</td>
+                          <td>100 Steem</td>
+                          <td>5</td>
+                        </tr>
+                        <tr>
+                          <td>2</td>
+                          <td>50 Steem</td>
+                          <td>10</td>
+                        </tr>
+                        <tr>
+                          <td>3</td>
+                          <td>30 Steem</td>
+                          <td>20</td>
+                        </tr>
+                        <tr>
+                          <td>4</td>
+                          <td>10 Steem</td>
+                          <td>30</td>
+                        </tr>
+                        <tr>
+                          <td>5</td>
+                          <td>5 Steem</td>
+                          <td>40</td>
+                        </tr>
+                        <tr>
+                          <td>6</td>
+                          <td>1 Steem</td>
+                          <td>50</td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+            </td>
+          </tr>
+        </table>  
+          <div style="clear:both;"></div>
+          <div>
+            <div style="text-align:center;width:100%;">
+              <num-btn v-for="(btn, idx) in numArray" 
+                :idx="idx"
+                :num="btn.num"
+                :styling="btn.styling"
+                @press="pressNum" />
+            </div>
+          </div>
+        
       </div>
     </div>
   </body>

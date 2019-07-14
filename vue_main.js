@@ -1,9 +1,10 @@
 new Vue({
   el: '#app',
   data: {
-    title: '1 to 49',
-    cntInRow:7,
-    lastNum: 49,
+    ssc: null,
+    title: '추억의 뽑기',
+    cntInRow: 13,
+    lastNum: 168,
     numArray: [],
     currNum: 1,
     timer: null,
@@ -12,52 +13,61 @@ new Vue({
     currTime: 0,
   },
   computed: {},
-  created() {},
+  created() {
+    this.ssc = new SSC('https://api.steem-engine.com/rpc/');
+  },
   mounted() {
     for (let i = 0; i < this.lastNum; i++) {
       this.numArray.push({
-        num: i + 1 + '',
+        num: i + '',
         position: i,
         styling: 'alive',
+        prize: Math.floor(Math.random() * 100),
       });
     }
 
-    this.shuffle();
+    // this.shuffle();
   },
   methods: {
-    start() {
-      this.timer = setInterval(this.increment, 1000 / this.divide);
-    },
-    increment() {
-      this.interval++;
-      this.currTime = this.interval / this.divide;
-    },
-    stop() {
-      clearInterval(this.timer);
-      this.timer = null;
-    },
-    reset() {
-      this.stop();
-      this.interval = 0;
-      this.currTime = this.interval / this.divide;
-    },
     pressNum(num) {
-      if (num != this.currNum) return;
-
-      let selBtn = this.numArray.filter(btn => {
-        return btn.num == this.currNum;
-      });
-
-      selBtn[0].styling = 'dead';
-
-      if (this.currNum == 1) {
-        this.start();
-      } else if (this.currNum == this.lastNum) {
-        this.stop();
-        alert('Congratulations!!');
+      const account = $('#account').val();
+      if (!confirm(`${account}님 ${num}번을 정말로 뽑으시겠습니까?`)) {
+        return;
       }
 
-      this.currNum += 1;
+      const self = this;
+
+      const type = 'ppopki';
+      const json = { id: 'test', num: num, permlink: 'test' };
+
+      if (window.steem_keychain) {
+        steem_keychain.requestTransfer(
+          account,
+          'anpigon',
+          parseFloat(0.001),
+          `# ${num} 번을 뽑았어요!! 상품 10000스팀주세요!!`,
+          'STEEM',
+          function(response) {
+            console.log(response);
+            alert(`Prize : ${self.numArray[num].prize} Steem`);
+            self.numArray[num].styling = 'dead';
+          },
+          true,
+        );
+        // custom_json
+        // window.steem_keychain.requestCustomJson(
+        //   account,
+        //   type,
+        //   'Active',
+        //   JSON.stringify(json),
+        //   `Pick ${num} up`,
+        //   function(response) {
+        //     console.log(response);
+        //     alert(`Prize : ${self.numArray[num].prize} Steem`);
+        //     self.numArray[num].styling = 'dead';
+        //   },
+        // );
+      }
     },
     shuffle() {
       let currentIndex = this.numArray.length,
