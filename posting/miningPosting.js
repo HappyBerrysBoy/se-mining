@@ -26,6 +26,10 @@ fs.readFile(`../logs/mining(${dateString}).txt`, "utf8", function(err, data) {
     if (!data.trim().length) return;
 
     const json = JSON.parse(data);
+
+    // WEED는 100개로 너무 많음.. Winner가..
+    if (json.symbol === "WEED") return;
+
     if (!map.has(json.symbol)) {
       map.set(json.symbol, [json]);
     } else {
