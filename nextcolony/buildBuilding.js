@@ -315,4 +315,4 @@ setTimeout(() => {
       console.log(err, result);
     },
   );
-}, 5 * 60 * 1000);
+}, 2.9 * 60 * 1000);
