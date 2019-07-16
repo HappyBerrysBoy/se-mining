@@ -63,8 +63,7 @@ async function blockMonitoring(blockno) {
     );
   }
 
-  retryCnt = 0;
-  if (transactions.length == 0) return;
+  // if (transactions.length == 0 && retryCount < 5) return;
 
   transactions.forEach(transaction => {
     const { operations, signatures } = transaction;
