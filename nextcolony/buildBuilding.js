@@ -3,7 +3,8 @@ const steem = require('steem');
 const key = require('../key.json');
 
 const account = 'happyberrysboy';
-// const buildPlanetArray = ['P-ZO75DZDVRUO'];
+const buildPlanetArray = ['P-ZO75DZDVRUO'];
+const explorePlanetArray = ['P-ZO75DZDVRUO'];
 let buildArray = [];
 let searchGalaxyArray = [];
 // const planetId = "P-ZA01QNQO29C";
@@ -260,6 +261,7 @@ function autoRun() {
                 }
 
                 if (availExplore) {
+                  if (explorePlanetArray.indexOf(planet.id) < 0) return;
                   searchGalaxyArray.push(
                     `{"username":"${account}","type":"explorespace","command":{"tr_var1":"${
                       planet.id
