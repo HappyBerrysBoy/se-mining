@@ -20,6 +20,8 @@ fs.readFile(`../logs/mining(${dateString}).txt`, 'utf8', function(err, data) {
     console.log(err);
     return;
   }
+
+	console.log(`reading mining(${dateString}).txt`);
   const map = new Map();
 
   data.split('\n').forEach(data => {
@@ -62,7 +64,8 @@ fs.readFile(`../logs/mining(${dateString}).txt`, 'utf8', function(err, data) {
     body += tmp;
   }
 
-  console.log(body);
+//  console.log(body);
+	
   steem.broadcast.comment(
     key.happyberrysboy_posting,
     '',
@@ -76,6 +79,7 @@ fs.readFile(`../logs/mining(${dateString}).txt`, 'utf8', function(err, data) {
       console.log(err, result);
     },
   );
+
 });
 
 Date.prototype.addHours = function(h) {
