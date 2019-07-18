@@ -288,7 +288,7 @@ function autoRun() {
 
 autoRun();
 
-setTimeout(autoRun, 9 * 60000);
+setTimeout(autoRun, 3 * 60000);
 
 setTimeout(() => {
   if (buildArray.length == 0) return;
@@ -321,4 +321,4 @@ setTimeout(() => {
       console.log(err, result);
     },
   );
-}, 2.9 * 60 * 1000);
+}, 4 * 60 * 1000);
