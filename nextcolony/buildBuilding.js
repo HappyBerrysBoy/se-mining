@@ -7,6 +7,7 @@ const buildPlanetArray = ["P-ZO75DZDVRUO"];
 const explorePlanetArray = ["P-ZO75DZDVRUO"];
 let buildArray = [];
 let searchGalaxyArray = [];
+const exceptPoint = [{ x: -10, y: -170 }];
 // const planetId = "P-ZA01QNQO29C";
 const maxBuildQty = {
   base: -1,
@@ -92,6 +93,9 @@ function searchTarget(targetPoint, explore, explored, planets) {
   }
   if (availExplore) {
     availExplore = chkAvailExplorePoint(planets, targetPoint);
+  }
+  if (availExplore) {
+    availExplore = chkAvailExplorePoint(exceptPoint, targetPoint);
   }
 
   return availExplore;
@@ -232,6 +236,7 @@ function autoRun() {
                 //skillInfo = [{"busy":1558984189,"coal":1344,"copper":288,"current":14,"name":"shipyard","ore":576,"time":48000,"uranium":156},{"busy":1557335921,"coal":499,"copper":94,"current":12,"name":"oredepot","ore":150,"time":31028,"uranium":52},{"busy":1559481986,"coal":416,"copper":62,"current":12,"name":"copperdepot","ore":225,"time":31028,"uranium":62},{"busy":1559620097,"coal":403,"copper":202,"current":13,"name":"coaldepot","ore":403,"time":38278,"uranium":76},{"busy":1559620199,"coal":605,"copper":242,"current":13,"name":"uraniumdepot","ore":336,"time":38278,"uranium":50},{"busy":1558823360,"coal":0,"copper":0,"current":20,"name":"Explorer","ore":0,"time":0,"uranium":0},{"busy":1557850913,"coal":538,"copper":96,"current":6,"name":"Transporter","ore":276,"time":25412,"uranium":62},{"busy":1556966731,"coal":84,"copper":50,"current":1,"name":"Corvette","ore":118,"time":38278,"uranium":17},{"busy":0,"coal":120,"copper":18,"current":0,"name":"Frigate","ore":48,"time":48000,"uranium":21},{"busy":0,"coal":128,"copper":19,"current":0,"name":"Destroyer","ore":51,"time":61714,"uranium":22},{"busy":0,"coal":136,"copper":17,"current":0,"name":"Cruiser","ore":54,"time":82517,"uranium":29},{"busy":0,"coal":173,"copper":50,"current":0,"name":"Battlecruiser","ore":101,"time":117818,"uranium":22},{"busy":0,"coal":182,"copper":53,"current":0,"name":"Carrier","ore":106,"time":190884,"uranium":23},{"busy":0,"coal":160,"copper":20,"current":0,"name":"Dreadnought","ore":64,"time":432000,"uranium":34},{"busy":1556538905,"coal":582,"copper":83,"current":12,"name":"oremine","ore":125,"time":31028,"uranium":52},{"busy":1556577416,"coal":416,"copper":52,"current":12,"name":"coppermine","ore":200,"time":31028,"uranium":73},{"busy":1556555639,"coal":208,"copper":104,"current":12,"name":"coalmine","ore":349,"time":31028,"uranium":42},{"busy":1557927246,"coal":1024,"copper":538,"current":15,"name":"uraniummine","ore":640,"time":61714,"uranium":80},{"busy":1556715088,"coal":42,"copper":10,"current":6,"name":"base","ore":20,"time":9480,"uranium":4},{"busy":1556713415,"coal":29,"copper":7,"current":5,"name":"researchcenter","ore":12,"time":7579,"uranium":4},{"busy":0,"coal":240,"copper":60,"current":0,"name":"orebooster","ore":120,"time":432000,"uranium":29},{"busy":0,"coal":192,"copper":56,"current":0,"name":"coalbooster","ore":112,"time":432000,"uranium":24},{"busy":0,"coal":80,"copper":40,"current":0,"name":"copperbooster","ore":112,"time":432000,"uranium":19},{"busy":1558705164,"coal":1120,"copper":200,"current":4,"name":"uraniumbooster","ore":480,"time":432000,"uranium":156},{"busy":1562246130,"coal":2880,"copper":720,"current":4,"name":"missioncontrol","ore":1440,"time":432000,"uranium":346},{"busy":1557827801,"coal":12,"copper":2,"current":2,"name":"bunker","ore":6,"time":3153,"uranium":1},{"busy":1557568293,"coal":32,"copper":8,"current":1,"name":"enlargebunker","ore":16,"time":1991,"uranium":5},{"busy":0,"coal":1536,"copper":499,"current":0,"name":"structureimprove","ore":640,"time":61714,"uranium":160},{"busy":0,"coal":1280,"copper":499,"current":0,"name":"armorimprove","ore":768,"time":61714,"uranium":160},{"busy":0,"coal":1280,"copper":461,"current":0,"name":"shieldimprove","ore":640,"time":61714,"uranium":192},{"busy":0,"coal":1536,"copper":499,"current":0,"name":"rocketimprove","ore":640,"time":61714,"uranium":160},{"busy":0,"coal":1280,"copper":499,"current":0,"name":"bulletimprove","ore":768,"time":61714,"uranium":160},{"busy":0,"coal":1280,"copper":461,"current":0,"name":"laserimprove","ore":640,"time":61714,"uranium":192},{"busy":0,"coal":179,"copper":31,"current":0,"name":"regenerationbonus","ore":32,"time":61714,"uranium":16},{"busy":0,"coal":128,"copper":46,"current":0,"name":"repairbonus","ore":77,"time":61714,"uranium":16},{"busy":0,"coal":8,"copper":2,"current":0,"name":"shieldgenerator","ore":4,"time":945,"uranium":1},{"busy":0,"coal":728,"copper":182,"current":0,"name":"siegeprolongation","ore":364,"time":31028,"uranium":153}]
 
                 // 탐사 관련 얘기들..
+                if (explorePlanetArray.indexOf(planet.id) < 0) return;
                 const data = loadGalaxy.data;
                 const area = data.area;
                 const explore = data.explore;
@@ -261,7 +266,6 @@ function autoRun() {
                 }
 
                 if (availExplore) {
-                  if (explorePlanetArray.indexOf(planet.id) < 0) return;
                   searchGalaxyArray.push(
                     `{"username":"${account}","type":"explorespace","command":{"tr_var1":"${
                       planet.id
@@ -284,7 +288,7 @@ function autoRun() {
 
 autoRun();
 
-setTimeout(autoRun, 2 * 60000);
+setTimeout(autoRun, 3 * 60000);
 
 setTimeout(() => {
   if (buildArray.length == 0) return;
@@ -317,4 +321,4 @@ setTimeout(() => {
       console.log(err, result);
     }
   );
-}, 3 * 60 * 1000);
+}, 4 * 60 * 1000);
