@@ -1,10 +1,10 @@
-const axios = require('axios');
-const steem = require('steem');
-const key = require('../key.json');
+const axios = require("axios");
+const steem = require("steem");
+const key = require("../key.json");
 
-const account = 'happyberrysboy';
-const buildPlanetArray = ['P-ZO75DZDVRUO'];
-const explorePlanetArray = ['P-ZO75DZDVRUO'];
+const account = "happyberrysboy";
+const buildPlanetArray = ["P-ZO75DZDVRUO"];
+const explorePlanetArray = ["P-ZO75DZDVRUO"];
 let buildArray = [];
 let searchGalaxyArray = [];
 // const planetId = "P-ZA01QNQO29C";
@@ -21,7 +21,7 @@ const maxBuildQty = {
   copperdepot: 13,
   uraniumdepot: 13,
   bunker: 13,
-  shieldgenerator: -1,
+  shieldgenerator: -1
 };
 const buildPriority = [
   { explorer: 0 },
@@ -37,43 +37,43 @@ const buildPriority = [
   { copperdepot: 13 },
   { uraniumdepot: 13 },
   { bunker: -1 },
-  { shieldgenerator: -1 },
+  { shieldgenerator: -1 }
 ];
 
 // Planet 정보
 const loadplanets = account => {
-  return axios.get(`https://nextcolony.io/api/loadplanets?user=${account}`);
+  return axios.get(`https://api.nextcolony.io/loadplanets?user=${account}`);
 };
 
 const loadskills = account => {
-  return axios.get(`https://nextcolony.io/api/loadskills?user=${account}`);
+  return axios.get(`https://api.nextcolony.io/loadskills?user=${account}`);
 };
 
 const loadplanet = planetId => {
-  return axios.get(`https://nextcolony.io/api/loadplanet?id=${planetId}`);
+  return axios.get(`https://api.nextcolony.io/loadplanet?id=${planetId}`);
 };
 
 const loadqyt = planetId => {
-  return axios.get(`https://nextcolony.io/api/loadqyt?id=${planetId}`);
+  return axios.get(`https://api.nextcolony.io/loadqyt?id=${planetId}`);
 };
 
 const loadbuilding = planetId => {
-  return axios.get(`https://nextcolony.io/api/loadbuildings?id=${planetId}`);
+  return axios.get(`https://api.nextcolony.io/loadbuildings?id=${planetId}`);
 };
 
 const loadshipyard = planetId => {
-  return axios.get(`https://nextcolony.io/api/shipyard?id=${planetId}`);
+  return axios.get(`https://api.nextcolony.io/shipyard?id=${planetId}`);
 };
 
 const loadproduction = (planetId, account) => {
   return axios.get(
-    `https://nextcolony.io/api/loadproduction?id=${planetId}&user=${account}`,
+    `https://api.nextcolony.io/loadproduction?id=${planetId}&user=${account}`
   );
 };
 
 const loadGalaxy = (planetX, planetY) => {
   return axios.get(
-    `https://nextcolony.io/api/loadgalaxy?x=${planetX}&y=${planetY}&height=120&width=120`,
+    `https://api.nextcolony.io/loadgalaxy?x=${planetX}&y=${planetY}&height=120&width=120`
   );
 };
 
@@ -103,7 +103,7 @@ function chkAvailExplorefromDistance(
   distance,
   explore,
   explored,
-  planets,
+  planets
 ) {
   console.log(`Distance:${distance}`);
 
@@ -160,7 +160,7 @@ function autoRun() {
             loadbuilding(planet.id),
             loadshipyard(planet.id),
             loadplanet(planet.id),
-            loadGalaxy(planet.posx, planet.posy),
+            loadGalaxy(planet.posx, planet.posy)
           ]) // axios.all로 여러 개의 request를 보내고
           .then(
             axios.spread(
@@ -170,7 +170,7 @@ function autoRun() {
                 buildingInfoData,
                 shipyardInfoData,
                 loadPlanetData,
-                loadGalaxy,
+                loadGalaxy
               ) => {
                 // response를 spread로 받는다
                 // Build 관련 내용들
@@ -216,7 +216,7 @@ function autoRun() {
                   buildArray.push(
                     `{"username":"${account}","type":"upgrade","command":{"tr_var1":"${
                       planet.id
-                    }","tr_var2":"${building.name}"}}`,
+                    }","tr_var2":"${building.name}"}}`
                   );
 
                   console.log(`Available building:${building.name}`);
@@ -251,7 +251,7 @@ function autoRun() {
                     i,
                     explore,
                     explored,
-                    planets,
+                    planets
                   );
 
                   if (Object.keys(targetPoint).length) {
@@ -267,13 +267,13 @@ function autoRun() {
                       planet.id
                     }","tr_var2":"${targetPoint.x}","tr_var3":"${
                       targetPoint.y
-                    }","tr_var4":"explorership"}}`,
+                    }","tr_var4":"explorership"}}`
                   );
                 } else {
-                  console.log('Can not find available explore point');
+                  console.log("Can not find available explore point");
                 }
-              },
-            ),
+              }
+            )
           )
           .catch(error => {
             console.error(error);
@@ -284,7 +284,7 @@ function autoRun() {
 
 autoRun();
 
-setTimeout(autoRun, 9 * 60000);
+setTimeout(autoRun, 2 * 60000);
 
 setTimeout(() => {
   if (buildArray.length == 0) return;
@@ -294,11 +294,11 @@ setTimeout(() => {
     key.happyberrysboy_posting, // posting key
     [],
     [account], // account
-    'nextcolony', // 'nextcolony'
+    "nextcolony", // 'nextcolony'
     customJson,
     function(err, result) {
       console.log(err, result);
-    },
+    }
   );
 }, 5 * 60 * 1000);
 
@@ -311,10 +311,10 @@ setTimeout(() => {
     key.happyberrysboy_posting, // posting key
     [],
     [account], // account
-    'nextcolony', // 'nextcolony'
+    "nextcolony", // 'nextcolony'
     customJson,
     function(err, result) {
       console.log(err, result);
-    },
+    }
   );
-}, 2.9 * 60 * 1000);
+}, 3 * 60 * 1000);
