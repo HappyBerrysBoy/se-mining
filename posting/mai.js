@@ -4,7 +4,6 @@ const key = require('../key.json');
 
 const date = new Date();
 date.setHours(date.getHours() + 9); // 9시간 추가
-date.setDate(date.getDate() - 1);
 const preYear = date.getFullYear() + '';
 const preMonth = (date.getMonth() + 1 + '').padStart(2, '0');
 const preDay = (date.getDate() + '').padStart(2, '0');
