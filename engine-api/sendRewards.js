@@ -51,9 +51,6 @@ function sendTokenPromise(account, sym, amo) {
       'ssc-mainnet1',
       json,
       function(err, result) {
-        // Required Auths["honeybeerbear"]
-        // Required Posting Auths[]
-        // Idssc-mainnet1
         // Json{"contractName":"tokens","contractAction":"transfer","contractPayload":
         // {"symbol":"SCT","to":"scotpool.miner","quantity":"0.001","memo":"test"}}
 
@@ -73,9 +70,4 @@ for (let i = 0; i < toAccount.length; i++) {
   sendTokenPromise(account, symbol, amount).then(() => {
     console.log(`To ${account} ${amount}${symbol}`);
   });
-}
-
-function sleep(delay) {
-  var start = new Date().getTime();
-  while (new Date().getTime() < start + delay);
 }

@@ -1,9 +1,9 @@
 const steem = require('steem');
 const config = require('../config.json');
-// const { createLogger, format, transports } = require("winston");
-//const log = require('log-to-file');
 const fs = require('fs');
 const key = require('../key.json');
+const SSC = require('sscjs');
+const ssc = new SSC('https://api.steem-engine.com/rpc/');
 
 const jsonData = {
   lastReadSteemBlock: 34543118,
