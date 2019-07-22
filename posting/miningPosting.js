@@ -15,7 +15,7 @@ let body = `![](https://cdn.steemitimages.com/DQmQD8RiPr7xWSFf3vk1217AYcrc8ppeAt
 body += `This report shows all mining results from steem-engine. This report is issued once a day.\n`;
 body += `# Last Day Steem Engine Mining Report \n<br>\n`;
 
-fs.readFile(`../logs/mining(${dateString}).txt`, 'utf8', function(err, data) {
+fs.readFile(`/home/ubuntu/workspace/se-mining/logs/mining(${dateString}).txt`, 'utf8', function(err, data) {
   if (err) {
     console.log(err);
     return;
@@ -32,6 +32,8 @@ fs.readFile(`../logs/mining(${dateString}).txt`, 'utf8', function(err, data) {
     // WEED는 100개로 너무 많음.. Winner가..
     if (json.symbol === 'WEED') return;
     if (json.symbol === 'NEOXAG') return;
+    if(json.symbol === 'GG') return;
+	  if(json.symbol === 'STEM') return;
 
     if (!map.has(json.symbol)) {
       map.set(json.symbol, [json]);
