@@ -10,7 +10,7 @@ const jsonData = {
   lastReadSscBlock: 400005,
 };
 
-fs.readFile('../config/blockConfig.ini', 'utf8', function(err, data) {
+fs.readFile('./config/blockConfig.ini', 'utf8', function(err, data) {
   if (err) console.log(err);
   const json = JSON.parse(data);
   console.log(json.lastReadSteemBlock);
@@ -55,7 +55,7 @@ async function blockMonitoring(blockno) {
     console.log(e);
     console.log(`const { timestamp = null, transactions } = blockinfo error`);
     fs.appendFile(
-      '../logs/exceptions(' + dateString + ').txt',
+      './logs/exceptions(' + dateString + ').txt',
       JSON.stringify(blockinfo) + '\n',
       err => {
         if (err) console.log(err);
@@ -69,13 +69,22 @@ async function blockMonitoring(blockno) {
     const { operations, signatures } = transaction;
     const action = operations[0][0];
     const content = operations[0][1];
-    content.blocknumber = blockno.lastReadSteemBlock;
+    content.block = blockno.lastReadSteemBlock;
+    content.timestamp = timestamp;
+
+    try {
+      let aa = JSON.stringify(content)
+        .toLowerCase()
+        .includes('sct');
+    } catch (e) {
+      console.log(e);
+    }
 
     if (action === 'custom_json') {
       try {
         const jsonInfo = JSON.parse(content.json);
         jsonInfo.timestamp = timestamp;
-        jsonInfo.blocknumber = blockno.lastReadSteemBlock;
+        jsonInfo.block = blockno.lastReadSteemBlock;
 
         if (
           content.id === config.customJsonList.mining &&
@@ -90,7 +99,7 @@ async function blockMonitoring(blockno) {
           console.log('content :', jsonInfo);
 
           fs.appendFile(
-            '../logs/mining(' + dateString + ').txt',
+            './logs/mining(' + dateString + ').txt',
             JSON.stringify(jsonInfo) + '\n',
             err => {
               if (err) console.log(err);
@@ -98,12 +107,27 @@ async function blockMonitoring(blockno) {
           );
           // {"service":"SE_MINING","content":"key:id, content:scot_claim","level":"info","message":"info","timestamp":"2019-06-25 01:42:46"}
           // {"service":"SE_MINING","content":"key:json, content:{\"symbol\":\"PAL\",\"type\":\"mining\",\"N\":9,\"staked_mining_power\":2313.0000000000005,\"winner\":[\"bitcoinflood\",\"jongolson\",\"michealb\",\"nuthman\",\"aggroed\",\"dylanhobalart\",\"dylanhobalart\",\"videosteemit\",\"steinreich\"],\"claim_token_amount\":2.067,\"trx_id\":\"4654e524c287b4354981587aea3a62f133da8648\",\"block_num\":34084567,\"N_accounts\":166}","level":"info","message":"info","timestamp":"2019-06-25 01:42:46"}
-        } else {
+        }
+
+        if (
+          JSON.stringify(content)
+            .toLowerCase()
+            .includes('sct')
+        ) {
+          // console.log('content :', content);
+
+          fs.appendFile(
+            './logs/sct_log_' + timestamp.split('T')[0] + '.txt',
+            JSON.stringify(content) + '\n',
+            err => {
+              if (err) console.log(err);
+            },
+          );
         }
       } catch (e) {
         console.log(e);
         fs.appendFile(
-          '../logs/exceptions(' + dateString + ').txt',
+          './logs/exceptions(' + dateString + ').txt',
           'retry count over\n',
           err => {
             if (err) console.log(err);
@@ -217,7 +241,7 @@ async function blockMonitoring(blockno) {
         const logJson = { content: content, result: body };
 
         fs.appendFile(
-          '../logs/happypick(' + dateString + ').txt',
+          './logs/happypick(' + dateString + ').txt',
           JSON.stringify(logJson) + '\n',
           err => {
             if (err) console.log(err);
@@ -244,7 +268,7 @@ async function blockMonitoring(blockno) {
 
   blockno.lastReadSteemBlock += 1;
 
-  fs.writeFile('../config/blockConfig.ini', JSON.stringify(blockno), err => {
+  fs.writeFile('./config/blockConfig.ini', JSON.stringify(blockno), err => {
     if (err) console.log(err);
   });
 }
