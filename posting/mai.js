@@ -166,6 +166,7 @@ Promise.all([getFormat(), getPrePosting(account, `${preDateString}-kr`)]).then(
           'iv',
           'steemleo',
           'steemace',
+          'sportstalk',
         ],
         app: 'busy/2.5.6',
       },
