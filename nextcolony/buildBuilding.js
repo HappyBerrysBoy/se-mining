@@ -1,10 +1,10 @@
-const axios = require('axios');
-const steem = require('steem');
-const key = require('../key.json');
+const axios = require("axios");
+const steem = require("steem");
+const key = require("../key.json");
 
-const account = 'happyberrysboy';
-const buildPlanetArray = ['P-Z36VFV9RSR4'];
-const explorePlanetArray = ['P-Z36VFV9RSR4'];
+const account = "happyberrysboy";
+const buildPlanetArray = ["P-ZA01QNQO29C", "P-ZO75DZDVRUO"];
+const explorePlanetArray = ["P-ZA01QNQO29C", "P-ZO75DZDVRUO"];
 
 let buildArray = [];
 let searchGalaxyArray = [];
@@ -22,8 +22,8 @@ const maxBuildQty = {
   oredepot: 13,
   copperdepot: 13,
   uraniumdepot: 13,
-  bunker: 13,
-  shieldgenerator: -1,
+  bunker: -1,
+  shieldgenerator: -1
 };
 const buildPriority = [
   { explorer: 0 },
@@ -39,7 +39,7 @@ const buildPriority = [
   { copperdepot: 13 },
   { uraniumdepot: 13 },
   { bunker: -1 },
-  { shieldgenerator: -1 },
+  { shieldgenerator: -1 }
 ];
 
 // Planet 정보
@@ -69,13 +69,13 @@ const loadshipyard = planetId => {
 
 const loadproduction = (planetId, account) => {
   return axios.get(
-    `https://api.nextcolony.io/loadproduction?id=${planetId}&user=${account}`,
+    `https://api.nextcolony.io/loadproduction?id=${planetId}&user=${account}`
   );
 };
 
 const loadGalaxy = (planetX, planetY) => {
   return axios.get(
-    `https://api.nextcolony.io/loadgalaxy?x=${planetX}&y=${planetY}&height=120&width=120`,
+    `https://api.nextcolony.io/loadgalaxy?x=${planetX}&y=${planetY}&height=120&width=120`
   );
 };
 
@@ -108,9 +108,9 @@ function chkAvailExplorefromDistance(
   distance,
   explore,
   explored,
-  planets,
+  planets
 ) {
-  console.log(`Distance:${distance}`);
+  // console.log(`Distance:${distance}`);
 
   let targetPoint = {};
   let availExplore = true;
@@ -156,7 +156,7 @@ function autoRun() {
     })
     .then(planets => {
       planets.forEach(planet => {
-        // if (buildPlanetArray.indexOf(planet.id) < 0) return;
+        // if (buildPlanetArray.indexOf(planet.id) > -1) return;
 
         axios
           .all([
@@ -165,7 +165,7 @@ function autoRun() {
             loadbuilding(planet.id),
             loadshipyard(planet.id),
             loadplanet(planet.id),
-            loadGalaxy(planet.posx, planet.posy),
+            loadGalaxy(planet.posx, planet.posy)
           ]) // axios.all로 여러 개의 request를 보내고
           .then(
             axios.spread(
@@ -175,7 +175,7 @@ function autoRun() {
                 buildingInfoData,
                 shipyardInfoData,
                 loadPlanetData,
-                loadGalaxy,
+                loadGalaxy
               ) => {
                 // response를 spread로 받는다
                 // Build 관련 내용들
@@ -218,12 +218,12 @@ function autoRun() {
 
                   if (currDate / 1000 <= building.busy) return;
 
-                  if (buildPlanetArray.indexOf(planet.id) < 0) return;
+                  if (buildPlanetArray.indexOf(planet.id) > -1) return;
 
                   buildArray.push(
                     `{"username":"${account}","type":"upgrade","command":{"tr_var1":"${
                       planet.id
-                    }","tr_var2":"${building.name}"}}`,
+                    }","tr_var2":"${building.name}"}}`
                   );
 
                   console.log(`Available building:${building.name}`);
@@ -259,7 +259,7 @@ function autoRun() {
                     i,
                     explore,
                     explored,
-                    planets,
+                    planets
                   );
 
                   if (Object.keys(targetPoint).length) {
@@ -274,13 +274,13 @@ function autoRun() {
                       planet.id
                     }","tr_var2":"${targetPoint.x}","tr_var3":"${
                       targetPoint.y
-                    }","tr_var4":"explorership"}}`,
+                    }","tr_var4":"explorership"}}`
                   );
                 } else {
-                  console.log('Can not find available explore point');
+                  console.log("Can not find available explore point");
                 }
-              },
-            ),
+              }
+            )
           )
           .catch(error => {
             console.error(error);
@@ -296,18 +296,26 @@ setTimeout(autoRun, 4 * 60000);
 setTimeout(() => {
   if (buildArray.length == 0) return;
 
-  const customJson = buildArray[0];
+  let customJson = buildArray[0];
+  buildArray.forEach(arr => {
+    if (arr.indexOf("mine") > -1) {
+      customJson = arr;
+    }
+  });
+
+  console.log(customJson);
+
   steem.broadcast.customJson(
     key.happyberrysboy_posting, // posting key
     [],
     [account], // account
-    'nextcolony', // 'nextcolony'
+    "nextcolony", // 'nextcolony'
     customJson,
     function(err, result) {
       console.log(err, result);
-    },
+    }
   );
-}, 5 * 60 * 1000);
+}, 1 * 60 * 1000);
 
 setTimeout(() => {
   if (searchGalaxyArray.length == 0) return;
@@ -318,10 +326,10 @@ setTimeout(() => {
     key.happyberrysboy_posting, // posting key
     [],
     [account], // account
-    'nextcolony', // 'nextcolony'
+    "nextcolony", // 'nextcolony'
     customJson,
     function(err, result) {
       console.log(err, result);
-    },
+    }
   );
 }, 5 * 60 * 1000);
