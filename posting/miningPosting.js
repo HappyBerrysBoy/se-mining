@@ -34,6 +34,7 @@ fs.readFile(`/home/ubuntu/workspace/se-mining/logs/mining(${dateString}).txt`, '
     if (json.symbol === 'NEOXAG') return;
     if(json.symbol === 'GG') return;
 	  if(json.symbol === 'STEM') return;
+	  if(json.symbol === 'CCC') return;
 
     if (!map.has(json.symbol)) {
       map.set(json.symbol, [json]);
