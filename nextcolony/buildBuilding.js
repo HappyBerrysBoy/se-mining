@@ -207,7 +207,12 @@ function autoRun() {
                 if (availUranium > qytInfo.uraniumdepot)
                   availUranium = qytInfo.uraniumdepot;
 
+                let mineLevel = 6;
+
                 buildingInfo.forEach(building => {
+                  if (building.name.indexOf("mine") > -1) {
+                    mineLevel = building.current;
+                  }
                   if (maxBuildQty[building.name] < 1) return;
                   if (maxBuildQty[building.name] <= building.current) return;
 
@@ -219,6 +224,13 @@ function autoRun() {
                   if (currDate / 1000 <= building.busy) return;
 
                   if (buildPlanetArray.indexOf(planet.id) > -1) return;
+                  if (
+                    building.name.indexOf("mine") < 0 &&
+                    mineLevel > -1 &&
+                    mineLevel <= 12 &&
+                    mineLevel - building.current < 6
+                  )
+                    return;
 
                   buildArray.push(
                     `{"username":"${account}","type":"upgrade","command":{"tr_var1":"${
