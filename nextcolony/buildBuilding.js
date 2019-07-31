@@ -4,7 +4,7 @@ const key = require("../key.json");
 
 const account = "happyberrysboy";
 const buildPlanetArray = ["P-ZA01QNQO29C", "P-ZO75DZDVRUO"];
-const explorePlanetArray = ["P-ZA01QNQO29C", "P-ZO75DZDVRUO"];
+const explorePlanetArray = ["P-ZA01QNQO29C", "P-ZO75DZDVRUO", "P-ZRBZG7PL6NK"];
 
 let buildArray = [];
 let searchGalaxyArray = [];
@@ -12,7 +12,7 @@ const exceptPoint = [{ x: -10, y: -170 }];
 // const planetId = "P-ZA01QNQO29C";
 const maxBuildQty = {
   base: -1,
-  shipyard: 14,
+  shipyard: 16,
   researchcenter: -1,
   coalmine: 13,
   oremine: 13,

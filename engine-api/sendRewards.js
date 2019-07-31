@@ -1,54 +1,37 @@
-const steem = require('steem');
-const scotAPI = require('./scotPoolAPI');
-let toAccount = [
-  'gfriend96',
-  'kiwipie',
-  'newbijohn',
-  'banguri',
-  'naha',
-  'jinuking',
-  'fur2002ks',
-  'isi3.sct',
-  'jcarvoting',
-  'gooehello',
-  'donekim',
-  'sweetpapa',
-  'peterpa',
-  'mimistar',
-  'relaxkim',
-  'kstop1',
-  'epitt925',
-  'tinker-bell',
-  'ldh1109',
-  'skymin',
-  'tradingideas',
-  'hyokhyok',
-  'kingsguards',
-  'blockchainstudio',
-];
-const amount = '500';
-const symbol = 'AAA';
+const steem = require("steem");
+const scotAPI = require("./scotPoolAPI");
+let toAccount = ["uni.dev"];
+const key = require("../key.json");
+const amount = "0.001";
+const symbol = "SCT";
 
 function sendTokenPromise(account, sym, amo) {
   return new Promise((resolve, reject) => {
     let jsonStr = {
-      contractName: 'tokens',
-      contractAction: 'transfer',
+      contractName: "tokens",
+      contractAction: "transfer",
       contractPayload: {
         symbol: sym,
         to: account,
         quantity: amo,
-        memo: '',
-      },
+        type: "scot-thumbup",
+        author: "happyberrysboy",
+        permlink: "happyberrysboy-mining-report-2019-07-28",
+        sender: "happyberrys.aaa",
+        memo: ""
+      }
     };
+
+    // id: "ssc-mainnet1";
+    // json:"{"contractName":"tokens","contractAction":"transfer","contractPayload":{"symbol":"GG","to":"doggodfroglog","quantity":"2.5","memo":"Daily Earnings for your Delegation. Thank you!"}}"
 
     let json = JSON.stringify(jsonStr);
 
     steem.broadcast.customJson(
-      'activekey',
-      ['happyberrysboy'],
+      key.happyberrys_aaa_active,
+      ["happyberrys.aaa"],
       [],
-      'ssc-mainnet1',
+      "ssc-mainnet1",
       json,
       function(err, result) {
         // Json{"contractName":"tokens","contractAction":"transfer","contractPayload":
@@ -59,7 +42,7 @@ function sendTokenPromise(account, sym, amo) {
         } else {
           console.log(err);
         }
-      },
+      }
     );
     resolve();
   });
