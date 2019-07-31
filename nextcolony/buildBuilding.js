@@ -227,7 +227,7 @@ function autoRun() {
                   if (
                     building.name.indexOf("mine") < 0 &&
                     mineLevel > -1 &&
-                    mineLevel <= 12 &&
+                    mineLevel < 12 &&
                     mineLevel - building.current < 6
                   )
                     return;
