@@ -1,6 +1,6 @@
-const steem = require('steem');
-const keyConfig = require('../key.json');
-const config = require('../config.json');
+const steem = require("steem");
+const keyConfig = require("../key.json");
+const config = require("../config.json");
 // const { createLogger, format, transports } = require('winston');
 
 // const logger = createLogger({
@@ -85,20 +85,20 @@ const config = require('../config.json');
 //////////////////////// 단체로 보내기 로직
 // transfer steem
 const sendList = [
-  { name: 'team1p', amount: '0.001 STEEM' },
-  { name: 'anpigon', amount: '0.001 STEEM' },
-  { name: 'lovelyyeon.sct', amount: '0.001 STEEM' },
-  { name: 'sky.min', amount: '0.001 STEEM' },
-  { name: 'sonki999', amount: '0.001 STEEM' },
-  { name: 'june0620', amount: '0.001 STEEM' },
-  { name: 'bluengel', amount: '0.001 STEEM' },
-  { name: 'realprince', amount: '0.001 STEEM' },
-  { name: 'twinpapa.aaa', amount: '0.001 STEEM' },
-  { name: 'feelsogood.cur', amount: '0.001 STEEM' },
-  { name: 'noisysky', amount: '0.001 STEEM' },
-  { name: 'jungjunghoon', amount: '0.001 STEEM' },
-  { name: 'naha', amount: '0.001 STEEM' },
-  { name: 'tinker-bell', amount: '0.001 STEEM' },
+  // { name: 'team1p', amount: '0.001 STEEM' },
+  // { name: 'anpigon', amount: '0.001 STEEM' },
+  // { name: 'lovelyyeon.sct', amount: '0.001 STEEM' },
+  // { name: 'sky.min', amount: '0.001 STEEM' },
+  // { name: 'sonki999', amount: '0.001 STEEM' },
+  // { name: 'june0620', amount: '0.001 STEEM' },
+  // { name: 'bluengel', amount: '0.001 STEEM' },
+  // { name: 'realprince', amount: '0.001 STEEM' },
+  // { name: 'twinpapa.aaa', amount: '0.001 STEEM' },
+  // { name: 'feelsogood.cur', amount: '0.001 STEEM' },
+  // { name: 'noisysky', amount: '0.001 STEEM' },
+  // { name: 'jungjunghoon', amount: '0.001 STEEM' },
+  // { name: 'naha', amount: '0.001 STEEM' },
+  // { name: 'tinker-bell', amount: '0.001 STEEM' },
 ];
 
 setInterval(async () => {
@@ -107,10 +107,10 @@ setInterval(async () => {
 
   await transferSteem(
     keyConfig.happyberrysboy_active,
-    'happyberrysboy',
+    "happyberrysboy",
     account.name,
     `${account.amount}`,
-    '이벤트에 참여하여주셔서 감사합니다.',
+    "이벤트에 참여하여주셔서 감사합니다."
   )
     .then(result => console.log(result))
     .catch(e => console.log(e));
@@ -120,7 +120,7 @@ function transferSteem(wif, from, to, amount, memo) {
   return new Promise((resolve, reject) => {
     steem.broadcast.transfer(wif, from, to, `${amount}`, memo, function(
       err,
-      result,
+      result
     ) {
       // console.log(err, result);
       resolve(result);

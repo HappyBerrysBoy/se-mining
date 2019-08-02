@@ -207,12 +207,18 @@ function autoRun() {
                 if (availUranium > qytInfo.uraniumdepot)
                   availUranium = qytInfo.uraniumdepot;
 
-                let mineLevel = 6;
+                const mineArray = buildingInfo.filter(b => {
+                  return b.name.includes("mine");
+                });
+
+                const mineLevel = Math.min.apply(
+                  Math,
+                  mineArray.map(function(o) {
+                    return o.current;
+                  })
+                );
 
                 buildingInfo.forEach(building => {
-                  if (building.name.indexOf("mine") > -1) {
-                    mineLevel = building.current;
-                  }
                   if (maxBuildQty[building.name] < 1) return;
                   if (maxBuildQty[building.name] <= building.current) return;
 
@@ -303,9 +309,9 @@ function autoRun() {
 
 autoRun();
 
-setTimeout(autoRun, 4 * 60000);
+setInterval(autoRun, 4 * 60000);
 
-setTimeout(() => {
+setInterval(() => {
   if (buildArray.length == 0) return;
 
   let customJson = buildArray[0];
@@ -315,7 +321,13 @@ setTimeout(() => {
     }
   });
 
-  console.log(customJson);
+  console.log(`building:${customJson}`);
+
+  const planetId = JSON.parse(customJson).command.tr_var1;
+
+  buildArray = buildArray.filter(b => {
+    return JSON.parse(b).command.tr_var1 != planetId;
+  });
 
   steem.broadcast.customJson(
     key.happyberrysboy_posting, // posting key
@@ -329,10 +341,10 @@ setTimeout(() => {
   );
 }, 1 * 60 * 1000);
 
-setTimeout(() => {
+setInterval(() => {
   if (searchGalaxyArray.length == 0) return;
 
-  const customJson = searchGalaxyArray[0];
+  const customJson = searchGalaxyArray.shift();
   console.log(customJson);
   steem.broadcast.customJson(
     key.happyberrysboy_posting, // posting key
@@ -344,4 +356,4 @@ setTimeout(() => {
       console.log(err, result);
     }
   );
-}, 5 * 60 * 1000);
+}, 3 * 60 * 1000);
