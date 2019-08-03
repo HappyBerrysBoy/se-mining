@@ -1,27 +1,32 @@
 const steem = require("steem");
 const key = require("../key.json");
 
-// 성공
-// Nextcolony Build Ship
-steem.broadcast.customJson(
-  key.happyberrysboy_posting, // posting key
-  [],
-  ["happyberrysboy"], // account
-  "nextcolony", // 'nextcolony'
-  `{"username":"happyberrysboy","type":"buildship","command":{"tr_var1":"P-ZO75DZDVRUO","tr_var2":"explorership"}}`, // content json stringfy
-  function(err, result) {
-    console.log(err, result);
-  }
-);
+const planetArray = ["P-ZRBZG7PL6NK", "P-ZO75DZDVRUO"];
+const explorer = "explorership";
 
-// Nextcolony Explore
-// steem.broadcast.customJson(
-//   key.happyberrysboy_posting, // posting key
-//   [],
-//   ["happyberrysboy"], // account
-//   "nextcolony", // 'nextcolony'
-//   `{"username":"happyberrysboy","type":"explorespace","command":{"tr_var1":"P-ZA01QNQO29C","tr_var2":"-5","tr_var3":"-177"}}`, // content json stringfy
-//   function(err, result) {
-//     console.log(err, result);
-//   }
-// );
+doBuild();
+
+function doBuild() {
+  setTimeout(async () => {
+    if (planetArray.length == 0) return;
+
+    const planet = planetArray.shift();
+    await buildVessel(planet, explorer).then(r => console.log(r));
+    doBuild();
+  }, 30 * 1000);
+}
+
+function buildVessel(planetid, ship) {
+  return new Promise(resolve => {
+    steem.broadcast.customJson(
+      key.happyberrysboy_posting, // posting key
+      [],
+      ["happyberrysboy"], // account
+      "nextcolony", // 'nextcolony'
+      `{"username":"happyberrysboy","type":"buildship","command":{"tr_var1":"${planetid}","tr_var2":"${ship}"}}`, // content json stringfy
+      function(err, result) {
+        resolve(result);
+      }
+    );
+  });
+}
