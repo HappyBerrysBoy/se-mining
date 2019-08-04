@@ -23,6 +23,7 @@
     "log-to-file": "^2.0.1",
     "moment": "^2.24.0",
     "node-cron": "^2.0.3",
+    "node-telegram-bot-api": "^0.30.0",
     "sscjs": "0.0.7",
     "steem": "^0.7.5",
     "winston": "^3.2.1",
