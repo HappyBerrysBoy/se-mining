@@ -2,12 +2,12 @@ const steem = require("steem");
 const scotAPI = require("./scotPoolAPI");
 let toAccount = ["uni.dev"];
 const key = require("../key.json");
-const amount = "0.01";
+const amount = "0.1";
 const symbol = "SCT";
-const sender = "uni.dev";
+const sender = "happyberrys.aaa";
 const author = "happyberrysboy";
 const permlink = "happyberrysboy-mining-report-2019-08-02";
-const activekey = key.uni_dev_active;
+const activekey = key.happyberrys_aaa_active;
 
 function sendTokenPromise(account, sym, amo) {
   return new Promise((resolve, reject) => {
