@@ -1,7 +1,8 @@
 const steem = require("steem");
 const key = require("../key.json");
 
-const planetArray = ["P-ZRBZG7PL6NK", "P-ZO75DZDVRUO"];
+//"P-ZRBZG7PL6NK" => D, "P-Z36VFV9RSR4" => C
+const planetArray = ["P-ZRBZG7PL6NK", "P-Z36VFV9RSR4"];
 const explorer = "explorership";
 
 doBuild();
