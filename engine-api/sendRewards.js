@@ -2,8 +2,12 @@ const steem = require('steem');
 const scotAPI = require('./scotPoolAPI');
 let toAccount = ['uni.dev'];
 const key = require('../key.json');
-const amount = '0.001';
+const amount = '0.1';
 const symbol = 'SCT';
+const sender = 'happyberrys.aaa';
+const author = 'happyberrysboy';
+const permlink = 'happyberrysboy-mining-report-2019-08-02';
+const activekey = key.happyberrys_aaa_active;
 
 function sendTokenPromise(account, sym, amo) {
   return new Promise((resolve, reject) => {
@@ -15,9 +19,9 @@ function sendTokenPromise(account, sym, amo) {
         to: account,
         quantity: amo,
         type: 'scot-thumbup',
-        author: 'happyberrysboy',
-        permlink: 'happyberrysboy-mining-report-2019-07-28',
-        sender: 'scotpool.miner',
+        author: author,
+        permlink: permlink,
+        sender: sender,
         memo: '',
       },
     };
@@ -28,8 +32,8 @@ function sendTokenPromise(account, sym, amo) {
     let json = JSON.stringify(jsonStr);
 
     steem.broadcast.customJson(
-      key.scotminer_active,
-      ['scotpool.miner'],
+      activekey,
+      [sender],
       [],
       'ssc-mainnet1',
       json,

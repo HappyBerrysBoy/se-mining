@@ -4,20 +4,77 @@ const key = require("../key.json");
 
 const account = "happyberrysboy";
 const buildPlanetArray = ["P-ZA01QNQO29C", "P-ZO75DZDVRUO"];
-const explorePlanetArray = ["P-ZA01QNQO29C", "P-ZO75DZDVRUO", "P-ZRBZG7PL6NK"];
+const explorePlanetArray = [
+  "P-ZA01QNQO29C",
+  "P-ZO75DZDVRUO",
+  "P-ZRBZG7PL6NK",
+  "P-ZWAXERLFIXS"
+];
+const skillUpArray = [
+  {
+    name: "A",
+    planet: "P-ZA01QNQO29C",
+    skill: [
+      { name: "missioncontrol", target: 20 },
+      { name: "uraniumbooster", target: 0 },
+      { name: "copperbooster", target: 0 },
+      { name: "coalbooster", target: 0 },
+      { name: "orebooster", target: 0 },
+      { name: "uraniummine", target: 0 },
+      { name: "coppermine", target: 0 },
+      { name: "oremine", target: 0 },
+      { name: "coalmine", target: 0 },
+      { name: "shipyard", target: 0 }
+    ]
+  },
+  {
+    name: "B",
+    planet: "P-ZO75DZDVRUO",
+    skill: [
+      { name: "Corvette", target: 20 },
+      { name: "Frigate", target: 20 },
+      { name: "missioncontrol", target: 0 },
+      { name: "uraniumbooster", target: 5 },
+      { name: "copperbooster", target: 5 },
+      { name: "coalbooster", target: 5 },
+      { name: "orebooster", target: 5 },
+      { name: "uraniummine", target: 0 },
+      { name: "coppermine", target: 0 },
+      { name: "oremine", target: 0 },
+      { name: "coalmine", target: 0 },
+      { name: "shipyard", target: 0 }
+    ]
+  }
+];
 
 let buildArray = [];
 let searchGalaxyArray = [];
+let skillArray = [];
 const exceptPoint = [{ x: -10, y: -170 }];
-// const planetId = "P-ZA01QNQO29C";
 const maxBuildQty = {
   base: -1,
-  shipyard: 16,
+  shipyard: 13,
   researchcenter: -1,
   coalmine: 13,
   oremine: 13,
   coppermine: 13,
   uraniummine: 15,
+  coaldepot: 10,
+  oredepot: 10,
+  copperdepot: 10,
+  uraniumdepot: 10,
+  bunker: -1,
+  shieldgenerator: -1
+};
+const buildPriority = {
+  explorer: 0,
+  base: -1,
+  shipyard: 14,
+  researchcenter: -1,
+  coalmine: 13,
+  oremine: 13,
+  coppermine: 13,
+  uraniummine: 13,
   coaldepot: 13,
   oredepot: 13,
   copperdepot: 13,
@@ -25,22 +82,6 @@ const maxBuildQty = {
   bunker: -1,
   shieldgenerator: -1
 };
-const buildPriority = [
-  { explorer: 0 },
-  { base: -1 },
-  { shipyard: 14 },
-  { researchcenter: -1 },
-  { coalmine: 13 },
-  { oremine: 13 },
-  { coppermine: 13 },
-  { uraniummine: 13 },
-  { coaldepot: 13 },
-  { oredepot: 13 },
-  { copperdepot: 13 },
-  { uraniumdepot: 13 },
-  { bunker: -1 },
-  { shieldgenerator: -1 }
-];
 
 // Planet 정보
 const loadplanets = account => {
@@ -149,6 +190,7 @@ function chkAvailExplorefromDistance(
 function autoRun() {
   searchGalaxyArray = [];
   buildArray = [];
+  skillArray = [];
 
   loadplanets(account)
     .then(response => {
@@ -165,7 +207,8 @@ function autoRun() {
             loadbuilding(planet.id),
             loadshipyard(planet.id),
             loadplanet(planet.id),
-            loadGalaxy(planet.posx, planet.posy)
+            loadGalaxy(planet.posx, planet.posy),
+            loadskills(account)
           ]) // axios.all로 여러 개의 request를 보내고
           .then(
             axios.spread(
@@ -175,7 +218,8 @@ function autoRun() {
                 buildingInfoData,
                 shipyardInfoData,
                 loadPlanetData,
-                loadGalaxy
+                loadGalaxy,
+                skillInfo
               ) => {
                 // response를 spread로 받는다
                 // Build 관련 내용들
@@ -207,12 +251,18 @@ function autoRun() {
                 if (availUranium > qytInfo.uraniumdepot)
                   availUranium = qytInfo.uraniumdepot;
 
-                let mineLevel = 6;
+                const mineArray = buildingInfo.filter(b => {
+                  return b.name.includes("mine");
+                });
+
+                const mineLevel = Math.min.apply(
+                  Math,
+                  mineArray.map(function(o) {
+                    return o.current;
+                  })
+                );
 
                 buildingInfo.forEach(building => {
-                  if (building.name.indexOf("mine") > -1) {
-                    mineLevel = building.current;
-                  }
                   if (maxBuildQty[building.name] < 1) return;
                   if (maxBuildQty[building.name] <= building.current) return;
 
@@ -233,14 +283,54 @@ function autoRun() {
                     return;
 
                   buildArray.push(
-                    `{"username":"${account}","type":"upgrade","command":{"tr_var1":"${
-                      planet.id
-                    }","tr_var2":"${building.name}"}}`
+                    `{"username":"${account}","type":"upgrade","command":{
+                      "tr_var1":"${planet.id}",
+                      "tr_var2":"${building.name}"}}`
                   );
 
                   console.log(`Available building:${building.name}`);
                 });
 
+                // skill up
+                if (skillUpArray.length) {
+                  const targetPlanet = skillUpArray.filter(
+                    p => p.planet == planet.id
+                  );
+
+                  if (targetPlanet.length) {
+                    const targetSkill = targetPlanet[0].skill.filter(
+                      s => s.target
+                    );
+
+                    console.log(targetSkill);
+
+                    skillInfo.data.forEach(skill => {
+                      const targetInfo = targetSkill.filter(
+                        t => t.name == skill.name
+                      );
+
+                      if (!targetInfo.length) return;
+
+                      if (targetInfo[0].target <= skill.current) return;
+
+                      if (availCoal < skill.coal) return;
+                      if (availCopper < skill.copper) return;
+                      if (availOre < skill.ore) return;
+                      if (availUranium < skill.uranium) return;
+
+                      if (currDate / 1000 <= skill.busy) return;
+
+                      skillArray.push(
+                        `{"username":"${account}","type":"enhance","command":{
+                          "tr_var1":"${account}",
+                          "tr_var2":"${planet.id}",
+                          "tr_var3":"${skill.name}"}}`
+                      );
+
+                      console.log(`Available skill:${skill.name}`);
+                    });
+                  }
+                }
                 // console.log(buildArray);
 
                 //planet = {"img":"co_atm_1.png","level_base":3,"level_coal":12,"level_coaldepot":12,"level_copper":12,"level_copperdepot":12,"level_ore":12,"level_oredepot":12,"level_research":3,"level_ship":14,"level_uranium":15,"level_uraniumdepot":12,"planet_bonus":0.0,"planet_corx":-3,"planet_cory":-182,"planet_crts":1555928508,"planet_id":"P-ZA01QNQO29C","planet_name":"Alpha","planet_rarity":"common","planet_type":"earth","shieldcharge_busy":0,"shieldcharged":0,"shieldprotection_busy":0,"startplanet":1,"total_type":4016,"user":"happyberrysboy"}
@@ -303,9 +393,9 @@ function autoRun() {
 
 autoRun();
 
-setTimeout(autoRun, 4 * 60000);
+setInterval(autoRun, 4 * 60000);
 
-setTimeout(() => {
+setInterval(() => {
   if (buildArray.length == 0) return;
 
   let customJson = buildArray[0];
@@ -315,7 +405,13 @@ setTimeout(() => {
     }
   });
 
-  console.log(customJson);
+  console.log(`building:${customJson}`);
+
+  const planetId = JSON.parse(customJson).command.tr_var1;
+
+  buildArray = buildArray.filter(b => {
+    return JSON.parse(b).command.tr_var1 != planetId;
+  });
 
   steem.broadcast.customJson(
     key.happyberrysboy_posting, // posting key
@@ -329,10 +425,35 @@ setTimeout(() => {
   );
 }, 1 * 60 * 1000);
 
-setTimeout(() => {
+setInterval(() => {
+  if (skillArray.length == 0) return;
+
+  let customJson = skillArray[0];
+
+  console.log(`skill:${customJson}`);
+
+  const planetId = JSON.parse(customJson).command.tr_var2;
+
+  skillArray = skillArray.filter(b => {
+    return JSON.parse(b).command.tr_var2 != planetId;
+  });
+
+  steem.broadcast.customJson(
+    key.happyberrysboy_posting, // posting key
+    [],
+    [account], // account
+    "nextcolony", // 'nextcolony'
+    customJson,
+    function(err, result) {
+      console.log(err, result);
+    }
+  );
+}, 3 * 60 * 1000);
+
+setInterval(() => {
   if (searchGalaxyArray.length == 0) return;
 
-  const customJson = searchGalaxyArray[0];
+  const customJson = searchGalaxyArray.shift();
   console.log(customJson);
   steem.broadcast.customJson(
     key.happyberrysboy_posting, // posting key
@@ -344,4 +465,4 @@ setTimeout(() => {
       console.log(err, result);
     }
   );
-}, 5 * 60 * 1000);
+}, 3 * 60 * 1000);
