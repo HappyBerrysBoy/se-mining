@@ -1,25 +1,25 @@
-const steem = require("steem");
-const scotAPI = require("./scotPoolAPI");
-let toAccount = ["uni.dev"];
-const key = require("../key.json");
-const amount = "0.001";
-const symbol = "SCT";
+const steem = require('steem');
+const scotAPI = require('./scotPoolAPI');
+let toAccount = ['uni.dev'];
+const key = require('../key.json');
+const amount = '0.001';
+const symbol = 'SCT';
 
 function sendTokenPromise(account, sym, amo) {
   return new Promise((resolve, reject) => {
     let jsonStr = {
-      contractName: "tokens",
-      contractAction: "transfer",
+      contractName: 'tokens',
+      contractAction: 'transfer',
       contractPayload: {
         symbol: sym,
         to: account,
         quantity: amo,
-        type: "scot-thumbup",
-        author: "happyberrysboy",
-        permlink: "happyberrysboy-mining-report-2019-07-28",
-        sender: "happyberrys.aaa",
-        memo: ""
-      }
+        type: 'scot-thumbup',
+        author: 'happyberrysboy',
+        permlink: 'happyberrysboy-mining-report-2019-07-28',
+        sender: 'scotpool.miner',
+        memo: '',
+      },
     };
 
     // id: "ssc-mainnet1";
@@ -28,10 +28,10 @@ function sendTokenPromise(account, sym, amo) {
     let json = JSON.stringify(jsonStr);
 
     steem.broadcast.customJson(
-      key.happyberrys_aaa_active,
-      ["happyberrys.aaa"],
+      key.scotminer_active,
+      ['scotpool.miner'],
       [],
-      "ssc-mainnet1",
+      'ssc-mainnet1',
       json,
       function(err, result) {
         // Json{"contractName":"tokens","contractAction":"transfer","contractPayload":
@@ -42,11 +42,13 @@ function sendTokenPromise(account, sym, amo) {
         } else {
           console.log(err);
         }
-      }
+      },
     );
     resolve();
   });
 }
+
+// {"contractName":"tokens","contractAction":"transfer","contractPayload":{"symbol":"SCT","to":"uni.dev","quantity":0.01,"memo":"","type":"scot-thumbup","author":"realmankwon","permlink":"r","sender":"happyberrysboy"}}
 
 for (let i = 0; i < toAccount.length; i++) {
   const account = toAccount[i];
