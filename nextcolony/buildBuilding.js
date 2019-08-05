@@ -9,7 +9,6 @@ const explorePlanetArray = [
   'P-ZO75DZDVRUO',
   'P-ZRBZG7PL6NK',
   'P-ZWAXERLFIXS',
-  'P-Z5TV3Z99YM8',
 ];
 const skillUpArray = [
   {
