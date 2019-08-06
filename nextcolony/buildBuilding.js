@@ -31,8 +31,8 @@ const explorePlanetArray = [
     explorerDirection: {
       xminus: true,
       xplus: true,
-      yminus: true,
-      yplus: false,
+      yminus: false,
+      yplus: true,
     },
   },
 ];
