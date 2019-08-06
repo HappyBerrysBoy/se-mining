@@ -1,27 +1,27 @@
-const steem = require("steem");
-const fs = require("fs");
-const key = require("../key.json");
+const steem = require('steem');
+const fs = require('fs');
+const key = require('../key.json');
 
 const date = new Date();
 date.setHours(date.getHours() + 9); // 9시간 추가
-const preYear = date.getFullYear() + "";
-const preMonth = (date.getMonth() + 1 + "").padStart(2, "0");
-const preDay = (date.getDate() + "").padStart(2, "0");
+const preYear = date.getFullYear() + '';
+const preMonth = (date.getMonth() + 1 + '').padStart(2, '0');
+const preDay = (date.getDate() + '').padStart(2, '0');
 const preDateString = `${preYear}-${preMonth}-${preDay}`;
 
 date.setDate(date.getDate() + 1);
-const year = date.getFullYear() + "";
-const month = (date.getMonth() + 1 + "").padStart(2, "0");
-const day = (date.getDate() + "").padStart(2, "0");
+const year = date.getFullYear() + '';
+const month = (date.getMonth() + 1 + '').padStart(2, '0');
+const day = (date.getDate() + '').padStart(2, '0');
 const dateString = `${year}-${month}-${day}`;
 
 const title = `[${year}/${month}/${day}] KR 커뮤니티 출석부`;
-const account = "maikuraki";
-const basePermlink = "3wz6r8";
+const account = 'maikuraki';
+const basePermlink = '3wz6r8';
 
 let g_cmtMap = new Map();
 let g_linkSet = new Set();
-let content = "";
+let content = '';
 
 function getFormat() {
   return new Promise((resolve, reject) => {
@@ -40,15 +40,15 @@ function getFormat() {
 }
 
 function noLink(body) {
-  idxhttp = body.indexOf("https://");
+  idxhttp = body.indexOf('https://');
 
   if (idxhttp < 0) {
-    return "";
+    return '';
   }
 
-  endIdx = body.indexOf("\n", idxhttp);
+  endIdx = body.indexOf('\n', idxhttp);
   if (endIdx < 0) {
-    endIdx = body.indexOf(" ", idxhttp);
+    endIdx = body.indexOf(' ', idxhttp);
   }
   if (endIdx < 0) {
     return body.substring(idxhttp);
@@ -60,7 +60,7 @@ function getPrePosting(id, permlink) {
   return new Promise(async (resolve, reject) => {
     await steem.api.getContentReplies(id, permlink, async function(
       err,
-      result
+      result,
     ) {
       if (err != null) {
         return;
@@ -69,17 +69,17 @@ function getPrePosting(id, permlink) {
       for (let i = 0; i < result.length; ++i) {
         let cmt = result[i];
 
-        if (cmt.author.length <= 0 || cmt.author == null || cmt.author == "") {
+        if (cmt.author.length <= 0 || cmt.author == null || cmt.author == '') {
           continue;
         }
 
         g_cmtMap.set(cmt.author, cmt.body);
-        link = "";
-        console.log("--" + cmt.json_metadata + "--");
+        link = '';
+        console.log('--' + cmt.json_metadata + '--');
         if (
           cmt.json_metadata == undefined ||
           cmt.json_metadata == null ||
-          cmt.json_metadata == ""
+          cmt.json_metadata == ''
         ) {
           link = noLink(cmt.body);
         } else {
@@ -92,11 +92,11 @@ function getPrePosting(id, permlink) {
           }
         }
 
-        if (link == "") {
+        if (link == '') {
           continue;
         }
 
-        index = link.lastIndexOf("/");
+        index = link.lastIndexOf('/');
         pl = link.substring(index + 1);
 
         await getPost(cmt.author, pl).then(txt => (content += txt));
@@ -110,13 +110,13 @@ function getPrePosting(id, permlink) {
 function getPost(author, permlink) {
   return new Promise(resolve => {
     steem.api.getContent(author, permlink, function(err, result) {
-      if (result.root_title == "") {
-        resolve("");
+      if (result.root_title == '') {
+        resolve('');
       }
 
       g_linkSet.add(result.author);
 
-      posttitle = result.root_title.replace(/|/g, "");
+      posttitle = result.root_title.replace(/|/g, '');
 
       txt = genText(author, posttitle, result.url);
       resolve(txt);
@@ -125,16 +125,16 @@ function getPost(author, permlink) {
 }
 
 function genText(author, title, url) {
-  txt = "";
-  txt += "| @";
+  txt = '';
+  txt += '| @';
   txt += author;
-  txt += " | [";
+  txt += ' | [';
   txt += title;
-  txt += "](";
-  txt += "https://steemit.com";
+  txt += '](';
+  txt += 'https://steemit.com';
   txt += url;
-  txt += ") |";
-  txt += "\n";
+  txt += ') |';
+  txt += '\n';
   return txt;
 }
 
@@ -145,33 +145,35 @@ Promise.all([getFormat(), getPrePosting(account, `${preDateString}-kr`)]).then(
 
     steem.broadcast.comment(
       key.mai_posting,
-      "",
-      "sct",
+      '',
+      'sct',
       account,
       `${dateString}-kr`,
       title,
       format.replace(/{{content}}/g, prePosting),
       {
         tags: [
-          "sct",
-          "freeboard",
-          "busy",
-          "jjm",
-          "aaa",
-          "liv",
-          "zzan",
-          "palnet",
-          "actnearn",
-          "dolphin",
-          "iv",
-          "steemleo",
-          "sportstalk"
+          'sct',
+          'freeboard',
+          'busy',
+          'jjm',
+          'aaa',
+          'liv',
+          'zzan',
+          'palnet',
+          'actnearn',
+          'dolphin',
+          'iv',
+          'steemleo',
+          'sportstalk',
         ],
-        app: "busy/2.5.6"
+        community: 'busy',
+        app: 'busy/2.5.6',
+        format: 'markdown',
       },
       function(err, result) {
         console.log(err, result);
-      }
+      },
     );
-  }
+  },
 );
