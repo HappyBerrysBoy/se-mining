@@ -15,16 +15,16 @@ const explorePlanetArray = [
       yplus: true,
     },
   },
-  {
-    id: 'P-Z5TV3Z99YM8',
-    exploreCnt: 2,
-    explorerDirection: {
-      xminus: false,
-      xplus: true,
-      yminus: true,
-      yplus: true,
-    },
-  },
+  // {
+  //   id: 'P-Z5TV3Z99YM8',
+  //   exploreCnt: 2,
+  //   explorerDirection: {
+  //     xminus: false,
+  //     xplus: true,
+  //     yminus: true,
+  //     yplus: true,
+  //   },
+  // },
   {
     id: 'P-ZD7VOJ4FF8W',
     exploreCnt: 10,
