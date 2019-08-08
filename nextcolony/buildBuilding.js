@@ -5,16 +5,16 @@ const key = require('../key.json');
 const account = 'happyberrysboy';
 const buildPlanetArray = ['P-ZA01QNQO29C', 'P-ZO75DZDVRUO'];
 const explorePlanetArray = [
-  {
-    id: 'P-Z36VFV9RSR4',
-    exploreCnt: 4,
-    explorerDirection: {
-      xminus: true,
-      xplus: false,
-      yminus: true,
-      yplus: true,
-    },
-  },
+  // {
+  //   id: 'P-Z36VFV9RSR4',
+  //   exploreCnt: 4,
+  //   explorerDirection: {
+  //     xminus: true,
+  //     xplus: false,
+  //     yminus: true,
+  //     yplus: true,
+  //   },
+  // },
   // {
   //   id: 'P-Z5TV3Z99YM8',
   //   exploreCnt: 2,
