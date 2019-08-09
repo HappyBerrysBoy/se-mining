@@ -5,29 +5,29 @@ const key = require('../key.json');
 const account = 'happyberrysboy';
 const buildPlanetArray = ['P-ZA01QNQO29C', 'P-ZO75DZDVRUO'];
 const explorePlanetArray = [
-  {
-    id: 'P-Z36VFV9RSR4',
-    exploreCnt: 4,
-    explorerDirection: {
-      xminus: true,
-      xplus: false,
-      yminus: true,
-      yplus: true,
-    },
-  },
-  {
-    id: 'P-Z5TV3Z99YM8',
-    exploreCnt: 2,
-    explorerDirection: {
-      xminus: false,
-      xplus: true,
-      yminus: true,
-      yplus: true,
-    },
-  },
+  // {
+  //   id: 'P-Z36VFV9RSR4',
+  //   exploreCnt: 4,
+  //   explorerDirection: {
+  //     xminus: true,
+  //     xplus: false,
+  //     yminus: true,
+  //     yplus: true,
+  //   },
+  // },
+  // {
+  //   id: 'P-Z5TV3Z99YM8',
+  //   exploreCnt: 2,
+  //   explorerDirection: {
+  //     xminus: false,
+  //     xplus: true,
+  //     yminus: true,
+  //     yplus: true,
+  //   },
+  // },
   {
     id: 'P-ZD7VOJ4FF8W',
-    exploreCnt: 10,
+    exploreCnt: 30,
     explorerDirection: {
       xminus: true,
       xplus: true,
@@ -57,13 +57,13 @@ const skillUpArray = [
     name: 'B',
     planet: 'P-ZO75DZDVRUO',
     skill: [
-      { name: 'Corvette', target: 20 },
-      { name: 'Frigate', target: 20 },
+      { name: 'Corvette', target: 0 },
+      { name: 'Frigate', target: 0 },
       { name: 'missioncontrol', target: 0 },
-      { name: 'uraniumbooster', target: 5 },
-      { name: 'copperbooster', target: 5 },
-      { name: 'coalbooster', target: 5 },
-      { name: 'orebooster', target: 5 },
+      { name: 'uraniumbooster', target: 0 },
+      { name: 'copperbooster', target: 0 },
+      { name: 'coalbooster', target: 0 },
+      { name: 'orebooster', target: 0 },
       { name: 'uraniummine', target: 0 },
       { name: 'coppermine', target: 0 },
       { name: 'oremine', target: 0 },
