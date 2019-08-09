@@ -170,9 +170,12 @@ async function blockMonitoring(blockno) {
             let arrTime = new Date(thisMission.arrival * 1000);
             let retTime = new Date(thisMission.return * 1000);
 
-            sendMsg = `Account:${jsonInfo.username}  \nType:${jsonInfo.type}(${
-              thisMission.id
-            })\nArr:${dateFormat(arrTime, 'mm/dd HH:MM:ss')}, Ret:${
+            sendMsg = `====비상비상====\nAccount:${jsonInfo.username}  \nType:${
+              jsonInfo.type
+            }(${thisMission.id})\nArr:${dateFormat(
+              arrTime,
+              'mm/dd HH:MM:ss',
+            )}, Ret:${
               thisMission.return ? dateFormat(retTime, 'mm/dd HH:MM:ss') : '-'
             }  \nShips:${JSON.stringify(
               jsonInfo.command.tr_var1,
