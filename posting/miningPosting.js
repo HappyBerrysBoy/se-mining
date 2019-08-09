@@ -1,13 +1,24 @@
-const steem = require('steem');
-const fs = require('fs');
-const key = require('../key.json');
+const steem = require("steem");
+const fs = require("fs");
+const key = require("../key.json");
+
+const miningTargetCoin = [
+  "SCT",
+  "ZZAN",
+  "PAL",
+  "ENG",
+  "IV",
+  "CTP",
+  "LEO",
+  "SONIC"
+];
 
 const date = new Date();
 date.setDate(date.getDate() - 1); // 하루전..
 date.setHours(date.getHours() + 9); // 9시간 추가
-const year = date.getFullYear() + '';
-const month = (date.getMonth() + 1 + '').padStart(2, '0');
-const day = (date.getDate() + '').padStart(2, '0');
+const year = date.getFullYear() + "";
+const month = (date.getMonth() + 1 + "").padStart(2, "0");
+const day = (date.getDate() + "").padStart(2, "0");
 const dateString = `${year}-${month}-${day}`;
 
 const title = `Steem-engine(${dateString}) Mining Report`;
@@ -17,7 +28,7 @@ body += `# Last Day Steem Engine Mining Report \n<br>\n`;
 
 fs.readFile(
   `/home/ubuntu/workspace/se-mining/logs/mining(${dateString}).txt`,
-  'utf8',
+  "utf8",
   function(err, data) {
     if (err) {
       console.log(err);
@@ -27,17 +38,18 @@ fs.readFile(
     console.log(`reading mining(${dateString}).txt`);
     const map = new Map();
 
-    data.split('\n').forEach(data => {
+    data.split("\n").forEach(data => {
       if (!data.trim().length) return;
 
       const json = JSON.parse(data);
 
+      if (!miningTargetCoin.includes(json.symbol)) return;
       // WEED는 100개로 너무 많음.. Winner가..
-      if (json.symbol === 'WEED') return;
-      if (json.symbol === 'NEOXAG') return;
-      if (json.symbol === 'GG') return;
-      if (json.symbol === 'STEM') return;
-      if (json.symbol === 'CCC') return;
+      // if (json.symbol === "WEED") return;
+      // if (json.symbol === "NEOXAG") return;
+      // if (json.symbol === "GG") return;
+      // if (json.symbol === "STEM") return;
+      // if (json.symbol === "CCC") return;
 
       if (!map.has(json.symbol)) {
         map.set(json.symbol, [json]);
@@ -48,7 +60,7 @@ fs.readFile(
 
     for (var [keyinfo, value] of map.entries()) {
       let totalAmount = 0;
-      let tmp = '';
+      let tmp = "";
       tmp += `|Type|Content|\n|----|--------------------|\n`;
       value.forEach(mining => {
         tmp += `|Time|${new Date(mining.timestamp).koreaDate()}|\n`;
@@ -62,42 +74,42 @@ fs.readFile(
         totalAmount += mining.claim_token_amount * mining.winner.length;
       });
 
-      tmp += '<br><br>\n';
+      tmp += "<br><br>\n";
 
       body += `### ${keyinfo} - Total Amount(${totalAmount.toFixed(
-        3,
+        3
       )}), Count(${value.length}) \n`;
       body += tmp;
     }
 
     steem.broadcast.comment(
       key.happyberrysboy_posting,
-      '',
-      'sct',
-      'happyberrysboy',
+      "",
+      "sct",
+      "happyberrysboy",
       `happyberrysboy-mining-report-${dateString}`,
       title,
       body,
       {
         tags: [
-          'sct',
-          'zzan',
-          'busy',
-          'liv',
-          'jjm',
-          'weed',
-          'steemleo',
-          'palnet',
+          "sct",
+          "zzan",
+          "busy",
+          "liv",
+          "jjm",
+          "weed",
+          "steemleo",
+          "palnet"
         ],
-        community: 'busy',
-        app: 'busy/2.5.6',
-        format: 'markdown',
+        community: "busy",
+        app: "busy/2.5.6",
+        format: "markdown"
       },
       function(err, result) {
         console.log(err, result);
-      },
+      }
     );
-  },
+  }
 );
 
 Date.prototype.addHours = function(h) {
@@ -108,8 +120,8 @@ Date.prototype.addHours = function(h) {
 Date.prototype.koreaDate = function() {
   this.setHours(this.getHours() + 9);
   return `${this.getFullYear()}-${this.getMonth() + 1}-${(
-    this.getDate() + ''
-  ).padStart(2, '0')} ${(this.getHours() + '').padStart(2, '0')}:${(
-    this.getMinutes() + ''
-  ).padStart(2, '0')}`;
+    this.getDate() + ""
+  ).padStart(2, "0")} ${(this.getHours() + "").padStart(2, "0")}:${(
+    this.getMinutes() + ""
+  ).padStart(2, "0")}`;
 };
