@@ -27,7 +27,7 @@ const explorePlanetArray = [
   // },
   {
     id: 'P-ZD7VOJ4FF8W',
-    exploreCnt: 10,
+    exploreCnt: 30,
     explorerDirection: {
       xminus: true,
       xplus: true,
