@@ -2,16 +2,7 @@ const steem = require("steem");
 const fs = require("fs");
 const key = require("../key.json");
 
-const miningTargetCoin = [
-  "SCT",
-  "ZZAN",
-  "PAL",
-  "ENG",
-  "IV",
-  "CTP",
-  "LEO",
-  "SONIC"
-];
+const miningTargetCoin = ["SCT", "ZZAN", "PAL", "ENG", "IV", "LEO"];
 
 const date = new Date();
 date.setDate(date.getDate() - 1); // 하루전..
