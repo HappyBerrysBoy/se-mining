@@ -70,7 +70,9 @@ const loadplanet = planetId => {
 };
 
 const loadFleet = (account, planet) => {
-  `https://api.nextcolony.io/loadfleet?user=${account}&planetid=${planet}`,
+  return axios.get(
+    `https://api.nextcolony.io/loadfleet?user=${account}&planetid=${planet}`,
+  );
 };
 
 const jsonData = {
