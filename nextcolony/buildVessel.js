@@ -1,9 +1,9 @@
-const steem = require('steem');
-const key = require('../key.json');
+const steem = require("steem");
+const key = require("../key.json");
 
 //"P-ZRBZG7PL6NK" => D, "P-Z36VFV9RSR4" => C
-const planetArray = ['P-ZRBZG7PL6NK', 'P-Z36VFV9RSR4'];
-const explorer = 'explorership';
+const planetArray = ["P-ZD7VOJ4FF8W"];
+const explorer = "explorership";
 
 doBuild();
 
@@ -22,12 +22,12 @@ function buildVessel(planetid, ship) {
     steem.broadcast.customJson(
       key.happyberrysboy_posting, // posting key
       [],
-      ['happyberrysboy'], // account
-      'nextcolony', // 'nextcolony'
+      ["happyberrysboy"], // account
+      "nextcolony", // 'nextcolony'
       `{"username":"happyberrysboy","type":"buildship","command":{"tr_var1":"${planetid}","tr_var2":"${ship}"}}`, // content json stringfy
       function(err, result) {
         resolve(result);
-      },
+      }
     );
   });
 }
