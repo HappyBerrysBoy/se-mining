@@ -36,7 +36,7 @@ const explorePlanetArray = [
   //   }
   // },
   {
-    id: "P-ZRHUDDMC6WG",
+    id: "P-ZHGO5SVV8XC",
     exploreCnt: 30,
     explorerDirection: {
       xminus: true,
