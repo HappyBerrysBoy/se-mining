@@ -18,7 +18,7 @@ body += `This report shows all mining results from steem-engine. This report is 
 body += `# Last Day Steem Engine Mining Report \n<br>\n`;
 
 fs.readFile(
-  `/home/ubuntu/workspace/se-mining/logs/mining(${dateString}).txt`,
+  `/Users/HappyBerrysBoy/workspace/nodejs/se-mining/logs/mining(2019-07-10).txt`,
   "utf8",
   function(err, data) {
     if (err) {
@@ -73,32 +73,100 @@ fs.readFile(
       body += tmp;
     }
 
-    steem.broadcast.comment(
-      key.happyberrysboy_posting,
-      "",
-      "sct",
-      "happyberrysboy",
-      `happyberrysboy-mining-report-${dateString}`,
-      title,
-      body,
-      {
-        tags: [
-          "sct",
-          "zzan",
-          "busy",
-          "liv",
-          "jjm",
-          "steemleo",
-          "palnet",
-          "sct-en",
-          "sct-mining"
-        ],
-        community: "busy",
-        app: "busy/2.5.6",
-        format: "markdown"
-      },
-      function(err, result) {
-        console.log(err, result);
+    // steem.broadcast.comment(data.password, data.parentAuthor, data.parentPermlink, data.userName, data.permlink, data.title, data.body, data.jsonMetadata,function(err, result) {
+    // steem.broadcast.commentOptions(data.password, data.userName, data.permlink, "1000000.000 SBD", 10000, true, true, [[0, { 'beneficiaries': [{ 'account':'xyz', 'weight':1500 }] }]],
+
+    // steem.broadcast.commentOptions(
+    //   // key.happyberrysboy_posting,
+    //   key.mamacoco_posting,
+    //   "",
+    //   // "sct",
+    //   'test',
+    //   "happyberrysboy",
+    //   // `happyberrysboy-mining-report-${dateString}`,
+    //   `happyberrysboy-mining-report-20190805`,
+    //   title,
+    //   beneficiaries: [{"account": "sct.krwp", "weight": 10000}],
+    //   body,
+    //   {
+    //     tags: [
+    //       "sct",
+    //       "zzan",
+    //       "busy",
+    //       "liv",
+    //       "jjm",
+    //       "steemleo",
+    //       "palnet",
+    //       "sct-en",
+    //       "sct-mining"
+    //     ],
+    //     community: "busy",
+    //     app: "busy/2.5.6",
+    //     format: "markdown"
+    //   },
+    //   function(err, result) {
+    //     console.log(err, result);
+    //   }
+    // );
+
+    var operations = [
+      [
+        "comment",
+        {
+          parent_author: "",
+          parent_permlink: "sct",
+          author: "happyberrysboy",
+          permlink: `happyberrysboy-mining-report-${dateString}`,
+          title: title,
+          body: body,
+          json_metadata: JSON.stringify({
+            tags: [
+              "sct",
+              "zzan",
+              "busy",
+              "liv",
+              "jjm",
+              "steemleo",
+              "palnet",
+              "sct-en",
+              "sct-mining"
+            ],
+            community: "busy",
+            app: "busy/2.5.6",
+            format: "markdown"
+          })
+        }
+      ],
+      [
+        "comment_options",
+        {
+          author: "happyberrysboy",
+          permlink: `happyberrysboy-mining-report-${dateString}`,
+          max_accepted_payout: "100000.000 SBD",
+          percent_steem_dollars: 5000,
+          allow_votes: true,
+          allow_curation_rewards: true,
+          extensions: [
+            [
+              0,
+              {
+                beneficiaries: [{ account: "sct.krwp", weight: 10000 }]
+              }
+            ]
+          ]
+        }
+      ]
+    ];
+    steem.broadcast.send(
+      { operations: operations, extensions: [] },
+      { posting: key.happyberrysboy_posting },
+      function(e, r) {
+        if (e) {
+          console.log(e);
+          return;
+        }
+
+        console.log(r);
       }
     );
   }
