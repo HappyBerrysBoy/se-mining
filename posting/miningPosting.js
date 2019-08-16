@@ -18,7 +18,7 @@ body += `This report shows all mining results from steem-engine. This report is 
 body += `# Last Day Steem Engine Mining Report \n<br>\n`;
 
 fs.readFile(
-  `/Users/HappyBerrysBoy/workspace/nodejs/se-mining/logs/mining(2019-07-10).txt`,
+  `/home/ubuntu/workspace/se-mining/logs/mining(${dateString}).txt`,
   "utf8",
   function(err, data) {
     if (err) {
