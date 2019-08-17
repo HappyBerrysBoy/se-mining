@@ -67,17 +67,21 @@ const skillUpArray = [
     name: "B",
     planet: "P-ZO75DZDVRUO",
     skill: [
-      { name: "Corvette", target: 20 },
+      { name: "Corvette", target: 0 },
       { name: "Frigate", target: 0 },
       { name: "missioncontrol", target: 0 },
-      { name: "uraniumbooster", target: 20 },
-      { name: "copperbooster", target: 20 },
-      { name: "coalbooster", target: 20 },
-      { name: "orebooster", target: 20 },
+      { name: "uraniumbooster", target: 0 },
+      { name: "copperbooster", target: 0 },
+      { name: "coalbooster", target: 0 },
+      { name: "orebooster", target: 0 },
       { name: "uraniummine", target: 0 },
       { name: "coppermine", target: 0 },
       { name: "oremine", target: 0 },
       { name: "coalmine", target: 0 },
+      { name: "uraniumdepot", target: 20 },
+      { name: "copperdepot", target: 20 },
+      { name: "oredepot", target: 20 },
+      { name: "coaldepot", target: 20 },
       { name: "shipyard", target: 0 }
     ]
   }
