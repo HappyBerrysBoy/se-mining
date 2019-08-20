@@ -36,7 +36,7 @@ const explorePlanetArray = [
   //   }
   // },
   {
-    id: "P-ZHGO5SVV8XC",
+    id: "P-ZTPRC5MLJXS",
     exploreCnt: 30,
     explorerDirection: {
       xminus: true,
@@ -99,10 +99,10 @@ const maxBuildQty = {
   oremine: 13,
   coppermine: 13,
   uraniummine: 15,
-  coaldepot: 10,
-  oredepot: 10,
-  copperdepot: 10,
-  uraniumdepot: 10,
+  coaldepot: 7,
+  oredepot: 7,
+  copperdepot: 7,
+  uraniumdepot: 7,
   bunker: -1,
   shieldgenerator: -1
 };
