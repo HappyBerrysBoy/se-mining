@@ -5,37 +5,19 @@ const key = require("../key.json");
 const account = "happyberrysboy";
 const buildPlanetArray = ["P-ZA01QNQO29C", "P-ZO75DZDVRUO"];
 const explorePlanetArray = [
-  // {
-  //   id: 'P-Z36VFV9RSR4',
-  //   exploreCnt: 4,
-  //   explorerDirection: {
-  //     xminus: true,
-  //     xplus: false,
-  //     yminus: true,
-  //     yplus: true,
-  //   },
-  // },
-  // {
-  //   id: 'P-Z5TV3Z99YM8',
-  //   exploreCnt: 2,
-  //   explorerDirection: {
-  //     xminus: false,
-  //     xplus: true,
-  //     yminus: true,
-  //     yplus: true,
-  //   },
-  // },
-  // {
-  //   id: "P-ZD7VOJ4FF8W",
-  //   exploreCnt: 30,
-  //   explorerDirection: {
-  //     xminus: true,
-  //     xplus: true,
-  //     yminus: false,
-  //     yplus: true
-  //   }
-  // },
   {
+    name: "I",
+    id: "P-ZHGO5SVV8XC",
+    exploreCnt: 10,
+    explorerDirection: {
+      xminus: false,
+      xplus: true,
+      yminus: true,
+      yplus: true
+    }
+  },
+  {
+    name: "K",
     id: "P-ZTPRC5MLJXS",
     exploreCnt: 30,
     explorerDirection: {
@@ -78,10 +60,10 @@ const skillUpArray = [
       { name: "coppermine", target: 0 },
       { name: "oremine", target: 0 },
       { name: "coalmine", target: 0 },
-      { name: "uraniumdepot", target: 20 },
-      { name: "copperdepot", target: 20 },
-      { name: "oredepot", target: 20 },
-      { name: "coaldepot", target: 20 },
+      { name: "uraniumdepot", target: 17 },
+      { name: "copperdepot", target: 17 },
+      { name: "oredepot", target: 17 },
+      { name: "coaldepot", target: 17 },
       { name: "shipyard", target: 0 }
     ]
   }
