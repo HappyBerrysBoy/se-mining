@@ -3,6 +3,13 @@ const steem = require("steem");
 const key = require("../key.json");
 
 const account = "happyberrysboy";
+const shipyardArray = [
+  { name: "G", id: "P-ZD7VOJ4FF8W", ship: ["explorership"] },
+  { name: "I", id: "P-ZHGO5SVV8XC", ship: ["explorership"] },
+  { name: "K", id: "P-ZTPRC5MLJXS", ship: ["explorership"] },
+  { name: "L", id: "P-ZYBGDS70ILS", ship: ["explorership"] }
+];
+
 const buildPlanetArray = ["P-ZA01QNQO29C", "P-ZO75DZDVRUO"];
 const explorePlanetArray = [
   {
@@ -72,6 +79,8 @@ const skillUpArray = [
 let buildArray = [];
 let searchGalaxyArray = [];
 let skillArray = [];
+let shipArray = [];
+
 const exceptPoint = [{ x: -10, y: -170 }];
 const maxBuildQty = {
   base: -1,
@@ -382,7 +391,37 @@ function autoRun() {
                     });
                   }
                 }
-                // console.log(buildArray);
+
+                // build ship
+                // shipyardInfo
+                const buildShipArray = shipyardArray.filter(
+                  s => s.id == planet.id
+                );
+                if (buildShipArray.length > 0) {
+                  const buildShip = buildShipArray[0];
+                  const buildArray = shipyardInfo.filter(s =>
+                    buildShip.ship.includes(s.type)
+                  );
+
+                  if (buildArray.length > 0) {
+                    console.log(buildArray);
+
+                    buildArray.forEach(ship => {
+                      if (availCoal < buildArray.cost.coal) return;
+                      if (availCopper < buildArray.cost.copper) return;
+                      if (availOre < buildArray.cost.ore) return;
+                      if (availUranium < buildArray.cost.uranium) return;
+
+                      shipArray.push(
+                        `{"username":"${account}","type":"buildship","command":{"tr_var1":"${
+                          planet.id
+                        }","tr_var2":"${ship.type}"}}`
+                      );
+
+                      console.log(`Available ship:${ship.type}`);
+                    });
+                  }
+                }
 
                 //planet = {"img":"co_atm_1.png","level_base":3,"level_coal":12,"level_coaldepot":12,"level_copper":12,"level_copperdepot":12,"level_ore":12,"level_oredepot":12,"level_research":3,"level_ship":14,"level_uranium":15,"level_uraniumdepot":12,"planet_bonus":0.0,"planet_corx":-3,"planet_cory":-182,"planet_crts":1555928508,"planet_id":"P-ZA01QNQO29C","planet_name":"Alpha","planet_rarity":"common","planet_type":"earth","shieldcharge_busy":0,"shieldcharged":0,"shieldprotection_busy":0,"startplanet":1,"total_type":4016,"user":"happyberrysboy"}
                 //qytInfo = coal, coaldepot, coalrate, copper, copperdepot......
@@ -522,6 +561,23 @@ setInterval(() => {
   if (searchGalaxyArray.length == 0) return;
 
   const customJson = searchGalaxyArray.shift();
+  console.log(customJson);
+  steem.broadcast.customJson(
+    key.happyberrysboy_posting, // posting key
+    [],
+    [account], // account
+    "nextcolony", // 'nextcolony'
+    customJson,
+    function(err, result) {
+      console.log(err, result);
+    }
+  );
+}, 3 * 60 * 1000);
+
+setInterval(() => {
+  if (shipArray.length == 0) return;
+
+  const customJson = shipArray.shift();
   console.log(customJson);
   steem.broadcast.customJson(
     key.happyberrysboy_posting, // posting key
