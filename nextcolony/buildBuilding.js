@@ -407,10 +407,10 @@ function autoRun() {
                     console.log(buildArray);
 
                     buildArray.forEach(ship => {
-                      if (availCoal < buildArray.cost.coal) return;
-                      if (availCopper < buildArray.cost.copper) return;
-                      if (availOre < buildArray.cost.ore) return;
-                      if (availUranium < buildArray.cost.uranium) return;
+                      if (availCoal < ship.cost.coal) return;
+                      if (availCopper < ship.cost.copper) return;
+                      if (availOre < ship.cost.ore) return;
+                      if (availUranium < ship.cost.uranium) return;
 
                       shipArray.push(
                         `{"username":"${account}","type":"buildship","command":{"tr_var1":"${
