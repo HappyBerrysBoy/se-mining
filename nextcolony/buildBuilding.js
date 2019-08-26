@@ -23,18 +23,18 @@ const explorePlanetArray = [
       yminus: true,
       yplus: true
     }
-  },
-  {
-    name: "L",
-    id: "P-ZYBGDS70ILS",
-    exploreCnt: 5,
-    explorerDirection: {
-      xminus: true,
-      xplus: true,
-      yminus: true,
-      yplus: true
-    }
   }
+  // {
+  //   name: "L",
+  //   id: "P-ZYBGDS70ILS",
+  //   exploreCnt: 5,
+  //   explorerDirection: {
+  //     xminus: true,
+  //     xplus: true,
+  //     yminus: true,
+  //     yplus: true
+  //   }
+  // }
 ];
 const skillUpArray = [
   {
