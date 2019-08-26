@@ -68,10 +68,10 @@ const skillUpArray = [
       { name: "coppermine", target: 0 },
       { name: "oremine", target: 0 },
       { name: "coalmine", target: 0 },
-      { name: "uraniumdepot", target: 17 },
-      { name: "copperdepot", target: 17 },
-      { name: "oredepot", target: 17 },
-      { name: "coaldepot", target: 17 },
+      { name: "uraniumdepot", target: 18 },
+      { name: "copperdepot", target: 18 },
+      { name: "oredepot", target: 18 },
+      { name: "coaldepot", target: 18 },
       { name: "shipyard", target: 0 }
     ]
   }
