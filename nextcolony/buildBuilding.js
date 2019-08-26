@@ -7,17 +7,18 @@ const shipyardArray = [
   { name: "G", id: "P-ZD7VOJ4FF8W", ship: ["explorership"] },
   { name: "I", id: "P-ZHGO5SVV8XC", ship: ["explorership"] },
   { name: "K", id: "P-ZTPRC5MLJXS", ship: ["explorership"] },
-  { name: "L", id: "P-ZYBGDS70ILS", ship: ["explorership"] }
+  { name: "L", id: "P-ZYBGDS70ILS", ship: ["explorership"] },
+  { name: "M", id: "P-ZIWU6M04H80", ship: ["explorership"] }
 ];
 
 const buildPlanetArray = ["P-ZA01QNQO29C", "P-ZO75DZDVRUO"];
 const explorePlanetArray = [
   {
-    name: "I",
-    id: "P-ZHGO5SVV8XC",
-    exploreCnt: 10,
+    name: "M",
+    id: "P-ZIWU6M04H80",
+    exploreCnt: 30,
     explorerDirection: {
-      xminus: false,
+      xminus: true,
       xplus: true,
       yminus: true,
       yplus: true
@@ -26,7 +27,7 @@ const explorePlanetArray = [
   {
     name: "L",
     id: "P-ZYBGDS70ILS",
-    exploreCnt: 30,
+    exploreCnt: 5,
     explorerDirection: {
       xminus: true,
       xplus: true,
