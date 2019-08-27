@@ -4,7 +4,7 @@ const key = require("../key.json");
 
 const account = "happyberrysboy";
 const shipyardArray = [
-  { name: "G", id: "P-ZD7VOJ4FF8W", ship: ["explorership"] },
+  // { name: "G", id: "P-ZD7VOJ4FF8W", ship: ["explorership"] },
   { name: "I", id: "P-ZHGO5SVV8XC", ship: ["explorership"] },
   { name: "K", id: "P-ZTPRC5MLJXS", ship: ["explorership"] },
   { name: "L", id: "P-ZYBGDS70ILS", ship: ["explorership"] },
