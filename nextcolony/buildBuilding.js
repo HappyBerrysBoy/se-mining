@@ -441,11 +441,7 @@ function autoRun() {
 
                 if (availExplore) {
                   searchGalaxyArray.push(
-                    `{"username":"${account}","type":"explorespace","command":{"tr_var1":"${
-                      planet.id
-                    }","tr_var2":"${targetPoint.x}","tr_var3":"${
-                      targetPoint.y
-                    }","tr_var4":"explorership"}}`,
+                    `{"username":"${account}","type":"explorespace","command":{"tr_var1":"${planet.id}","tr_var2":"${targetPoint.x}","tr_var3":"${targetPoint.y}","tr_var4":"explorership"}}`,
                   );
                 } else {
                   console.log("Can not find available explore point");
