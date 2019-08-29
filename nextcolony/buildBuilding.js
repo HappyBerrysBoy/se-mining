@@ -3,47 +3,45 @@ const steem = require("steem");
 const key = require("../key.json");
 
 const account = "happyberrysboy";
+const shipyardArray = [
+  // { name: "I", id: "P-ZHGO5SVV8XC", ship: ["explorership"] },
+  { name: "K", id: "P-ZTPRC5MLJXS", ship: ["explorership"] },
+  // { name: "L", id: "P-ZYBGDS70ILS", ship: ["explorership"] },
+  { name: "M", id: "P-ZIWU6M04H80", ship: ["explorership"] }
+];
+
 const buildPlanetArray = ["P-ZA01QNQO29C", "P-ZO75DZDVRUO"];
 const explorePlanetArray = [
   {
-    name: "I",
-    id: "P-ZHGO5SVV8XC",
-    exploreCnt: 30,
+    name: "M",
+    id: "P-ZIWU6M04H80",
+    exploreCnt: 23,
     explorerDirection: {
       xminus: true,
       xplus: true,
       yminus: true,
-      yplus: true,
-    },
-  },
-  {
-    name: "K",
-    id: "P-ZTPRC5MLJXS",
-    exploreCnt: 30,
-    explorerDirection: {
-      xminus: true,
-      xplus: true,
-      yminus: true,
-      yplus: true,
-    },
-  },
+      yplus: true
+    }
+  }
+  // {
+  //   name: "L",
+  //   id: "P-ZYBGDS70ILS",
+  //   exploreCnt: 5,
+  //   explorerDirection: {
+  //     xminus: true,
+  //     xplus: true,
+  //     yminus: true,
+  //     yplus: true
+  //   }
+  // }
 ];
 const skillUpArray = [
   {
     name: "A",
     planet: "P-ZA01QNQO29C",
     skill: [
-      { name: "missioncontrol", target: 20 },
-      { name: "uraniumbooster", target: 0 },
-      { name: "copperbooster", target: 0 },
-      { name: "coalbooster", target: 0 },
-      { name: "orebooster", target: 0 },
-      { name: "uraniummine", target: 0 },
-      { name: "coppermine", target: 0 },
-      { name: "oremine", target: 0 },
-      { name: "coalmine", target: 0 },
-      { name: "shipyard", target: 0 },
-    ],
+      { name: "missioncontrol", target: 20 }
+    ]
   },
   {
     name: "B",
@@ -60,18 +58,64 @@ const skillUpArray = [
       { name: "coppermine", target: 0 },
       { name: "oremine", target: 0 },
       { name: "coalmine", target: 0 },
-      { name: "uraniumdepot", target: 17 },
-      { name: "copperdepot", target: 17 },
-      { name: "oredepot", target: 17 },
-      { name: "coaldepot", target: 17 },
-      { name: "shipyard", target: 0 },
-    ],
+      { name: "uraniumdepot", target: 18 },
+      { name: "copperdepot", target: 18 },
+      { name: "oredepot", target: 18 },
+      { name: "coaldepot", target: 18 },
+      { name: "shipyard", target: 0 }
+    ]
   },
+  {
+    name: "G",
+    planet: "P-ZD7VOJ4FF8W",
+    skill: [
+      { name: "Corvette", target: 20 },
+      { name: "Frigate", target: 20 },
+      { name: "missioncontrol", target: 0 },
+      { name: "uraniumbooster", target: 10 },
+      { name: "copperbooster", target: 0 },
+      { name: "coalbooster", target: 5 },
+      { name: "orebooster", target: 10 },
+      { name: "uraniummine", target: 0 },
+      { name: "coppermine", target: 0 },
+      { name: "oremine", target: 0 },
+      { name: "coalmine", target: 0 },
+      { name: "uraniumdepot", target: 0 },
+      { name: "copperdepot", target: 0 },
+      { name: "oredepot", target: 0 },
+      { name: "coaldepot", target: 0 },
+      { name: "shipyard", target: 0 }
+    ]
+  },
+  {
+    name: "I",
+    planet: "P-ZD7VOJ4FF8W",
+    skill: [
+      { name: "Corvette", target: 20 },
+      { name: "Frigate", target: 20 },
+      { name: "missioncontrol", target: 0 },
+      { name: "uraniumbooster", target: 10 },
+      { name: "copperbooster", target: 0 },
+      { name: "coalbooster", target: 5 },
+      { name: "orebooster", target: 10 },
+      { name: "uraniummine", target: 0 },
+      { name: "coppermine", target: 0 },
+      { name: "oremine", target: 0 },
+      { name: "coalmine", target: 0 },
+      { name: "uraniumdepot", target: 0 },
+      { name: "copperdepot", target: 0 },
+      { name: "oredepot", target: 0 },
+      { name: "coaldepot", target: 0 },
+      { name: "shipyard", target: 0 }
+    ]
+  }
 ];
 
 let buildArray = [];
 let searchGalaxyArray = [];
 let skillArray = [];
+let shipArray = [];
+
 const exceptPoint = [{ x: -10, y: -170 }];
 const maxBuildQty = {
   base: -1,
@@ -81,12 +125,12 @@ const maxBuildQty = {
   oremine: 13,
   coppermine: 13,
   uraniummine: 15,
-  coaldepot: 10,
-  oredepot: 10,
-  copperdepot: 10,
-  uraniumdepot: 10,
+  coaldepot: 7,
+  oredepot: 7,
+  copperdepot: 7,
+  uraniumdepot: 7,
   bunker: -1,
-  shieldgenerator: -1,
+  shieldgenerator: -1
 };
 const buildPriority = {
   explorer: 0,
@@ -102,7 +146,7 @@ const buildPriority = {
   copperdepot: 13,
   uraniumdepot: 13,
   bunker: -1,
-  shieldgenerator: -1,
+  shieldgenerator: -1
 };
 
 // Planet 정보
@@ -132,19 +176,19 @@ const loadshipyard = planetId => {
 
 const loadproduction = (planetId, account) => {
   return axios.get(
-    `https://api.nextcolony.io/loadproduction?id=${planetId}&user=${account}`,
+    `https://api.nextcolony.io/loadproduction?id=${planetId}&user=${account}`
   );
 };
 
 const loadGalaxy = (planetX, planetY) => {
   return axios.get(
-    `https://api.nextcolony.io/loadgalaxy?x=${planetX}&y=${planetY}&height=120&width=120`,
+    `https://api.nextcolony.io/loadgalaxy?x=${planetX}&y=${planetY}&height=120&width=120`
   );
 };
 
 const fleetMission = account => {
   return axios.get(
-    `https://api.nextcolony.io/loadfleetmission?user=${account}&active=1`,
+    `https://api.nextcolony.io/loadfleetmission?user=${account}&active=1`
   );
 };
 
@@ -178,7 +222,7 @@ function chkAvailExplorefromDistance(
   explore,
   explored,
   planets,
-  explorePlanet,
+  explorePlanet
 ) {
   // console.log(`Distance:${distance}`);
 
@@ -257,7 +301,7 @@ function autoRun() {
             loadplanet(planet.id),
             loadGalaxy(planet.posx, planet.posy),
             loadskills(account),
-            fleetMission(account),
+            fleetMission(account)
           ]) // axios.all로 여러 개의 request를 보내고
           .then(
             axios.spread(
@@ -269,7 +313,7 @@ function autoRun() {
                 loadPlanetData,
                 loadGalaxy,
                 skillInfo,
-                fleetMission,
+                fleetMission
               ) => {
                 // response를 spread로 받는다
                 // Build 관련 내용들
@@ -310,7 +354,7 @@ function autoRun() {
                   Math,
                   mineArray.map(function(o) {
                     return o.current;
-                  }),
+                  })
                 );
 
                 buildingInfo.forEach(building => {
@@ -336,7 +380,7 @@ function autoRun() {
                   buildArray.push(
                     `{"username":"${account}","type":"upgrade","command":{
                       "tr_var1":"${planet.id}",
-                      "tr_var2":"${building.name}"}}`,
+                      "tr_var2":"${building.name}"}}`
                   );
 
                   console.log(`Available building:${building.name}`);
@@ -345,19 +389,19 @@ function autoRun() {
                 // skill up
                 if (skillUpArray.length) {
                   const targetPlanet = skillUpArray.filter(
-                    p => p.planet == planet.id,
+                    p => p.planet == planet.id
                   );
 
                   if (targetPlanet.length) {
                     const targetSkill = targetPlanet[0].skill.filter(
-                      s => s.target,
+                      s => s.target
                     );
 
                     console.log(targetSkill);
 
                     skillInfo.data.forEach(skill => {
                       const targetInfo = targetSkill.filter(
-                        t => t.name == skill.name,
+                        t => t.name == skill.name
                       );
 
                       if (!targetInfo.length) return;
@@ -375,14 +419,44 @@ function autoRun() {
                         `{"username":"${account}","type":"enhance","command":{
                           "tr_var1":"${account}",
                           "tr_var2":"${planet.id}",
-                          "tr_var3":"${skill.name}"}}`,
+                          "tr_var3":"${skill.name}"}}`
                       );
 
                       console.log(`Available skill:${skill.name}`);
                     });
                   }
                 }
-                // console.log(buildArray);
+
+                // build ship
+                // shipyardInfo
+                const buildShipArray = shipyardArray.filter(
+                  s => s.id == planet.id
+                );
+                if (buildShipArray.length > 0) {
+                  const buildShip = buildShipArray[0];
+                  const buildArray = shipyardInfo.filter(s =>
+                    buildShip.ship.includes(s.type)
+                  );
+
+                  if (buildArray.length > 0) {
+                    console.log(buildArray);
+
+                    buildArray.forEach(ship => {
+                      if (availCoal < ship.cost.coal) return;
+                      if (availCopper < ship.cost.copper) return;
+                      if (availOre < ship.cost.ore) return;
+                      if (availUranium < ship.cost.uranium) return;
+
+                      shipArray.push(
+                        `{"username":"${account}","type":"buildship","command":{"tr_var1":"${
+                          planet.id
+                        }","tr_var2":"${ship.type}"}}`
+                      );
+
+                      console.log(`Available ship:${ship.type}`);
+                    });
+                  }
+                }
 
                 //planet = {"img":"co_atm_1.png","level_base":3,"level_coal":12,"level_coaldepot":12,"level_copper":12,"level_copperdepot":12,"level_ore":12,"level_oredepot":12,"level_research":3,"level_ship":14,"level_uranium":15,"level_uraniumdepot":12,"planet_bonus":0.0,"planet_corx":-3,"planet_cory":-182,"planet_crts":1555928508,"planet_id":"P-ZA01QNQO29C","planet_name":"Alpha","planet_rarity":"common","planet_type":"earth","shieldcharge_busy":0,"shieldcharged":0,"shieldprotection_busy":0,"startplanet":1,"total_type":4016,"user":"happyberrysboy"}
                 //qytInfo = coal, coaldepot, coalrate, copper, copperdepot......
@@ -402,8 +476,7 @@ function autoRun() {
                 if (!explorePlanet.length) return;
 
                 const exploreMissions = loadFleetInfo.filter(
-                  l =>
-                    l.type == "explorespace" && l.from_planet.id == planet.id,
+                  l => l.type == "explorespace" && l.from_planet.id == planet.id
                 );
 
                 // 행성당 제한한 횟수보다 많이 보낼 수 없음
@@ -430,7 +503,7 @@ function autoRun() {
                     explore,
                     explored,
                     planets,
-                    explorePlanet[0],
+                    explorePlanet[0]
                   );
 
                   if (Object.keys(targetPoint).length) {
@@ -441,13 +514,21 @@ function autoRun() {
 
                 if (availExplore) {
                   searchGalaxyArray.push(
+<<<<<<< HEAD
                     `{"username":"${account}","type":"explorespace","command":{"tr_var1":"${planet.id}","tr_var2":"${targetPoint.x}","tr_var3":"${targetPoint.y}","tr_var4":"explorership"}}`,
+=======
+                    `{"username":"${account}","type":"explorespace","command":{"tr_var1":"${
+                      planet.id
+                    }","tr_var2":"${targetPoint.x}","tr_var3":"${
+                      targetPoint.y
+                    }","tr_var4":"explorership"}}`
+>>>>>>> 28b3decbaf6a51b97a7dcd56402b9ebb4a68fb5a
                   );
                 } else {
                   console.log("Can not find available explore point");
                 }
-              },
-            ),
+              }
+            )
           )
           .catch(error => {
             console.error(error);
@@ -486,7 +567,7 @@ setInterval(() => {
     customJson,
     function(err, result) {
       console.log(err, result);
-    },
+    }
   );
 }, 1 * 60 * 1000);
 
@@ -511,7 +592,7 @@ setInterval(() => {
     customJson,
     function(err, result) {
       console.log(err, result);
-    },
+    }
   );
 }, 3 * 60 * 1000);
 
@@ -528,6 +609,23 @@ setInterval(() => {
     customJson,
     function(err, result) {
       console.log(err, result);
-    },
+    }
+  );
+}, 3 * 60 * 1000);
+
+setInterval(() => {
+  if (shipArray.length == 0) return;
+
+  const customJson = shipArray.shift();
+  console.log(customJson);
+  steem.broadcast.customJson(
+    key.happyberrysboy_posting, // posting key
+    [],
+    [account], // account
+    "nextcolony", // 'nextcolony'
+    customJson,
+    function(err, result) {
+      console.log(err, result);
+    }
   );
 }, 3 * 60 * 1000);
