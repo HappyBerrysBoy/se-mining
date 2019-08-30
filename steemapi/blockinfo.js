@@ -482,14 +482,33 @@ async function blockMonitoring(blockno) {
 
         if (options) {
           if (options.indexOf("~") > -1) {
-            startNo = parseInt(options.split("~")[0]);
-            endNo = parseInt(options.split("~")[1]);
+            startNo = parseInt(options.split("~")[0].trim());
+            endNo = parseInt(options.split("~")[1].trim());
           } else {
             endNo = parseInt(options);
           }
         }
 
-        if (startNo > endNo) return;
+        if (startNo > endNo || isNaN(startNo) || isNaN(endNo)) {
+          // content
+          steem.broadcast.comment(
+            key.happyberrysboy_posting,
+            content.author,
+            content.permlink,
+            "happyberrysboy",
+            steem.formatter
+              .commentPermlink(content.author, content.permlink)
+              .replace(/\./g, "")
+              .substring(0, 16) + Math.floor(Math.random() * 10000),
+            "",
+            "올바르지 않은 숫자입니다.",
+            content.json_metadata,
+            function(err, result) {
+              console.log(err, result);
+            },
+          );
+          return;
+        }
 
         const theNumber =
           Math.floor(Math.random() * (endNo - startNo + 1)) + startNo;
