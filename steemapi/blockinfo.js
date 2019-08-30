@@ -220,9 +220,7 @@ async function blockMonitoring(blockno) {
 
           findPlanet().then(p => {
             if (blockno.lastPlanetUser != p.data.planets[0].username) {
-              let sendMsg = `*********************\n*******행성발견*******\n*********************\n${
-                p.data.planets[0].username
-              }\n*********************\n*********************`;
+              let sendMsg = `*********************\n*******행성발견*******\n*********************\n${p.data.planets[0].username}\n*********************\n*********************`;
               // console.log(sendMsg);
               blockno.lastPlanetUser = p.data.planets[0].username;
               telegramMembers.forEach(m => bot.sendMessage(m, sendMsg));
@@ -246,9 +244,7 @@ async function blockMonitoring(blockno) {
                 jsonInfo.command.tr_var1
               }`;
             } else {
-              sendMsg = `Account:${jsonInfo.username}  \nType:${
-                jsonInfo.type
-              }(${jsonInfo.timestamp})  \nMission:${jsonInfo.command.tr_var1}`;
+              sendMsg = `Account:${jsonInfo.username}  \nType:${jsonInfo.type}(${jsonInfo.timestamp})  \nMission:${jsonInfo.command.tr_var1}`;
             }
           } else {
             // deploy, attack, siege
@@ -470,6 +466,81 @@ async function blockMonitoring(blockno) {
             console.log(err, result);
           },
         );
+      }
+    } else if (
+      action === "comment" &&
+      content.body.indexOf(config.diceTag) > -1
+    ) {
+      console.log(`${config.pickTag}`);
+      let startNo = 1;
+      let endNo = 100;
+      try {
+        let options = content.body.split(config.diceTag)[1].trim();
+
+        if (options) {
+          if (options.indexOf("~") > -1) {
+            startNo = parseInt(options.split("~")[0]);
+            endNo = parseInt(options.split("~")[1]);
+          } else {
+            endNo = parseInt(options);
+          }
+        }
+
+        if (startNo > endNo) return;
+
+        const theNumber =
+          Math.floor(Math.random() * (endNo - startNo + 1)) + startNo;
+        let body = `##### Happy Dice Result!!\n`;
+        body += `${content.author}님은 ${theNumber}을 뽑으셨습니다.`;
+
+        // content
+        steem.broadcast.comment(
+          key.happyberrysboy_posting,
+          content.author,
+          content.permlink,
+          "happyberrysboy",
+          steem.formatter
+            .commentPermlink(content.author, content.permlink)
+            .replace(/\./g, "")
+            .substring(0, 16) + Math.floor(Math.random() * 10000),
+          "",
+          body,
+          content.json_metadata,
+          function(err, result) {
+            console.log(err, result);
+          },
+        );
+
+        const logJson = { content: content, result: body };
+
+        fs.appendFile(
+          "../logs/happydice(" + dateString + ").txt",
+          JSON.stringify(logJson) + "\n",
+          err => {
+            if (err) console.log(err);
+          },
+        );
+      } catch (e) {
+        console.log(`dice error`);
+        console.log(e);
+
+        steem.broadcast.comment(
+          key.happyberrysboy_posting,
+          content.author,
+          content.permlink,
+          "happyberrysboy",
+          steem.formatter
+            .commentPermlink(content.author, content.permlink)
+            .replace(/\./g, "")
+            .substring(0, 16) + Math.floor(Math.random() * 10000),
+          "",
+          e,
+          content.json_metadata,
+          function(err, result) {
+            console.log(err, result);
+          },
+        );
+        return;
       }
     }
   });

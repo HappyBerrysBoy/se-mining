@@ -3,6 +3,7 @@
   "steemEngineApi": "https://api.steem-engine.com/rpc/",
   "blockConfigPath": "./config/blockConfig.ini",
   "pickTag": "#happy-pick",
+  "diceTag": "#happy-dice",
   "customJsonList": {
     "mining": "scot_claim",
     "mining_type": "mining"
