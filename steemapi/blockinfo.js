@@ -81,12 +81,6 @@ const findPlanet = () => {
   );
 };
 
-// const jsonData = {
-//   lastReadSteemBlock: 34543118,
-//   lastReadSscBlock: 400005,
-//   lastPlanetUser: "",
-// };
-
 fs.readFile("../config/blockConfig.ini", "utf8", function(err, data) {
   if (err) console.log(err);
   const json = JSON.parse(data);
@@ -210,6 +204,17 @@ async function blockMonitoring(blockno) {
           }
         }
 
+        if (blockno.lastReadSteemBlock % 10 == 0) {
+          findPlanet().then(p => {
+            if (blockno.lastPlanetUser != p.data.planets[0].username) {
+              const foundPlanet = p.data.planets[0];
+              let sendMsg = `*******행성발견*******\n${foundPlanet.username}(${foundPlanet.id})\n${foundPlanet.name}(${foundPlanet.posx},${foundPlanet.posy})\n*********************\n`;
+              blockno.lastPlanetUser = p.data.planets[0].username;
+              telegramMembers.forEach(m => bot.sendMessage(m, sendMsg));
+            }
+          });
+        }
+
         if (
           content.id == "nextcolony" &&
           nextColonyMonitoringId.includes(jsonInfo.username) &&
@@ -217,15 +222,6 @@ async function blockMonitoring(blockno) {
         ) {
           console.log(jsonInfo);
           // {"username":"strikeeagle","type":"siege","command":{"tr_var1":{"frigate1":{"pos":1,"n":30}},"tr_var2":-294,"tr_var3":116,"tr_var4":"P-ZBVFMCH4HEO"}}
-
-          findPlanet().then(p => {
-            if (blockno.lastPlanetUser != p.data.planets[0].username) {
-              let sendMsg = `*********************\n*******행성발견*******\n*********************\n${p.data.planets[0].username}\n*********************\n*********************`;
-              // console.log(sendMsg);
-              blockno.lastPlanetUser = p.data.planets[0].username;
-              telegramMembers.forEach(m => bot.sendMessage(m, sendMsg));
-            }
-          });
 
           let sendMsg = "";
 
