@@ -4,17 +4,14 @@ const key = require("../key.json");
 
 const account = "happyberrysboy";
 const shipyardArray = [
-  // { name: "I", id: "P-ZHGO5SVV8XC", ship: ["explorership"] },
-  { name: "K", id: "P-ZTPRC5MLJXS", ship: ["explorership"] },
-  // { name: "L", id: "P-ZYBGDS70ILS", ship: ["explorership"] },
   { name: "M", id: "P-ZIWU6M04H80", ship: ["explorership"] },
 ];
 
 const buildPlanetArray = ["P-ZA01QNQO29C", "P-ZO75DZDVRUO"];
 const explorePlanetArray = [
   {
-    name: "M",
-    id: "P-ZIWU6M04H80",
+    name: "N",
+    id: "P-Z03P0EIL1LS",
     exploreCnt: 23,
     explorerDirection: {
       xminus: true,
@@ -23,17 +20,6 @@ const explorePlanetArray = [
       yplus: true,
     },
   },
-  // {
-  //   name: "L",
-  //   id: "P-ZYBGDS70ILS",
-  //   exploreCnt: 5,
-  //   explorerDirection: {
-  //     xminus: true,
-  //     xplus: true,
-  //     yminus: true,
-  //     yplus: true
-  //   }
-  // }
 ];
 const skillUpArray = [
   {
@@ -45,110 +31,132 @@ const skillUpArray = [
     name: "V3_UU",
     planet: "P-ZKMVJ9P05PS",
     skill: [
-      { name: "Corvette", target: 20 },
+      { name: "Transporter", target: 20 },
       { name: "Frigate", target: 20 },
       { name: "missioncontrol", target: 0 },
       { name: "uraniumbooster", target: 10 },
       { name: "copperbooster", target: 0 },
       { name: "coalbooster", target: 5 },
       { name: "orebooster", target: 10 },
-      { name: "uraniummine", target: 0 },
-      { name: "coppermine", target: 0 },
-      { name: "oremine", target: 0 },
-      { name: "coalmine", target: 0 },
+      { name: "uraniummine", target: 20 },
+      { name: "coppermine", target: 20 },
+      { name: "oremine", target: 20 },
+      { name: "coalmine", target: 20 },
       { name: "uraniumdepot", target: 20 },
       { name: "copperdepot", target: 20 },
       { name: "oredepot", target: 20 },
       { name: "coaldepot", target: 20 },
-      { name: "shipyard", target: 0 },
+      { name: "shipyard", target: 20 },
     ],
   },
   {
     name: "V2_CC",
     planet: "P-ZQA5D71XR40",
     skill: [
-      { name: "Corvette", target: 20 },
+      { name: "Transporter", target: 20 },
       { name: "Frigate", target: 20 },
       { name: "missioncontrol", target: 0 },
       { name: "uraniumbooster", target: 10 },
       { name: "copperbooster", target: 0 },
       { name: "coalbooster", target: 5 },
       { name: "orebooster", target: 10 },
-      { name: "uraniummine", target: 0 },
-      { name: "coppermine", target: 0 },
-      { name: "oremine", target: 0 },
-      { name: "coalmine", target: 0 },
+      { name: "uraniummine", target: 20 },
+      { name: "coppermine", target: 20 },
+      { name: "oremine", target: 20 },
+      { name: "coalmine", target: 20 },
       { name: "uraniumdepot", target: 20 },
       { name: "copperdepot", target: 20 },
       { name: "oredepot", target: 20 },
       { name: "coaldepot", target: 20 },
-      { name: "shipyard", target: 0 },
+      { name: "shipyard", target: 20 },
     ],
   },
   {
     name: "G",
     planet: "P-ZD7VOJ4FF8W",
     skill: [
-      { name: "Corvette", target: 20 },
+      { name: "Transporter", target: 20 },
       { name: "Frigate", target: 20 },
       { name: "missioncontrol", target: 0 },
       { name: "uraniumbooster", target: 10 },
       { name: "copperbooster", target: 0 },
       { name: "coalbooster", target: 5 },
       { name: "orebooster", target: 10 },
-      { name: "uraniummine", target: 0 },
-      { name: "coppermine", target: 0 },
-      { name: "oremine", target: 0 },
-      { name: "coalmine", target: 0 },
+      { name: "uraniummine", target: 20 },
+      { name: "coppermine", target: 20 },
+      { name: "oremine", target: 20 },
+      { name: "coalmine", target: 20 },
       { name: "uraniumdepot", target: 20 },
       { name: "copperdepot", target: 20 },
       { name: "oredepot", target: 20 },
       { name: "coaldepot", target: 20 },
-      { name: "shipyard", target: 0 },
+      { name: "shipyard", target: 20 },
     ],
   },
   {
     name: "I",
     planet: "P-ZD7VOJ4FF8W",
     skill: [
-      { name: "Corvette", target: 20 },
+      { name: "Transporter", target: 20 },
       { name: "Frigate", target: 20 },
       { name: "missioncontrol", target: 0 },
       { name: "uraniumbooster", target: 10 },
       { name: "copperbooster", target: 0 },
       { name: "coalbooster", target: 5 },
       { name: "orebooster", target: 10 },
-      { name: "uraniummine", target: 0 },
-      { name: "coppermine", target: 0 },
-      { name: "oremine", target: 0 },
-      { name: "coalmine", target: 0 },
+      { name: "uraniummine", target: 20 },
+      { name: "coppermine", target: 20 },
+      { name: "oremine", target: 20 },
+      { name: "coalmine", target: 20 },
       { name: "uraniumdepot", target: 20 },
       { name: "copperdepot", target: 20 },
       { name: "oredepot", target: 20 },
       { name: "coaldepot", target: 20 },
-      { name: "shipyard", target: 0 },
+      { name: "shipyard", target: 20 },
     ],
   },
   {
     name: "J",
     planet: "P-ZOWKXS7K60W",
     skill: [
-      { name: "Corvette", target: 20 },
+      { name: "Transporter", target: 20 },
       { name: "Frigate", target: 20 },
       { name: "missioncontrol", target: 0 },
       { name: "uraniumbooster", target: 10 },
       { name: "copperbooster", target: 0 },
       { name: "coalbooster", target: 5 },
       { name: "orebooster", target: 10 },
-      { name: "uraniummine", target: 0 },
-      { name: "coppermine", target: 0 },
-      { name: "oremine", target: 0 },
-      { name: "coalmine", target: 0 },
+      { name: "uraniummine", target: 20 },
+      { name: "coppermine", target: 20 },
+      { name: "oremine", target: 20 },
+      { name: "coalmine", target: 20 },
       { name: "uraniumdepot", target: 20 },
       { name: "copperdepot", target: 20 },
       { name: "oredepot", target: 20 },
       { name: "coaldepot", target: 20 },
-      { name: "shipyard", target: 0 },
+      { name: "shipyard", target: 20 },
+    ],
+  },
+  {
+    name: "K",
+    planet: "P-ZTPRC5MLJXS",
+    skill: [
+      { name: "Transporter", target: 20 },
+      { name: "Frigate", target: 20 },
+      { name: "missioncontrol", target: 0 },
+      { name: "uraniumbooster", target: 10 },
+      { name: "copperbooster", target: 0 },
+      { name: "coalbooster", target: 5 },
+      { name: "orebooster", target: 10 },
+      { name: "uraniummine", target: 20 },
+      { name: "coppermine", target: 20 },
+      { name: "oremine", target: 20 },
+      { name: "coalmine", target: 20 },
+      { name: "uraniumdepot", target: 20 },
+      { name: "copperdepot", target: 20 },
+      { name: "oredepot", target: 20 },
+      { name: "coaldepot", target: 20 },
+      { name: "shipyard", target: 20 },
     ],
   },
 ];
@@ -161,16 +169,16 @@ let shipArray = [];
 const exceptPoint = [{ x: -10, y: -170 }];
 const maxBuildQty = {
   base: -1,
-  shipyard: 13,
+  shipyard: 15,
   researchcenter: -1,
-  coalmine: 13,
-  oremine: 13,
-  coppermine: 13,
+  coalmine: 15,
+  oremine: 15,
+  coppermine: 15,
   uraniummine: 15,
-  coaldepot: 7,
-  oredepot: 7,
-  copperdepot: 7,
-  uraniumdepot: 7,
+  coaldepot: 15,
+  oredepot: 15,
+  copperdepot: 15,
+  uraniumdepot: 15,
   bunker: -1,
   shieldgenerator: -1,
 };
@@ -502,8 +510,8 @@ function autoRun() {
                 //qytInfo = coal, coaldepot, coalrate, copper, copperdepot......
                 //prodInfo = coal:{booster:null, depot:2880, level:12, production:960, safe:0}, copper....
                 //buildingInfo = [{base:0, busy:1559091080, coal:1344, copper:288, cur_rate:null, current:14, misc:null, name:"shipyard", next_rate:null, ore:576, research:0, skill:14, time:46560, uranium:156}, ....]
-                //shipyardInfo = [{"activated":false,"armor":20,"bullet":0,"busy_until":null,"capacity":160,"class":"Battlecruiser","consumption":0.0038,"cost":{"coal":576,"copper":144,"ore":288,"time":101323.48,"uranium":72},"cur_level":14,"cur_level_skill":14,"laser":0,"longname":"Battlecruiser Tiger","min_level":18,"rocket":8,"shield":36,"skill":null,"speed":2.0,"structure":40,"type":"battlecruiser","variant":0,"variant_name":"rocket"},{"activated":false,"armor":20,"bullet":8,"busy_until":null,"capacity":160,"class":"Battlecruiser","consumption":0.0038,"cost":{"coal":576,"copper":144,"ore":288,"time":101323.48,"uranium":72},"cur_level":14,"cur_level_skill":14,"laser":0,"longname":"Battlecruiser Lion","min_level":18,"rocket":0,"shield":36,"skill":null,"speed":2.0,"structure":40,"type":"battlecruiser1","variant":1,"variant_name":"bullet"},{"activated":false,"armor":100,"bullet":0,"busy_until":null,"capacity":800,"class":"Carrier","consumption":0.0096,"cost":{"coal":1520,"copper":380,"ore":760,"time":164159.38,"uranium":190},"cur_level":14,"cur_level_skill":14,"laser":0,"longname":"Carrier Argus","min_level":19,"rocket":20,"shield":80,"skill":null,"speed":1.0,"structure":60,"type":"carrier","variant":0,"variant_name":"rocket"},{"activated":false,"armor":100,"bullet":20,"busy_until":null,"capacity":800,"class":"Carrier","consumption":0.0096,"cost":{"coal":1520,"copper":380,"ore":760,"time":164159.38,"uranium":190},"cur_level":14,"cur_level_skill":14,"laser":0,"longname":"Carrier Unicorn","min_level":19,"rocket":0,"shield":80,"skill":null,"speed":1.0,"structure":60,"type":"carrier1","variant":1,"variant_name":"bullet"},{"activated":false,"armor":8,"bullet":0,"busy_until":null,"capacity":20,"class":"Corvette","consumption":0.001,"cost":{"coal":112,"copper":28,"ore":56,"time":32919.08,"uranium":17},"cur_level":14,"cur_level_skill":14,"laser":0,"longname":"Corvette Crocus","min_level":14,"rocket":2,"shield":10,"skill":1,"speed":4.0,"structure":6,"type":"corvette","variant":0,"variant_name":"rocket"},{"activated":false,"armor":8,"bullet":2,"busy_until":null,"capacity":20,"class":"Corvette","consumption":0.001,"cost":{"coal":112,"copper":28,"ore":56,"time":32919.08,"uranium":17},"cur_level":14,"cur_level_skill":14,"laser":0,"longname":"Corvette Petunia","min_level":14,"rocket":0,"shield":10,"skill":1,"speed":4.0,"structure":6,"type":"corvette1","variant":1,"variant_name":"bullet"},{"activated":false,"armor":25,"bullet":0,"busy_until":null,"capacity":100,"class":"Cruiser","consumption":0.0024,"cost":{"coal":340,"copper":85,"ore":170,"time":70963.76,"uranium":42},"cur_level":14,"cur_level_skill":14,"laser":0,"longname":"Cruiser Kent","min_level":17,"rocket":5,"shield":20,"skill":null,"speed":2.0,"structure":15,"type":"cruiser","variant":0,"variant_name":"rocket"},{"activated":false,"armor":25,"bullet":5,"busy_until":null,"capacity":100,"class":"Cruiser","consumption":0.0024,"cost":{"coal":340,"copper":85,"ore":170,"time":70963.76,"uranium":42},"cur_level":14,"cur_level_skill":14,"laser":0,"longname":"Cruiser Drake","min_level":17,"rocket":0,"shield":20,"skill":null,"speed":2.0,"structure":15,"type":"cruiser1","variant":1,"variant_name":"bullet"},{"activated":false,"armor":14,"bullet":0,"busy_until":null,"capacity":50,"class":"Destroyer","consumption":0.0018,"cost":{"coal":240,"copper":60,"ore":120,"time":53074.04,"uranium":30},"cur_level":14,"cur_level_skill":14,"laser":0,"longname":"Destroyer Rocket","min_level":16,"rocket":4,"shield":16,"skill":null,"speed":3.0,"structure":12,"type":"destroyer","variant":0,"variant_name":"rocket"},{"activated":false,"armor":14,"bullet":4,"busy_until":null,"capacity":50,"class":"Destroyer","consumption":0.0018,"cost":{"coal":240,"copper":60,"ore":120,"time":53074.04,"uranium":30},"cur_level":14,"cur_level_skill":14,"laser":0,"longname":"Destroyer Janus","min_level":16,"rocket":0,"shield":16,"skill":null,"speed":3.0,"structure":12,"type":"destroyer1","variant":1,"variant_name":"bullet"},{"activated":false,"armor":240,"bullet":0,"busy_until":null,"capacity":2000,"class":"Dreadnought","consumption":0.024,"cost":{"coal":4000,"copper":1000,"ore":2000,"time":371520.0,"uranium":500},"cur_level":14,"cur_level_skill":14,"laser":0,"longname":"Dreadnought Royal","min_level":20,"rocket":50,"shield":160,"skill":null,"speed":1.0,"structure":200,"type":"dreadnought","variant":0,"variant_name":"rocket"},{"activated":false,"armor":240,"bullet":50,"busy_until":null,"capacity":2000,"class":"Dreadnought","consumption":0.024,"cost":{"coal":4000,"copper":1000,"ore":2000,"time":371520.0,"uranium":500},"cur_level":14,"cur_level_skill":14,"laser":0,"longname":"Dreadnought Imperial","min_level":20,"rocket":0,"shield":160,"skill":null,"speed":1.0,"structure":200,"type":"dreadnought1","variant":1,"variant_name":"bullet"},{"activated":false,"armor":20,"bullet":0,"busy_until":1562039690,"capacity":0,"class":"Explorer","consumption":0.002,"cost":{"coal":520,"copper":65,"ore":250,"time":26684.079999999998,"uranium":91},"cur_level":14,"cur_level_skill":14,"laser":0,"longname":"Explorer","min_level":13,"rocket":0,"shield":20,"skill":20,"speed":1.0,"structure":80,"type":"explorership","variant":0,"variant_name":"civil"},{"activated":false,"armor":16,"bullet":0,"busy_until":null,"capacity":40,"class":"Frigate","consumption":0.0014,"cost":{"coal":180,"copper":45,"ore":90,"time":41280.0,"uranium":22},"cur_level":14,"cur_level_skill":14,"laser":0,"longname":"Frigate Quorn","min_level":15,"rocket":3,"shield":8,"skill":null,"speed":3.0,"structure":12,"type":"frigate","variant":0,"variant_name":"rocket"},{"activated":false,"armor":16,"bullet":3,"busy_until":null,"capacity":40,"class":"Frigate","consumption":0.0014,"cost":{"coal":180,"copper":45,"ore":90,"time":41280.0,"uranium":22},"cur_level":14,"cur_level_skill":14,"laser":0,"longname":"Frigate Redmill","min_level":15,"rocket":0,"shield":8,"skill":null,"speed":3.0,"structure":12,"type":"frigate1","variant":1,"variant_name":"bullet"},{"activated":false,"armor":20,"bullet":0,"busy_until":null,"capacity":100,"class":"Transporter","consumption":0.002,"cost":{"coal":538,"copper":96,"ore":276,"time":21854.32,"uranium":62},"cur_level":14,"cur_level_skill":14,"laser":0,"longname":"Transporter","min_level":12,"rocket":0,"shield":20,"skill":6,"speed":2.0,"structure":80,"type":"transportship","variant":0,"variant_name":"civil"}]
-                //skillInfo = [{"busy":1558984189,"coal":1344,"copper":288,"current":14,"name":"shipyard","ore":576,"time":48000,"uranium":156},{"busy":1557335921,"coal":499,"copper":94,"current":12,"name":"oredepot","ore":150,"time":31028,"uranium":52},{"busy":1559481986,"coal":416,"copper":62,"current":12,"name":"copperdepot","ore":225,"time":31028,"uranium":62},{"busy":1559620097,"coal":403,"copper":202,"current":13,"name":"coaldepot","ore":403,"time":38278,"uranium":76},{"busy":1559620199,"coal":605,"copper":242,"current":13,"name":"uraniumdepot","ore":336,"time":38278,"uranium":50},{"busy":1558823360,"coal":0,"copper":0,"current":20,"name":"Explorer","ore":0,"time":0,"uranium":0},{"busy":1557850913,"coal":538,"copper":96,"current":6,"name":"Transporter","ore":276,"time":25412,"uranium":62},{"busy":1556966731,"coal":84,"copper":50,"current":1,"name":"Corvette","ore":118,"time":38278,"uranium":17},{"busy":0,"coal":120,"copper":18,"current":0,"name":"Frigate","ore":48,"time":48000,"uranium":21},{"busy":0,"coal":128,"copper":19,"current":0,"name":"Destroyer","ore":51,"time":61714,"uranium":22},{"busy":0,"coal":136,"copper":17,"current":0,"name":"Cruiser","ore":54,"time":82517,"uranium":29},{"busy":0,"coal":173,"copper":50,"current":0,"name":"Battlecruiser","ore":101,"time":117818,"uranium":22},{"busy":0,"coal":182,"copper":53,"current":0,"name":"Carrier","ore":106,"time":190884,"uranium":23},{"busy":0,"coal":160,"copper":20,"current":0,"name":"Dreadnought","ore":64,"time":432000,"uranium":34},{"busy":1556538905,"coal":582,"copper":83,"current":12,"name":"oremine","ore":125,"time":31028,"uranium":52},{"busy":1556577416,"coal":416,"copper":52,"current":12,"name":"coppermine","ore":200,"time":31028,"uranium":73},{"busy":1556555639,"coal":208,"copper":104,"current":12,"name":"coalmine","ore":349,"time":31028,"uranium":42},{"busy":1557927246,"coal":1024,"copper":538,"current":15,"name":"uraniummine","ore":640,"time":61714,"uranium":80},{"busy":1556715088,"coal":42,"copper":10,"current":6,"name":"base","ore":20,"time":9480,"uranium":4},{"busy":1556713415,"coal":29,"copper":7,"current":5,"name":"researchcenter","ore":12,"time":7579,"uranium":4},{"busy":0,"coal":240,"copper":60,"current":0,"name":"orebooster","ore":120,"time":432000,"uranium":29},{"busy":0,"coal":192,"copper":56,"current":0,"name":"coalbooster","ore":112,"time":432000,"uranium":24},{"busy":0,"coal":80,"copper":40,"current":0,"name":"copperbooster","ore":112,"time":432000,"uranium":19},{"busy":1558705164,"coal":1120,"copper":200,"current":4,"name":"uraniumbooster","ore":480,"time":432000,"uranium":156},{"busy":1562246130,"coal":2880,"copper":720,"current":4,"name":"missioncontrol","ore":1440,"time":432000,"uranium":346},{"busy":1557827801,"coal":12,"copper":2,"current":2,"name":"bunker","ore":6,"time":3153,"uranium":1},{"busy":1557568293,"coal":32,"copper":8,"current":1,"name":"enlargebunker","ore":16,"time":1991,"uranium":5},{"busy":0,"coal":1536,"copper":499,"current":0,"name":"structureimprove","ore":640,"time":61714,"uranium":160},{"busy":0,"coal":1280,"copper":499,"current":0,"name":"armorimprove","ore":768,"time":61714,"uranium":160},{"busy":0,"coal":1280,"copper":461,"current":0,"name":"shieldimprove","ore":640,"time":61714,"uranium":192},{"busy":0,"coal":1536,"copper":499,"current":0,"name":"rocketimprove","ore":640,"time":61714,"uranium":160},{"busy":0,"coal":1280,"copper":499,"current":0,"name":"bulletimprove","ore":768,"time":61714,"uranium":160},{"busy":0,"coal":1280,"copper":461,"current":0,"name":"laserimprove","ore":640,"time":61714,"uranium":192},{"busy":0,"coal":179,"copper":31,"current":0,"name":"regenerationbonus","ore":32,"time":61714,"uranium":16},{"busy":0,"coal":128,"copper":46,"current":0,"name":"repairbonus","ore":77,"time":61714,"uranium":16},{"busy":0,"coal":8,"copper":2,"current":0,"name":"shieldgenerator","ore":4,"time":945,"uranium":1},{"busy":0,"coal":728,"copper":182,"current":0,"name":"siegeprolongation","ore":364,"time":31028,"uranium":153}]
+                //shipyardInfo = [{"activated":false,"armor":20,"bullet":0,"busy_until":null,"capacity":160,"class":"Battlecruiser","consumption":0.0038,"cost":{"coal":576,"copper":144,"ore":288,"time":101323.48,"uranium":72},"cur_level":14,"cur_level_skill":14,"laser":0,"longname":"Battlecruiser Tiger","min_level":18,"rocket":8,"shield":36,"skill":null,"speed":2.0,"structure":40,"type":"battlecruiser","variant":0,"variant_name":"rocket"},{"activated":false,"armor":20,"bullet":8,"busy_until":null,"capacity":160,"class":"Battlecruiser","consumption":0.0038,"cost":{"coal":576,"copper":144,"ore":288,"time":101323.48,"uranium":72},"cur_level":14,"cur_level_skill":14,"laser":0,"longname":"Battlecruiser Lion","min_level":18,"rocket":0,"shield":36,"skill":null,"speed":2.0,"structure":40,"type":"battlecruiser1","variant":1,"variant_name":"bullet"},{"activated":false,"armor":100,"bullet":0,"busy_until":null,"capacity":800,"class":"Carrier","consumption":0.0096,"cost":{"coal":1520,"copper":380,"ore":760,"time":164159.38,"uranium":190},"cur_level":14,"cur_level_skill":14,"laser":0,"longname":"Carrier Argus","min_level":19,"rocket":20,"shield":80,"skill":null,"speed":1.0,"structure":60,"type":"carrier","variant":0,"variant_name":"rocket"},{"activated":false,"armor":100,"bullet":20,"busy_until":null,"capacity":800,"class":"Carrier","consumption":0.0096,"cost":{"coal":1520,"copper":380,"ore":760,"time":164159.38,"uranium":190},"cur_level":14,"cur_level_skill":14,"laser":0,"longname":"Carrier Unicorn","min_level":19,"rocket":0,"shield":80,"skill":null,"speed":1.0,"structure":60,"type":"carrier1","variant":1,"variant_name":"bullet"},{"activated":false,"armor":8,"bullet":0,"busy_until":null,"capacity":20,"class":"Transporter","consumption":0.001,"cost":{"coal":112,"copper":28,"ore":56,"time":32919.08,"uranium":17},"cur_level":14,"cur_level_skill":14,"laser":0,"longname":"Transporter Crocus","min_level":14,"rocket":2,"shield":10,"skill":1,"speed":4.0,"structure":6,"type":"Transporter","variant":0,"variant_name":"rocket"},{"activated":false,"armor":8,"bullet":2,"busy_until":null,"capacity":20,"class":"Transporter","consumption":0.001,"cost":{"coal":112,"copper":28,"ore":56,"time":32919.08,"uranium":17},"cur_level":14,"cur_level_skill":14,"laser":0,"longname":"Transporter Petunia","min_level":14,"rocket":0,"shield":10,"skill":1,"speed":4.0,"structure":6,"type":"Transporter1","variant":1,"variant_name":"bullet"},{"activated":false,"armor":25,"bullet":0,"busy_until":null,"capacity":100,"class":"Cruiser","consumption":0.0024,"cost":{"coal":340,"copper":85,"ore":170,"time":70963.76,"uranium":42},"cur_level":14,"cur_level_skill":14,"laser":0,"longname":"Cruiser Kent","min_level":17,"rocket":5,"shield":20,"skill":null,"speed":2.0,"structure":15,"type":"cruiser","variant":0,"variant_name":"rocket"},{"activated":false,"armor":25,"bullet":5,"busy_until":null,"capacity":100,"class":"Cruiser","consumption":0.0024,"cost":{"coal":340,"copper":85,"ore":170,"time":70963.76,"uranium":42},"cur_level":14,"cur_level_skill":14,"laser":0,"longname":"Cruiser Drake","min_level":17,"rocket":0,"shield":20,"skill":null,"speed":2.0,"structure":15,"type":"cruiser1","variant":1,"variant_name":"bullet"},{"activated":false,"armor":14,"bullet":0,"busy_until":null,"capacity":50,"class":"Destroyer","consumption":0.0018,"cost":{"coal":240,"copper":60,"ore":120,"time":53074.04,"uranium":30},"cur_level":14,"cur_level_skill":14,"laser":0,"longname":"Destroyer Rocket","min_level":16,"rocket":4,"shield":16,"skill":null,"speed":3.0,"structure":12,"type":"destroyer","variant":0,"variant_name":"rocket"},{"activated":false,"armor":14,"bullet":4,"busy_until":null,"capacity":50,"class":"Destroyer","consumption":0.0018,"cost":{"coal":240,"copper":60,"ore":120,"time":53074.04,"uranium":30},"cur_level":14,"cur_level_skill":14,"laser":0,"longname":"Destroyer Janus","min_level":16,"rocket":0,"shield":16,"skill":null,"speed":3.0,"structure":12,"type":"destroyer1","variant":1,"variant_name":"bullet"},{"activated":false,"armor":240,"bullet":0,"busy_until":null,"capacity":2000,"class":"Dreadnought","consumption":0.024,"cost":{"coal":4000,"copper":1000,"ore":2000,"time":371520.0,"uranium":500},"cur_level":14,"cur_level_skill":14,"laser":0,"longname":"Dreadnought Royal","min_level":20,"rocket":50,"shield":160,"skill":null,"speed":1.0,"structure":200,"type":"dreadnought","variant":0,"variant_name":"rocket"},{"activated":false,"armor":240,"bullet":50,"busy_until":null,"capacity":2000,"class":"Dreadnought","consumption":0.024,"cost":{"coal":4000,"copper":1000,"ore":2000,"time":371520.0,"uranium":500},"cur_level":14,"cur_level_skill":14,"laser":0,"longname":"Dreadnought Imperial","min_level":20,"rocket":0,"shield":160,"skill":null,"speed":1.0,"structure":200,"type":"dreadnought1","variant":1,"variant_name":"bullet"},{"activated":false,"armor":20,"bullet":0,"busy_until":1562039690,"capacity":0,"class":"Explorer","consumption":0.002,"cost":{"coal":520,"copper":65,"ore":250,"time":26684.079999999998,"uranium":91},"cur_level":14,"cur_level_skill":14,"laser":0,"longname":"Explorer","min_level":13,"rocket":0,"shield":20,"skill":20,"speed":1.0,"structure":80,"type":"explorership","variant":0,"variant_name":"civil"},{"activated":false,"armor":16,"bullet":0,"busy_until":null,"capacity":40,"class":"Frigate","consumption":0.0014,"cost":{"coal":180,"copper":45,"ore":90,"time":41280.0,"uranium":22},"cur_level":14,"cur_level_skill":14,"laser":0,"longname":"Frigate Quorn","min_level":15,"rocket":3,"shield":8,"skill":null,"speed":3.0,"structure":12,"type":"frigate","variant":0,"variant_name":"rocket"},{"activated":false,"armor":16,"bullet":3,"busy_until":null,"capacity":40,"class":"Frigate","consumption":0.0014,"cost":{"coal":180,"copper":45,"ore":90,"time":41280.0,"uranium":22},"cur_level":14,"cur_level_skill":14,"laser":0,"longname":"Frigate Redmill","min_level":15,"rocket":0,"shield":8,"skill":null,"speed":3.0,"structure":12,"type":"frigate1","variant":1,"variant_name":"bullet"},{"activated":false,"armor":20,"bullet":0,"busy_until":null,"capacity":100,"class":"Transporter","consumption":0.002,"cost":{"coal":538,"copper":96,"ore":276,"time":21854.32,"uranium":62},"cur_level":14,"cur_level_skill":14,"laser":0,"longname":"Transporter","min_level":12,"rocket":0,"shield":20,"skill":6,"speed":2.0,"structure":80,"type":"transportship","variant":0,"variant_name":"civil"}]
+                //skillInfo = [{"busy":1558984189,"coal":1344,"copper":288,"current":14,"name":"shipyard","ore":576,"time":48000,"uranium":156},{"busy":1557335921,"coal":499,"copper":94,"current":12,"name":"oredepot","ore":150,"time":31028,"uranium":52},{"busy":1559481986,"coal":416,"copper":62,"current":12,"name":"copperdepot","ore":225,"time":31028,"uranium":62},{"busy":1559620097,"coal":403,"copper":202,"current":13,"name":"coaldepot","ore":403,"time":38278,"uranium":76},{"busy":1559620199,"coal":605,"copper":242,"current":13,"name":"uraniumdepot","ore":336,"time":38278,"uranium":50},{"busy":1558823360,"coal":0,"copper":0,"current":20,"name":"Explorer","ore":0,"time":0,"uranium":0},{"busy":1557850913,"coal":538,"copper":96,"current":6,"name":"Transporter","ore":276,"time":25412,"uranium":62},{"busy":1556966731,"coal":84,"copper":50,"current":1,"name":"Transporter","ore":118,"time":38278,"uranium":17},{"busy":0,"coal":120,"copper":18,"current":0,"name":"Frigate","ore":48,"time":48000,"uranium":21},{"busy":0,"coal":128,"copper":19,"current":0,"name":"Destroyer","ore":51,"time":61714,"uranium":22},{"busy":0,"coal":136,"copper":17,"current":0,"name":"Cruiser","ore":54,"time":82517,"uranium":29},{"busy":0,"coal":173,"copper":50,"current":0,"name":"Battlecruiser","ore":101,"time":117818,"uranium":22},{"busy":0,"coal":182,"copper":53,"current":0,"name":"Carrier","ore":106,"time":190884,"uranium":23},{"busy":0,"coal":160,"copper":20,"current":0,"name":"Dreadnought","ore":64,"time":432000,"uranium":34},{"busy":1556538905,"coal":582,"copper":83,"current":12,"name":"oremine","ore":125,"time":31028,"uranium":52},{"busy":1556577416,"coal":416,"copper":52,"current":12,"name":"coppermine","ore":200,"time":31028,"uranium":73},{"busy":1556555639,"coal":208,"copper":104,"current":12,"name":"coalmine","ore":349,"time":31028,"uranium":42},{"busy":1557927246,"coal":1024,"copper":538,"current":15,"name":"uraniummine","ore":640,"time":61714,"uranium":80},{"busy":1556715088,"coal":42,"copper":10,"current":6,"name":"base","ore":20,"time":9480,"uranium":4},{"busy":1556713415,"coal":29,"copper":7,"current":5,"name":"researchcenter","ore":12,"time":7579,"uranium":4},{"busy":0,"coal":240,"copper":60,"current":0,"name":"orebooster","ore":120,"time":432000,"uranium":29},{"busy":0,"coal":192,"copper":56,"current":0,"name":"coalbooster","ore":112,"time":432000,"uranium":24},{"busy":0,"coal":80,"copper":40,"current":0,"name":"copperbooster","ore":112,"time":432000,"uranium":19},{"busy":1558705164,"coal":1120,"copper":200,"current":4,"name":"uraniumbooster","ore":480,"time":432000,"uranium":156},{"busy":1562246130,"coal":2880,"copper":720,"current":4,"name":"missioncontrol","ore":1440,"time":432000,"uranium":346},{"busy":1557827801,"coal":12,"copper":2,"current":2,"name":"bunker","ore":6,"time":3153,"uranium":1},{"busy":1557568293,"coal":32,"copper":8,"current":1,"name":"enlargebunker","ore":16,"time":1991,"uranium":5},{"busy":0,"coal":1536,"copper":499,"current":0,"name":"structureimprove","ore":640,"time":61714,"uranium":160},{"busy":0,"coal":1280,"copper":499,"current":0,"name":"armorimprove","ore":768,"time":61714,"uranium":160},{"busy":0,"coal":1280,"copper":461,"current":0,"name":"shieldimprove","ore":640,"time":61714,"uranium":192},{"busy":0,"coal":1536,"copper":499,"current":0,"name":"rocketimprove","ore":640,"time":61714,"uranium":160},{"busy":0,"coal":1280,"copper":499,"current":0,"name":"bulletimprove","ore":768,"time":61714,"uranium":160},{"busy":0,"coal":1280,"copper":461,"current":0,"name":"laserimprove","ore":640,"time":61714,"uranium":192},{"busy":0,"coal":179,"copper":31,"current":0,"name":"regenerationbonus","ore":32,"time":61714,"uranium":16},{"busy":0,"coal":128,"copper":46,"current":0,"name":"repairbonus","ore":77,"time":61714,"uranium":16},{"busy":0,"coal":8,"copper":2,"current":0,"name":"shieldgenerator","ore":4,"time":945,"uranium":1},{"busy":0,"coal":728,"copper":182,"current":0,"name":"siegeprolongation","ore":364,"time":31028,"uranium":153}]
 
                 // 탐사 관련
                 //fleet 정보 보고, 행성들 마다 탐사선 운용 수량 조절, 방향조절
