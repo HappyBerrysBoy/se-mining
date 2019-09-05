@@ -5,6 +5,8 @@ const key = require("../key.json");
 const account = "happyberrysboy";
 const shipyardArray = [
   { name: "M", id: "P-ZIWU6M04H80", ship: ["explorership"] },
+  // { name: "N", id: "P-Z03P0EIL1LS", ship: ["explorership"] },
+  // { name: "O", id: "P-Z11IOTOZ9WG", ship: ["explorership"] },
 ];
 
 const buildPlanetArray = ["P-ZA01QNQO29C", "P-ZO75DZDVRUO"];
@@ -12,10 +14,21 @@ const explorePlanetArray = [
   {
     name: "N",
     id: "P-Z03P0EIL1LS",
-    exploreCnt: 23,
+    exploreCnt: 8,
+    explorerDirection: {
+      xminus: false,
+      xplus: true,
+      yminus: true,
+      yplus: true,
+    },
+  },
+  {
+    name: "O",
+    id: "P-Z11IOTOZ9WG",
+    exploreCnt: 16,
     explorerDirection: {
       xminus: true,
-      xplus: true,
+      xplus: false,
       yminus: true,
       yplus: true,
     },
