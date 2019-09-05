@@ -2,7 +2,7 @@ const steem = require("steem");
 const fs = require("fs");
 const key = require("../key.json");
 
-const miningTargetCoin = ["SCT", "ZZAN", "PAL", "ENG", "IV", "LEO"];
+const miningTargetCoin = ["SCT", "ZZAN", "PAL", "ENG", "IV", "LEO", "SAGO"];
 
 const date = new Date();
 date.setDate(date.getDate() - 1); // 하루전..
@@ -11,6 +11,8 @@ const year = date.getFullYear() + "";
 const month = (date.getMonth() + 1 + "").padStart(2, "0");
 const day = (date.getDate() + "").padStart(2, "0");
 const dateString = `${year}-${month}-${day}`;
+
+const author = "happy.report";
 
 const title = `Steem-engine(${dateString}) Mining Report`;
 let body = `![](https://cdn.steemitimages.com/DQmQD8RiPr7xWSFf3vk1217AYcrc8ppeAt3U7LSto7q6KCe/image.png)\n`;
@@ -73,50 +75,14 @@ fs.readFile(
       body += tmp;
     }
 
-    // steem.broadcast.comment(data.password, data.parentAuthor, data.parentPermlink, data.userName, data.permlink, data.title, data.body, data.jsonMetadata,function(err, result) {
-    // steem.broadcast.commentOptions(data.password, data.userName, data.permlink, "1000000.000 SBD", 10000, true, true, [[0, { 'beneficiaries': [{ 'account':'xyz', 'weight':1500 }] }]],
-
-    // steem.broadcast.commentOptions(
-    //   // key.happyberrysboy_posting,
-    //   key.mamacoco_posting,
-    //   "",
-    //   // "sct",
-    //   'test',
-    //   "happyberrysboy",
-    //   // `happyberrysboy-mining-report-${dateString}`,
-    //   `happyberrysboy-mining-report-20190805`,
-    //   title,
-    //   beneficiaries: [{"account": "sct.krwp", "weight": 10000}],
-    //   body,
-    //   {
-    //     tags: [
-    //       "sct",
-    //       "zzan",
-    //       "busy",
-    //       "liv",
-    //       "jjm",
-    //       "steemleo",
-    //       "palnet",
-    //       "sct-en",
-    //       "sct-mining"
-    //     ],
-    //     community: "busy",
-    //     app: "busy/2.5.6",
-    //     format: "markdown"
-    //   },
-    //   function(err, result) {
-    //     console.log(err, result);
-    //   }
-    // );
-
     var operations = [
       [
         "comment",
         {
           parent_author: "",
           parent_permlink: "sct",
-          author: "happyberrysboy",
-          permlink: `happyberrysboy-mining-report-${dateString}`,
+          author: author,
+          permlink: `${author}-mining-report-${dateString}`,
           title: title,
           body: body,
           json_metadata: JSON.stringify({
@@ -140,8 +106,8 @@ fs.readFile(
       [
         "comment_options",
         {
-          author: "happyberrysboy",
-          permlink: `happyberrysboy-mining-report-${dateString}`,
+          author: author,
+          permlink: `${author}-mining-report-${dateString}`,
           max_accepted_payout: "100000.000 SBD",
           percent_steem_dollars: 5000,
           allow_votes: true,
@@ -159,7 +125,7 @@ fs.readFile(
     ];
     steem.broadcast.send(
       { operations: operations, extensions: [] },
-      { posting: key.happyberrysboy_posting },
+      { posting: key.happy_report_posting },
       function(e, r) {
         if (e) {
           console.log(e);
