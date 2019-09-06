@@ -70,7 +70,7 @@ fs.readFile(
       tmp += "<br><br>\n";
 
       body += `### ${keyinfo} - Total Amount(${totalAmount.toFixed(
-        3
+        3,
       )}), Count(${value.length}) \n`;
       body += tmp;
     }
@@ -82,7 +82,7 @@ fs.readFile(
           parent_author: "",
           parent_permlink: "sct",
           author: author,
-          permlink: `${author}-mining-report-${dateString}`,
+          permlink: `${author.replace(/./g, "")}-mining-report-${dateString}`,
           title: title,
           body: body,
           json_metadata: JSON.stringify({
@@ -95,19 +95,19 @@ fs.readFile(
               "steemleo",
               "palnet",
               "sct-en",
-              "sct-mining"
+              "sct-mining",
             ],
             community: "busy",
             app: "busy/2.5.6",
-            format: "markdown"
-          })
-        }
+            format: "markdown",
+          }),
+        },
       ],
       [
         "comment_options",
         {
           author: author,
-          permlink: `${author}-mining-report-${dateString}`,
+          permlink: `${author.replace(/./g, "")}-mining-report-${dateString}`,
           max_accepted_payout: "100000.000 SBD",
           percent_steem_dollars: 5000,
           allow_votes: true,
@@ -116,12 +116,12 @@ fs.readFile(
             [
               0,
               {
-                beneficiaries: [{ account: "sct.krwp", weight: 10000 }]
-              }
-            ]
-          ]
-        }
-      ]
+                beneficiaries: [{ account: "sct.krwp", weight: 10000 }],
+              },
+            ],
+          ],
+        },
+      ],
     ];
     steem.broadcast.send(
       { operations: operations, extensions: [] },
@@ -133,9 +133,9 @@ fs.readFile(
         }
 
         console.log(r);
-      }
+      },
     );
-  }
+  },
 );
 
 Date.prototype.addHours = function(h) {
