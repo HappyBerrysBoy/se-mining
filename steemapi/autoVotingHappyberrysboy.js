@@ -21,7 +21,10 @@ const voter = "happyberrysboy";
 const query = "get_discussions_by_created";
 const postingkey = key.happyberrysboy_posting;
 
-fs.readFile(`./whitelistForHappyberrysboy.json`, "utf8", function(err, data) {
+fs.readFile(`./steemapi/whitelistForHappyberrysboy.json`, "utf8", function(
+  err,
+  data
+) {
   if (err) {
     console.log(err);
     return;
