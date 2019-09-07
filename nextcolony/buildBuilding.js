@@ -6,20 +6,25 @@ const account = "happyberrysboy";
 const shipyardArray = [
   { name: "M", id: "P-ZIWU6M04H80", ship: ["explorership"] },
   { name: "N", id: "P-Z03P0EIL1LS", ship: ["explorership"] },
-  { name: "O", id: "P-Z11IOTOZ9WG", ship: ["explorership"] }
+  { name: "O", id: "P-Z11IOTOZ9WG", ship: ["explorership"] },
+  { name: "P", id: "P-Z44ED8BDCZ4", ship: ["explorership"] },
+  { name: "Q", id: "P-ZH2DUQGU1Z4", ship: ["explorership"] },
+  { name: "R", id: "P-Z7K08XK4IFK", ship: ["explorership"] }
 ];
 
+//A, B, F, G 행성 건물 업글 안함
 const buildPlanetArray = [
   "P-ZA01QNQO29C",
   "P-ZO75DZDVRUO",
   "P-Z5TV3Z99YM8",
   "P-ZD7VOJ4FF8W"
 ];
+
 const explorePlanetArray = [
   {
     name: "N",
     id: "P-Z03P0EIL1LS",
-    exploreCnt: 8,
+    exploreCnt: 4,
     explorerDirection: {
       xminus: false,
       xplus: true,
@@ -41,15 +46,27 @@ const explorePlanetArray = [
   {
     name: "Q",
     id: "P-ZH2DUQGU1Z4",
-    exploreCnt: 12,
+    exploreCnt: 8,
     explorerDirection: {
       xminus: true,
-      xplus: false,
-      yminus: false,
+      xplus: true,
+      yminus: ture,
+      yplus: true
+    }
+  },
+  {
+    name: "R",
+    id: "P-Z7K08XK4IFK",
+    exploreCnt: 8,
+    explorerDirection: {
+      xminus: true,
+      xplus: true,
+      yminus: true,
       yplus: true
     }
   }
 ];
+
 const skillUpArray = [
   {
     name: "A",
@@ -631,7 +648,7 @@ setInterval(() => {
       console.log(err, result);
     }
   );
-}, 1 * 60 * 1000);
+}, 0.5 * 60 * 1000);
 
 setInterval(() => {
   if (skillArray.length == 0) return;
@@ -673,7 +690,7 @@ setInterval(() => {
       console.log(err, result);
     }
   );
-}, 3 * 60 * 1000);
+}, 1 * 70 * 1000);
 
 setInterval(() => {
   if (shipArray.length == 0) return;
