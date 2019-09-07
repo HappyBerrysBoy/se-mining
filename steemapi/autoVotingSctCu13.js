@@ -17,10 +17,7 @@ const voter = "sct.cu13";
 const query = "get_discussions_by_created";
 const postingkey = key.sct_cu13_posting;
 
-fs.readFile(`./steemapi/whitelistForHappyberrysboy.json`, "utf8", function(
-  err,
-  data
-) {
+fs.readFile(`./whitelistForHappyberrysboy.json`, "utf8", function(err, data) {
   if (err) {
     console.log(err);
     return;
