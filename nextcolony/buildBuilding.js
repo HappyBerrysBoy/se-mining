@@ -648,7 +648,7 @@ setInterval(() => {
       console.log(err, result);
     }
   );
-}, 0.5 * 60 * 1000);
+}, 1 * 40 * 1000);
 
 setInterval(() => {
   if (skillArray.length == 0) return;
