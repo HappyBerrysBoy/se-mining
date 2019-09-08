@@ -40,6 +40,7 @@ fs.readFile(`./steemapi/whitelistForHappyberrysboy.json`, "utf8", function(
 });
 
 cron.schedule("*/20 * * * * *", function() {
+  console.log(`start getScotDataAsync(query, discussionQueryforSteemEngine)`);
   getPostingAsync(query, discussionQueryforSteemEngine).then(feedData => {
     let result = new Array();
     feedData.forEach(async content => {
@@ -83,6 +84,7 @@ cron.schedule("*/10 * * * * *", function() {
   const tmp = _votingList.shift();
 
   if (tmp != null) {
+    console.log(`start voting)`);
     steem.broadcast.vote(
       tmp.wif,
       tmp.account,
