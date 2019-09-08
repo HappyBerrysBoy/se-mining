@@ -17,7 +17,8 @@ const buildPlanetArray = [
   "P-ZA01QNQO29C",
   "P-ZO75DZDVRUO",
   "P-Z5TV3Z99YM8",
-  "P-ZD7VOJ4FF8W"
+  "P-ZD7VOJ4FF8W",
+  "P-ZIWU6M04H80"
 ];
 
 const explorePlanetArray = [
