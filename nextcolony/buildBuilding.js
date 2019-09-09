@@ -18,7 +18,7 @@ const shipyardArray = [
   // { name: "G", id: "P-ZD7VOJ4FF8W", ship: ["corvette1"] },
 ];
 
-//A, B, F, G 행성 건물 업글 안함
+//A, B, F, M 행성 건물 업글 안함
 const buildPlanetArray = [
   "P-ZA01QNQO29C",
   "P-ZO75DZDVRUO",
