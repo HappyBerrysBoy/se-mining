@@ -19,6 +19,7 @@ const shipyardArray = [
 ];
 
 //A, B, F, M 행성 건물 업글 안함
+// test2
 const buildPlanetArray = [
   "P-ZA01QNQO29C",
   "P-ZO75DZDVRUO",
