@@ -12,6 +12,10 @@ const shipyardArray = [
   { name: "P", id: "P-Z44ED8BDCZ4", ship: ["explorership"] },
   { name: "Q", id: "P-ZH2DUQGU1Z4", ship: ["explorership"] },
   { name: "R", id: "P-Z7K08XK4IFK", ship: ["explorership"] },
+  { name: "I", id: "P-ZD7VOJ4FF8W", ship: ["explorership"] },
+  { name: "J", id: "P-ZOWKXS7K60W", ship: ["explorership"] },
+  { name: "K", id: "P-ZTPRC5MLJXS", ship: ["explorership"] },
+  // { name: "G", id: "P-ZD7VOJ4FF8W", ship: ["corvette1"] },
 ];
 
 //A, B, F, G 행성 건물 업글 안함
@@ -19,7 +23,7 @@ const buildPlanetArray = [
   "P-ZA01QNQO29C",
   "P-ZO75DZDVRUO",
   "P-Z5TV3Z99YM8",
-  "P-ZD7VOJ4FF8W",
+  // "P-ZD7VOJ4FF8W",
   "P-ZIWU6M04H80",
 ];
 
