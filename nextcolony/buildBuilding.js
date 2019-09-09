@@ -6,26 +6,24 @@ const account = "happyberrysboy";
 const mineMinLevel = 13;
 const mineGapVal = 7;
 const shipyardArray = [
-  { name: "M", id: "P-ZIWU6M04H80", ship: ["explorership"] },
   { name: "N", id: "P-Z03P0EIL1LS", ship: ["explorership"] },
   { name: "O", id: "P-Z11IOTOZ9WG", ship: ["explorership"] },
   { name: "P", id: "P-Z44ED8BDCZ4", ship: ["explorership"] },
   { name: "Q", id: "P-ZH2DUQGU1Z4", ship: ["explorership"] },
   { name: "R", id: "P-Z7K08XK4IFK", ship: ["explorership"] },
-  { name: "I", id: "P-ZD7VOJ4FF8W", ship: ["explorership"] },
-  { name: "J", id: "P-ZOWKXS7K60W", ship: ["explorership"] },
+  { name: "M", id: "P-ZIWU6M04H80", ship: ["explorership"] },
   { name: "K", id: "P-ZTPRC5MLJXS", ship: ["explorership"] },
-  // { name: "G", id: "P-ZD7VOJ4FF8W", ship: ["corvette1"] },
+  { name: "L", id: "P-ZYBGDS70ILS", ship: ["explorership"] },
 ];
 
-//A, B, F, M 행성 건물 업글 안함
-// test2
+//A, B, F, M, K, L 행성 건물 업글 안함
 const buildPlanetArray = [
   "P-ZA01QNQO29C",
   "P-ZO75DZDVRUO",
   "P-Z5TV3Z99YM8",
-  // "P-ZD7VOJ4FF8W",
   "P-ZIWU6M04H80",
+  "P-ZTPRC5MLJXS",
+  "P-ZYBGDS70ILS",
 ];
 
 const explorePlanetArray = [
@@ -157,9 +155,28 @@ const skillUpArray = [
       { name: "researchcenter", target: 13 },
     ],
   },
+  // {
+  //   name: "K",
+  //   planet: "P-ZTPRC5MLJXS",
+  //   skill: [
+  //     { name: "Transporter", target: 20 },
+  //     { name: "Frigate", target: 20 },
+  //     { name: "missioncontrol", target: 0 },
+  //     { name: "uraniumbooster", target: 20 },
+  //     { name: "copperbooster", target: 5 },
+  //     { name: "coalbooster", target: 20 },
+  //     { name: "orebooster", target: 20 },
+  //     { name: "uraniummine", target: 16 },
+  //     { name: "coppermine", target: 17 },
+  //     { name: "oremine", target: 15 },
+  //     { name: "coalmine", target: 18 },
+  //     { name: "shipyard", target: 20 },
+  //     { name: "researchcenter", target: 13 },
+  //   ],
+  // },
   {
-    name: "K",
-    planet: "P-ZTPRC5MLJXS",
+    name: "G",
+    planet: "P-ZD7VOJ4FF8W",
     skill: [
       { name: "Transporter", target: 20 },
       { name: "Frigate", target: 20 },
