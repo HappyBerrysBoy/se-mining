@@ -362,6 +362,19 @@ async function blockMonitoring(blockno) {
     ) {
       try {
         console.log(`${config.pickTag} : ${content.blocknumber}`);
+
+        // 존재하는 포스팅 체크
+        const postingInfo = await getContent(content.author, content.permlink)
+          .then(p => {
+            return p;
+          })
+          .catch(e => {
+            throw new Error(e);
+          });
+
+        // 생성된 시간과 업데이트 시간이 다르면 수정된 글이라고 판단
+        if (postingInfo.created != postingInfo.last_update) return;
+
         const hdata = content.body.split(config.pickTag)[1].match(/\((.*?)\)/g);
         let pickCnt = parseInt(
           content.body
