@@ -22,7 +22,7 @@ const targetAccountList = [
   "glory7",
   "koyuh8",
   "y-o-u-t-h-m-e",
-  "mamacoco",
+  "mamacoco"
 ];
 const nextColonyMonitoringId = [
   "unique.esprit",
@@ -30,7 +30,7 @@ const nextColonyMonitoringId = [
   "strikeeagle",
   "powernap",
   "drugwar",
-  "mmunited",
+  "mmunited"
 ];
 const nextColonyMinitoringCommand = ["attack", "cancel", "deploy", "siege"];
 
@@ -39,7 +39,7 @@ bot.on("message", msg => {
     `id:${msg.from.id},
     first_name:${msg.from.first_name},
     username:${msg.from.username},
-    is_bot:${msg.from.is_bot}`,
+    is_bot:${msg.from.is_bot}`
   );
 
   if (!telegramMembers.includes(msg.from.id)) return;
@@ -49,19 +49,19 @@ bot.on("message", msg => {
   // send a message to the chat acknowledging receipt of their message
   bot.sendMessage(
     chatId,
-    `반갑습니다. ${msg.from.first_name}님. 메아리(${msg.text})`,
+    `반갑습니다. ${msg.from.first_name}님. 메아리(${msg.text})`
   );
 });
 
 const fleetMission = account => {
   return axios.get(
-    `https://api.nextcolony.io/loadfleetmission?user=${account}&active=1`,
+    `https://api.nextcolony.io/loadfleetmission?user=${account}&active=1`
   );
 };
 
 const fleetPlanetMission = (account, planet) => {
   return axios.get(
-    `https://api.nextcolony.io/loadfleetmission?user=${account}&planetid=${planet}`,
+    `https://api.nextcolony.io/loadfleetmission?user=${account}&planetid=${planet}`
   );
 };
 
@@ -71,17 +71,17 @@ const loadplanet = planetId => {
 
 const loadFleet = (account, planet) => {
   return axios.get(
-    `https://api.nextcolony.io/loadfleet?user=${account}&planetid=${planet}`,
+    `https://api.nextcolony.io/loadfleet?user=${account}&planetid=${planet}`
   );
 };
 
 const findPlanet = () => {
   return axios.get(
-    `https://api.nextcolony.io/loadplanets?sort=date&from=0&to=1`,
+    `https://api.nextcolony.io/loadplanets?sort=date&from=0&to=1`
   );
 };
 
-fs.readFile("../config/blockConfig.ini", "utf8", function(err, data) {
+fs.readFile("./config/blockConfig.ini", "utf8", function(err, data) {
   if (err) console.log(err);
   const json = JSON.parse(data);
   console.log(json.lastReadSteemBlock);
@@ -95,7 +95,7 @@ async function getBlock(json) {
   // blockno.lastReadSteemBlock = lastSteemBlock;
   console.log("start : " + json.lastReadSteemBlock);
 
-  setInterval(blockMonitoring, 2000, json);
+  setInterval(blockMonitoring, 300, json);
 }
 
 async function blockMonitoring(blockno) {
@@ -127,11 +127,11 @@ async function blockMonitoring(blockno) {
     console.log(e);
     console.log(`const { timestamp = null, transactions } = blockinfo error`);
     fs.appendFile(
-      "../logs/exceptions(" + dateString + ").txt",
+      "./logs/exceptions(" + dateString + ").txt",
       JSON.stringify(blockinfo) + "\n",
       err => {
         if (err) console.log(err);
-      },
+      }
     );
   }
 
@@ -166,14 +166,14 @@ async function blockMonitoring(blockno) {
 
           const missions = await fleetPlanetMission(
             jsonInfo.username,
-            planetid,
+            planetid
           );
 
           const thisMission = missions.data.find(
             m =>
               m.type == jsonInfo.type &&
               m.end_x == jsonInfo.command.tr_var2 &&
-              m.end_y == jsonInfo.command.tr_var3,
+              m.end_y == jsonInfo.command.tr_var3
           );
 
           if (targetAccountList.includes(thisMission.to_planet.user)) {
@@ -184,11 +184,11 @@ async function blockMonitoring(blockno) {
               jsonInfo.type
             }(${thisMission.id})\nArr:${dateFormat(
               arrTime,
-              "mm/dd HH:MM:ss",
+              "mm/dd HH:MM:ss"
             )}, Ret:${
               thisMission.return ? dateFormat(retTime, "mm/dd HH:MM:ss") : "-"
             }  \nShips:${JSON.stringify(
-              jsonInfo.command.tr_var1,
+              jsonInfo.command.tr_var1
             )}  \nFrom:${planetid}(${thisMission.from_planet.name}, ${
               thisMission.start_x
             }, ${thisMission.start_y})\nTo:${thisMission.to_planet.user}(${
@@ -228,7 +228,7 @@ async function blockMonitoring(blockno) {
           if (jsonInfo.type == "cancel") {
             const missions = await fleetMission(jsonInfo.username);
             const target = missions.data.filter(
-              m => m.id == jsonInfo.command.tr_var1,
+              m => m.id == jsonInfo.command.tr_var1
             );
 
             if (target.length) {
@@ -251,14 +251,14 @@ async function blockMonitoring(blockno) {
 
             const missions = await fleetPlanetMission(
               jsonInfo.username,
-              planetid,
+              planetid
             );
 
             const thisMission = missions.data.find(
               m =>
                 m.type == jsonInfo.type &&
                 m.end_x == jsonInfo.command.tr_var2 &&
-                m.end_y == jsonInfo.command.tr_var3,
+                m.end_y == jsonInfo.command.tr_var3
             );
 
             let arrTime = new Date(thisMission.arrival * 1000);
@@ -269,7 +269,7 @@ async function blockMonitoring(blockno) {
             })\nArr:${dateFormat(arrTime, "mm/dd HH:MM:ss")}, Ret:${
               thisMission.return ? dateFormat(retTime, "mm/dd HH:MM:ss") : "-"
             }  \nShips:${JSON.stringify(
-              jsonInfo.command.tr_var1,
+              jsonInfo.command.tr_var1
             )}  \nFrom:${planetid}(${thisMission.from_planet.name}, ${
               thisMission.start_x
             }, ${thisMission.start_y})\nTo:${thisMission.to_planet.user}(${
@@ -299,11 +299,11 @@ async function blockMonitoring(blockno) {
           console.log("content :", jsonInfo);
 
           fs.appendFile(
-            "../logs/mining(" + dateString + ").txt",
+            "./logs/mining(" + dateString + ").txt",
             JSON.stringify(jsonInfo) + "\n",
             err => {
               if (err) console.log(err);
-            },
+            }
           );
           // {"service":"SE_MINING","content":"key:id, content:scot_claim","level":"info","message":"info","timestamp":"2019-06-25 01:42:46"}
           // {"service":"SE_MINING","content":"key:json, content:{\"symbol\":\"PAL\",\"type\":\"mining\",\"N\":9,\"staked_mining_power\":2313.0000000000005,\"winner\":[\"bitcoinflood\",\"jongolson\",\"michealb\",\"nuthman\",\"aggroed\",\"dylanhobalart\",\"dylanhobalart\",\"videosteemit\",\"steinreich\"],\"claim_token_amount\":2.067,\"trx_id\":\"4654e524c287b4354981587aea3a62f133da8648\",\"block_num\":34084567,\"N_accounts\":166}","level":"info","message":"info","timestamp":"2019-06-25 01:42:46"}
@@ -317,21 +317,21 @@ async function blockMonitoring(blockno) {
           // console.log('content :', content);
 
           fs.appendFile(
-            "../logs/sct_log_" + timestamp.split("T")[0] + ".txt",
+            "./logs/sct_log_" + timestamp.split("T")[0] + ".txt",
             JSON.stringify(content) + "\n",
             err => {
               if (err) console.log(err);
-            },
+            }
           );
         }
       } catch (e) {
         console.log(e);
         fs.appendFile(
-          "../logs/exceptions(" + dateString + ").txt",
+          "./logs/exceptions(" + dateString + ").txt",
           "retry count over\n",
           err => {
             if (err) console.log(err);
-          },
+          }
         );
         return;
       }
@@ -346,7 +346,7 @@ async function blockMonitoring(blockno) {
           content.body
             .split(config.pickTag)[1]
             .split("(")[0]
-            .trim(),
+            .trim()
         );
 
         // 몇명 뽑는지 입력 안하면 1명으로 설정
@@ -435,17 +435,17 @@ async function blockMonitoring(blockno) {
           content.json_metadata,
           function(err, result) {
             console.log(err, result);
-          },
+          }
         );
 
         const logJson = { content: content, result: body };
 
         fs.appendFile(
-          "../logs/happypick(" + dateString + ").txt",
+          "./logs/happypick(" + dateString + ").txt",
           JSON.stringify(logJson) + "\n",
           err => {
             if (err) console.log(err);
-          },
+          }
         );
       } catch (e) {
         console.log(e);
@@ -460,17 +460,30 @@ async function blockMonitoring(blockno) {
           content.json_metadata,
           function(err, result) {
             console.log(err, result);
-          },
+          }
         );
       }
     } else if (
       action === "comment" &&
+      content.parent_author != "" &&
       content.body.indexOf(config.diceTag) > -1
     ) {
       console.log(`${config.pickTag}`);
       let startNo = 1;
       let endNo = 100;
       try {
+        // 존재하는 포스팅 체크
+        const postingInfo = await getContent(content.author, content.permlink)
+          .then(p => {
+            return p;
+          })
+          .catch(e => {
+            throw new Error(e);
+          });
+
+        // 생성된 시간과 업데이트 시간이 다르면 수정된 글이라고 판단
+        if (postingInfo.created != postingInfo.last_update) return;
+
         let options = content.body
           .split(config.diceTag)[1]
           .split("\n")[0]
@@ -501,7 +514,7 @@ async function blockMonitoring(blockno) {
             content.json_metadata,
             function(err, result) {
               console.log(err, result);
-            },
+            }
           );
           return;
         }
@@ -526,17 +539,17 @@ async function blockMonitoring(blockno) {
           content.json_metadata,
           function(err, result) {
             console.log(err, result);
-          },
+          }
         );
 
         const logJson = { content: content, result: body };
 
         fs.appendFile(
-          "../logs/happydice(" + dateString + ").txt",
+          "./logs/happydice(" + dateString + ").txt",
           JSON.stringify(logJson) + "\n",
           err => {
             if (err) console.log(err);
-          },
+          }
         );
       } catch (e) {
         console.log(`dice error`);
@@ -556,7 +569,7 @@ async function blockMonitoring(blockno) {
           content.json_metadata,
           function(err, result) {
             console.log(err, result);
-          },
+          }
         );
         return;
       }
@@ -565,7 +578,7 @@ async function blockMonitoring(blockno) {
 
   blockno.lastReadSteemBlock += 1;
 
-  fs.writeFile("../config/blockConfig.ini", JSON.stringify(blockno), err => {
+  fs.writeFile("./config/blockConfig.ini", JSON.stringify(blockno), err => {
     if (err) console.log(err);
   });
 }
