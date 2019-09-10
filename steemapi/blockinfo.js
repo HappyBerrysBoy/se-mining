@@ -9,6 +9,9 @@ const ssc = new SSC("https://api.steem-engine.com/rpc/");
 const TelegramBot = require("node-telegram-bot-api");
 // For a description of the Bot API, see this page: https://core.telegram.org/bots/api
 
+const serviceAccount = "steemservice";
+const postingKey = key.steemservice_posting;
+
 const token = "918252456:AAEM4eW8Dk5bDzc2XuXPh5vHDtckMOXyw-U";
 const bot = new TelegramBot(token, { polling: true });
 const telegramMembers = [36227498, 454924368]; //36227498:me, 277033489 : ukk, 454924368:youthme
@@ -79,6 +82,24 @@ const findPlanet = () => {
   return axios.get(
     `https://api.nextcolony.io/loadplanets?sort=date&from=0&to=1`
   );
+};
+
+const getContent = (author, permlink) => {
+  return new Promise((resolve, reject) => {
+    steem.api.getContent(author, permlink, (err, result) => {
+      if (err) {
+        reject(new Error(`Fail to load getContent(${author}, ${permlink})`));
+        return;
+      }
+
+      if (!result.body.length) {
+        reject(new Error(`Invalid permlink(${author}, ${permlink})`));
+        return;
+      }
+
+      resolve(result);
+    });
+  });
 };
 
 fs.readFile("../config/blockConfig.ini", "utf8", function(err, data) {
@@ -422,10 +443,10 @@ async function blockMonitoring(blockno) {
 
         // content
         steem.broadcast.comment(
-          key.happyberrysboy_posting,
+          postingKey,
           content.author,
           content.permlink,
-          "happyberrysboy",
+          serviceAccount,
           steem.formatter
             .commentPermlink(content.author, content.permlink)
             .replace(/\./g, "")
@@ -450,10 +471,10 @@ async function blockMonitoring(blockno) {
       } catch (e) {
         console.log(e);
         steem.broadcast.comment(
-          key.happyberrysboy_posting,
+          postingKey,
           content.author,
           content.permlink,
-          "happyberrysboy",
+          serviceAccount,
           steem.formatter.commentPermlink(content.author, content.permlink),
           "",
           e,
@@ -501,10 +522,10 @@ async function blockMonitoring(blockno) {
         if (startNo > endNo || isNaN(startNo) || isNaN(endNo)) {
           // content
           steem.broadcast.comment(
-            key.happyberrysboy_posting,
+            postingKey,
             content.author,
             content.permlink,
-            "happyberrysboy",
+            serviceAccount,
             steem.formatter
               .commentPermlink(content.author, content.permlink)
               .replace(/\./g, "")
@@ -526,10 +547,10 @@ async function blockMonitoring(blockno) {
 
         // content
         steem.broadcast.comment(
-          key.happyberrysboy_posting,
+          postingKey,
           content.author,
           content.permlink,
-          "happyberrysboy",
+          serviceAccount,
           steem.formatter
             .commentPermlink(content.author, content.permlink)
             .replace(/\./g, "")
@@ -556,10 +577,10 @@ async function blockMonitoring(blockno) {
         console.log(e);
 
         steem.broadcast.comment(
-          key.happyberrysboy_posting,
+          postingKey,
           content.author,
           content.permlink,
-          "happyberrysboy",
+          serviceAccount,
           steem.formatter
             .commentPermlink(content.author, content.permlink)
             .replace(/\./g, "")
