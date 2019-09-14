@@ -40,6 +40,8 @@ cron.schedule("*/20 * * * * *", function() {
   console.log(`start getScotDataAsync(query, discussionQueryforSteemEngine)`);
   getPostingAsync(query, discussionQueryforSteemEngine).then(feedData => {
     let result = new Array();
+
+    console.log(`feedData:${feedData.length}`);
     feedData.forEach(async content => {
       const diffTime =
         (new Date().getTime() - new Date(content.created).getTime()) /
