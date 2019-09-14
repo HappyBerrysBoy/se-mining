@@ -200,7 +200,7 @@ const skillUpArray = [
   },
   {
     name: "I",
-    planet: "P-ZD7VOJ4FF8W",
+    planet: "P-ZHGO5SVV8XC",
     skill: [
       { name: "Transporter", target: 20 },
       { name: "Frigate", target: 20 },
