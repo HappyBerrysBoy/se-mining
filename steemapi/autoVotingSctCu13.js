@@ -44,12 +44,13 @@ cron.schedule("*/20 * * * * *", function() {
   getPostingAsync(query, discussionQueryforSteemEngine).then(feedData => {
     let result = new Array();
 
-    console.log("feedData:", feedData);
     feedData.forEach(async content => {
       const diffTime =
         (new Date().getTime() - new Date(content.created).getTime()) /
           (1000 * 60) -
         9 * 60;
+
+      console.log("author/time", content.author, diffTime);
       if (diffTime < 200 && diffTime >= 15) {
         let isVoting = false;
         if (!_whitelist.has(content.author)) {
