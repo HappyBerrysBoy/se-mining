@@ -62,7 +62,7 @@ cron.schedule("*/20 * * * * *", function() {
         }
 
         if (isVoting) {
-          //console.log("Already!");
+          console.log("Already!");
         } else {
           //console.log("Not yet!");
           console.log(`input : ${content.author} - ${diffTime}`);
