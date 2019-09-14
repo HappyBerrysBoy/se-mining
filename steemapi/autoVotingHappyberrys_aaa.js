@@ -45,8 +45,7 @@ cron.schedule("*/20 * * * * *", function() {
     feedData.forEach(async content => {
       const diffTime =
         (new Date().getTime() - new Date(content.created).getTime()) /
-          (1000 * 60) -
-        9 * 60;
+        (1000 * 60);
 
       console.log(`diff time:${diffTime}`);
       if (diffTime < 200 && diffTime >= 15) {
