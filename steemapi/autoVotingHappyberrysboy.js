@@ -51,8 +51,7 @@ cron.schedule("*/30 * * * * *", function() {
     feedData.forEach(async content => {
       const diffTime =
         (new Date().getTime() - new Date(content.created).getTime()) /
-          (1000 * 60) -
-        9 * 60;
+        (1000 * 60);
       if (diffTime < 200 && diffTime >= 15) {
         let isVoting = false;
         if (!_whitelist.has(content.author)) {

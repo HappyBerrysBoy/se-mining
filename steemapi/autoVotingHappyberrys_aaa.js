@@ -45,6 +45,8 @@ cron.schedule("*/20 * * * * *", function() {
         (new Date().getTime() - new Date(content.created).getTime()) /
           (1000 * 60) -
         9 * 60;
+
+      console.log(`diff time:${diffTime}`);
       if (diffTime < 200 && diffTime >= 15) {
         let isVoting = false;
         if (!_whitelist.has(content.author)) {
