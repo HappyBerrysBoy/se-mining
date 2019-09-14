@@ -44,7 +44,7 @@ cron.schedule("*/20 * * * * *", function() {
   getPostingAsync(query, discussionQueryforSteemEngine).then(feedData => {
     let result = new Array();
 
-    console.log(`feedData length:${feedData.length}`);
+    console.log("feedData:", feedData);
     feedData.forEach(async content => {
       const diffTime =
         (new Date().getTime() - new Date(content.created).getTime()) /
