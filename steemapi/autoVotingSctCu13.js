@@ -43,13 +43,16 @@ cron.schedule("*/20 * * * * *", function() {
   console.log(`start getScotDataAsync(query, discussionQueryforSteemEngine)`);
   getPostingAsync(query, discussionQueryforSteemEngine).then(feedData => {
     let result = new Array();
-
     feedData.forEach(async content => {
       const diffTime =
         (new Date().getTime() - new Date(content.created).getTime()) /
-          (1000 * 60) -
-        9 * 60;
+        (1000 * 60);
 
+      console.log(
+        "time calc",
+        Date().getTime(),
+        new Date(content.created).getTime()
+      );
       console.log("author/time", content.author, diffTime);
       if (diffTime < 200 && diffTime >= 15) {
         let isVoting = false;
