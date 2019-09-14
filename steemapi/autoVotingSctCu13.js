@@ -50,7 +50,7 @@ cron.schedule("*/20 * * * * *", function() {
 
       console.log(
         "time calc",
-        Date().getTime(),
+        new Date().getTime(),
         new Date(content.created).getTime()
       );
       console.log("author/time", content.author, diffTime);
