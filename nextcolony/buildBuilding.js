@@ -11,9 +11,9 @@ const shipyardArray = [
   { name: "P", id: "P-Z44ED8BDCZ4", ship: ["explorership"] },
   { name: "Q", id: "P-ZH2DUQGU1Z4", ship: ["explorership"] },
   { name: "R", id: "P-Z7K08XK4IFK", ship: ["explorership"] },
-  { name: "M", id: "P-ZIWU6M04H80", ship: ["explorership"] },
-  { name: "K", id: "P-ZTPRC5MLJXS", ship: ["explorership"] },
-  { name: "L", id: "P-ZYBGDS70ILS", ship: ["explorership"] }
+  { name: "M", id: "P-ZIWU6M04H80", ship: ["explorership"] }
+  // { name: "K", id: "P-ZTPRC5MLJXS", ship: ["explorership"] },
+  // { name: "L", id: "P-ZYBGDS70ILS", ship: ["explorership"] }
 ];
 
 //A, B, F, M, K, L 행성 건물 업글 안함
@@ -21,9 +21,9 @@ const buildPlanetArray = [
   "P-ZA01QNQO29C",
   "P-ZO75DZDVRUO",
   "P-Z5TV3Z99YM8",
-  "P-ZIWU6M04H80",
-  "P-ZTPRC5MLJXS",
-  "P-ZYBGDS70ILS"
+  "P-ZIWU6M04H80"
+  // "P-ZTPRC5MLJXS",
+  // "P-ZYBGDS70ILS"
 ];
 
 const explorePlanetArray = [
@@ -69,6 +69,58 @@ const skillUpArray = [
     skill: [{ name: "missioncontrol", target: 20 }]
   },
   {
+    name: "K",
+    planet: "P-ZTPRC5MLJXS",
+    skill: [
+      { name: "Transporter", target: 20 },
+      { name: "Frigate", target: 20 },
+      { name: "missioncontrol", target: 0 },
+      { name: "uraniumbooster", target: 10 },
+      { name: "copperbooster", target: 0 },
+      { name: "coalbooster", target: 5 },
+      { name: "orebooster", target: 10 },
+      { name: "uraniummine", target: 16 },
+      { name: "coppermine", target: 17 },
+      { name: "oremine", target: 15 },
+      { name: "coalmine", target: 18 },
+      { name: "shipyard", target: 20 },
+      { name: "researchcenter", target: 13 },
+      { name: "armorimprove", target: 20 },
+      { name: "structureimprove", target: 20 },
+      { name: "armorimprove", target: 20 },
+      { name: "shieldsimprove", target: 20 },
+      { name: "rocketimprove", target: 20 },
+      { name: "bulletimprove", target: 20 },
+      { name: "laserimprove", target: 20 }
+    ]
+  },
+  {
+    name: "L",
+    planet: "P-ZYBGDS70ILS",
+    skill: [
+      { name: "Transporter", target: 20 },
+      { name: "Frigate", target: 20 },
+      { name: "missioncontrol", target: 0 },
+      { name: "uraniumbooster", target: 10 },
+      { name: "copperbooster", target: 0 },
+      { name: "coalbooster", target: 5 },
+      { name: "orebooster", target: 10 },
+      { name: "uraniummine", target: 16 },
+      { name: "coppermine", target: 17 },
+      { name: "oremine", target: 15 },
+      { name: "coalmine", target: 18 },
+      { name: "shipyard", target: 20 },
+      { name: "researchcenter", target: 13 },
+      { name: "armorimprove", target: 20 },
+      { name: "structureimprove", target: 20 },
+      { name: "armorimprove", target: 20 },
+      { name: "shieldsimprove", target: 20 },
+      { name: "rocketimprove", target: 20 },
+      { name: "bulletimprove", target: 20 },
+      { name: "laserimprove", target: 20 }
+    ]
+  },
+  {
     name: "V3_UU",
     planet: "P-ZKMVJ9P05PS",
     skill: [
@@ -84,7 +136,14 @@ const skillUpArray = [
       { name: "oremine", target: 15 },
       { name: "coalmine", target: 18 },
       { name: "shipyard", target: 20 },
-      { name: "researchcenter", target: 13 }
+      { name: "researchcenter", target: 13 },
+      { name: "armorimprove", target: 20 },
+      { name: "structureimprove", target: 20 },
+      { name: "armorimprove", target: 20 },
+      { name: "shieldsimprove", target: 20 },
+      { name: "rocketimprove", target: 20 },
+      { name: "bulletimprove", target: 20 },
+      { name: "laserimprove", target: 20 }
     ]
   },
   {
@@ -103,7 +162,14 @@ const skillUpArray = [
       { name: "oremine", target: 15 },
       { name: "coalmine", target: 18 },
       { name: "shipyard", target: 20 },
-      { name: "researchcenter", target: 13 }
+      { name: "researchcenter", target: 13 },
+      { name: "armorimprove", target: 20 },
+      { name: "structureimprove", target: 20 },
+      { name: "armorimprove", target: 20 },
+      { name: "shieldsimprove", target: 20 },
+      { name: "rocketimprove", target: 20 },
+      { name: "bulletimprove", target: 20 },
+      { name: "laserimprove", target: 20 }
     ]
   },
   {
@@ -122,7 +188,14 @@ const skillUpArray = [
       { name: "oremine", target: 15 },
       { name: "coalmine", target: 18 },
       { name: "shipyard", target: 20 },
-      { name: "researchcenter", target: 13 }
+      { name: "researchcenter", target: 13 },
+      { name: "armorimprove", target: 20 },
+      { name: "structureimprove", target: 20 },
+      { name: "armorimprove", target: 20 },
+      { name: "shieldsimprove", target: 20 },
+      { name: "rocketimprove", target: 20 },
+      { name: "bulletimprove", target: 20 },
+      { name: "laserimprove", target: 20 }
     ]
   },
   {
@@ -141,28 +214,16 @@ const skillUpArray = [
       { name: "oremine", target: 15 },
       { name: "coalmine", target: 18 },
       { name: "shipyard", target: 20 },
-      { name: "researchcenter", target: 13 }
+      { name: "researchcenter", target: 13 },
+      { name: "armorimprove", target: 20 },
+      { name: "structureimprove", target: 20 },
+      { name: "armorimprove", target: 20 },
+      { name: "shieldsimprove", target: 20 },
+      { name: "rocketimprove", target: 20 },
+      { name: "bulletimprove", target: 20 },
+      { name: "laserimprove", target: 20 }
     ]
   },
-  // {
-  //   name: "K",
-  //   planet: "P-ZTPRC5MLJXS",
-  //   skill: [
-  //     { name: "Transporter", target: 20 },
-  //     { name: "Frigate", target: 20 },
-  //     { name: "missioncontrol", target: 0 },
-  //     { name: "uraniumbooster", target: 20 },
-  //     { name: "copperbooster", target: 5 },
-  //     { name: "coalbooster", target: 20 },
-  //     { name: "orebooster", target: 20 },
-  //     { name: "uraniummine", target: 16 },
-  //     { name: "coppermine", target: 17 },
-  //     { name: "oremine", target: 15 },
-  //     { name: "coalmine", target: 18 },
-  //     { name: "shipyard", target: 20 },
-  //     { name: "researchcenter", target: 13 },
-  //   ],
-  // },
   {
     name: "G",
     planet: "P-ZD7VOJ4FF8W",
@@ -179,7 +240,14 @@ const skillUpArray = [
       { name: "oremine", target: 15 },
       { name: "coalmine", target: 18 },
       { name: "shipyard", target: 20 },
-      { name: "researchcenter", target: 13 }
+      { name: "researchcenter", target: 13 },
+      { name: "armorimprove", target: 20 },
+      { name: "structureimprove", target: 20 },
+      { name: "armorimprove", target: 20 },
+      { name: "shieldsimprove", target: 20 },
+      { name: "rocketimprove", target: 20 },
+      { name: "bulletimprove", target: 20 },
+      { name: "laserimprove", target: 20 }
     ]
   }
 ];
