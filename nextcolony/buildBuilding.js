@@ -10,7 +10,8 @@ const shipyardArray = [
   { name: "O", id: "P-Z11IOTOZ9WG", ship: ["explorership"] },
   { name: "P", id: "P-Z44ED8BDCZ4", ship: ["explorership"] },
   { name: "Q", id: "P-ZH2DUQGU1Z4", ship: ["explorership"] },
-  { name: "R", id: "P-Z7K08XK4IFK", ship: ["explorership"] }
+  { name: "R", id: "P-Z7K08XK4IFK", ship: ["explorership"] },
+  { name: "U", id: "P-Z4878F8CXG0", ship: ["explorership"] }
   // { name: "M", id: "P-ZIWU6M04H80", ship: ["explorership"] }
   // { name: "K", id: "P-ZTPRC5MLJXS", ship: ["explorership"] },
   // { name: "L", id: "P-ZYBGDS70ILS", ship: ["explorership"] }
@@ -41,18 +42,18 @@ const explorePlanetArray = [
   {
     name: "R",
     id: "P-Z7K08XK4IFK",
-    exploreCnt: 11,
+    exploreCnt: 4,
     explorerDirection: {
-      xminus: true,
+      xminus: false,
       xplus: true,
       yminus: true,
       yplus: true
     }
   },
   {
-    name: "T",
-    id: "P-Z0QS8KUS8ZK",
-    exploreCnt: 13,
+    name: "U",
+    id: "P-Z4878F8CXG0",
+    exploreCnt: 20,
     explorerDirection: {
       xminus: true,
       xplus: true,
