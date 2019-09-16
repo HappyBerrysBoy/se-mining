@@ -10,7 +10,7 @@ const fs = require("fs");
 // sct_cu13_posting
 const discussionQuery = {
   token: "SCT",
-  limit: 30,
+  limit: 30
 };
 let _votingList = new Array();
 let _whitelist = new Map();
@@ -45,7 +45,7 @@ cron.schedule("*/20 * * * * *", function() {
           (new Date().getTime() - new Date(content.created).getTime()) /
             (1000 * 60) -
           9 * 60;
-        if (diffTime < 200 && diffTime >= 15) {
+        if (diffTime < 200 && diffTime >= 5) {
           let isVoting = false;
           if (!_whitelist.has(content.author)) {
             return;
@@ -68,13 +68,13 @@ cron.schedule("*/20 * * * * *", function() {
               account: "realmankwon",
               author: content.author,
               permlink: content.permlink,
-              votingMana: _whitelist.get(content.author),
+              votingMana: _whitelist.get(content.author)
             };
             _votingList.push(tmp);
           }
         }
       });
-    },
+    }
   );
 });
 
@@ -100,10 +100,10 @@ cron.schedule("*/10 * * * * *", function() {
               tmp.author +
               ", weight: " +
               100 +
-              "%.\n",
+              "%.\n"
           );
         }
-      },
+      }
     );
   }
 });
@@ -116,7 +116,7 @@ async function callApi(url, params) {
   return await axios({
     url,
     method: "GET",
-    params,
+    params
   })
     .then(response => {
       return response.data;
