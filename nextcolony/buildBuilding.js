@@ -89,7 +89,7 @@ const skillUpArray = [
       { name: "armorimprove", target: 20 },
       { name: "structureimprove", target: 20 },
       { name: "armorimprove", target: 20 },
-      { name: "shieldsimprove", target: 20 },
+      { name: "shieldimprove", target: 20 },
       { name: "rocketimprove", target: 20 },
       { name: "bulletimprove", target: 20 },
       { name: "laserimprove", target: 20 }
@@ -115,7 +115,7 @@ const skillUpArray = [
       { name: "armorimprove", target: 20 },
       { name: "structureimprove", target: 20 },
       { name: "armorimprove", target: 20 },
-      { name: "shieldsimprove", target: 20 },
+      { name: "shieldimprove", target: 20 },
       { name: "rocketimprove", target: 20 },
       { name: "bulletimprove", target: 20 },
       { name: "laserimprove", target: 20 }
@@ -141,7 +141,7 @@ const skillUpArray = [
       { name: "armorimprove", target: 20 },
       { name: "structureimprove", target: 20 },
       { name: "armorimprove", target: 20 },
-      { name: "shieldsimprove", target: 20 },
+      { name: "shieldimprove", target: 20 },
       { name: "rocketimprove", target: 20 },
       { name: "bulletimprove", target: 20 },
       { name: "laserimprove", target: 20 }
@@ -167,7 +167,7 @@ const skillUpArray = [
       { name: "armorimprove", target: 20 },
       { name: "structureimprove", target: 20 },
       { name: "armorimprove", target: 20 },
-      { name: "shieldsimprove", target: 20 },
+      { name: "shieldimprove", target: 20 },
       { name: "rocketimprove", target: 20 },
       { name: "bulletimprove", target: 20 },
       { name: "laserimprove", target: 20 }
@@ -193,7 +193,7 @@ const skillUpArray = [
       { name: "armorimprove", target: 20 },
       { name: "structureimprove", target: 20 },
       { name: "armorimprove", target: 20 },
-      { name: "shieldsimprove", target: 20 },
+      { name: "shieldimprove", target: 20 },
       { name: "rocketimprove", target: 20 },
       { name: "bulletimprove", target: 20 },
       { name: "laserimprove", target: 20 }
@@ -219,7 +219,7 @@ const skillUpArray = [
       { name: "armorimprove", target: 20 },
       { name: "structureimprove", target: 20 },
       { name: "armorimprove", target: 20 },
-      { name: "shieldsimprove", target: 20 },
+      { name: "shieldimprove", target: 20 },
       { name: "rocketimprove", target: 20 },
       { name: "bulletimprove", target: 20 },
       { name: "laserimprove", target: 20 }
@@ -245,7 +245,7 @@ const skillUpArray = [
       { name: "armorimprove", target: 20 },
       { name: "structureimprove", target: 20 },
       { name: "armorimprove", target: 20 },
-      { name: "shieldsimprove", target: 20 },
+      { name: "shieldimprove", target: 20 },
       { name: "rocketimprove", target: 20 },
       { name: "bulletimprove", target: 20 },
       { name: "laserimprove", target: 20 }
@@ -271,7 +271,7 @@ const skillUpArray = [
       { name: "armorimprove", target: 20 },
       { name: "structureimprove", target: 20 },
       { name: "armorimprove", target: 20 },
-      { name: "shieldsimprove", target: 20 },
+      { name: "shieldimprove", target: 20 },
       { name: "rocketimprove", target: 20 },
       { name: "bulletimprove", target: 20 },
       { name: "laserimprove", target: 20 }
