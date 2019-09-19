@@ -17,6 +17,9 @@ const shipyardArray = [
   // { name: "L", id: "P-ZYBGDS70ILS", ship: ["explorership"] }
 ];
 
+// shield 켜는 custom_json 나중에 참고!!
+// {"username":"happyberrysboy","type":"enable","command":{"tr_var1":"P-ZA01QNQO29C","tr_var2":"shieldgenerator"}}
+
 //A, B, F, M, K, L 행성 건물 업글 안함
 const buildPlanetArray = [
   "P-ZA01QNQO29C",
@@ -103,7 +106,8 @@ const skillUpArray = [
       { name: "shieldimprove", target: 20 },
       { name: "rocketimprove", target: 20 },
       { name: "bulletimprove", target: 20 },
-      { name: "laserimprove", target: 20 }
+      { name: "laserimprove", target: 20 },
+      { name: "siegeprolongation", target: 5 }
     ]
   },
   {
@@ -129,7 +133,8 @@ const skillUpArray = [
       { name: "shieldimprove", target: 20 },
       { name: "rocketimprove", target: 20 },
       { name: "bulletimprove", target: 20 },
-      { name: "laserimprove", target: 20 }
+      { name: "laserimprove", target: 20 },
+      { name: "siegeprolongation", target: 5 }
     ]
   },
   {
@@ -155,7 +160,8 @@ const skillUpArray = [
       { name: "shieldimprove", target: 20 },
       { name: "rocketimprove", target: 20 },
       { name: "bulletimprove", target: 20 },
-      { name: "laserimprove", target: 20 }
+      { name: "laserimprove", target: 20 },
+      { name: "siegeprolongation", target: 5 }
     ]
   },
   {
@@ -181,7 +187,8 @@ const skillUpArray = [
       { name: "shieldimprove", target: 20 },
       { name: "rocketimprove", target: 20 },
       { name: "bulletimprove", target: 20 },
-      { name: "laserimprove", target: 20 }
+      { name: "laserimprove", target: 20 },
+      { name: "siegeprolongation", target: 5 }
     ]
   },
   {
@@ -207,7 +214,8 @@ const skillUpArray = [
       { name: "shieldimprove", target: 20 },
       { name: "rocketimprove", target: 20 },
       { name: "bulletimprove", target: 20 },
-      { name: "laserimprove", target: 20 }
+      { name: "laserimprove", target: 20 },
+      { name: "siegeprolongation", target: 5 }
     ]
   },
   {
@@ -233,7 +241,8 @@ const skillUpArray = [
       { name: "shieldimprove", target: 20 },
       { name: "rocketimprove", target: 20 },
       { name: "bulletimprove", target: 20 },
-      { name: "laserimprove", target: 20 }
+      { name: "laserimprove", target: 20 },
+      { name: "siegeprolongation", target: 5 }
     ]
   },
   {
@@ -259,7 +268,8 @@ const skillUpArray = [
       { name: "shieldimprove", target: 20 },
       { name: "rocketimprove", target: 20 },
       { name: "bulletimprove", target: 20 },
-      { name: "laserimprove", target: 20 }
+      { name: "laserimprove", target: 20 },
+      { name: "siegeprolongation", target: 5 }
     ]
   },
   {
@@ -285,7 +295,8 @@ const skillUpArray = [
       { name: "shieldimprove", target: 20 },
       { name: "rocketimprove", target: 20 },
       { name: "bulletimprove", target: 20 },
-      { name: "laserimprove", target: 20 }
+      { name: "laserimprove", target: 20 },
+      { name: "siegeprolongation", target: 5 }
     ]
   },
   {
@@ -311,7 +322,8 @@ const skillUpArray = [
       { name: "shieldimprove", target: 20 },
       { name: "rocketimprove", target: 20 },
       { name: "bulletimprove", target: 20 },
-      { name: "laserimprove", target: 20 }
+      { name: "laserimprove", target: 20 },
+      { name: "siegeprolongation", target: 5 }
     ]
   }
 ];
