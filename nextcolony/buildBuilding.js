@@ -496,8 +496,8 @@ function chkAvailExplorefromDistance(
   }
 }
 
-function loadSchedulerJob(planet) {
-  axios
+async function loadSchedulerJob(planet) {
+  await axios
     .all([
       loadqyt(planet.id),
       loadproduction(planet.id, account),
@@ -509,7 +509,7 @@ function loadSchedulerJob(planet) {
       fleetMission(account)
     ]) // axios.all로 여러 개의 request를 보내고
     .then(
-      axios.spread(
+      await axios.spread(
         (
           qytInfoData,
           prodInfoData,
@@ -725,10 +725,10 @@ function autoRun() {
     .then(response => {
       return response.data.planets;
     })
-    .then(planets => {
+    .then(async planets => {
       for (let i = 0; i < planets.length; i++) {
         let planet = planets[i];
-        loadSchedulerJob(planet);
+        await loadSchedulerJob(planet);
       }
     });
 }
