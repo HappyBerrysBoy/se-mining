@@ -12,24 +12,17 @@ const shipyardArray = [
   { name: "Q", id: "P-ZH2DUQGU1Z4", ship: ["explorership"] },
   { name: "R", id: "P-Z7K08XK4IFK", ship: ["explorership"] },
   { name: "U", id: "P-Z4878F8CXG0", ship: ["explorership"] }
-  // { name: "M", id: "P-ZIWU6M04H80", ship: ["explorership"] }
-  // { name: "K", id: "P-ZTPRC5MLJXS", ship: ["explorership"] },
-  // { name: "L", id: "P-ZYBGDS70ILS", ship: ["explorership"] }
+  // { name: "S", id: "P-ZNBD5M6HLN4", ship: ["explorership"] },
+  // { name: "T", id: "P-Z0QS8KUS8ZK", ship: ["explorership"] },
 ];
 
 // shield 켜는 custom_json 나중에 참고!!
 // {"username":"happyberrysboy","type":"enable","command":{"tr_var1":"P-ZA01QNQO29C","tr_var2":"shieldgenerator"}}
 
-//A, B, F, M, K, L 행성 건물 업글 안함
-const buildPlanetArray = [
-  "P-ZA01QNQO29C",
-  // "P-ZO75DZDVRUO",
-  "P-Z5TV3Z99YM8"
-  // "P-ZIWU6M04H80"
-  // "P-ZTPRC5MLJXS",
-  // "P-ZYBGDS70ILS"
-];
+// 리스트에 포함되면 업글 안함
+const buildPlanetArray = ["P-ZA01QNQO29C"];
 
+//탐험 관련 계정
 const explorePlanetArray = [
   {
     name: "N",
@@ -76,7 +69,7 @@ const explorePlanetArray = [
     }
   },
   {
-    name: "W",
+    name: "X",
     id: "P-Z1YNSURVXKG",
     exploreCnt: 14,
     explorerDirection: {
@@ -88,254 +81,35 @@ const explorePlanetArray = [
   }
 ];
 
+const defaultSkillUpList = [
+  { name: "Transporter", target: 20 },
+  { name: "Frigate", target: 20 },
+  { name: "missioncontrol", target: 0 },
+  { name: "uraniumbooster", target: 10 },
+  { name: "copperbooster", target: 0 },
+  { name: "coalbooster", target: 5 },
+  { name: "orebooster", target: 10 },
+  { name: "uraniummine", target: 16 },
+  { name: "coppermine", target: 16 },
+  { name: "oremine", target: 17 },
+  { name: "coalmine", target: 18 },
+  { name: "shipyard", target: 20 },
+  { name: "researchcenter", target: 13 },
+  { name: "armorimprove", target: 20 },
+  { name: "structureimprove", target: 20 },
+  { name: "armorimprove", target: 20 },
+  { name: "shieldimprove", target: 20 },
+  { name: "rocketimprove", target: 20 },
+  { name: "bulletimprove", target: 20 },
+  { name: "laserimprove", target: 20 },
+  { name: "siegeprolongation", target: 10 }
+];
+
 const skillUpArray = [
   {
     name: "A",
     planet: "P-ZA01QNQO29C",
     skill: [{ name: "missioncontrol", target: 20 }]
-  },
-  {
-    name: "K",
-    planet: "P-ZTPRC5MLJXS",
-    skill: [
-      { name: "Transporter", target: 20 },
-      { name: "Frigate", target: 20 },
-      { name: "missioncontrol", target: 0 },
-      { name: "uraniumbooster", target: 10 },
-      { name: "copperbooster", target: 0 },
-      { name: "coalbooster", target: 5 },
-      { name: "orebooster", target: 10 },
-      { name: "uraniummine", target: 16 },
-      { name: "coppermine", target: 16 },
-      { name: "oremine", target: 17 },
-      { name: "coalmine", target: 18 },
-      { name: "shipyard", target: 20 },
-      { name: "researchcenter", target: 13 },
-      { name: "armorimprove", target: 20 },
-      { name: "structureimprove", target: 20 },
-      { name: "armorimprove", target: 20 },
-      { name: "shieldimprove", target: 20 },
-      { name: "rocketimprove", target: 20 },
-      { name: "bulletimprove", target: 20 },
-      { name: "laserimprove", target: 20 },
-      { name: "siegeprolongation", target: 5 }
-    ]
-  },
-  {
-    name: "L",
-    planet: "P-ZYBGDS70ILS",
-    skill: [
-      { name: "Transporter", target: 20 },
-      { name: "Frigate", target: 20 },
-      { name: "missioncontrol", target: 0 },
-      { name: "uraniumbooster", target: 10 },
-      { name: "copperbooster", target: 0 },
-      { name: "coalbooster", target: 5 },
-      { name: "orebooster", target: 10 },
-      { name: "uraniummine", target: 16 },
-      { name: "coppermine", target: 16 },
-      { name: "oremine", target: 17 },
-      { name: "coalmine", target: 18 },
-      { name: "shipyard", target: 20 },
-      { name: "researchcenter", target: 13 },
-      { name: "armorimprove", target: 20 },
-      { name: "structureimprove", target: 20 },
-      { name: "armorimprove", target: 20 },
-      { name: "shieldimprove", target: 20 },
-      { name: "rocketimprove", target: 20 },
-      { name: "bulletimprove", target: 20 },
-      { name: "laserimprove", target: 20 },
-      { name: "siegeprolongation", target: 5 }
-    ]
-  },
-  {
-    name: "M",
-    planet: "P-ZIWU6M04H80",
-    skill: [
-      { name: "Transporter", target: 20 },
-      { name: "Frigate", target: 20 },
-      { name: "missioncontrol", target: 0 },
-      { name: "uraniumbooster", target: 10 },
-      { name: "copperbooster", target: 0 },
-      { name: "coalbooster", target: 5 },
-      { name: "orebooster", target: 10 },
-      { name: "uraniummine", target: 16 },
-      { name: "coppermine", target: 16 },
-      { name: "oremine", target: 17 },
-      { name: "coalmine", target: 18 },
-      { name: "shipyard", target: 20 },
-      { name: "researchcenter", target: 13 },
-      { name: "armorimprove", target: 20 },
-      { name: "structureimprove", target: 20 },
-      { name: "armorimprove", target: 20 },
-      { name: "shieldimprove", target: 20 },
-      { name: "rocketimprove", target: 20 },
-      { name: "bulletimprove", target: 20 },
-      { name: "laserimprove", target: 20 },
-      { name: "siegeprolongation", target: 5 }
-    ]
-  },
-  {
-    name: "V3_UU",
-    planet: "P-ZKMVJ9P05PS",
-    skill: [
-      { name: "Transporter", target: 20 },
-      { name: "Frigate", target: 20 },
-      { name: "missioncontrol", target: 0 },
-      { name: "uraniumbooster", target: 10 },
-      { name: "copperbooster", target: 0 },
-      { name: "coalbooster", target: 5 },
-      { name: "orebooster", target: 10 },
-      { name: "uraniummine", target: 16 },
-      { name: "coppermine", target: 16 },
-      { name: "oremine", target: 17 },
-      { name: "coalmine", target: 18 },
-      { name: "shipyard", target: 20 },
-      { name: "researchcenter", target: 13 },
-      { name: "armorimprove", target: 20 },
-      { name: "structureimprove", target: 20 },
-      { name: "armorimprove", target: 20 },
-      { name: "shieldimprove", target: 20 },
-      { name: "rocketimprove", target: 20 },
-      { name: "bulletimprove", target: 20 },
-      { name: "laserimprove", target: 20 },
-      { name: "siegeprolongation", target: 5 }
-    ]
-  },
-  {
-    name: "V2_CC",
-    planet: "P-ZQA5D71XR40",
-    skill: [
-      { name: "Transporter", target: 20 },
-      { name: "Frigate", target: 20 },
-      { name: "missioncontrol", target: 0 },
-      { name: "uraniumbooster", target: 10 },
-      { name: "copperbooster", target: 0 },
-      { name: "coalbooster", target: 5 },
-      { name: "orebooster", target: 10 },
-      { name: "uraniummine", target: 16 },
-      { name: "coppermine", target: 16 },
-      { name: "oremine", target: 17 },
-      { name: "coalmine", target: 18 },
-      { name: "shipyard", target: 20 },
-      { name: "researchcenter", target: 13 },
-      { name: "armorimprove", target: 20 },
-      { name: "structureimprove", target: 20 },
-      { name: "armorimprove", target: 20 },
-      { name: "shieldimprove", target: 20 },
-      { name: "rocketimprove", target: 20 },
-      { name: "bulletimprove", target: 20 },
-      { name: "laserimprove", target: 20 },
-      { name: "siegeprolongation", target: 5 }
-    ]
-  },
-  {
-    name: "I",
-    planet: "P-ZHGO5SVV8XC",
-    skill: [
-      { name: "Transporter", target: 20 },
-      { name: "Frigate", target: 20 },
-      { name: "missioncontrol", target: 0 },
-      { name: "uraniumbooster", target: 10 },
-      { name: "copperbooster", target: 0 },
-      { name: "coalbooster", target: 5 },
-      { name: "orebooster", target: 10 },
-      { name: "uraniummine", target: 16 },
-      { name: "coppermine", target: 16 },
-      { name: "oremine", target: 17 },
-      { name: "coalmine", target: 18 },
-      { name: "shipyard", target: 20 },
-      { name: "researchcenter", target: 13 },
-      { name: "armorimprove", target: 20 },
-      { name: "structureimprove", target: 20 },
-      { name: "armorimprove", target: 20 },
-      { name: "shieldimprove", target: 20 },
-      { name: "rocketimprove", target: 20 },
-      { name: "bulletimprove", target: 20 },
-      { name: "laserimprove", target: 20 },
-      { name: "siegeprolongation", target: 5 }
-    ]
-  },
-  {
-    name: "J",
-    planet: "P-ZOWKXS7K60W",
-    skill: [
-      { name: "Transporter", target: 20 },
-      { name: "Frigate", target: 20 },
-      { name: "missioncontrol", target: 0 },
-      { name: "uraniumbooster", target: 10 },
-      { name: "copperbooster", target: 0 },
-      { name: "coalbooster", target: 5 },
-      { name: "orebooster", target: 10 },
-      { name: "uraniummine", target: 16 },
-      { name: "coppermine", target: 16 },
-      { name: "oremine", target: 17 },
-      { name: "coalmine", target: 18 },
-      { name: "shipyard", target: 20 },
-      { name: "researchcenter", target: 13 },
-      { name: "armorimprove", target: 20 },
-      { name: "structureimprove", target: 20 },
-      { name: "armorimprove", target: 20 },
-      { name: "shieldimprove", target: 20 },
-      { name: "rocketimprove", target: 20 },
-      { name: "bulletimprove", target: 20 },
-      { name: "laserimprove", target: 20 },
-      { name: "siegeprolongation", target: 5 }
-    ]
-  },
-  {
-    name: "G",
-    planet: "P-ZD7VOJ4FF8W",
-    skill: [
-      { name: "Transporter", target: 20 },
-      { name: "Frigate", target: 20 },
-      { name: "missioncontrol", target: 0 },
-      { name: "uraniumbooster", target: 20 },
-      { name: "copperbooster", target: 5 },
-      { name: "coalbooster", target: 20 },
-      { name: "orebooster", target: 20 },
-      { name: "uraniummine", target: 16 },
-      { name: "coppermine", target: 16 },
-      { name: "oremine", target: 17 },
-      { name: "coalmine", target: 18 },
-      { name: "shipyard", target: 20 },
-      { name: "researchcenter", target: 13 },
-      { name: "armorimprove", target: 20 },
-      { name: "structureimprove", target: 20 },
-      { name: "armorimprove", target: 20 },
-      { name: "shieldimprove", target: 20 },
-      { name: "rocketimprove", target: 20 },
-      { name: "bulletimprove", target: 20 },
-      { name: "laserimprove", target: 20 },
-      { name: "siegeprolongation", target: 5 }
-    ]
-  },
-  {
-    name: "D",
-    planet: "P-ZRBZG7PL6NK",
-    skill: [
-      { name: "Transporter", target: 20 },
-      { name: "Frigate", target: 20 },
-      { name: "missioncontrol", target: 0 },
-      { name: "uraniumbooster", target: 20 },
-      { name: "copperbooster", target: 5 },
-      { name: "coalbooster", target: 20 },
-      { name: "orebooster", target: 20 },
-      { name: "uraniummine", target: 16 },
-      { name: "coppermine", target: 16 },
-      { name: "oremine", target: 17 },
-      { name: "coalmine", target: 18 },
-      { name: "shipyard", target: 20 },
-      { name: "researchcenter", target: 13 },
-      { name: "armorimprove", target: 20 },
-      { name: "structureimprove", target: 20 },
-      { name: "armorimprove", target: 20 },
-      { name: "shieldimprove", target: 20 },
-      { name: "rocketimprove", target: 20 },
-      { name: "bulletimprove", target: 20 },
-      { name: "laserimprove", target: 20 },
-      { name: "siegeprolongation", target: 5 }
-    ]
   }
 ];
 
@@ -365,10 +139,10 @@ const buildPriority = {
   base: -1,
   shipyard: 14,
   researchcenter: -1,
-  coalmine: 13,
-  oremine: 13,
-  coppermine: 13,
-  uraniummine: 13,
+  coalmine: 15,
+  oremine: 15,
+  coppermine: 14,
+  uraniummine: 16,
   coaldepot: 13,
   oredepot: 13,
   copperdepot: 13,
@@ -601,13 +375,16 @@ async function loadSchedulerJob(planet) {
           });
 
           // skill up
-          if (skillUpArray.length) {
-            const targetPlanet = skillUpArray.filter(
-              p => p.planet == planet.id
-            );
+          // shipyardarray 리스트에 포함되어 있으면 스킬업은 하지 않는다.
+          if (!shipyardArray.some(s => s.id === planet.id)) {
+            let targetPlanet = skillUpArray.filter(p => p.planet == planet.id);
+
+            if (targetPlanet.length == 0) {
+              targetPlanet = defaultSkillUpList;
+            }
 
             if (targetPlanet.length) {
-              const targetSkill = targetPlanet[0].skill.filter(s => s.target);
+              const targetSkill = targetPlanet.filter(s => s.target);
 
               // console.log(targetSkill);
 
