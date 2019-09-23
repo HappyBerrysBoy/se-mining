@@ -11,7 +11,7 @@ const shipyardArray = [
   { name: "P", id: "P-Z44ED8BDCZ4", ship: ["explorership"] },
   { name: "Q", id: "P-ZH2DUQGU1Z4", ship: ["explorership"] },
   { name: "R", id: "P-Z7K08XK4IFK", ship: ["explorership"] },
-  { name: "U", id: "P-Z4878F8CXG0", ship: ["explorership"] }
+  { name: "U", id: "P-Z4878F8CXG0", ship: ["explorership"] },
   // { name: "S", id: "P-ZNBD5M6HLN4", ship: ["explorership"] },
   // { name: "T", id: "P-Z0QS8KUS8ZK", ship: ["explorership"] },
 ];
@@ -32,8 +32,8 @@ const explorePlanetArray = [
       xminus: false,
       xplus: true,
       yminus: true,
-      yplus: true
-    }
+      yplus: true,
+    },
   },
   {
     name: "R",
@@ -43,8 +43,8 @@ const explorePlanetArray = [
       xminus: false,
       xplus: true,
       yminus: true,
-      yplus: true
-    }
+      yplus: true,
+    },
   },
   {
     name: "V",
@@ -54,31 +54,31 @@ const explorePlanetArray = [
       xminus: true,
       xplus: true,
       yminus: true,
-      yplus: false
-    }
+      yplus: false,
+    },
   },
   {
     name: "W",
     id: "P-ZRI66JULGW0",
-    exploreCnt: 6,
+    exploreCnt: 13,
     explorerDirection: {
       xminus: false,
       xplus: true,
       yminus: true,
-      yplus: true
-    }
+      yplus: true,
+    },
   },
   {
     name: "X",
     id: "P-Z1YNSURVXKG",
-    exploreCnt: 14,
+    exploreCnt: 5,
     explorerDirection: {
       xminus: true,
       xplus: true,
       yminus: true,
-      yplus: true
-    }
-  }
+      yplus: true,
+    },
+  },
 ];
 
 const defaultSkillUpList = [
@@ -102,15 +102,15 @@ const defaultSkillUpList = [
   { name: "rocketimprove", target: 20 },
   { name: "bulletimprove", target: 20 },
   { name: "laserimprove", target: 20 },
-  { name: "siegeprolongation", target: 10 }
+  { name: "siegeprolongation", target: 10 },
 ];
 
 const skillUpArray = [
   {
     name: "A",
     planet: "P-ZA01QNQO29C",
-    skill: [{ name: "missioncontrol", target: 20 }]
-  }
+    skill: [{ name: "missioncontrol", target: 20 }],
+  },
 ];
 
 let buildArray = [];
@@ -125,20 +125,20 @@ const maxBuildQty = {
   researchcenter: 10,
   coalmine: 14,
   oremine: 15,
-  coppermine: 13,
+  coppermine: 14,
   uraniummine: 15,
   coaldepot: 10,
   oredepot: 10,
   copperdepot: 10,
   uraniumdepot: 10,
   bunker: -1,
-  shieldgenerator: -1
+  shieldgenerator: -1,
 };
 const buildPriority = {
   explorer: 0,
   base: -1,
   shipyard: 14,
-  researchcenter: -1,
+  researchcenter: 10,
   coalmine: 15,
   oremine: 15,
   coppermine: 14,
@@ -148,7 +148,7 @@ const buildPriority = {
   copperdepot: 13,
   uraniumdepot: 13,
   bunker: -1,
-  shieldgenerator: -1
+  shieldgenerator: -1,
 };
 
 // Planet 정보
@@ -178,19 +178,19 @@ const loadshipyard = planetId => {
 
 const loadproduction = (planetId, account) => {
   return axios.get(
-    `https://api.nextcolony.io/loadproduction?id=${planetId}&user=${account}`
+    `https://api.nextcolony.io/loadproduction?id=${planetId}&user=${account}`,
   );
 };
 
 const loadGalaxy = (planetX, planetY) => {
   return axios.get(
-    `https://api.nextcolony.io/loadgalaxy?x=${planetX}&y=${planetY}&height=120&width=120`
+    `https://api.nextcolony.io/loadgalaxy?x=${planetX}&y=${planetY}&height=120&width=120`,
   );
 };
 
 const fleetMission = account => {
   return axios.get(
-    `https://api.nextcolony.io/loadfleetmission?user=${account}&active=1`
+    `https://api.nextcolony.io/loadfleetmission?user=${account}&active=1`,
   );
 };
 
@@ -224,7 +224,7 @@ function chkAvailExplorefromDistance(
   explore,
   explored,
   planets,
-  explorePlanet
+  explorePlanet,
 ) {
   // console.log(`Distance:${distance}`);
 
@@ -291,7 +291,7 @@ async function loadSchedulerJob(planet) {
       loadplanet(planet.id),
       loadGalaxy(planet.posx, planet.posy),
       loadskills(account),
-      fleetMission(account)
+      fleetMission(account),
     ]) // axios.all로 여러 개의 request를 보내고
     .then(
       await axios.spread(
@@ -303,7 +303,7 @@ async function loadSchedulerJob(planet) {
           loadPlanetData,
           loadGalaxy,
           skillInfo,
-          fleetMission
+          fleetMission,
         ) => {
           // response를 spread로 받는다
           // Build 관련 내용들
@@ -342,7 +342,7 @@ async function loadSchedulerJob(planet) {
             Math,
             mineArray.map(function(o) {
               return o.current;
-            })
+            }),
           );
 
           buildingInfo.forEach(building => {
@@ -368,7 +368,7 @@ async function loadSchedulerJob(planet) {
             buildArray.push(
               `{"username":"${account}","type":"upgrade","command":{
                       "tr_var1":"${planet.id}",
-                      "tr_var2":"${building.name}"}}`
+                      "tr_var2":"${building.name}"}}`,
             );
 
             console.log(`Available building:${building.name}`);
@@ -390,7 +390,7 @@ async function loadSchedulerJob(planet) {
 
               skillInfo.data.forEach(skill => {
                 const targetInfo = targetSkill.filter(
-                  t => t.name == skill.name
+                  t => t.name == skill.name,
                 );
 
                 if (!targetInfo.length) return;
@@ -408,7 +408,7 @@ async function loadSchedulerJob(planet) {
                   `{"username":"${account}","type":"enhance","command":{
                           "tr_var1":"${account}",
                           "tr_var2":"${planet.id}",
-                          "tr_var3":"${skill.name}"}}`
+                          "tr_var3":"${skill.name}"}}`,
                 );
 
                 console.log(`Available skill:${skill.name}`);
@@ -422,7 +422,7 @@ async function loadSchedulerJob(planet) {
           if (buildShipArray.length > 0) {
             const buildShip = buildShipArray[0];
             const buildArray = shipyardInfo.filter(s =>
-              buildShip.ship.includes(s.type)
+              buildShip.ship.includes(s.type),
             );
 
             if (buildArray.length > 0) {
@@ -435,7 +435,7 @@ async function loadSchedulerJob(planet) {
                 if (availUranium < ship.cost.uranium) return;
 
                 shipArray.push(
-                  `{"username":"${account}","type":"buildship","command":{"tr_var1":"${planet.id}","tr_var2":"${ship.type}"}}`
+                  `{"username":"${account}","type":"buildship","command":{"tr_var1":"${planet.id}","tr_var2":"${ship.type}"}}`,
                 );
 
                 console.log(`Available ship:${ship.type}`);
@@ -454,7 +454,7 @@ async function loadSchedulerJob(planet) {
           if (!explorePlanet.length) return;
 
           const exploreMissions = loadFleetInfo.filter(
-            l => l.type == "explorespace" && l.from_planet.id == planet.id
+            l => l.type == "explorespace" && l.from_planet.id == planet.id,
           );
 
           // 행성당 제한한 횟수보다 많이 보낼 수 없음
@@ -480,7 +480,7 @@ async function loadSchedulerJob(planet) {
               explore,
               explored,
               planets,
-              explorePlanet[0]
+              explorePlanet[0],
             );
 
             if (Object.keys(targetPoint).length) {
@@ -491,13 +491,13 @@ async function loadSchedulerJob(planet) {
 
           if (availExplore) {
             searchGalaxyArray.push(
-              `{"username":"${account}","type":"explorespace","command":{"tr_var1":"${planet.id}","tr_var2":"${targetPoint.x}","tr_var3":"${targetPoint.y}","tr_var4":"explorership"}}`
+              `{"username":"${account}","type":"explorespace","command":{"tr_var1":"${planet.id}","tr_var2":"${targetPoint.x}","tr_var3":"${targetPoint.y}","tr_var4":"explorership"}}`,
             );
           } else {
             console.log("Can not find available explore point");
           }
-        }
-      )
+        },
+      ),
     )
     .catch(error => {
       console.error(error);
@@ -551,7 +551,7 @@ setInterval(() => {
     customJson,
     function(err, result) {
       console.log(err, result);
-    }
+    },
   );
 }, 1 * 40 * 1000);
 
@@ -576,7 +576,7 @@ setInterval(() => {
     customJson,
     function(err, result) {
       console.log(err, result);
-    }
+    },
   );
 }, 3 * 60 * 1000);
 
@@ -593,7 +593,7 @@ setInterval(() => {
     customJson,
     function(err, result) {
       console.log(err, result);
-    }
+    },
   );
 }, 1 * 70 * 1000);
 
@@ -610,6 +610,6 @@ setInterval(() => {
     customJson,
     function(err, result) {
       console.log(err, result);
-    }
+    },
   );
 }, 3 * 60 * 1000);
