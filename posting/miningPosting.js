@@ -98,7 +98,7 @@ fs.readFile(
               "sct-mining",
             ],
             community: "busy",
-            app: "busy/2.5.6",
+            app: "steemcoinpan/0.1",
             format: "markdown",
           }),
         },
