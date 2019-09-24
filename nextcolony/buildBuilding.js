@@ -100,9 +100,11 @@ const defaultSkillUpList = [
   { name: "armorimprove", target: 20 },
   { name: "shieldimprove", target: 20 },
   { name: "rocketimprove", target: 20 },
-  { name: "bulletimprove", target: 20 },
-  { name: "laserimprove", target: 20 },
-  { name: "siegeprolongation", target: 10 },
+  { name: "bulletimprove", target: 0 },
+  { name: "laserimprove", target: 0 },
+  { name: "siegeprolongation", target: 20 },
+  { name: "regenerationbonus", target: 20 },
+  { name: "repairbonus", target: 20 },
 ];
 
 const skillUpArray = [
