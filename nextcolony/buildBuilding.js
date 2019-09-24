@@ -83,10 +83,10 @@ const defaultSkillUpList = [
   { name: "Transporter", target: 20 },
   { name: "Frigate", target: 20 },
   { name: "missioncontrol", target: 0 },
-  { name: "uraniumbooster", target: 10 },
-  { name: "copperbooster", target: 0 },
-  { name: "coalbooster", target: 5 },
-  { name: "orebooster", target: 10 },
+  { name: "uraniumbooster", target: 20 },
+  { name: "copperbooster", target: 20 },
+  { name: "coalbooster", target: 20 },
+  { name: "orebooster", target: 20 },
   { name: "uraniummine", target: 16 },
   { name: "coppermine", target: 16 },
   { name: "oremine", target: 17 },
@@ -103,6 +103,7 @@ const defaultSkillUpList = [
   { name: "siegeprolongation", target: 20 },
   { name: "regenerationbonus", target: 20 },
   { name: "repairbonus", target: 20 },
+  { name: "depotincrease", target: 20 },
 ];
 
 const skillUpArray = [
