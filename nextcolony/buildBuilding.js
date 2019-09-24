@@ -142,7 +142,7 @@ const buildPriority = {
   researchcenter: 10,
   coalmine: 15,
   oremine: 15,
-  coppermine: 14,
+  coppermine: 15,
   uraniummine: 16,
   coaldepot: 13,
   oredepot: 13,
