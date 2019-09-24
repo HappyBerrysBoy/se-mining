@@ -6,14 +6,12 @@ const account = "happyberrysboy";
 const mineMinLevel = 13;
 const mineGapVal = 7;
 const shipyardArray = [
-  { name: "N", id: "P-Z03P0EIL1LS", ship: ["explorership"] },
-  { name: "O", id: "P-Z11IOTOZ9WG", ship: ["explorership"] },
-  { name: "P", id: "P-Z44ED8BDCZ4", ship: ["explorership"] },
-  { name: "Q", id: "P-ZH2DUQGU1Z4", ship: ["explorership"] },
-  { name: "R", id: "P-Z7K08XK4IFK", ship: ["explorership"] },
-  { name: "U", id: "P-Z4878F8CXG0", ship: ["explorership"] },
-  // { name: "S", id: "P-ZNBD5M6HLN4", ship: ["explorership"] },
-  // { name: "T", id: "P-Z0QS8KUS8ZK", ship: ["explorership"] },
+  // { name: "N", id: "P-Z03P0EIL1LS", ship: ["explorership"] },
+  // { name: "O", id: "P-Z11IOTOZ9WG", ship: ["explorership"] },
+  // { name: "P", id: "P-Z44ED8BDCZ4", ship: ["explorership"] },
+  // { name: "Q", id: "P-ZH2DUQGU1Z4", ship: ["explorership"] },
+  // { name: "R", id: "P-Z7K08XK4IFK", ship: ["explorership"] },
+  // { name: "U", id: "P-Z4878F8CXG0", ship: ["explorership"] },
 ];
 
 // shield 켜는 custom_json 나중에 참고!!
