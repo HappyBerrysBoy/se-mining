@@ -58,9 +58,9 @@ const explorePlanetArray = [
   {
     name: "W",
     id: "P-ZRI66JULGW0",
-    exploreCnt: 13,
+    exploreCnt: 15,
     explorerDirection: {
-      xminus: false,
+      xminus: true,
       xplus: true,
       yminus: true,
       yplus: true
@@ -146,7 +146,7 @@ const buildPriority = {
   copperdepot: 13,
   uraniumdepot: 13,
   bunker: -1,
-  shieldgenerator: -1
+  shieldgenerator: 1
 };
 
 // Planet 정보
