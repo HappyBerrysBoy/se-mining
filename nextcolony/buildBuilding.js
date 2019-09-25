@@ -22,17 +22,17 @@ const buildPlanetArray = ["P-ZA01QNQO29C"];
 
 //탐험 관련 계정
 const explorePlanetArray = [
-  {
-    name: "N",
-    id: "P-Z03P0EIL1LS",
-    exploreCnt: 4,
-    explorerDirection: {
-      xminus: false,
-      xplus: true,
-      yminus: true,
-      yplus: true
-    }
-  },
+  // {
+  //   name: "N",
+  //   id: "P-Z03P0EIL1LS",
+  //   exploreCnt: 4,
+  //   explorerDirection: {
+  //     xminus: false,
+  //     xplus: true,
+  //     yminus: true,
+  //     yplus: true
+  //   }
+  // },
   {
     name: "R",
     id: "P-Z7K08XK4IFK",
