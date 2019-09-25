@@ -36,7 +36,7 @@ const explorePlanetArray = [
   {
     name: "R",
     id: "P-Z7K08XK4IFK",
-    exploreCnt: 4,
+    exploreCnt: 5,
     explorerDirection: {
       xminus: false,
       xplus: true,
@@ -47,7 +47,7 @@ const explorePlanetArray = [
   {
     name: "V",
     id: "P-Z3LJ6NVV1O0",
-    exploreCnt: 4,
+    exploreCnt: 5,
     explorerDirection: {
       xminus: true,
       xplus: true,
@@ -58,7 +58,7 @@ const explorePlanetArray = [
   {
     name: "W",
     id: "P-ZRI66JULGW0",
-    exploreCnt: 15,
+    exploreCnt: 17,
     explorerDirection: {
       xminus: true,
       xplus: true,
@@ -554,7 +554,7 @@ setInterval(() => {
       console.log(err, result);
     }
   );
-}, 1 * 40 * 1000);
+}, 1 * 30 * 1000);
 
 setInterval(() => {
   if (skillArray.length == 0) return;
@@ -579,7 +579,7 @@ setInterval(() => {
       console.log(err, result);
     }
   );
-}, 3 * 60 * 1000);
+}, 2 * 60 * 1000);
 
 setInterval(() => {
   if (searchGalaxyArray.length == 0) return;
@@ -613,4 +613,4 @@ setInterval(() => {
       console.log(err, result);
     }
   );
-}, 3 * 60 * 1000);
+}, 3 * 80 * 1000);
