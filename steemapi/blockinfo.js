@@ -53,7 +53,8 @@ bot.on("message", msg => {
     `id:${msg.from.id},
     first_name:${msg.from.first_name},
     username:${msg.from.username},
-    is_bot:${msg.from.is_bot}`,
+    is_bot:${msg.from.is_bot}
+    text:${msg.text}`,
   );
 
   if (!telegramMembers.includes(msg.from.id)) return;
