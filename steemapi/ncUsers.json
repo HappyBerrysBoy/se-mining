@@ -1,0 +1,66 @@
+{
+  "telegramMembers": [
+    {
+      "id": 36227498,
+      "user": "happyberrysboy",
+      "targetAccountList": [
+        "proof-of-work",
+        "happyberrysboy",
+        "zzings",
+        "fur2002ks",
+        "gfriend96",
+        "backdm",
+        "glory7",
+        "koyuh8",
+        "y-o-u-t-h-m-e",
+        "mamacoco"
+      ],
+      "nextColonyMonitoringId": []
+    },
+    {
+      "id": 454924368,
+      "user": "y-o-u-t-h-m-e",
+      "targetAccountList": [
+        "proof-of-work",
+        "happyberrysboy",
+        "zzings",
+        "fur2002ks",
+        "gfriend96",
+        "backdm",
+        "glory7",
+        "koyuh8",
+        "y-o-u-t-h-m-e",
+        "mamacoco"
+      ],
+      "nextColonyMonitoringId": [
+        "unique.esprit",
+        "steem.drone",
+        "strikeeagle",
+        "powernap",
+        "drugwar",
+        "mmunited"
+      ]
+    },
+    {
+      "id": 590800908,
+      "user": "koyuh8",
+      "targetAccountList": [
+        "proof-of-work",
+        "happyberrysboy",
+        "zzings",
+        "fur2002ks",
+        "gfriend96",
+        "backdm",
+        "glory7",
+        "koyuh8",
+        "y-o-u-t-h-m-e",
+        "mamacoco",
+        "koyuh88",
+        "koyuh8aaa",
+        "co-owner",
+        "co-owner2"
+      ],
+      "nextColonyMonitoringId": []
+    }
+  ]
+}

@@ -7,42 +7,53 @@ const axios = require("axios");
 const dateFormat = require("dateformat");
 const ssc = new SSC("https://api.steem-engine.com/rpc/");
 const TelegramBot = require("node-telegram-bot-api");
+const ncUsers = require("./ncUsers.json");
 // For a description of the Bot API, see this page: https://core.telegram.org/bots/api
+
+const useTelegramBot = true;
+const useHappyDice = true;
+const useHappyPick = true;
+const useMining = true;
 
 const serviceAccount = "steemservice";
 const postingKey = key.steemservice_posting;
 
-const token = "918252456:AAEM4eW8Dk5bDzc2XuXPh5vHDtckMOXyw-U";
+const token = "918252456:AAEM4eW8Dk5bDzc2XuXPh5vHDtckMOXyw-U"; // nc_bot
+// const token = "901594819:AAGd3ZT2R0886C2Dr9eF2m1nUTrgHng4I84"; // happytest2_bot
 const bot = new TelegramBot(token, { polling: true });
-const telegramMembers = [36227498, 454924368]; //36227498:me, 277033489 : ukk, 454924368:youthme
-const targetAccountList = [
-  "proof-of-work",
-  "happyberrysboy",
-  "zzings",
-  "fur2002ks",
-  "gfriend96",
-  "backdm",
-  "glory7",
-  "koyuh8",
-  "y-o-u-t-h-m-e",
-  "mamacoco"
-];
-const nextColonyMonitoringId = [
-  "unique.esprit",
-  "steem.drone",
-  "strikeeagle",
-  "powernap",
-  "drugwar",
-  "mmunited"
-];
+// const telegramMembers = [36227498, 454924368, 590800908]; //36227498:me, 277033489 : ukk, 454924368:youthme, 590800908:코유님
+// const targetAccountList = [
+//   "proof-of-work",
+//   "happyberrysboy",
+//   "zzings",
+//   "fur2002ks",
+//   "gfriend96",
+//   "backdm",
+//   "glory7",
+//   "koyuh8",
+//   "y-o-u-t-h-m-e",
+//   "mamacoco",
+// ];
+// const nextColonyMonitoringId = [
+//   "unique.esprit",
+//   "steem.drone",
+//   "strikeeagle",
+//   "powernap",
+//   "drugwar",
+//   "mmunited",
+// ];
 const nextColonyMinitoringCommand = ["attack", "cancel", "deploy", "siege"];
+const telegramMembers = [];
+ncUsers.telegramMembers.forEach(u => {
+  telegramMembers.push(u.id);
+});
 
 bot.on("message", msg => {
   console.log(
     `id:${msg.from.id},
     first_name:${msg.from.first_name},
     username:${msg.from.username},
-    is_bot:${msg.from.is_bot}`
+    is_bot:${msg.from.is_bot}`,
   );
 
   if (!telegramMembers.includes(msg.from.id)) return;
@@ -52,19 +63,19 @@ bot.on("message", msg => {
   // send a message to the chat acknowledging receipt of their message
   bot.sendMessage(
     chatId,
-    `반갑습니다. ${msg.from.first_name}님. 메아리(${msg.text})`
+    `반갑습니다. ${msg.from.first_name}님. 메아리(${msg.text})`,
   );
 });
 
 const fleetMission = account => {
   return axios.get(
-    `https://api.nextcolony.io/loadfleetmission?user=${account}&active=1`
+    `https://api.nextcolony.io/loadfleetmission?user=${account}&active=1`,
   );
 };
 
 const fleetPlanetMission = (account, planet) => {
   return axios.get(
-    `https://api.nextcolony.io/loadfleetmission?user=${account}&planetid=${planet}`
+    `https://api.nextcolony.io/loadfleetmission?user=${account}&planetid=${planet}`,
   );
 };
 
@@ -74,13 +85,13 @@ const loadplanet = planetId => {
 
 const loadFleet = (account, planet) => {
   return axios.get(
-    `https://api.nextcolony.io/loadfleet?user=${account}&planetid=${planet}`
+    `https://api.nextcolony.io/loadfleet?user=${account}&planetid=${planet}`,
   );
 };
 
 const findPlanet = () => {
   return axios.get(
-    `https://api.nextcolony.io/loadplanets?sort=date&from=0&to=1`
+    `https://api.nextcolony.io/loadplanets?sort=date&from=0&to=1`,
   );
 };
 
@@ -102,7 +113,7 @@ const getContent = (author, permlink) => {
   });
 };
 
-fs.readFile("../config/blockConfig.ini", "utf8", function(err, data) {
+fs.readFile("./config/blockConfig.ini", "utf8", function(err, data) {
   if (err) console.log(err);
   const json = JSON.parse(data);
   console.log(json.lastReadSteemBlock);
@@ -148,11 +159,11 @@ async function blockMonitoring(blockno) {
     console.log(e);
     console.log(`const { timestamp = null, transactions } = blockinfo error`);
     fs.appendFile(
-      "../logs/exceptions(" + dateString + ").txt",
+      "./logs/exceptions(" + dateString + ").txt",
       JSON.stringify(blockinfo) + "\n",
       err => {
         if (err) console.log(err);
-      }
+      },
     );
   }
 
@@ -179,52 +190,6 @@ async function blockMonitoring(blockno) {
         jsonInfo.timestamp = timestamp;
         jsonInfo.block = blockno.lastReadSteemBlock;
 
-        if (
-          content.id == "nextcolony" &&
-          (jsonInfo.type == "siege" || jsonInfo.type == "attack")
-        ) {
-          const planetid = jsonInfo.command.tr_var4;
-
-          const missions = await fleetPlanetMission(
-            jsonInfo.username,
-            planetid
-          );
-
-          const thisMission = missions.data.find(
-            m =>
-              m.type == jsonInfo.type &&
-              m.end_x == jsonInfo.command.tr_var2 &&
-              m.end_y == jsonInfo.command.tr_var3
-          );
-
-          if (targetAccountList.includes(thisMission.to_planet.user)) {
-            let arrTime = new Date(thisMission.arrival * 1000);
-            let retTime = new Date(thisMission.return * 1000);
-
-            sendMsg = `====비상비상====\nAccount:${jsonInfo.username}  \nType:${
-              jsonInfo.type
-            }(${thisMission.id})\nArr:${dateFormat(
-              arrTime,
-              "mm/dd HH:MM:ss"
-            )}, Ret:${
-              thisMission.return ? dateFormat(retTime, "mm/dd HH:MM:ss") : "-"
-            }  \nShips:${JSON.stringify(
-              jsonInfo.command.tr_var1
-            )}  \nFrom:${planetid}(${thisMission.from_planet.name}, ${
-              thisMission.start_x
-            }, ${thisMission.start_y})\nTo:${thisMission.to_planet.user}(${
-              thisMission.to_planet.id
-            }(${thisMission.to_planet.name}), ${jsonInfo.command.tr_var2}, ${
-              jsonInfo.command.tr_var3
-            })`;
-
-            if (sendMsg) {
-              console.log(sendMsg);
-              telegramMembers.forEach(m => bot.sendMessage(m, sendMsg));
-            }
-          }
-        }
-
         if (blockno.lastReadSteemBlock % 10 == 0) {
           findPlanet().then(p => {
             if (blockno.lastPlanetUser != p.data.planets[0].username) {
@@ -236,78 +201,142 @@ async function blockMonitoring(blockno) {
           });
         }
 
-        if (
-          content.id == "nextcolony" &&
-          nextColonyMonitoringId.includes(jsonInfo.username) &&
-          nextColonyMinitoringCommand.includes(jsonInfo.type)
-        ) {
-          console.log(jsonInfo);
-          // {"username":"strikeeagle","type":"siege","command":{"tr_var1":{"frigate1":{"pos":1,"n":30}},"tr_var2":-294,"tr_var3":116,"tr_var4":"P-ZBVFMCH4HEO"}}
-
-          let sendMsg = "";
-
-          if (jsonInfo.type == "cancel") {
-            const missions = await fleetMission(jsonInfo.username);
-            const target = missions.data.filter(
-              m => m.id == jsonInfo.command.tr_var1
-            );
-
-            if (target.length) {
-              let tmpTime = new Date(target[0].arrival * 1000);
-
-              sendMsg = `Account:${jsonInfo.username}  \nType:${
-                jsonInfo.type
-              }(ArrTime:${dateFormat(tmpTime, "mm/dd HH:MM:ss")})  \nMission:${
-                jsonInfo.command.tr_var1
-              }`;
-            } else {
-              sendMsg = `Account:${jsonInfo.username}  \nType:${jsonInfo.type}(${jsonInfo.timestamp})  \nMission:${jsonInfo.command.tr_var1}`;
-            }
-          } else {
-            // deploy, attack, siege
-            const planetid =
-              jsonInfo.type == "deploy"
-                ? jsonInfo.command.tr_var8
-                : jsonInfo.command.tr_var4;
+        if (useTelegramBot && content.id == "nextcolony") {
+          // siege, attack인 경우 여기 등록된 계정에 공격 받는사람이 있는지 체크
+          if (jsonInfo.type == "siege" || jsonInfo.type == "attack") {
+            const planetid = jsonInfo.command.tr_var4;
 
             const missions = await fleetPlanetMission(
               jsonInfo.username,
-              planetid
+              planetid,
             );
 
             const thisMission = missions.data.find(
               m =>
                 m.type == jsonInfo.type &&
                 m.end_x == jsonInfo.command.tr_var2 &&
-                m.end_y == jsonInfo.command.tr_var3
+                m.end_y == jsonInfo.command.tr_var3,
             );
 
-            let arrTime = new Date(thisMission.arrival * 1000);
-            let retTime = new Date(thisMission.return * 1000);
+            for (let i = 0; i < ncUsers.telegramMembers.length; i++) {
+              const ncUser = ncUsers.telegramMembers[i];
+              const targetAccountList = ncUser.targetAccountList;
 
-            sendMsg = `Account:${jsonInfo.username}  \nType:${jsonInfo.type}(${
-              thisMission.id
-            })\nArr:${dateFormat(arrTime, "mm/dd HH:MM:ss")}, Ret:${
-              thisMission.return ? dateFormat(retTime, "mm/dd HH:MM:ss") : "-"
-            }  \nShips:${JSON.stringify(
-              jsonInfo.command.tr_var1
-            )}  \nFrom:${planetid}(${thisMission.from_planet.name}, ${
-              thisMission.start_x
-            }, ${thisMission.start_y})\nTo:${thisMission.to_planet.user}(${
-              thisMission.to_planet.id
-            }(${thisMission.to_planet.name}), ${jsonInfo.command.tr_var2}, ${
-              jsonInfo.command.tr_var3
-            })`;
+              if (targetAccountList.includes(thisMission.to_planet.user)) {
+                let arrTime = new Date(thisMission.arrival * 1000);
+                let retTime = new Date(thisMission.return * 1000);
+
+                sendMsg = `====비상비상====\nAccount:${
+                  jsonInfo.username
+                }  \nType:${jsonInfo.type}(${thisMission.id})\nArr:${dateFormat(
+                  arrTime,
+                  "mm/dd HH:MM:ss",
+                )}, Ret:${
+                  thisMission.return
+                    ? dateFormat(retTime, "mm/dd HH:MM:ss")
+                    : "-"
+                }  \nShips:${JSON.stringify(
+                  jsonInfo.command.tr_var1,
+                )}  \nFrom:${planetid}(${thisMission.from_planet.name}, ${
+                  thisMission.start_x
+                }, ${thisMission.start_y})\nTo:${thisMission.to_planet.user}(${
+                  thisMission.to_planet.id
+                }(${thisMission.to_planet.name}), ${
+                  jsonInfo.command.tr_var2
+                }, ${jsonInfo.command.tr_var3})`;
+
+                if (sendMsg) {
+                  console.log(ncUser.id, thisMission.to_planet.user, sendMsg);
+                  bot.sendMessage(ncUser.id, sendMsg);
+                }
+              }
+            }
           }
 
-          if (sendMsg) {
-            telegramMembers.forEach(m => bot.sendMessage(m, sendMsg));
+          for (let i = 0; i < ncUsers.telegramMembers.length; i++) {
+            const ncUser = ncUsers.telegramMembers[i];
+            const nextColonyMonitoringId = ncUser.nextColonyMonitoringId;
+
+            if (
+              nextColonyMonitoringId.includes(jsonInfo.username) &&
+              nextColonyMinitoringCommand.includes(jsonInfo.type)
+            ) {
+              console.log(jsonInfo);
+              // {"username":"strikeeagle","type":"siege","command":{"tr_var1":{"frigate1":{"pos":1,"n":30}},"tr_var2":-294,"tr_var3":116,"tr_var4":"P-ZBVFMCH4HEO"}}
+
+              let sendMsg = "";
+
+              if (jsonInfo.type == "cancel") {
+                const missions = await fleetMission(jsonInfo.username);
+                const target = missions.data.filter(
+                  m => m.id == jsonInfo.command.tr_var1,
+                );
+
+                if (target.length) {
+                  let tmpTime = new Date(target[0].arrival * 1000);
+
+                  sendMsg = `Account:${jsonInfo.username}  \nType:${
+                    jsonInfo.type
+                  }(ArrTime:${dateFormat(
+                    tmpTime,
+                    "mm/dd HH:MM:ss",
+                  )})  \nMission:${jsonInfo.command.tr_var1}`;
+                } else {
+                  sendMsg = `Account:${jsonInfo.username}  \nType:${jsonInfo.type}(${jsonInfo.timestamp})  \nMission:${jsonInfo.command.tr_var1}`;
+                }
+              } else {
+                // deploy, attack, siege
+                const planetid =
+                  jsonInfo.type == "deploy"
+                    ? jsonInfo.command.tr_var8
+                    : jsonInfo.command.tr_var4;
+
+                const missions = await fleetPlanetMission(
+                  jsonInfo.username,
+                  planetid,
+                );
+
+                const thisMission = missions.data.find(
+                  m =>
+                    m.type == jsonInfo.type &&
+                    m.end_x == jsonInfo.command.tr_var2 &&
+                    m.end_y == jsonInfo.command.tr_var3,
+                );
+
+                let arrTime = new Date(thisMission.arrival * 1000);
+                let retTime = new Date(thisMission.return * 1000);
+
+                sendMsg = `Account:${jsonInfo.username}  \nType:${
+                  jsonInfo.type
+                }(${thisMission.id})\nArr:${dateFormat(
+                  arrTime,
+                  "mm/dd HH:MM:ss",
+                )}, Ret:${
+                  thisMission.return
+                    ? dateFormat(retTime, "mm/dd HH:MM:ss")
+                    : "-"
+                }  \nShips:${JSON.stringify(
+                  jsonInfo.command.tr_var1,
+                )}  \nFrom:${planetid}(${thisMission.from_planet.name}, ${
+                  thisMission.start_x
+                }, ${thisMission.start_y})\nTo:${thisMission.to_planet.user}(${
+                  thisMission.to_planet.id
+                }(${thisMission.to_planet.name}), ${
+                  jsonInfo.command.tr_var2
+                }, ${jsonInfo.command.tr_var3})`;
+              }
+
+              if (sendMsg) {
+                bot.sendMessage(ncUser.id, sendMsg);
+              }
+            }
           }
         }
 
         // {"username":"kurade","type":"deploy","command":{"tr_var1":{"explorership":2},"tr_var2":-33,"tr_var3":-247,"tr_var4":0,"tr_var5":0,"tr_var6":0,"tr_var7":0,"tr_var8":"P-ZWRISNYRSV4"}}
 
         if (
+          useMining &&
           content.id === config.customJsonList.mining &&
           jsonInfo.type === config.customJsonList.mining_type
         ) {
@@ -320,11 +349,11 @@ async function blockMonitoring(blockno) {
           console.log("content :", jsonInfo);
 
           fs.appendFile(
-            "../logs/mining(" + dateString + ").txt",
+            "./logs/mining(" + dateString + ").txt",
             JSON.stringify(jsonInfo) + "\n",
             err => {
               if (err) console.log(err);
-            }
+            },
           );
           // {"service":"SE_MINING","content":"key:id, content:scot_claim","level":"info","message":"info","timestamp":"2019-06-25 01:42:46"}
           // {"service":"SE_MINING","content":"key:json, content:{\"symbol\":\"PAL\",\"type\":\"mining\",\"N\":9,\"staked_mining_power\":2313.0000000000005,\"winner\":[\"bitcoinflood\",\"jongolson\",\"michealb\",\"nuthman\",\"aggroed\",\"dylanhobalart\",\"dylanhobalart\",\"videosteemit\",\"steinreich\"],\"claim_token_amount\":2.067,\"trx_id\":\"4654e524c287b4354981587aea3a62f133da8648\",\"block_num\":34084567,\"N_accounts\":166}","level":"info","message":"info","timestamp":"2019-06-25 01:42:46"}
@@ -338,25 +367,26 @@ async function blockMonitoring(blockno) {
           // console.log('content :', content);
 
           fs.appendFile(
-            "../logs/sct_log_" + timestamp.split("T")[0] + ".txt",
+            "./logs/sct_log_" + timestamp.split("T")[0] + ".txt",
             JSON.stringify(content) + "\n",
             err => {
               if (err) console.log(err);
-            }
+            },
           );
         }
       } catch (e) {
         console.log(e);
         fs.appendFile(
-          "../logs/exceptions(" + dateString + ").txt",
+          "./logs/exceptions(" + dateString + ").txt",
           "retry count over\n",
           err => {
             if (err) console.log(err);
-          }
+          },
         );
         return;
       }
     } else if (
+      useHappyPick &&
       action === "comment" &&
       content.body.indexOf(config.pickTag) > -1
     ) {
@@ -380,7 +410,7 @@ async function blockMonitoring(blockno) {
           content.body
             .split(config.pickTag)[1]
             .split("(")[0]
-            .trim()
+            .trim(),
         );
 
         // 몇명 뽑는지 입력 안하면 1명으로 설정
@@ -469,17 +499,17 @@ async function blockMonitoring(blockno) {
           content.json_metadata,
           function(err, result) {
             console.log(err, result);
-          }
+          },
         );
 
         const logJson = { content: content, result: body };
 
         fs.appendFile(
-          "../logs/happypick(" + dateString + ").txt",
+          "./logs/happypick(" + dateString + ").txt",
           JSON.stringify(logJson) + "\n",
           err => {
             if (err) console.log(err);
-          }
+          },
         );
       } catch (e) {
         console.log(e);
@@ -494,10 +524,11 @@ async function blockMonitoring(blockno) {
           content.json_metadata,
           function(err, result) {
             console.log(err, result);
-          }
+          },
         );
       }
     } else if (
+      useHappyDice &&
       action === "comment" &&
       content.parent_author != "" &&
       content.body.indexOf(config.diceTag) > -1
@@ -548,7 +579,7 @@ async function blockMonitoring(blockno) {
             content.json_metadata,
             function(err, result) {
               console.log(err, result);
-            }
+            },
           );
           return;
         }
@@ -573,17 +604,17 @@ async function blockMonitoring(blockno) {
           content.json_metadata,
           function(err, result) {
             console.log(err, result);
-          }
+          },
         );
 
         const logJson = { content: content, result: body };
 
         fs.appendFile(
-          "../logs/happydice(" + dateString + ").txt",
+          "./logs/happydice(" + dateString + ").txt",
           JSON.stringify(logJson) + "\n",
           err => {
             if (err) console.log(err);
-          }
+          },
         );
       } catch (e) {
         console.log(`dice error`);
@@ -603,7 +634,7 @@ async function blockMonitoring(blockno) {
           content.json_metadata,
           function(err, result) {
             console.log(err, result);
-          }
+          },
         );
         return;
       }
@@ -612,7 +643,7 @@ async function blockMonitoring(blockno) {
 
   blockno.lastReadSteemBlock += 1;
 
-  fs.writeFile("../config/blockConfig.ini", JSON.stringify(blockno), err => {
+  fs.writeFile("./config/blockConfig.ini", JSON.stringify(blockno), err => {
     if (err) console.log(err);
   });
 }
