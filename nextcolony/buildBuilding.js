@@ -12,6 +12,16 @@ const shipyardArray = [
   // { name: "Q", id: "P-ZH2DUQGU1Z4", ship: ["explorership"] },
   // { name: "R", id: "P-Z7K08XK4IFK", ship: ["explorership"] },
   // { name: "U", id: "P-Z4878F8CXG0", ship: ["explorership"] },
+  { name: "D", id: "P-ZRBZG7PL6NK", ship: ["corvette"] },
+  { name: "F", id: "P-Z5TV3Z99YM8", ship: ["corvette"] },
+  { name: "G", id: "P-ZD7VOJ4FF8W", ship: ["corvette"] },
+  { name: "I", id: "P-ZHGO5SVV8XC", ship: ["corvette"] },
+  { name: "J", id: "P-ZOWKXS7K60W", ship: ["corvette"] },
+  { name: "K", id: "P-ZTPRC5MLJXS", ship: ["corvette"] },
+  { name: "L", id: "P-ZYBGDS70ILS", ship: ["corvette"] },
+  { name: "M", id: "P-ZIWU6M04H80", ship: ["corvette"] },
+  { name: "O", id: "P-Z11IOTOZ9WG", ship: ["corvette"] },
+  { name: "P", id: "P-Z44ED8BDCZ4", ship: ["corvette"] }
 ];
 
 // shield 켜는 custom_json 나중에 참고!!
@@ -55,28 +65,6 @@ const explorePlanetArray = [
       yplus: true
     }
   }
-  // {
-  //   name: "W",
-  //   id: "P-ZRI66JULGW0",
-  //   exploreCnt: 17,
-  //   explorerDirection: {
-  //     xminus: true,
-  //     xplus: true,
-  //     yminus: true,
-  //     yplus: true
-  //   }
-  // },
-  // {
-  //   name: "X",
-  //   id: "P-Z1YNSURVXKG",
-  //   exploreCnt: 5,
-  //   explorerDirection: {
-  //     xminus: false,
-  //     xplus: true,
-  //     yminus: true,
-  //     yplus: true
-  //   }
-  // }
 ];
 
 const defaultSkillUpList = [
@@ -377,45 +365,43 @@ async function loadSchedulerJob(planet) {
 
           // skill up
           // shipyardarray 리스트에 포함되어 있으면 스킬업은 하지 않는다.
-          if (!shipyardArray.some(s => s.id === planet.id)) {
-            let targetPlanet = skillUpArray.filter(p => p.planet == planet.id);
+          // if (!shipyardArray.some(s => s.id === planet.id)) {
+          let targetPlanet = skillUpArray.filter(p => p.planet == planet.id);
 
-            if (targetPlanet.length == 0) {
-              targetPlanet = defaultSkillUpList;
-            }
+          if (targetPlanet.length == 0) {
+            targetPlanet = defaultSkillUpList;
+          }
 
-            if (targetPlanet.length) {
-              const targetSkill = targetPlanet.filter(s => s.target);
+          if (targetPlanet.length) {
+            const targetSkill = targetPlanet.filter(s => s.target);
 
-              // console.log(targetSkill);
+            // console.log(targetSkill);
 
-              skillInfo.data.forEach(skill => {
-                const targetInfo = targetSkill.filter(
-                  t => t.name == skill.name
-                );
+            skillInfo.data.forEach(skill => {
+              const targetInfo = targetSkill.filter(t => t.name == skill.name);
 
-                if (!targetInfo.length) return;
+              if (!targetInfo.length) return;
 
-                if (targetInfo[0].target <= skill.current) return;
+              if (targetInfo[0].target <= skill.current) return;
 
-                if (availCoal < skill.coal) return;
-                if (availCopper < skill.copper) return;
-                if (availOre < skill.ore) return;
-                if (availUranium < skill.uranium) return;
+              if (availCoal < skill.coal) return;
+              if (availCopper < skill.copper) return;
+              if (availOre < skill.ore) return;
+              if (availUranium < skill.uranium) return;
 
-                if (currDate / 1000 <= skill.busy) return;
+              if (currDate / 1000 <= skill.busy) return;
 
-                skillArray.push(
-                  `{"username":"${account}","type":"enhance","command":{
+              skillArray.push(
+                `{"username":"${account}","type":"enhance","command":{
                           "tr_var1":"${account}",
                           "tr_var2":"${planet.id}",
                           "tr_var3":"${skill.name}"}}`
-                );
+              );
 
-                console.log(`Available skill:${skill.name}`);
-              });
-            }
+              console.log(`Available skill:${skill.name}`);
+            });
           }
+          // }
 
           // build ship
           // shipyardInfo
@@ -554,7 +540,7 @@ setInterval(() => {
       console.log(err, result);
     }
   );
-}, 1 * 30 * 1000);
+}, 1 * 20 * 1000);
 
 setInterval(() => {
   if (skillArray.length == 0) return;
@@ -579,7 +565,7 @@ setInterval(() => {
       console.log(err, result);
     }
   );
-}, 2 * 60 * 1000);
+}, 1 * 50 * 1000);
 
 setInterval(() => {
   if (searchGalaxyArray.length == 0) return;
@@ -596,7 +582,7 @@ setInterval(() => {
       console.log(err, result);
     }
   );
-}, 1 * 70 * 1000);
+}, 1 * 30 * 1000);
 
 setInterval(() => {
   if (shipArray.length == 0) return;
@@ -613,4 +599,4 @@ setInterval(() => {
       console.log(err, result);
     }
   );
-}, 3 * 80 * 1000);
+}, 1 * 40 * 1000);
