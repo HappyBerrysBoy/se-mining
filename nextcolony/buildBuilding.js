@@ -22,17 +22,6 @@ const buildPlanetArray = ["P-ZA01QNQO29C"];
 
 //탐험 관련 계정
 const explorePlanetArray = [
-  // {
-  //   name: "N",
-  //   id: "P-Z03P0EIL1LS",
-  //   exploreCnt: 4,
-  //   explorerDirection: {
-  //     xminus: false,
-  //     xplus: true,
-  //     yminus: true,
-  //     yplus: true
-  //   }
-  // },
   {
     name: "R",
     id: "P-Z7K08XK4IFK",
@@ -56,27 +45,38 @@ const explorePlanetArray = [
     }
   },
   {
-    name: "W",
-    id: "P-ZRI66JULGW0",
-    exploreCnt: 17,
+    name: "Y",
+    id: "P-ZSYM6UCTBGG",
+    exploreCnt: 22,
     explorerDirection: {
       xminus: true,
       xplus: true,
       yminus: true,
       yplus: true
     }
-  },
-  {
-    name: "X",
-    id: "P-Z1YNSURVXKG",
-    exploreCnt: 5,
-    explorerDirection: {
-      xminus: false,
-      xplus: true,
-      yminus: true,
-      yplus: true
-    }
   }
+  // {
+  //   name: "W",
+  //   id: "P-ZRI66JULGW0",
+  //   exploreCnt: 17,
+  //   explorerDirection: {
+  //     xminus: true,
+  //     xplus: true,
+  //     yminus: true,
+  //     yplus: true
+  //   }
+  // },
+  // {
+  //   name: "X",
+  //   id: "P-Z1YNSURVXKG",
+  //   exploreCnt: 5,
+  //   explorerDirection: {
+  //     xminus: false,
+  //     xplus: true,
+  //     yminus: true,
+  //     yplus: true
+  //   }
+  // }
 ];
 
 const defaultSkillUpList = [
