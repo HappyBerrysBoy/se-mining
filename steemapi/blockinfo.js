@@ -7,7 +7,7 @@ const axios = require("axios");
 const dateFormat = require("dateformat");
 const ssc = new SSC("https://api.steem-engine.com/rpc/");
 const TelegramBot = require("node-telegram-bot-api");
-const ncUsers = require("./ncUsers.json");
+// const ncUsers = require("./ncUsers.json");
 // For a description of the Bot API, see this page: https://core.telegram.org/bots/api
 
 const useTelegramBot = true;
@@ -43,10 +43,10 @@ const bot = new TelegramBot(token, { polling: true });
 //   "mmunited",
 // ];
 const nextColonyMinitoringCommand = ["attack", "cancel", "deploy", "siege"];
-const telegramMembers = [];
-ncUsers.telegramMembers.forEach(u => {
-  telegramMembers.push(u.id);
-});
+// const telegramMembers = [];
+// ncUsers.telegramMembers.forEach(u => {
+//   telegramMembers.push(u.id);
+// });
 
 bot.on("message", msg => {
   console.log(
@@ -54,29 +54,29 @@ bot.on("message", msg => {
     first_name:${msg.from.first_name},
     username:${msg.from.username},
     is_bot:${msg.from.is_bot}
-    text:${msg.text}`,
+    text:${msg.text}`
   );
 
-  if (!telegramMembers.includes(msg.from.id)) return;
+  // if (!telegramMembers.includes(msg.from.id)) return;
 
   const chatId = msg.chat.id;
 
   // send a message to the chat acknowledging receipt of their message
   bot.sendMessage(
     chatId,
-    `반갑습니다. ${msg.from.first_name}님. 메아리(${msg.text})`,
+    `반갑습니다. ${msg.from.first_name}님. 메아리(${msg.text})`
   );
 });
 
 const fleetMission = account => {
   return axios.get(
-    `https://api.nextcolony.io/loadfleetmission?user=${account}&active=1`,
+    `https://api.nextcolony.io/loadfleetmission?user=${account}&active=1`
   );
 };
 
 const fleetPlanetMission = (account, planet) => {
   return axios.get(
-    `https://api.nextcolony.io/loadfleetmission?user=${account}&planetid=${planet}`,
+    `https://api.nextcolony.io/loadfleetmission?user=${account}&planetid=${planet}`
   );
 };
 
@@ -86,13 +86,13 @@ const loadplanet = planetId => {
 
 const loadFleet = (account, planet) => {
   return axios.get(
-    `https://api.nextcolony.io/loadfleet?user=${account}&planetid=${planet}`,
+    `https://api.nextcolony.io/loadfleet?user=${account}&planetid=${planet}`
   );
 };
 
 const findPlanet = () => {
   return axios.get(
-    `https://api.nextcolony.io/loadplanets?sort=date&from=0&to=1`,
+    `https://api.nextcolony.io/loadplanets?sort=date&from=0&to=1`
   );
 };
 
@@ -132,6 +132,14 @@ async function getBlock(json) {
 }
 
 async function blockMonitoring(blockno) {
+  const ncUsers = require("./ncUsers.json");
+  const telegramMembers = [];
+  ncUsers.telegramMembers.forEach(u => {
+    telegramMembers.push(u.id);
+  });
+
+  console.log(telegramMembers);
+
   const date = new Date();
   // AWS 시간이 UTC 기준이라 국내보다 9시간 늦음 그래서 강제로 9시간 빠르게 돌림
   date.setHours(date.getHours() + 9);
@@ -164,7 +172,7 @@ async function blockMonitoring(blockno) {
       JSON.stringify(blockinfo) + "\n",
       err => {
         if (err) console.log(err);
-      },
+      }
     );
   }
 
@@ -209,14 +217,14 @@ async function blockMonitoring(blockno) {
 
             const missions = await fleetPlanetMission(
               jsonInfo.username,
-              planetid,
+              planetid
             );
 
             const thisMission = missions.data.find(
               m =>
                 m.type == jsonInfo.type &&
                 m.end_x == jsonInfo.command.tr_var2 &&
-                m.end_y == jsonInfo.command.tr_var3,
+                m.end_y == jsonInfo.command.tr_var3
             );
 
             for (let i = 0; i < ncUsers.telegramMembers.length; i++) {
@@ -231,13 +239,13 @@ async function blockMonitoring(blockno) {
                   jsonInfo.username
                 }  \nType:${jsonInfo.type}(${thisMission.id})\nArr:${dateFormat(
                   arrTime,
-                  "mm/dd HH:MM:ss",
+                  "mm/dd HH:MM:ss"
                 )}, Ret:${
                   thisMission.return
                     ? dateFormat(retTime, "mm/dd HH:MM:ss")
                     : "-"
                 }  \nShips:${JSON.stringify(
-                  jsonInfo.command.tr_var1,
+                  jsonInfo.command.tr_var1
                 )}  \nFrom:${planetid}(${thisMission.from_planet.name}, ${
                   thisMission.start_x
                 }, ${thisMission.start_y})\nTo:${thisMission.to_planet.user}(${
@@ -270,7 +278,7 @@ async function blockMonitoring(blockno) {
               if (jsonInfo.type == "cancel") {
                 const missions = await fleetMission(jsonInfo.username);
                 const target = missions.data.filter(
-                  m => m.id == jsonInfo.command.tr_var1,
+                  m => m.id == jsonInfo.command.tr_var1
                 );
 
                 if (target.length) {
@@ -280,7 +288,7 @@ async function blockMonitoring(blockno) {
                     jsonInfo.type
                   }(ArrTime:${dateFormat(
                     tmpTime,
-                    "mm/dd HH:MM:ss",
+                    "mm/dd HH:MM:ss"
                   )})  \nMission:${jsonInfo.command.tr_var1}`;
                 } else {
                   sendMsg = `Account:${jsonInfo.username}  \nType:${jsonInfo.type}(${jsonInfo.timestamp})  \nMission:${jsonInfo.command.tr_var1}`;
@@ -294,14 +302,14 @@ async function blockMonitoring(blockno) {
 
                 const missions = await fleetPlanetMission(
                   jsonInfo.username,
-                  planetid,
+                  planetid
                 );
 
                 const thisMission = missions.data.find(
                   m =>
                     m.type == jsonInfo.type &&
                     m.end_x == jsonInfo.command.tr_var2 &&
-                    m.end_y == jsonInfo.command.tr_var3,
+                    m.end_y == jsonInfo.command.tr_var3
                 );
 
                 let arrTime = new Date(thisMission.arrival * 1000);
@@ -311,13 +319,13 @@ async function blockMonitoring(blockno) {
                   jsonInfo.type
                 }(${thisMission.id})\nArr:${dateFormat(
                   arrTime,
-                  "mm/dd HH:MM:ss",
+                  "mm/dd HH:MM:ss"
                 )}, Ret:${
                   thisMission.return
                     ? dateFormat(retTime, "mm/dd HH:MM:ss")
                     : "-"
                 }  \nShips:${JSON.stringify(
-                  jsonInfo.command.tr_var1,
+                  jsonInfo.command.tr_var1
                 )}  \nFrom:${planetid}(${thisMission.from_planet.name}, ${
                   thisMission.start_x
                 }, ${thisMission.start_y})\nTo:${thisMission.to_planet.user}(${
@@ -354,7 +362,7 @@ async function blockMonitoring(blockno) {
             JSON.stringify(jsonInfo) + "\n",
             err => {
               if (err) console.log(err);
-            },
+            }
           );
           // {"service":"SE_MINING","content":"key:id, content:scot_claim","level":"info","message":"info","timestamp":"2019-06-25 01:42:46"}
           // {"service":"SE_MINING","content":"key:json, content:{\"symbol\":\"PAL\",\"type\":\"mining\",\"N\":9,\"staked_mining_power\":2313.0000000000005,\"winner\":[\"bitcoinflood\",\"jongolson\",\"michealb\",\"nuthman\",\"aggroed\",\"dylanhobalart\",\"dylanhobalart\",\"videosteemit\",\"steinreich\"],\"claim_token_amount\":2.067,\"trx_id\":\"4654e524c287b4354981587aea3a62f133da8648\",\"block_num\":34084567,\"N_accounts\":166}","level":"info","message":"info","timestamp":"2019-06-25 01:42:46"}
@@ -372,7 +380,7 @@ async function blockMonitoring(blockno) {
             JSON.stringify(content) + "\n",
             err => {
               if (err) console.log(err);
-            },
+            }
           );
         }
       } catch (e) {
@@ -382,7 +390,7 @@ async function blockMonitoring(blockno) {
           "retry count over\n",
           err => {
             if (err) console.log(err);
-          },
+          }
         );
         return;
       }
@@ -411,7 +419,7 @@ async function blockMonitoring(blockno) {
           content.body
             .split(config.pickTag)[1]
             .split("(")[0]
-            .trim(),
+            .trim()
         );
 
         // 몇명 뽑는지 입력 안하면 1명으로 설정
@@ -500,7 +508,7 @@ async function blockMonitoring(blockno) {
           content.json_metadata,
           function(err, result) {
             console.log(err, result);
-          },
+          }
         );
 
         const logJson = { content: content, result: body };
@@ -510,7 +518,7 @@ async function blockMonitoring(blockno) {
           JSON.stringify(logJson) + "\n",
           err => {
             if (err) console.log(err);
-          },
+          }
         );
       } catch (e) {
         console.log(e);
@@ -525,7 +533,7 @@ async function blockMonitoring(blockno) {
           content.json_metadata,
           function(err, result) {
             console.log(err, result);
-          },
+          }
         );
       }
     } else if (
@@ -580,7 +588,7 @@ async function blockMonitoring(blockno) {
             content.json_metadata,
             function(err, result) {
               console.log(err, result);
-            },
+            }
           );
           return;
         }
@@ -605,7 +613,7 @@ async function blockMonitoring(blockno) {
           content.json_metadata,
           function(err, result) {
             console.log(err, result);
-          },
+          }
         );
 
         const logJson = { content: content, result: body };
@@ -615,7 +623,7 @@ async function blockMonitoring(blockno) {
           JSON.stringify(logJson) + "\n",
           err => {
             if (err) console.log(err);
-          },
+          }
         );
       } catch (e) {
         console.log(`dice error`);
@@ -635,7 +643,7 @@ async function blockMonitoring(blockno) {
           content.json_metadata,
           function(err, result) {
             console.log(err, result);
-          },
+          }
         );
         return;
       }

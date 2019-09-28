@@ -70,7 +70,7 @@ fs.readFile(
       tmp += "<br><br>\n";
 
       body += `### ${keyinfo} - Total Amount(${totalAmount.toFixed(
-        3,
+        3
       )}), Count(${value.length}) \n`;
       body += tmp;
     }
@@ -95,13 +95,13 @@ fs.readFile(
               "steemleo",
               "palnet",
               "sct-en",
-              "sct-mining",
+              "sct-mining"
             ],
             community: "busy",
             app: "steemcoinpan/0.1",
-            format: "markdown",
-          }),
-        },
+            format: "markdown"
+          })
+        }
       ],
       [
         "comment_options",
@@ -116,12 +116,12 @@ fs.readFile(
             [
               0,
               {
-                beneficiaries: [{ account: "sct.krwp", weight: 10000 }],
-              },
-            ],
-          ],
-        },
-      ],
+                beneficiaries: [{ account: "happyberrysboy", weight: 10000 }]
+              }
+            ]
+          ]
+        }
+      ]
     ];
     steem.broadcast.send(
       { operations: operations, extensions: [] },
@@ -133,9 +133,9 @@ fs.readFile(
         }
 
         console.log(r);
-      },
+      }
     );
-  },
+  }
 );
 
 Date.prototype.addHours = function(h) {
