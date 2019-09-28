@@ -134,23 +134,18 @@ async function readFileFunc(filepath) {
       resolve(JSON.parse(data));
     });
   }).then(r => {
-    console.log(`ncusers!!!:${r}`);
     return r;
   });
 }
 
 async function blockMonitoring(blockno) {
   let ncUsers;
-  console.log(`start!!!!!!`);
   ncUsers = await readFileFunc("./ncUsers.json");
-  console.log("the end!!!");
-  // const ncUsers = require("./ncUsers.json");
+
   const telegramMembers = [];
   ncUsers.telegramMembers.forEach(u => {
     telegramMembers.push(u.id);
   });
-
-  console.log(telegramMembers);
 
   const date = new Date();
   // AWS 시간이 UTC 기준이라 국내보다 9시간 늦음 그래서 강제로 9시간 빠르게 돌림
