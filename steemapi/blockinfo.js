@@ -132,7 +132,13 @@ async function getBlock(json) {
 }
 
 async function blockMonitoring(blockno) {
-  const ncUsers = require("./ncUsers.json");
+  let ncUsers;
+  await fs.readFile("./ncUsers.json", "utf8", function(err, data) {
+    if (err) console.log(err);
+    ncUsers = JSON.parse(data);
+    console.log(ncUsers);
+  });
+  // const ncUsers = require("./ncUsers.json");
   const telegramMembers = [];
   ncUsers.telegramMembers.forEach(u => {
     telegramMembers.push(u.id);
