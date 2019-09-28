@@ -133,11 +133,14 @@ async function getBlock(json) {
 
 async function blockMonitoring(blockno) {
   let ncUsers;
+  console.log(`start!!!!!!`);
   await fs.readFile("./ncUsers.json", "utf8", function(err, data) {
     if (err) console.log(err);
     ncUsers = JSON.parse(data);
-    console.log(ncUsers);
+    console.log(`ncusers!!!:${ncUsers}`);
   });
+
+  console.log("the end!!!");
   // const ncUsers = require("./ncUsers.json");
   const telegramMembers = [];
   ncUsers.telegramMembers.forEach(u => {
