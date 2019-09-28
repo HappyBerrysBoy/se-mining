@@ -43,17 +43,17 @@ const explorePlanetArray = [
       yplus: true
     }
   },
-  {
-    name: "V",
-    id: "P-Z3LJ6NVV1O0",
-    exploreCnt: 5,
-    explorerDirection: {
-      xminus: true,
-      xplus: true,
-      yminus: true,
-      yplus: false
-    }
-  },
+  // {
+  //   name: "V",
+  //   id: "P-Z3LJ6NVV1O0",
+  //   exploreCnt: 5,
+  //   explorerDirection: {
+  //     xminus: true,
+  //     xplus: true,
+  //     yminus: true,
+  //     yplus: false
+  //   }
+  // },
   {
     name: "Y",
     id: "P-ZSYM6UCTBGG",
@@ -68,8 +68,11 @@ const explorePlanetArray = [
 ];
 
 const defaultSkillUpList = [
-  { name: "Transporter", target: 20 },
-  { name: "Frigate", target: 20 },
+  { name: "Destroyer", target: 20 },
+  { name: "Cruiser", target: 20 },
+  { name: "Battlecruiser", target: 20 },
+  { name: "Carrier", target: 20 },
+  { name: "Dreadnought", target: 20 },
   { name: "missioncontrol", target: 0 },
   { name: "uraniumbooster", target: 20 },
   { name: "copperbooster", target: 20 },
