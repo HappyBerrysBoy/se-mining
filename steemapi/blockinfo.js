@@ -118,24 +118,24 @@ fs.readFile("../config/blockConfig.ini", "utf8", function(err, data) {
   if (err) console.log(err);
   const json = JSON.parse(data);
   console.log(json.lastReadSteemBlock);
-  // jsonData.lastReadSteemBlock = json.lastReadSteemBlock;
-  // jsonData.lastPlanetUser = json.lastPlanetUser;
   getBlock(json);
 });
 
 async function getBlock(json) {
-  // const blockno = { lastReadSteemBlock: 34300626 };
-  // blockno.lastReadSteemBlock = lastSteemBlock;
   console.log("start : " + json.lastReadSteemBlock);
 
   setInterval(blockMonitoring, 1500, json);
 }
 
 async function readFileFunc(filepath) {
-  fs.readFile(filepath, "utf8", function(err, data) {
-    if (err) console.log(err);
-    console.log(`ncusers!!!:${JSON.parse(data)}`);
-    return JSON.parse(data);
+  return new Promise((resolve, reject) => {
+    fs.readFile(filepath, "utf8", function(err, data) {
+      if (err) console.log(err);
+      resolve(JSON.parse(data));
+    });
+  }).then(r => {
+    console.log(`ncusers!!!:${r}`);
+    return r;
   });
 }
 
