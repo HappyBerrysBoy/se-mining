@@ -147,8 +147,6 @@ async function blockMonitoring(blockno) {
     telegramMembers.push(u.id);
   });
 
-  console.log(telegramMembers);
-
   const date = new Date();
   // AWS 시간이 UTC 기준이라 국내보다 9시간 늦음 그래서 강제로 9시간 빠르게 돌림
   date.setHours(date.getHours() + 9);
