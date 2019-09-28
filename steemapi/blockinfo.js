@@ -134,7 +134,7 @@ async function getBlock(json) {
 async function readFileFunc(filepath) {
   fs.readFile(filepath, "utf8", function(err, data) {
     if (err) console.log(err);
-    console.log(`ncusers!!!:${ncUsers}`);
+    console.log(`ncusers!!!:${JSON.parse(data)}`);
     return JSON.parse(data);
   });
 }
