@@ -43,21 +43,10 @@ const explorePlanetArray = [
       yplus: true
     }
   },
-  // {
-  //   name: "V",
-  //   id: "P-Z3LJ6NVV1O0",
-  //   exploreCnt: 5,
-  //   explorerDirection: {
-  //     xminus: true,
-  //     xplus: true,
-  //     yminus: true,
-  //     yplus: false
-  //   }
-  // },
   {
-    name: "Y",
-    id: "P-ZSYM6UCTBGG",
-    exploreCnt: 22,
+    name: "Z",
+    id: "P-Z0SFP0F0V9C",
+    exploreCnt: 30,
     explorerDirection: {
       xminus: true,
       xplus: true,
@@ -113,32 +102,16 @@ let shipArray = [];
 const exceptPoint = [{ x: -10, y: -170 }];
 const maxBuildQty = {
   base: -1,
-  shipyard: 14,
+  shipyard: 15,
   researchcenter: 10,
-  coalmine: 14,
-  oremine: 15,
-  coppermine: 14,
-  uraniummine: 15,
+  coalmine: 16,
+  oremine: 16,
+  coppermine: 16,
+  uraniummine: 16,
   coaldepot: 10,
   oredepot: 10,
   copperdepot: 10,
   uraniumdepot: 10,
-  bunker: -1,
-  shieldgenerator: -1
-};
-const buildPriority = {
-  explorer: 0,
-  base: -1,
-  shipyard: 14,
-  researchcenter: 10,
-  coalmine: 15,
-  oremine: 15,
-  coppermine: 15,
-  uraniummine: 16,
-  coaldepot: 13,
-  oredepot: 13,
-  copperdepot: 13,
-  uraniumdepot: 13,
   bunker: -1,
   shieldgenerator: 1
 };
