@@ -43,9 +43,20 @@ const explorePlanetArray = [
       yplus: true
     }
   },
+  // {
+  //   name: "Z",
+  //   id: "P-Z0SFP0F0V9C",
+  //   exploreCnt: 30,
+  //   explorerDirection: {
+  //     xminus: true,
+  //     xplus: true,
+  //     yminus: true,
+  //     yplus: true
+  //   }
+  // },
   {
-    name: "Z",
-    id: "P-Z0SFP0F0V9C",
+    name: "ZA",
+    id: "P-ZF4QDXZ75M8",
     exploreCnt: 30,
     explorerDirection: {
       xminus: true,
