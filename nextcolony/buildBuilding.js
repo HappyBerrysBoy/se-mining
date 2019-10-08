@@ -112,15 +112,15 @@ const exceptPoint = [{ x: -10, y: -170 }];
 const maxBuildQty = {
   base: -1,
   shipyard: 15,
-  researchcenter: 10,
+  researchcenter: 12,
   coalmine: 16,
   oremine: 16,
   coppermine: 16,
   uraniummine: 16,
-  coaldepot: 10,
-  oredepot: 10,
-  copperdepot: 10,
-  uraniumdepot: 10,
+  coaldepot: 12,
+  oredepot: 12,
+  copperdepot: 12,
+  uraniumdepot: 12,
   bunker: -1,
   shieldgenerator: 1
 };
