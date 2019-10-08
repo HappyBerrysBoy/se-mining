@@ -67,10 +67,10 @@ const explorePlanetArray = [
 
 const defaultSkillUpList = [
   { name: "Destroyer", target: 20 },
-  { name: "Cruiser", target: 20 },
-  { name: "Battlecruiser", target: 20 },
-  { name: "Carrier", target: 20 },
-  { name: "Dreadnought", target: 20 },
+  { name: "Cruiser", target: 0 },
+  { name: "Battlecruiser", target: 0 },
+  { name: "Carrier", target: 0 },
+  { name: "Dreadnought", target: 0 },
   { name: "missioncontrol", target: 0 },
   { name: "uraniumbooster", target: 20 },
   { name: "copperbooster", target: 20 },
