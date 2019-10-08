@@ -60,7 +60,7 @@ function getPrePosting(id, permlink) {
   return new Promise(async (resolve, reject) => {
     await steem.api.getContentReplies(id, permlink, async function(
       err,
-      result
+      result,
     ) {
       if (err != null) {
         return;
@@ -158,21 +158,21 @@ Promise.all([getFormat(), getPrePosting(account, `${preDateString}-kr`)]).then(
           "sct-freeboard",
           "busy",
           "jjm",
-          "aaa",
+          "dblog",
           "liv",
           "zzan",
           "palnet",
           "iv",
           "sportstalk",
-          "sago"
+          "sago",
         ],
         community: "busy",
         app: "steemcoinpan/0.1",
-        format: "markdown"
+        format: "markdown",
       },
       function(err, result) {
         console.log(err, result);
-      }
+      },
     );
-  }
+  },
 );
