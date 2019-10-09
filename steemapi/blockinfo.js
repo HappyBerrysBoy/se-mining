@@ -11,7 +11,7 @@ const TelegramBot = require("node-telegram-bot-api");
 // For a description of the Bot API, see this page: https://core.telegram.org/bots/api
 
 const useTelegramBot = true;
-const useHappyDice = true;
+const useHappyDice = false;
 const useHappyPick = true;
 const useMining = true;
 
