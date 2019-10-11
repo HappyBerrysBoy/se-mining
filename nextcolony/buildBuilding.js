@@ -19,7 +19,12 @@ const shipyardArray = [
   { name: "P", id: "P-Z44ED8BDCZ4", ship: ["corvette", "frigate"] },
   { name: "Q", id: "P-ZH2DUQGU1Z4", ship: ["explorership"] },
   { name: "R", id: "P-Z7K08XK4IFK", ship: ["explorership"] },
-  { name: "U", id: "P-Z4878F8CXG0", ship: ["explorership"] }
+  { name: "U", id: "P-Z4878F8CXG0", ship: ["explorership"] },
+  { name: "S", id: "P-ZNBD5M6HLN4", ship: ["explorership"] },
+  { name: "T", id: "P-Z0QS8KUS8ZK", ship: ["explorership"] },
+  { name: "X", id: "P-Z1YNSURVXKG", ship: ["explorership"] },
+  { name: "V", id: "P-Z3LJ6NVV1O0", ship: ["explorership"] },
+  { name: "W", id: "P-ZRI66JULGW0", ship: ["explorership"] }
 ];
 
 // shield 켜는 custom_json 나중에 참고!!
@@ -30,21 +35,21 @@ const buildPlanetArray = [];
 
 //탐험 관련 계정
 const explorePlanetArray = [
-  {
-    name: "R",
-    id: "P-Z7K08XK4IFK",
-    exploreCnt: 5,
-    explorerDirection: {
-      xminus: false,
-      xplus: true,
-      yminus: true,
-      yplus: true
-    }
-  },
+  // {
+  //   name: "R",
+  //   id: "P-Z7K08XK4IFK",
+  //   exploreCnt: 10,
+  //   explorerDirection: {
+  //     xminus: false,
+  //     xplus: true,
+  //     yminus: true,
+  //     yplus: true
+  //   }
+  // },
   {
     name: "ZC",
     id: "P-ZM2D98W9QWW",
-    exploreCnt: 5,
+    exploreCnt: 10,
     explorerDirection: {
       xminus: true,
       xplus: false,
@@ -53,9 +58,9 @@ const explorePlanetArray = [
     }
   },
   {
-    name: "ZE",
-    id: "P-ZLKOQZVS90G",
-    exploreCnt: 25,
+    name: "ZF",
+    id: "P-Z1W8XMJH04W",
+    exploreCnt: 30,
     explorerDirection: {
       xminus: true,
       xplus: true,
