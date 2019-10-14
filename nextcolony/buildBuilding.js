@@ -47,20 +47,9 @@ const explorePlanetArray = [
   //   }
   // },
   {
-    name: "ZC",
-    id: "P-ZM2D98W9QWW",
-    exploreCnt: 10,
-    explorerDirection: {
-      xminus: true,
-      xplus: false,
-      yminus: true,
-      yplus: true
-    }
-  },
-  {
-    name: "ZF",
-    id: "P-Z1W8XMJH04W",
-    exploreCnt: 30,
+    name: "g10",
+    id: "P-ZMBZZUMKYQ8",
+    exploreCnt: 38,
     explorerDirection: {
       xminus: true,
       xplus: true,
@@ -68,6 +57,17 @@ const explorePlanetArray = [
       yplus: true
     }
   }
+  // {
+  //   name: "ZF",
+  //   id: "P-Z1W8XMJH04W",
+  //   exploreCnt: 30,
+  //   explorerDirection: {
+  //     xminus: true,
+  //     xplus: true,
+  //     yminus: true,
+  //     yplus: true
+  //   }
+  // }
 ];
 
 const defaultSkillUpList = [
