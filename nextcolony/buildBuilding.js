@@ -24,7 +24,7 @@ const shipyardArray = [
   { name: "T", id: "P-Z0QS8KUS8ZK", ship: ["explorership"] },
   { name: "X", id: "P-Z1YNSURVXKG", ship: ["explorership"] },
   { name: "V", id: "P-Z3LJ6NVV1O0", ship: ["explorership"] },
-  { name: "W", id: "P-ZRI66JULGW0", ship: ["explorership"] }
+  { name: "W", id: "P-ZRI66JULGW0", ship: ["explorership"] },
 ];
 
 // shield 켜는 custom_json 나중에 참고!!
@@ -47,16 +47,16 @@ const explorePlanetArray = [
   //   }
   // },
   {
-    name: "g10",
-    id: "P-ZMBZZUMKYQ8",
+    name: "ZG",
+    id: "P-Z9H48VSJB6O",
     exploreCnt: 38,
     explorerDirection: {
       xminus: true,
       xplus: true,
       yminus: true,
-      yplus: true
-    }
-  }
+      yplus: true,
+    },
+  },
   // {
   //   name: "ZF",
   //   id: "P-Z1W8XMJH04W",
@@ -97,7 +97,7 @@ const defaultSkillUpList = [
   { name: "siegeprolongation", target: 20 },
   { name: "regenerationbonus", target: 20 },
   { name: "repairbonus", target: 20 },
-  { name: "depotincrease", target: 20 }
+  { name: "depotincrease", target: 20 },
 ];
 
 const skillUpArray = [
@@ -127,7 +127,7 @@ const maxBuildQty = {
   copperdepot: 12,
   uraniumdepot: 12,
   bunker: -1,
-  shieldgenerator: 1
+  shieldgenerator: 1,
 };
 
 // Planet 정보
@@ -157,19 +157,19 @@ const loadshipyard = planetId => {
 
 const loadproduction = (planetId, account) => {
   return axios.get(
-    `https://api.nextcolony.io/loadproduction?id=${planetId}&user=${account}`
+    `https://api.nextcolony.io/loadproduction?id=${planetId}&user=${account}`,
   );
 };
 
 const loadGalaxy = (planetX, planetY) => {
   return axios.get(
-    `https://api.nextcolony.io/loadgalaxy?x=${planetX}&y=${planetY}&height=120&width=120`
+    `https://api.nextcolony.io/loadgalaxy?x=${planetX}&y=${planetY}&height=120&width=120`,
   );
 };
 
 const fleetMission = account => {
   return axios.get(
-    `https://api.nextcolony.io/loadfleetmission?user=${account}&active=1`
+    `https://api.nextcolony.io/loadfleetmission?user=${account}&active=1`,
   );
 };
 
@@ -203,7 +203,7 @@ function chkAvailExplorefromDistance(
   explore,
   explored,
   planets,
-  explorePlanet
+  explorePlanet,
 ) {
   // console.log(`Distance:${distance}`);
 
@@ -270,7 +270,7 @@ async function loadSchedulerJob(planet) {
       loadplanet(planet.id),
       loadGalaxy(planet.posx, planet.posy),
       loadskills(account),
-      fleetMission(account)
+      fleetMission(account),
     ]) // axios.all로 여러 개의 request를 보내고
     .then(
       await axios.spread(
@@ -282,7 +282,7 @@ async function loadSchedulerJob(planet) {
           loadPlanetData,
           loadGalaxy,
           skillInfo,
-          fleetMission
+          fleetMission,
         ) => {
           // response를 spread로 받는다
           // Build 관련 내용들
@@ -321,7 +321,7 @@ async function loadSchedulerJob(planet) {
             Math,
             mineArray.map(function(o) {
               return o.current;
-            })
+            }),
           );
 
           buildingInfo.forEach(building => {
@@ -347,7 +347,7 @@ async function loadSchedulerJob(planet) {
             buildArray.push(
               `{"username":"${account}","type":"upgrade","command":{
                       "tr_var1":"${planet.id}",
-                      "tr_var2":"${building.name}"}}`
+                      "tr_var2":"${building.name}"}}`,
             );
 
             console.log(`Available building:${building.name}`);
@@ -385,7 +385,7 @@ async function loadSchedulerJob(planet) {
                 `{"username":"${account}","type":"enhance","command":{
                           "tr_var1":"${account}",
                           "tr_var2":"${planet.id}",
-                          "tr_var3":"${skill.name}"}}`
+                          "tr_var3":"${skill.name}"}}`,
               );
 
               console.log(`Available skill:${skill.name}`);
@@ -399,7 +399,7 @@ async function loadSchedulerJob(planet) {
           if (buildShipArray.length > 0) {
             const buildShip = buildShipArray[0];
             const buildArray = shipyardInfo.filter(s =>
-              buildShip.ship.includes(s.type)
+              buildShip.ship.includes(s.type),
             );
 
             if (buildArray.length > 0) {
@@ -412,7 +412,7 @@ async function loadSchedulerJob(planet) {
                 if (availUranium < ship.cost.uranium) return;
 
                 shipArray.push(
-                  `{"username":"${account}","type":"buildship","command":{"tr_var1":"${planet.id}","tr_var2":"${ship.type}"}}`
+                  `{"username":"${account}","type":"buildship","command":{"tr_var1":"${planet.id}","tr_var2":"${ship.type}"}}`,
                 );
 
                 console.log(`Available ship:${ship.type}`);
@@ -431,7 +431,7 @@ async function loadSchedulerJob(planet) {
           if (!explorePlanet.length) return;
 
           const exploreMissions = loadFleetInfo.filter(
-            l => l.type == "explorespace" && l.from_planet.id == planet.id
+            l => l.type == "explorespace" && l.from_planet.id == planet.id,
           );
 
           // 행성당 제한한 횟수보다 많이 보낼 수 없음
@@ -457,7 +457,7 @@ async function loadSchedulerJob(planet) {
               explore,
               explored,
               planets,
-              explorePlanet[0]
+              explorePlanet[0],
             );
 
             if (Object.keys(targetPoint).length) {
@@ -468,13 +468,13 @@ async function loadSchedulerJob(planet) {
 
           if (availExplore) {
             searchGalaxyArray.push(
-              `{"username":"${account}","type":"explorespace","command":{"tr_var1":"${planet.id}","tr_var2":"${targetPoint.x}","tr_var3":"${targetPoint.y}","tr_var4":"explorership"}}`
+              `{"username":"${account}","type":"explorespace","command":{"tr_var1":"${planet.id}","tr_var2":"${targetPoint.x}","tr_var3":"${targetPoint.y}","tr_var4":"explorership"}}`,
             );
           } else {
             console.log("Can not find available explore point");
           }
-        }
-      )
+        },
+      ),
     )
     .catch(error => {
       console.error(error);
@@ -528,7 +528,7 @@ setInterval(() => {
     customJson,
     function(err, result) {
       console.log(err, result);
-    }
+    },
   );
 }, 1 * 20 * 1000);
 
@@ -553,7 +553,7 @@ setInterval(() => {
     customJson,
     function(err, result) {
       console.log(err, result);
-    }
+    },
   );
 }, 1 * 50 * 1000);
 
@@ -570,7 +570,7 @@ setInterval(() => {
     customJson,
     function(err, result) {
       console.log(err, result);
-    }
+    },
   );
 }, 1 * 30 * 1000);
 
@@ -587,6 +587,6 @@ setInterval(() => {
     customJson,
     function(err, result) {
       console.log(err, result);
-    }
+    },
   );
 }, 1 * 40 * 1000);
