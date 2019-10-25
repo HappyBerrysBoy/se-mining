@@ -163,8 +163,6 @@ Promise.all([getFormat(), getPrePosting(account, `${preDateString}-kr`)]).then(
           "zzan",
           "palnet",
           "iv",
-          "sportstalk",
-          "sago",
         ],
         community: "busy",
         app: "steemcoinpan/0.1",
