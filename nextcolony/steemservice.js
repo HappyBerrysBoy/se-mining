@@ -124,6 +124,18 @@ const fleetMission = account => {
   );
 };
 
+const loadFleet = (account, planetId) => {
+  return axios.get(
+    `https://api.nextcolony.io/loadfleet?user=${account}&planetid=${planetId}`
+  );
+};
+
+const fleetMissionOutgoing = (planetId, account) => {
+  return axios.get(
+    `https://api.nextcolony.io/loadfleetmission?planetid=${planetId}&user=${account}&active=1`
+  );
+};
+
 function chkAvailExplorePoint(array, point) {
   return !array.some(function(element) {
     return point.x === element.x && point.y === element.y;
@@ -221,7 +233,9 @@ async function loadSchedulerJob(planet) {
       loadplanet(planet.id),
       loadGalaxy(planet.posx, planet.posy),
       loadskills(account),
-      fleetMission(account)
+      fleetMission(account),
+      loadFleet(account, planet.id),
+      fleetMissionOutgoing(planet.id, account)
     ]) // axios.all로 여러 개의 request를 보내고
     .then(
       await axios.spread(
@@ -233,7 +247,9 @@ async function loadSchedulerJob(planet) {
           loadPlanetData,
           loadGalaxy,
           skillInfo,
-          fleetMission
+          fleetMission,
+          accountFleet,
+          planetFleet
         ) => {
           // response를 spread로 받는다
           // Build 관련 내용들
@@ -379,58 +395,61 @@ async function loadSchedulerJob(planet) {
           });
 
           // 탐사 행성 아니면 리턴
-          if (!explorePlanet.length) return;
-
-          const exploreMissions = loadFleetInfo.filter(
-            l => l.type == "explorespace" && l.from_planet.id == planet.id
-          );
-
-          // 행성당 제한한 횟수보다 많이 보낼 수 없음
-          if (exploreMissions.length >= explorePlanet[0].exploreCnt) return;
-
-          const data = loadGalaxy.data;
-          const area = data.area;
-          const explore = data.explore;
-          const explored = data.explored;
-          const planets = data.planets;
-
-          const centerPointX = Math.floor((area.xmax + area.xmin) / 2);
-          const centerPointY = Math.floor((area.ymax + area.ymin) / 2);
-
-          let targetPoint = {};
-          let availExplore = true;
-          // 최대 120칸 거리까지 검색
-          for (let i = 1; i < 120; i++) {
-            targetPoint = chkAvailExplorefromDistance(
-              centerPointX,
-              centerPointY,
-              i,
-              explore,
-              explored,
-              planets,
-              explorePlanet[0]
+          if (explorePlanet.length) {
+            const exploreMissions = loadFleetInfo.filter(
+              l => l.type == "explorespace" && l.from_planet.id == planet.id
             );
 
-            if (Object.keys(targetPoint).length) {
-              console.log(targetPoint);
-              break;
+            // 행성당 제한한 횟수보다 많이 보낼 수 없음
+            if (exploreMissions.length >= explorePlanet[0].exploreCnt) return;
+
+            const data = loadGalaxy.data;
+            const area = data.area;
+            const explore = data.explore;
+            const explored = data.explored;
+            const planets = data.planets;
+
+            const centerPointX = Math.floor((area.xmax + area.xmin) / 2);
+            const centerPointY = Math.floor((area.ymax + area.ymin) / 2);
+
+            let targetPoint = {};
+            let availExplore = true;
+            // 최대 120칸 거리까지 검색
+            for (let i = 1; i < 120; i++) {
+              targetPoint = chkAvailExplorefromDistance(
+                centerPointX,
+                centerPointY,
+                i,
+                explore,
+                explored,
+                planets,
+                explorePlanet[0]
+              );
+
+              if (Object.keys(targetPoint).length) {
+                console.log(targetPoint);
+                break;
+              }
             }
-          }
 
-          if (availExplore) {
-            searchGalaxyArray.push(
-              `{"username":"${account}","type":"explorespace","command":{"tr_var1":"${planet.id}","tr_var2":"${targetPoint.x}","tr_var3":"${targetPoint.y}","tr_var4":"explorership"}}`
-            );
-          } else {
-            console.log("Can not find available explore point");
+            if (availExplore) {
+              searchGalaxyArray.push(
+                `{"username":"${account}","type":"explorespace","command":{"tr_var1":"${planet.id}","tr_var2":"${targetPoint.x}","tr_var3":"${targetPoint.y}","tr_var4":"explorership"}}`
+              );
+            } else {
+              console.log("Can not find available explore point");
+            }
           }
 
           const attackCnt = loadFleetInfo.find(fleet => fleet.type == "attack");
 
-          if (attackCnt.length == 0) {
+          if (!attackCnt) {
+            // console.log(planetFleet);
+            console.log(accountFleet);
+            // const shipCnt = accountFleet.filter(f => f.ship?? == 'coldf???');
             const targetPlanetInfo = attackList[attackIdx];
             attachArray.push(
-              `{"username":"${account}","type":"attack","command":{"tr_var1":{"corvette":{"pos":1,"n":150}},"tr_var2":${targetPlanetInfo.x},"tr_var3":${targetPlanetInfo.y},"tr_var4":"${planet.id}"}}`
+              `{"username":"${account}","type":"attack","command":{"tr_var1":{"corvette":{"pos":1,"n":140}},"tr_var2":${targetPlanetInfo.x},"tr_var3":${targetPlanetInfo.y},"tr_var4":"${planet.id}"}}`
             );
             attackIdx++;
           }
@@ -555,7 +574,7 @@ setInterval(() => {
 setInterval(() => {
   if (attachArray.length == 0) return;
 
-  const customJson = shipArray.shift();
+  const customJson = attachArray.shift();
   console.log(customJson);
   steem.broadcast.customJson(
     postingkey, // posting key
