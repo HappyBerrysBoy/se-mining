@@ -51,18 +51,20 @@ const skillUpArray = [
 
 let attackIdx = 0;
 const attackList = [
-  { id: "P-ZTY87WKC52O", x: -546, y: 117 },
+  { id: "P-Z2DEL2ENL34", x: -528, y: 110 },
+  { id: "P-Z39X5A042K0", x: -531, y: 106 },
+  { id: "P-Z3TXPUXUCYO", x: -544, y: 143 },
+  { id: "P-ZAIUWOOL62O", x: -545, y: 115 },
   { id: "P-ZNYQLE6J81C", x: -543, y: 126 },
   { id: "P-Z4F8YZE0XJ4", x: -543, y: 122 },
-  { id: "P-Z3TXPUXUCYO", x: -544, y: 143 },
-  { id: "P-ZAIUWOOL62O", x: -545, y: 115 }
+  { id: "P-ZTY87WKC52O", x: -546, y: 117 }
 ];
 
 let buildArray = [];
 let searchGalaxyArray = [];
 let skillArray = [];
 let shipArray = [];
-let attachArray = [];
+let attackArray = [];
 
 const exceptPoint = [{ x: -10, y: -170 }];
 const maxBuildQty = {
@@ -444,12 +446,11 @@ async function loadSchedulerJob(planet) {
           const attackCnt = loadFleetInfo.find(fleet => fleet.type == "attack");
 
           if (!attackCnt) {
-            // console.log(planetFleet);
             console.log(accountFleet);
-            // const shipCnt = accountFleet.filter(f => f.ship?? == 'coldf???');
+            const shipCnt = accountFleet.data.filter(f => f.type == "corvette");
             const targetPlanetInfo = attackList[attackIdx];
-            attachArray.push(
-              `{"username":"${account}","type":"attack","command":{"tr_var1":{"corvette":{"pos":1,"n":140}},"tr_var2":${targetPlanetInfo.x},"tr_var3":${targetPlanetInfo.y},"tr_var4":"${planet.id}"}}`
+            attackArray.push(
+              `{"username":"${account}","type":"attack","command":{"tr_var1":{"corvette":{"pos":1,"n":${shipCnt.length}}},"tr_var2":${targetPlanetInfo.x},"tr_var3":${targetPlanetInfo.y},"tr_var4":"${planet.id}"}}`
             );
             attackIdx++;
           }
@@ -572,9 +573,9 @@ setInterval(() => {
 }, 1 * 40 * 1000);
 
 setInterval(() => {
-  if (attachArray.length == 0) return;
+  if (attackArray.length == 0) return;
 
-  const customJson = attachArray.shift();
+  const customJson = attackArray.shift();
   console.log(customJson);
   steem.broadcast.customJson(
     postingkey, // posting key
@@ -586,4 +587,4 @@ setInterval(() => {
       console.log(err, result);
     }
   );
-}, 10 * 60 * 1000);
+}, 1 * 60 * 1000);
