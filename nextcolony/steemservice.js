@@ -15,17 +15,17 @@ const buildPlanetArray = [];
 
 //탐험 관련 계정
 const explorePlanetArray = [
-  {
-    name: "A",
-    id: "P-ZLRD1LQB8N4",
-    exploreCnt: 10,
-    explorerDirection: {
-      xminus: true,
-      xplus: true,
-      yminus: true,
-      yplus: true
-    }
-  }
+  // {
+  //   name: "A",
+  //   id: "P-ZLRD1LQB8N4",
+  //   exploreCnt: 10,
+  //   explorerDirection: {
+  //     xminus: true,
+  //     xplus: true,
+  //     yminus: true,
+  //     yplus: true
+  //   }
+  // }
 ];
 
 const defaultSkillUpList = [
@@ -62,6 +62,7 @@ let buildArray = [];
 let searchGalaxyArray = [];
 let skillArray = [];
 let shipArray = [];
+let attachArray = [];
 
 const exceptPoint = [{ x: -10, y: -170 }];
 const maxBuildQty = {
