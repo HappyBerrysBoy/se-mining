@@ -426,7 +426,7 @@ async function loadSchedulerJob(planet) {
 
           const attackCnt = loadFleetInfo.find(fleet => fleet.type == "attack");
 
-          if (attackCnt == 0) {
+          if (attackCnt.length == 0) {
             const targetPlanetInfo = attackList[attackIdx];
             attachArray.push(
               `{"username":"${account}","type":"attack","command":{"tr_var1":{"corvette":{"pos":1,"n":150}},"tr_var2":${targetPlanetInfo.x},"tr_var3":${targetPlanetInfo.y},"tr_var4":"${planet.id}"}}`
