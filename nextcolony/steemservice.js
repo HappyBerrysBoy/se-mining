@@ -49,6 +49,15 @@ const skillUpArray = [
   }
 ];
 
+const attackIdx = 0;
+const attackList = [
+  { id: "P-ZTY87WKC52O", x: -546, y: 117 },
+  { id: "P-ZNYQLE6J81C", x: -543, y: 126 },
+  { id: "P-Z4F8YZE0XJ4", x: -543, y: 122 },
+  { id: "P-Z3TXPUXUCYO", x: -544, y: 143 },
+  { id: "P-ZAIUWOOL62O", x: -545, y: 115 }
+];
+
 let buildArray = [];
 let searchGalaxyArray = [];
 let skillArray = [];
@@ -414,6 +423,16 @@ async function loadSchedulerJob(planet) {
           } else {
             console.log("Can not find available explore point");
           }
+
+          const attackCnt = loadFleetInfo.find(fleet => fleet.type == "attack");
+
+          if (attackCnt == 0) {
+            const targetPlanetInfo = attackList[attackIdx];
+            attachArray.push(
+              `{"username":"${account}","type":"attack","command":{"tr_var1":{"corvette":{"pos":1,"n":150}},"tr_var2":${targetPlanetInfo.x},"tr_var3":${targetPlanetInfo.y},"tr_var4":"${planet.id}"}}`
+            );
+            attackIdx++;
+          }
         }
       )
     )
@@ -531,3 +550,20 @@ setInterval(() => {
     }
   );
 }, 1 * 40 * 1000);
+
+setInterval(() => {
+  if (attachArray.length == 0) return;
+
+  const customJson = shipArray.shift();
+  console.log(customJson);
+  steem.broadcast.customJson(
+    postingkey, // posting key
+    [],
+    [account], // account
+    "nextcolony", // 'nextcolony'
+    customJson,
+    function(err, result) {
+      console.log(err, result);
+    }
+  );
+}, 1 * 60 * 1000);
