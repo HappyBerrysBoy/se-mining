@@ -49,7 +49,7 @@ const skillUpArray = [
   }
 ];
 
-const attackIdx = 0;
+let attackIdx = 0;
 const attackList = [
   { id: "P-ZTY87WKC52O", x: -546, y: 117 },
   { id: "P-ZNYQLE6J81C", x: -543, y: 126 },
