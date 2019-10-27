@@ -586,4 +586,4 @@ setInterval(() => {
       console.log(err, result);
     }
   );
-}, 1 * 60 * 1000);
+}, 10 * 60 * 1000);
