@@ -38,14 +38,18 @@ const defaultSkillUpList = [
   { name: "oredepot", target: 10 },
   { name: "uraniumdepot", target: 10 },
   { name: "copperdepot", target: 10 },
-  { name: "researchcenter", target: 0 }
+  { name: "researchcenter", target: 10 },
+  { name: "shipyard", target: 13 }
 ];
 
 const skillUpArray = [
   {
     name: "A",
     planet: "P-ZLRD1LQB8N4",
-    skill: [{ name: "missioncontrol", target: 20 }]
+    skill: [
+      { name: "missioncontrol", target: 20 },
+      { name: "shipyard", target: 13 }
+    ]
   }
 ];
 

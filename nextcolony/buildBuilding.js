@@ -6,25 +6,85 @@ const account = "happyberrysboy";
 const mineMinLevel = 13;
 const mineGapVal = 7;
 const shipyardArray = [
-  { name: "A", id: "P-ZA01QNQO29C", ship: ["corvette", "frigate"] },
-  { name: "D", id: "P-ZRBZG7PL6NK", ship: ["corvette", "frigate"] },
-  { name: "F", id: "P-Z5TV3Z99YM8", ship: ["corvette", "frigate"] },
-  { name: "G", id: "P-ZD7VOJ4FF8W", ship: ["corvette", "frigate"] },
-  { name: "I", id: "P-ZHGO5SVV8XC", ship: ["corvette", "frigate"] },
-  { name: "J", id: "P-ZOWKXS7K60W", ship: ["corvette", "frigate"] },
-  { name: "K", id: "P-ZTPRC5MLJXS", ship: ["corvette", "frigate"] },
-  { name: "L", id: "P-ZYBGDS70ILS", ship: ["corvette", "frigate"] },
-  { name: "M", id: "P-ZIWU6M04H80", ship: ["corvette", "frigate"] },
-  { name: "O", id: "P-Z11IOTOZ9WG", ship: ["corvette", "frigate"] },
+  {
+    name: "A",
+    id: "P-ZA01QNQO29C",
+    ship: ["corvette", "frigate", "destroyer"]
+  },
+  {
+    name: "D",
+    id: "P-ZRBZG7PL6NK",
+    ship: ["corvette", "frigate", "destroyer"]
+  },
+  {
+    name: "F",
+    id: "P-Z5TV3Z99YM8",
+    ship: ["corvette", "frigate", "destroyer"]
+  },
+  {
+    name: "G",
+    id: "P-ZD7VOJ4FF8W",
+    ship: ["corvette", "frigate", "destroyer"]
+  },
+  {
+    name: "I",
+    id: "P-ZHGO5SVV8XC",
+    ship: ["corvette", "frigate", "destroyer"]
+  },
+  {
+    name: "J",
+    id: "P-ZOWKXS7K60W",
+    ship: ["corvette", "frigate", "destroyer"]
+  },
+  {
+    name: "K",
+    id: "P-ZTPRC5MLJXS",
+    ship: ["corvette", "frigate", "destroyer"]
+  },
+  {
+    name: "L",
+    id: "P-ZYBGDS70ILS",
+    ship: ["corvette", "frigate", "destroyer"]
+  },
+  {
+    name: "M",
+    id: "P-ZIWU6M04H80",
+    ship: ["corvette", "frigate", "destroyer"]
+  },
+  {
+    name: "O",
+    id: "P-Z11IOTOZ9WG",
+    ship: ["corvette", "frigate", "destroyer"]
+  },
   { name: "P", id: "P-Z44ED8BDCZ4", ship: ["explorership"] },
   { name: "Q", id: "P-ZH2DUQGU1Z4", ship: ["explorership"] },
   { name: "R", id: "P-Z7K08XK4IFK", ship: ["explorership"] },
-  { name: "U", id: "P-Z4878F8CXG0", ship: ["corvette", "frigate"] },
-  { name: "S", id: "P-ZNBD5M6HLN4", ship: ["corvette", "frigate"] },
-  { name: "T", id: "P-Z0QS8KUS8ZK", ship: ["corvette", "frigate"] },
-  { name: "X", id: "P-Z1YNSURVXKG", ship: ["corvette", "frigate"] },
-  { name: "V", id: "P-Z3LJ6NVV1O0", ship: ["corvette", "frigate"] },
-  { name: "W", id: "P-ZRI66JULGW0", ship: ["corvette", "frigate"] }
+  {
+    name: "U",
+    id: "P-Z4878F8CXG0",
+    ship: ["corvette", "frigate", "destroyer"]
+  },
+  {
+    name: "S",
+    id: "P-ZNBD5M6HLN4",
+    ship: ["corvette", "frigate", "destroyer"]
+  },
+  {
+    name: "T",
+    id: "P-Z0QS8KUS8ZK",
+    ship: ["corvette", "frigate", "destroyer"]
+  },
+  {
+    name: "X",
+    id: "P-Z1YNSURVXKG",
+    ship: ["corvette", "frigate", "destroyer"]
+  },
+  {
+    name: "V",
+    id: "P-Z3LJ6NVV1O0",
+    ship: ["corvette", "frigate", "destroyer"]
+  },
+  { name: "W", id: "P-ZRI66JULGW0", ship: ["corvette", "frigate", "destroyer"] }
 ];
 
 // shield 켜는 custom_json 나중에 참고!!
@@ -72,7 +132,7 @@ const explorePlanetArray = [
 
 const defaultSkillUpList = [
   { name: "Destroyer", target: 20 },
-  { name: "Cruiser", target: 0 },
+  { name: "Cruiser", target: 20 },
   { name: "Battlecruiser", target: 0 },
   { name: "Carrier", target: 0 },
   { name: "Dreadnought", target: 0 },
@@ -116,7 +176,7 @@ let shipArray = [];
 const exceptPoint = [{ x: -10, y: -170 }];
 const maxBuildQty = {
   base: -1,
-  shipyard: 15,
+  shipyard: 16,
   researchcenter: 12,
   coalmine: 16,
   oremine: 16,
