@@ -7,7 +7,7 @@ const postingkey = key.steemservice_posting;
 const mineMinLevel = 12;
 const mineGapVal = 6;
 const shipyardArray = [
-  // { name: "U", id: "P-Z4878F8CXG0", ship: ["explorership"] }
+  { name: "A", id: "P-ZLRD1LQB8N4", ship: ["explorership"] },
 ];
 
 // 리스트에 포함되면 업글 안함
@@ -29,17 +29,17 @@ const explorePlanetArray = [
 ];
 
 const defaultSkillUpList = [
-  { name: "missioncontrol", target: 20 },
-  { name: "uraniummine", target: 14 },
-  { name: "coppermine", target: 13 },
-  { name: "oremine", target: 13 },
-  { name: "coalmine", target: 14 },
-  { name: "coaldepot", target: 10 },
-  { name: "oredepot", target: 10 },
-  { name: "uraniumdepot", target: 10 },
-  { name: "copperdepot", target: 10 },
-  { name: "researchcenter", target: 10 },
-  { name: "shipyard", target: 13 },
+  // { name: "missioncontrol", target: 20 },
+  // { name: "uraniummine", target: 14 },
+  // { name: "coppermine", target: 13 },
+  // { name: "oremine", target: 13 },
+  // { name: "coalmine", target: 14 },
+  // { name: "coaldepot", target: 10 },
+  // { name: "oredepot", target: 10 },
+  // { name: "uraniumdepot", target: 10 },
+  // { name: "copperdepot", target: 10 },
+  // { name: "researchcenter", target: 10 },
+  // { name: "shipyard", target: 13 },
 ];
 
 const skillUpArray = [
@@ -55,13 +55,13 @@ const skillUpArray = [
 
 let attackIdx = 0;
 const attackList = [
+  { id: "P-Z39X5A042K0", x: -531, y: 106 },
+  { id: "P-Z3TXPUXUCYO", x: -544, y: 143 },
   { id: "P-ZAIUWOOL62O", x: -545, y: 115 },
   { id: "P-ZNYQLE6J81C", x: -543, y: 126 },
   { id: "P-Z4F8YZE0XJ4", x: -543, y: 122 },
   { id: "P-ZTY87WKC52O", x: -546, y: 117 },
   { id: "P-Z2DEL2ENL34", x: -528, y: 110 },
-  { id: "P-Z39X5A042K0", x: -531, y: 106 },
-  { id: "P-Z3TXPUXUCYO", x: -544, y: 143 },
 ];
 
 let buildArray = [];

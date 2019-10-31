@@ -6,11 +6,11 @@ const account = "happyberrysboy";
 const mineMinLevel = 13;
 const mineGapVal = 7;
 const shipyardArray = [
-  // {
-  //   name: "A",
-  //   id: "P-ZA01QNQO29C",
-  //   ship: ["corvette", "frigate", "destroyer"]
-  // },
+  {
+    name: "BA",
+    id: "P-ZA01QNQO29C",
+    ship: ["explorership"],
+  },
   {
     name: "D",
     id: "P-ZRBZG7PL6NK",
@@ -169,36 +169,14 @@ const shipyardArray = [
 // {"username":"happyberrysboy","type":"enable","command":{"tr_var1":"P-ZA01QNQO29C","tr_var2":"shieldgenerator"}}
 
 // 리스트에 포함되면 업글 안함
-const buildPlanetArray = [];
+const neverBuildPlanetArray = [];
 
 //탐험 관련 계정
 const explorePlanetArray = [
   // {
-  //   name: "R",
-  //   id: "P-Z7K08XK4IFK",
-  //   exploreCnt: 10,
-  //   explorerDirection: {
-  //     xminus: false,
-  //     xplus: true,
-  //     yminus: true,
-  //     yplus: true
-  //   }
-  // },
-  // {
   //   name: "ZM",
   //   id: "P-Z8KT5TSNKQ8",
   //   exploreCnt: 38,
-  //   explorerDirection: {
-  //     xminus: true,
-  //     xplus: true,
-  //     yminus: true,
-  //     yplus: true
-  //   }
-  // }
-  // {
-  //   name: "ZF",
-  //   id: "P-Z1W8XMJH04W",
-  //   exploreCnt: 30,
   //   explorerDirection: {
   //     xminus: true,
   //     xplus: true,
@@ -473,7 +451,7 @@ async function loadSchedulerJob(planet) {
 
             if (currDate / 1000 <= building.busy) return;
 
-            if (buildPlanetArray.indexOf(planet.id) > -1) return;
+            if (neverBuildPlanetArray.indexOf(planet.id) > -1) return;
             if (
               building.name.indexOf("mine") < 0 &&
               mineLevel > -1 &&
