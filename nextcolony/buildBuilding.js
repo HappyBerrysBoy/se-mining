@@ -6,11 +6,11 @@ const account = "happyberrysboy";
 const mineMinLevel = 13;
 const mineGapVal = 7;
 const shipyardArray = [
-  {
-    name: "A",
-    id: "P-ZA01QNQO29C",
-    ship: ["corvette", "frigate", "destroyer"]
-  },
+  // {
+  //   name: "A",
+  //   id: "P-ZA01QNQO29C",
+  //   ship: ["corvette", "frigate", "destroyer"]
+  // },
   {
     name: "D",
     id: "P-ZRBZG7PL6NK",
@@ -59,11 +59,8 @@ const shipyardArray = [
   { name: "P", id: "P-Z44ED8BDCZ4", ship: ["explorership"] },
   { name: "Q", id: "P-ZH2DUQGU1Z4", ship: ["explorership"] },
   { name: "R", id: "P-Z7K08XK4IFK", ship: ["explorership"] },
-  {
-    name: "U",
-    id: "P-Z4878F8CXG0",
-    ship: ["corvette", "frigate", "destroyer"]
-  },
+  { name: "V2_CC", id: "P-ZQA5D71XR40", ship: ["explorership"] },
+  { name: "V3_UU", id: "P-ZKMVJ9P05PS", ship: ["explorership"] },
   {
     name: "S",
     id: "P-ZNBD5M6HLN4",
@@ -75,8 +72,8 @@ const shipyardArray = [
     ship: ["corvette", "frigate", "destroyer"]
   },
   {
-    name: "X",
-    id: "P-Z1YNSURVXKG",
+    name: "U",
+    id: "P-Z4878F8CXG0",
     ship: ["corvette", "frigate", "destroyer"]
   },
   {
@@ -84,7 +81,24 @@ const shipyardArray = [
     id: "P-Z3LJ6NVV1O0",
     ship: ["corvette", "frigate", "destroyer"]
   },
-  { name: "W", id: "P-ZRI66JULGW0", ship: ["corvette", "frigate", "destroyer"] }
+  { name: "W", id: "P-ZRI66JULGW0", ship: ["corvette", "frigate", "destroyer"],},
+  {
+    name: "X",
+    id: "P-Z1YNSURVXKG",
+    ship: ["corvette", "frigate", "destroyer"]
+  },
+  { name: "Y", id: "P-ZSYM6UCTBGG", ship: ["corvette", "frigate", "destroyer"], },
+  { name: "Z", id: "P-Z0SFP0F0V9C", ship: ["corvette", "frigate", "destroyer"], },
+  { name: "ZA", id: "P-ZF4QDXZ75M8", ship: ["corvette", "frigate", "destroyer"], },
+  { name: "ZB", id: "P-Z7G3UEZVC80", ship: ["corvette", "frigate", "destroyer"], },
+  { name: "ZC", id: "P-ZM2D98W9QWW", ship: ["corvette", "frigate", "destroyer"], },
+  { name: "ZD", id: "P-ZV5O67YR4YO", ship: ["corvette", "frigate", "destroyer"], },
+  { name: "ZE", id: "P-ZLKOQZVS90G", ship: ["corvette", "frigate", "destroyer"], },
+  { name: "ZF", id: "P-Z1W8XMJH04W", ship: ["corvette", "frigate", "destroyer"], },
+  { name: "ZG", id: "P-Z9H48VSJB6O", ship: ["corvette", "frigate", "destroyer"], },
+  { name: "ZH", id: "P-ZKRG92N98TC", ship: ["corvette", "frigate", "destroyer"], },
+  { name: "ZI", id: "P-Z3D0EEL5JW0", ship: ["corvette", "frigate", "destroyer"], },
+  { name: "ZJ", id: "P-Z7YELJWCXJK", ship: ["corvette", "frigate", "destroyer"], },
 ];
 
 // shield 켜는 custom_json 나중에 참고!!
@@ -106,17 +120,17 @@ const explorePlanetArray = [
   //     yplus: true
   //   }
   // },
-  {
-    name: "ZM",
-    id: "P-Z8KT5TSNKQ8",
-    exploreCnt: 38,
-    explorerDirection: {
-      xminus: true,
-      xplus: true,
-      yminus: true,
-      yplus: true
-    }
-  }
+  // {
+  //   name: "ZM",
+  //   id: "P-Z8KT5TSNKQ8",
+  //   exploreCnt: 38,
+  //   explorerDirection: {
+  //     xminus: true,
+  //     xplus: true,
+  //     yminus: true,
+  //     yplus: true
+  //   }
+  // }
   // {
   //   name: "ZF",
   //   id: "P-Z1W8XMJH04W",
