@@ -112,7 +112,7 @@ cron.schedule("*/20 * * * * *", function() {
           //console.log("Not yet!");
           console.log(`input : ${content.author} - ${diffTime}`);
           const tmp = {
-            wif: key.happyberrysboy_posting,
+            wif: postingkey,
             account: voter,
             author: content.author,
             permlink: content.permlink,
