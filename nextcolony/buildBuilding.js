@@ -108,7 +108,7 @@ const explorePlanetArray = [
   // },
   {
     name: "ZM",
-    id: "P-Z8KT5TSNKQ8",
+    id: "P-Z9CBVS7MYCW",
     exploreCnt: 38,
     explorerDirection: {
       xminus: true,
@@ -174,20 +174,25 @@ let skillArray = [];
 let shipArray = [];
 
 const exceptPoint = [{ x: -10, y: -170 }];
+// const maxBuildQty = {
+//   base: -1,
+//   shipyard: 16,
+//   researchcenter: 12,
+//   coalmine: 16,
+//   oremine: 16,
+//   coppermine: 17,
+//   uraniummine: 17,
+//   coaldepot: 12,
+//   oredepot: 12,
+//   copperdepot: 12,
+//   uraniumdepot: 12,
+//   bunker: -1,
+//   shieldgenerator: 1
+// };
+
+//temp
 const maxBuildQty = {
-  base: -1,
-  shipyard: 16,
-  researchcenter: 12,
-  coalmine: 16,
-  oremine: 16,
-  coppermine: 17,
-  uraniummine: 17,
-  coaldepot: 12,
-  oredepot: 12,
-  copperdepot: 12,
-  uraniumdepot: 12,
-  bunker: -1,
-  shieldgenerator: 1
+  shipyard: 13
 };
 
 // Planet 정보
