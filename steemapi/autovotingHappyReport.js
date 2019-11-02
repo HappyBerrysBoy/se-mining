@@ -8,11 +8,11 @@ const fs = require("fs");
 
 const discussionQueryforSteemEngine = {
   token: "SCT",
-  limit: 30
+  limit: 30,
 };
 const discussionQuery = {
   tag: "kr",
-  limit: 30
+  limit: 30,
 };
 let _votingList = new Array();
 let _whitelist = new Map();
@@ -23,7 +23,7 @@ const postingkey = key.happy_report_posting;
 
 fs.readFile(`./steemapi/whitelistForHappyberrysboy.json`, "utf8", function(
   err,
-  data
+  data,
 ) {
   if (err) {
     console.log(err);
@@ -75,7 +75,7 @@ cron.schedule("*/30 * * * * *", function() {
             account: voter,
             author: content.author,
             permlink: content.permlink,
-            votingMana: _whitelist.get(content.author)
+            votingMana: _whitelist.get(content.author),
           };
           _votingList.push(tmp);
         }
@@ -93,7 +93,7 @@ cron.schedule("*/20 * * * * *", function() {
         (new Date().getTime() - new Date(content.created).getTime()) /
         (1000 * 60);
 
-      if (diffTime < 200 && diffTime >= 15) {
+      if (diffTime < 200 && diffTime >= 0) {
         let isVoting = false;
         if (!_whitelist.has(content.author)) {
           return;
@@ -112,11 +112,11 @@ cron.schedule("*/20 * * * * *", function() {
           //console.log("Not yet!");
           console.log(`input : ${content.author} - ${diffTime}`);
           const tmp = {
-            wif: key.happyberrysboy_posting,
+            wif: postingkey,
             account: voter,
             author: content.author,
             permlink: content.permlink,
-            votingMana: _whitelist.get(content.author)
+            votingMana: _whitelist.get(content.author),
           };
           _votingList.push(tmp);
         }
@@ -148,10 +148,10 @@ cron.schedule("*/10 * * * * *", function() {
               tmp.author +
               ", weight: " +
               100 +
-              "%.\n"
+              "%.\n",
           );
         }
-      }
+      },
     );
   }
 });
@@ -164,7 +164,7 @@ async function callApi(url, params) {
   return await axios({
     url,
     method: "GET",
-    params
+    params,
   })
     .then(response => {
       return response.data;
