@@ -30,6 +30,7 @@ const explorePlanetArray = [
 
 const defaultSkillUpList = [
   { name: "missioncontrol", target: 20 },
+  { name: "Explorer", target: 20 },
   // { name: "uraniummine", target: 14 },
   // { name: "coppermine", target: 13 },
   // { name: "oremine", target: 13 },
@@ -448,6 +449,8 @@ async function loadSchedulerJob(planet) {
           }
 
           const attackCnt = loadFleetInfo.find(fleet => fleet.type == "attack");
+
+          console.log(`attackcnt`, attackCnt);
 
           if (!attackCnt) {
             console.log(accountFleet);

@@ -12,6 +12,11 @@ const shipyardArray = [
     ship: ["explorership"]
   },
   {
+    name: "youthme",
+    id: "P-ZVVDS0L9FBK",
+    ship: ["explorership"]
+  },
+  {
     name: "D",
     id: "P-ZRBZG7PL6NK",
     ship: ["corvette", "frigate", "destroyer"]
