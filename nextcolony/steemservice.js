@@ -49,6 +49,7 @@ const skillUpArray = [
     planet: "P-ZLRD1LQB8N4",
     skill: [
       { name: "missioncontrol", target: 20 },
+      { name: "Explorer", target: 20 },
       { name: "shipyard", target: 13 }
     ]
   }
