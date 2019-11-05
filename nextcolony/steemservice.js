@@ -57,13 +57,13 @@ const skillUpArray = [
 
 let attackIdx = 0;
 const attackList = [
-  { id: "P-ZNYQLE6J81C", x: -543, y: 126 },
   { id: "P-Z4F8YZE0XJ4", x: -543, y: 122 },
   { id: "P-ZTY87WKC52O", x: -546, y: 117 },
   { id: "P-Z2DEL2ENL34", x: -528, y: 110 },
   { id: "P-Z39X5A042K0", x: -531, y: 106 },
   { id: "P-ZAIUWOOL62O", x: -545, y: 115 },
   { id: "P-Z3TXPUXUCYO", x: -544, y: 143 },
+  { id: "P-ZNYQLE6J81C", x: -543, y: 126 },
 ];
 
 let buildArray = [];
@@ -409,45 +409,45 @@ async function loadSchedulerJob(planet) {
             );
 
             // 행성당 제한한 횟수보다 많이 보낼 수 없음
-            if (exploreMissions.length >= explorePlanet[0].exploreCnt) return;
+            if (exploreMissions.length < explorePlanet[0].exploreCnt) {
+              const data = loadGalaxy.data;
+              const area = data.area;
+              const explore = data.explore;
+              const explored = data.explored;
+              const planets = data.planets;
 
-            const data = loadGalaxy.data;
-            const area = data.area;
-            const explore = data.explore;
-            const explored = data.explored;
-            const planets = data.planets;
+              const centerPointX = Math.floor((area.xmax + area.xmin) / 2);
+              const centerPointY = Math.floor((area.ymax + area.ymin) / 2);
 
-            const centerPointX = Math.floor((area.xmax + area.xmin) / 2);
-            const centerPointY = Math.floor((area.ymax + area.ymin) / 2);
+              let targetPoint = {};
+              let availExplore = true;
+              // 최대 120칸 거리까지 검색
+              const startDistance = 51;
+              const exploreshipType = "explorership1";
+              for (let i = startDistance; i < 240; i++) {
+                targetPoint = chkAvailExplorefromDistance(
+                  centerPointX,
+                  centerPointY,
+                  i,
+                  explore,
+                  explored,
+                  planets,
+                  explorePlanet[0],
+                );
 
-            let targetPoint = {};
-            let availExplore = true;
-            // 최대 120칸 거리까지 검색
-            const startDistance = 51;
-            const exploreshipType = "explorership1";
-            for (let i = startDistance; i < 240; i++) {
-              targetPoint = chkAvailExplorefromDistance(
-                centerPointX,
-                centerPointY,
-                i,
-                explore,
-                explored,
-                planets,
-                explorePlanet[0],
-              );
-
-              if (Object.keys(targetPoint).length) {
-                console.log(targetPoint);
-                break;
+                if (Object.keys(targetPoint).length) {
+                  console.log(targetPoint);
+                  break;
+                }
               }
-            }
 
-            if (availExplore) {
-              searchGalaxyArray.push(
-                `{"username":"${account}","type":"explorespace","command":{"tr_var1":"${planet.id}","tr_var2":"${targetPoint.x}","tr_var3":"${targetPoint.y}","tr_var4":"${exploreshipType}"}}`,
-              );
-            } else {
-              console.log("Can not find available explore point");
+              if (availExplore) {
+                searchGalaxyArray.push(
+                  `{"username":"${account}","type":"explorespace","command":{"tr_var1":"${planet.id}","tr_var2":"${targetPoint.x}","tr_var3":"${targetPoint.y}","tr_var4":"${exploreshipType}"}}`,
+                );
+              } else {
+                console.log("Can not find available explore point");
+              }
             }
           }
 
