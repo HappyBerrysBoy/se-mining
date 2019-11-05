@@ -44,15 +44,15 @@ const defaultSkillUpList = [
 ];
 
 const skillUpArray = [
-  {
-    name: "A",
-    planet: "P-ZLRD1LQB8N4",
-    skill: [
-      { name: "missioncontrol", target: 20 },
-      { name: "Explorer", target: 20 },
-      { name: "shipyard", target: 13 }
-    ]
-  }
+  // {
+  //   name: "A",
+  //   planet: "P-ZLRD1LQB8N4",
+  //   skill: [
+  //     { name: "missioncontrol", target: 20 },
+  //     { name: "Explorer", target: 20 },
+  //     { name: "shipyard", target: 13 }
+  //   ]
+  // }
 ];
 
 let attackIdx = 0;
@@ -340,7 +340,7 @@ async function loadSchedulerJob(planet) {
           if (targetPlanet.length) {
             const targetSkill = targetPlanet.filter(s => s.target);
 
-            // console.log(targetSkill);
+            console.log(targetSkill);
 
             skillInfo.data.forEach(skill => {
               const targetInfo = targetSkill.filter(t => t.name == skill.name);
@@ -423,7 +423,9 @@ async function loadSchedulerJob(planet) {
             let targetPoint = {};
             let availExplore = true;
             // 최대 120칸 거리까지 검색
-            for (let i = 1; i < 120; i++) {
+            const startDistance = 51;
+            const exploreshipType = "explorership1";
+            for (let i = startDistance; i < 240; i++) {
               targetPoint = chkAvailExplorefromDistance(
                 centerPointX,
                 centerPointY,
@@ -442,7 +444,7 @@ async function loadSchedulerJob(planet) {
 
             if (availExplore) {
               searchGalaxyArray.push(
-                `{"username":"${account}","type":"explorespace","command":{"tr_var1":"${planet.id}","tr_var2":"${targetPoint.x}","tr_var3":"${targetPoint.y}","tr_var4":"explorership"}}`
+                `{"username":"${account}","type":"explorespace","command":{"tr_var1":"${planet.id}","tr_var2":"${targetPoint.x}","tr_var3":"${targetPoint.y}","tr_var4":"${exploreshipType}"}}`
               );
             } else {
               console.log("Can not find available explore point");
