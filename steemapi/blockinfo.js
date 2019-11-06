@@ -260,6 +260,8 @@ async function blockMonitoring(blockno) {
               const ncUser = ncUsers.telegramMembers[i];
               const targetAccountList = ncUser.targetAccountList;
 
+              console.log('siege/attack log', thisMission);
+
               if (targetAccountList.includes(thisMission.to_planet.user)) {
                 let arrTime = new Date(thisMission.arrival * 1000);
                 let retTime = new Date(thisMission.return * 1000);
