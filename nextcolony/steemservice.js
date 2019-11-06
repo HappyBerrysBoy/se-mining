@@ -21,7 +21,7 @@ const explorePlanetArray = [
     exploreCnt: 2,
     explorerDirection: {
       xminus: true,
-      xplus: true,
+      xplus: false,
       yminus: true,
       yplus: true,
     },
@@ -88,6 +88,8 @@ const maxBuildQty = {
   bunker: -1,
   shieldgenerator: 1,
 };
+
+const exploreRange = {fromX:-9999, toX:9999, fromY:120, toY:140};
 
 // Planet 정보
 const loadplanets = account => {
@@ -190,7 +192,12 @@ function chkAvailExplorefromDistance(
         explorePlanet.explorerDirection.yminus
       ) {
         targetPoint = { x: centerPointX - i, y: centerPointY - j };
-        availExplore = searchTarget(targetPoint, explore, explored, planets);
+
+        if(targetPoint.x >= exploreRange.fromX && targetPoint.x <= exploreRange.toX
+          && targetPoint.y >= exploreRange.fromY && targetPoint.y <= exploreRange.toY){
+            availExplore = searchTarget(targetPoint, explore, explored, planets);
+        }
+        
         if (availExplore) break;
       }
 
@@ -199,7 +206,10 @@ function chkAvailExplorefromDistance(
         explorePlanet.explorerDirection.yminus
       ) {
         targetPoint = { x: centerPointX + i, y: centerPointY - j };
-        availExplore = searchTarget(targetPoint, explore, explored, planets);
+        if(targetPoint.x >= exploreRange.fromX && targetPoint.x <= exploreRange.toX
+          && targetPoint.y >= exploreRange.fromY && targetPoint.y <= exploreRange.toY){
+            availExplore = searchTarget(targetPoint, explore, explored, planets);
+        }
         if (availExplore) break;
       }
 
@@ -208,7 +218,10 @@ function chkAvailExplorefromDistance(
         explorePlanet.explorerDirection.yplus
       ) {
         targetPoint = { x: centerPointX + i, y: centerPointY + j };
-        availExplore = searchTarget(targetPoint, explore, explored, planets);
+        if(targetPoint.x >= exploreRange.fromX && targetPoint.x <= exploreRange.toX
+          && targetPoint.y >= exploreRange.fromY && targetPoint.y <= exploreRange.toY){
+            availExplore = searchTarget(targetPoint, explore, explored, planets);
+        }
         if (availExplore) break;
       }
 
@@ -217,7 +230,10 @@ function chkAvailExplorefromDistance(
         explorePlanet.explorerDirection.yplus
       ) {
         targetPoint = { x: centerPointX - i, y: centerPointY + j };
-        availExplore = searchTarget(targetPoint, explore, explored, planets);
+        if(targetPoint.x >= exploreRange.fromX && targetPoint.x <= exploreRange.toX
+          && targetPoint.y >= exploreRange.fromY && targetPoint.y <= exploreRange.toY){
+            availExplore = searchTarget(targetPoint, explore, explored, planets);
+        }
         if (availExplore) break;
       }
     }
@@ -422,9 +438,9 @@ async function loadSchedulerJob(planet) {
               let targetPoint = {};
               let availExplore = true;
               // 최대 120칸 거리까지 검색
-              const startDistance = 51;
+              const startDistance = 240;
               const exploreshipType = "explorership1";
-              for (let i = startDistance; i < 240; i++) {
+              for (let i = startDistance; i < 360; i++) {
                 targetPoint = chkAvailExplorefromDistance(
                   centerPointX,
                   centerPointY,
