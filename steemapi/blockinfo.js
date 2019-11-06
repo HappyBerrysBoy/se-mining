@@ -19,8 +19,10 @@ const serviceAccount = "steemservice";
 const postingKey = key.steemservice_posting;
 
 const token = "918252456:AAEM4eW8Dk5bDzc2XuXPh5vHDtckMOXyw-U"; // nc_bot
+const warningToken = '1036763519:AAFIImhUu_q7MFOYzsX6-46KebVD7SAy5x0';
 // const token = "901594819:AAGd3ZT2R0886C2Dr9eF2m1nUTrgHng4I84"; // happytest2_bot
 const bot = new TelegramBot(token, { polling: true });
+const warningbot = new TelegramBot(warningToken, {polling:true});
 // const telegramMembers = [36227498, 454924368, 590800908]; //36227498:me, 277033489 : ukk, 454924368:youthme, 590800908:코유님
 // const targetAccountList = [
 //   "proof-of-work",
@@ -63,6 +65,26 @@ bot.on("message", msg => {
 
   // send a message to the chat acknowledging receipt of their message
   bot.sendMessage(
+    chatId,
+    `반갑습니다. ${msg.from.first_name}님. 메아리(${msg.text})`
+  );
+});
+
+warningbot.on("message", msg => {
+  console.log(
+    `id:${msg.from.id},
+    first_name:${msg.from.first_name},
+    username:${msg.from.username},
+    is_bot:${msg.from.is_bot}
+    text:${msg.text}`
+  );
+
+  // if (!telegramMembers.includes(msg.from.id)) return;
+
+  const chatId = msg.chat.id;
+
+  // send a message to the chat acknowledging receipt of their message
+  warningbot.sendMessage(
     chatId,
     `반갑습니다. ${msg.from.first_name}님. 메아리(${msg.text})`
   );
@@ -263,7 +285,7 @@ async function blockMonitoring(blockno) {
 
                 if (sendMsg) {
                   console.log(ncUser.id, thisMission.to_planet.user, sendMsg);
-                  bot.sendMessage(ncUser.id, sendMsg);
+                  warningbot.sendMessage(ncUser.id, sendMsg);
                 }
               }
             }
