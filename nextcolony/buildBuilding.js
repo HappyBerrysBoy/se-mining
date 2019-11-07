@@ -5,168 +5,170 @@ const key = require("../key.json");
 const account = "happyberrysboy";
 const mineMinLevel = 13;
 const mineGapVal = 7;
+const explorerShipArray = ["explorership"];
+const battleShipArray = ["corvette", "frigate", "destroyer", "cruiser"];
 const shipyardArray = [
   {
     name: "BA",
     id: "P-Z92DPZ1W8N4",
-    ship: ["explorership"],
+    ship: explorerShipArray,
   },
   {
     name: "youthme",
     id: "P-Z9CBVS7MYCW",
-    ship: ["explorership"],
+    ship: explorerShipArray,
   },
   {
     name: "D",
     id: "P-ZRBZG7PL6NK",
-    ship: ["corvette", "frigate", "destroyer"],
+    ship: battleShipArray,
   },
   {
     name: "F",
     id: "P-Z5TV3Z99YM8",
-    ship: ["corvette", "frigate", "destroyer"],
+    ship: battleShipArray,
   },
   {
     name: "G",
     id: "P-ZD7VOJ4FF8W",
-    ship: ["corvette", "frigate", "destroyer"],
+    ship: battleShipArray,
   },
-  {
-    name: "I",
-    id: "P-ZHGO5SVV8XC",
-    ship: ["corvette", "frigate", "destroyer"],
-  },
-  {
-    name: "J",
-    id: "P-ZOWKXS7K60W",
-    ship: ["corvette", "frigate", "destroyer"],
-  },
-  {
-    name: "K",
-    id: "P-ZTPRC5MLJXS",
-    ship: ["corvette", "frigate", "destroyer"],
-  },
+  // {
+  //   name: "I",
+  //   id: "P-ZHGO5SVV8XC",
+  //   ship: battleShipArray,
+  // },
+  // {
+  //   name: "J",
+  //   id: "P-ZOWKXS7K60W",
+  //   ship: battleShipArray,
+  // },
+  // {
+  //   name: "K",
+  //   id: "P-ZTPRC5MLJXS",
+  //   ship: battleShipArray,
+  // },
   {
     name: "L",
     id: "P-ZYBGDS70ILS",
-    ship: ["corvette", "frigate", "destroyer"],
+    ship: battleShipArray,
   },
   {
     name: "M",
     id: "P-ZIWU6M04H80",
-    ship: ["corvette", "frigate", "destroyer"],
+    ship: battleShipArray,
   },
   {
     name: "O",
     id: "P-Z11IOTOZ9WG",
-    ship: ["corvette", "frigate", "destroyer"],
+    ship: battleShipArray,
   },
   {
     name: "P",
     id: "P-Z44ED8BDCZ4",
-    ship: ["corvette", "frigate", "destroyer"],
+    ship: battleShipArray,
   },
   {
     name: "Q",
     id: "P-ZH2DUQGU1Z4",
-    ship: ["corvette", "frigate", "destroyer"],
+    ship: battleShipArray,
   },
   {
     name: "R",
     id: "P-Z7K08XK4IFK",
-    ship: ["corvette", "frigate", "destroyer"],
+    ship: battleShipArray,
   },
   { name: "V2_CC", id: "P-ZQA5D71XR40", ship: ["explorership"] },
   { name: "V3_UU", id: "P-ZKMVJ9P05PS", ship: ["explorership"] },
   {
     name: "S",
     id: "P-ZNBD5M6HLN4",
-    ship: ["corvette", "frigate", "destroyer"],
+    ship: battleShipArray,
   },
   {
     name: "T",
     id: "P-Z0QS8KUS8ZK",
-    ship: ["corvette", "frigate", "destroyer"],
+    ship: battleShipArray,
   },
   {
     name: "U",
     id: "P-Z4878F8CXG0",
-    ship: ["corvette", "frigate", "destroyer"],
+    ship: battleShipArray,
   },
   {
     name: "V",
     id: "P-Z3LJ6NVV1O0",
-    ship: ["corvette", "frigate", "destroyer"],
+    ship: battleShipArray,
   },
   {
     name: "W",
     id: "P-ZRI66JULGW0",
-    ship: ["corvette", "frigate", "destroyer"],
+    ship: battleShipArray,
   },
   {
     name: "X",
     id: "P-Z1YNSURVXKG",
-    ship: ["corvette", "frigate", "destroyer"],
+    ship: battleShipArray,
   },
   {
     name: "Y",
     id: "P-ZSYM6UCTBGG",
-    ship: ["corvette", "frigate", "destroyer"],
+    ship: battleShipArray,
   },
   {
     name: "Z",
     id: "P-Z0SFP0F0V9C",
-    ship: ["corvette", "frigate", "destroyer"],
+    ship: battleShipArray,
   },
   {
     name: "ZA",
     id: "P-ZF4QDXZ75M8",
-    ship: ["corvette", "frigate", "destroyer"],
+    ship: battleShipArray,
   },
   {
     name: "ZB",
     id: "P-Z7G3UEZVC80",
-    ship: ["corvette", "frigate", "destroyer"],
+    ship: battleShipArray,
   },
   {
     name: "ZC",
     id: "P-ZM2D98W9QWW",
-    ship: ["corvette", "frigate", "destroyer"],
+    ship: battleShipArray,
   },
   {
     name: "ZD",
     id: "P-ZV5O67YR4YO",
-    ship: ["corvette", "frigate", "destroyer"],
+    ship: battleShipArray,
   },
   {
     name: "ZE",
     id: "P-ZLKOQZVS90G",
-    ship: ["corvette", "frigate", "destroyer"],
+    ship: battleShipArray,
   },
   {
     name: "ZF",
     id: "P-Z1W8XMJH04W",
-    ship: ["corvette", "frigate", "destroyer"],
+    ship: battleShipArray,
   },
   {
     name: "ZG",
     id: "P-Z9H48VSJB6O",
-    ship: ["corvette", "frigate", "destroyer"],
+    ship: battleShipArray,
   },
   {
     name: "ZH",
     id: "P-ZKRG92N98TC",
-    ship: ["corvette", "frigate", "destroyer"],
+    ship: battleShipArray,
   },
   {
     name: "ZI",
     id: "P-Z3D0EEL5JW0",
-    ship: ["corvette", "frigate", "destroyer"],
+    ship: battleShipArray,
   },
   {
     name: "ZJ",
     id: "P-Z7YELJWCXJK",
-    ship: ["corvette", "frigate", "destroyer"],
+    ship: battleShipArray,
   },
 ];
 
