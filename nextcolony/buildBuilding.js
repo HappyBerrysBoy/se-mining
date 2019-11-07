@@ -723,4 +723,4 @@ setInterval(() => {
       console.log(err, result);
     },
   );
-}, 1 * 40 * 1000);
+}, 1 * 15 * 1000);
