@@ -18,7 +18,7 @@ const explorePlanetArray = [
   {
     name: "A",
     id: "P-ZLRD1LQB8N4",
-    exploreCnt: 2,
+    exploreCnt: 10,
     explorerDirection: {
       xminus: true,
       xplus: false,
