@@ -181,8 +181,8 @@ const neverBuildPlanetArray = ["P-ZA01QNQO29C"];
 //탐험 관련 계정
 const explorePlanetArray = [
   {
-    name: "ZN",
-    id: "P-ZVVDS0L9FBK",
+    name: "ZO",
+    id: "P-ZQDCCUZSUPC",
     exploreCnt: 38,
     explorerDirection: {
       xminus: true,
