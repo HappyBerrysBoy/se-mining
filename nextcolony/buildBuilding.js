@@ -207,7 +207,7 @@ const explorePlanetArray = [
 const defaultSkillUpList = [
   { name: "Destroyer", target: 20 },
   { name: "Cruiser", target: 20 },
-  { name: "Battlecruiser", target: 0 },
+  { name: "Battlecruiser", target: 20 },
   { name: "Carrier", target: 0 },
   { name: "Dreadnought", target: 0 },
   { name: "missioncontrol", target: 0 },
@@ -250,7 +250,7 @@ let shipArray = [];
 const exceptPoint = [{ x: -10, y: -170 }];
 const maxBuildQty = {
   base: -1,
-  shipyard: 16,
+  shipyard: 17,
   researchcenter: 12,
   coalmine: 16,
   oremine: 16,
