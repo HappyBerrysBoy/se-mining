@@ -101,26 +101,38 @@ const sendList = [
   // { name: 'tinker-bell', amount: '0.001 STEEM' },
 ];
 
-setInterval(async () => {
-  if (sendList.length == 0) return;
-  const account = sendList.shift();
+const kkey = "5Hu4ko8qrSu4Ajb11mcYX7BHetTSEFx6yuweCzyfYvBWvcm8ouY";
+const aacc = "sct.ssc";
+const jjson = {
+  id: "ssc-testnet1",
+  json: {
+    contractName: "witnesses",
+    contractAction: "register",
+    contractPayload: {
+      IP: "148.251.103.14",
+      RPCPort: 5000,
+      P2PPort: 5001,
+      signingKey: "STM7GgggvHRecenH3jBfwmVNKgUGNS59FQBeS1zf4r19SpZYioUWs",
+      enabled: true,
+    },
+  },
+};
 
-  await transferSteem(
-    keyConfig.happyberrysboy_active,
-    "happyberrysboy",
-    account.name,
-    `${account.amount}`,
-    "이벤트에 참여하여주셔서 감사합니다."
-  )
-    .then(result => console.log(result))
-    .catch(e => console.log(e));
-}, 3000);
+// setInterval(async () => {
+// if (sendList.length == 0) return;
+// const account = sendList.shift();
+console.log(kkey, aacc, JSON.stringify(jjson));
+
+transferSteem(kkey, aacc, aacc, "0.001 STEEM", JSON.stringify(jjson))
+  .then(result => console.log(result))
+  .catch(e => console.log(e));
+// }, 3000);
 
 function transferSteem(wif, from, to, amount, memo) {
   return new Promise((resolve, reject) => {
     steem.broadcast.transfer(wif, from, to, `${amount}`, memo, function(
       err,
-      result
+      result,
     ) {
       // console.log(err, result);
       resolve(result);
