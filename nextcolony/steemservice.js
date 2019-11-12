@@ -25,6 +25,17 @@ const explorePlanetArray = [
       yminus: true,
       yplus: true
     }
+  },
+  {
+    name: "B",
+    id: "P-ZTUAR18RZ9C",
+    exploreCnt: 20,
+    explorerDirection: {
+      xminus: true,
+      xplus: false,
+      yminus: true,
+      yplus: true
+    }
   }
 ];
 
@@ -454,8 +465,8 @@ async function loadSchedulerJob(planet) {
               let targetPoint = {};
               let availExplore = true;
               // 최대 120칸 거리까지 검색
-              const startDistance = 240;
-              const exploreshipType = "explorership1";
+              const startDistance = 0;
+              const exploreshipType = "explorership";
               for (let i = startDistance; i < 360; i++) {
                 targetPoint = chkAvailExplorefromDistance(
                   centerPointX,
