@@ -11,27 +11,27 @@ const shipyardArray = [
   {
     name: "BA",
     id: "P-Z92DPZ1W8N4",
-    ship: explorerShipArray,
+    ship: explorerShipArray
   },
   {
     name: "youthme",
     id: "P-Z9CBVS7MYCW",
-    ship: explorerShipArray,
+    ship: explorerShipArray
   },
   {
     name: "D",
     id: "P-ZRBZG7PL6NK",
-    ship: battleShipArray,
+    ship: battleShipArray
   },
   {
     name: "F",
     id: "P-Z5TV3Z99YM8",
-    ship: battleShipArray,
+    ship: battleShipArray
   },
   {
     name: "G",
     id: "P-ZD7VOJ4FF8W",
-    ship: battleShipArray,
+    ship: battleShipArray
   },
   // {
   //   name: "I",
@@ -51,125 +51,125 @@ const shipyardArray = [
   {
     name: "L",
     id: "P-ZYBGDS70ILS",
-    ship: battleShipArray,
+    ship: battleShipArray
   },
   {
     name: "M",
     id: "P-ZIWU6M04H80",
-    ship: battleShipArray,
+    ship: battleShipArray
   },
   {
     name: "O",
     id: "P-Z11IOTOZ9WG",
-    ship: battleShipArray,
+    ship: battleShipArray
   },
   {
     name: "P",
     id: "P-Z44ED8BDCZ4",
-    ship: battleShipArray,
+    ship: battleShipArray
   },
   {
     name: "Q",
     id: "P-ZH2DUQGU1Z4",
-    ship: battleShipArray,
+    ship: battleShipArray
   },
   {
     name: "R",
     id: "P-Z7K08XK4IFK",
-    ship: battleShipArray,
+    ship: battleShipArray
   },
   { name: "V2_CC", id: "P-ZQA5D71XR40", ship: ["explorership"] },
   { name: "V3_UU", id: "P-ZKMVJ9P05PS", ship: ["explorership"] },
   {
     name: "S",
     id: "P-ZNBD5M6HLN4",
-    ship: battleShipArray,
+    ship: battleShipArray
   },
   {
     name: "T",
     id: "P-Z0QS8KUS8ZK",
-    ship: battleShipArray,
+    ship: battleShipArray
   },
   {
     name: "U",
     id: "P-Z4878F8CXG0",
-    ship: battleShipArray,
+    ship: battleShipArray
   },
   {
     name: "V",
     id: "P-Z3LJ6NVV1O0",
-    ship: battleShipArray,
+    ship: battleShipArray
   },
   {
     name: "W",
     id: "P-ZRI66JULGW0",
-    ship: battleShipArray,
+    ship: battleShipArray
   },
   {
     name: "X",
     id: "P-Z1YNSURVXKG",
-    ship: battleShipArray,
+    ship: battleShipArray
   },
   {
     name: "Y",
     id: "P-ZSYM6UCTBGG",
-    ship: battleShipArray,
+    ship: battleShipArray
   },
   {
     name: "Z",
     id: "P-Z0SFP0F0V9C",
-    ship: battleShipArray,
+    ship: battleShipArray
   },
   {
     name: "ZA",
     id: "P-ZF4QDXZ75M8",
-    ship: battleShipArray,
+    ship: battleShipArray
   },
   {
     name: "ZB",
     id: "P-Z7G3UEZVC80",
-    ship: battleShipArray,
+    ship: battleShipArray
   },
   {
     name: "ZC",
     id: "P-ZM2D98W9QWW",
-    ship: battleShipArray,
+    ship: battleShipArray
   },
   {
     name: "ZD",
     id: "P-ZV5O67YR4YO",
-    ship: battleShipArray,
+    ship: battleShipArray
   },
   {
     name: "ZE",
     id: "P-ZLKOQZVS90G",
-    ship: battleShipArray,
+    ship: battleShipArray
   },
   {
     name: "ZF",
     id: "P-Z1W8XMJH04W",
-    ship: battleShipArray,
+    ship: battleShipArray
   },
   {
     name: "ZG",
     id: "P-Z9H48VSJB6O",
-    ship: battleShipArray,
+    ship: battleShipArray
   },
   {
     name: "ZH",
     id: "P-ZKRG92N98TC",
-    ship: battleShipArray,
+    ship: battleShipArray
   },
   {
     name: "ZI",
     id: "P-Z3D0EEL5JW0",
-    ship: battleShipArray,
+    ship: battleShipArray
   },
   {
     name: "ZJ",
     id: "P-Z7YELJWCXJK",
-    ship: battleShipArray,
-  },
+    ship: battleShipArray
+  }
 ];
 
 // shield 켜는 custom_json 나중에 참고!!
@@ -181,15 +181,15 @@ const neverBuildPlanetArray = ["P-ZA01QNQO29C"];
 //탐험 관련 계정
 const explorePlanetArray = [
   {
-    name: "ZO",
-    id: "P-ZQDCCUZSUPC",
+    name: "ZP",
+    id: "P-ZIMAVHPXVYO",
     exploreCnt: 38,
     explorerDirection: {
       xminus: true,
       xplus: true,
       yminus: true,
-      yplus: true,
-    },
+      yplus: true
+    }
   },
   {
     name: "BA",
@@ -199,9 +199,9 @@ const explorePlanetArray = [
       xminus: true,
       xplus: true,
       yminus: true,
-      yplus: true,
-    },
-  },
+      yplus: true
+    }
+  }
 ];
 
 const defaultSkillUpList = [
@@ -231,7 +231,7 @@ const defaultSkillUpList = [
   { name: "siegeprolongation", target: 20 },
   { name: "regenerationbonus", target: 20 },
   { name: "repairbonus", target: 20 },
-  { name: "depotincrease", target: 20 },
+  { name: "depotincrease", target: 20 }
 ];
 
 const skillUpArray = [
@@ -261,7 +261,7 @@ const maxBuildQty = {
   copperdepot: 12,
   uraniumdepot: 12,
   bunker: -1,
-  shieldgenerator: 1,
+  shieldgenerator: 1
 };
 
 // Planet 정보
@@ -291,19 +291,19 @@ const loadshipyard = planetId => {
 
 const loadproduction = (planetId, account) => {
   return axios.get(
-    `https://api.nextcolony.io/loadproduction?id=${planetId}&user=${account}`,
+    `https://api.nextcolony.io/loadproduction?id=${planetId}&user=${account}`
   );
 };
 
 const loadGalaxy = (planetX, planetY) => {
   return axios.get(
-    `https://api.nextcolony.io/loadgalaxy?x=${planetX}&y=${planetY}&height=120&width=120`,
+    `https://api.nextcolony.io/loadgalaxy?x=${planetX}&y=${planetY}&height=120&width=120`
   );
 };
 
 const fleetMission = account => {
   return axios.get(
-    `https://api.nextcolony.io/loadfleetmission?user=${account}&active=1`,
+    `https://api.nextcolony.io/loadfleetmission?user=${account}&active=1`
   );
 };
 
@@ -337,7 +337,7 @@ function chkAvailExplorefromDistance(
   explore,
   explored,
   planets,
-  explorePlanet,
+  explorePlanet
 ) {
   // console.log(`Distance:${distance}`);
 
@@ -404,7 +404,7 @@ async function loadSchedulerJob(planet) {
       loadplanet(planet.id),
       loadGalaxy(planet.posx, planet.posy),
       loadskills(account),
-      fleetMission(account),
+      fleetMission(account)
     ]) // axios.all로 여러 개의 request를 보내고
     .then(
       await axios.spread(
@@ -416,7 +416,7 @@ async function loadSchedulerJob(planet) {
           loadPlanetData,
           loadGalaxy,
           skillInfo,
-          fleetMission,
+          fleetMission
         ) => {
           // response를 spread로 받는다
           // Build 관련 내용들
@@ -455,7 +455,7 @@ async function loadSchedulerJob(planet) {
             Math,
             mineArray.map(function(o) {
               return o.current;
-            }),
+            })
           );
 
           buildingInfo.forEach(building => {
@@ -481,7 +481,7 @@ async function loadSchedulerJob(planet) {
             buildArray.push(
               `{"username":"${account}","type":"upgrade","command":{
                       "tr_var1":"${planet.id}",
-                      "tr_var2":"${building.name}"}}`,
+                      "tr_var2":"${building.name}"}}`
             );
 
             console.log(`Available building:${building.name}`);
@@ -519,7 +519,7 @@ async function loadSchedulerJob(planet) {
                 `{"username":"${account}","type":"enhance","command":{
                           "tr_var1":"${account}",
                           "tr_var2":"${planet.id}",
-                          "tr_var3":"${skill.name}"}}`,
+                          "tr_var3":"${skill.name}"}}`
               );
 
               console.log(`Available skill:${skill.name}`);
@@ -533,7 +533,7 @@ async function loadSchedulerJob(planet) {
           if (buildShipArray.length > 0) {
             const buildShip = buildShipArray[0];
             const buildArray = shipyardInfo.filter(s =>
-              buildShip.ship.includes(s.type),
+              buildShip.ship.includes(s.type)
             );
 
             if (buildArray.length > 0) {
@@ -546,7 +546,7 @@ async function loadSchedulerJob(planet) {
                 if (availUranium < ship.cost.uranium) return;
 
                 shipArray.push(
-                  `{"username":"${account}","type":"buildship","command":{"tr_var1":"${planet.id}","tr_var2":"${ship.type}"}}`,
+                  `{"username":"${account}","type":"buildship","command":{"tr_var1":"${planet.id}","tr_var2":"${ship.type}"}}`
                 );
 
                 console.log(`Available ship:${ship.type}`);
@@ -565,7 +565,7 @@ async function loadSchedulerJob(planet) {
           if (!explorePlanet.length) return;
 
           const exploreMissions = loadFleetInfo.filter(
-            l => l.type == "explorespace" && l.from_planet.id == planet.id,
+            l => l.type == "explorespace" && l.from_planet.id == planet.id
           );
 
           // 행성당 제한한 횟수보다 많이 보낼 수 없음
@@ -591,7 +591,7 @@ async function loadSchedulerJob(planet) {
               explore,
               explored,
               planets,
-              explorePlanet[0],
+              explorePlanet[0]
             );
 
             if (Object.keys(targetPoint).length) {
@@ -602,13 +602,13 @@ async function loadSchedulerJob(planet) {
 
           if (availExplore) {
             searchGalaxyArray.push(
-              `{"username":"${account}","type":"explorespace","command":{"tr_var1":"${planet.id}","tr_var2":"${targetPoint.x}","tr_var3":"${targetPoint.y}","tr_var4":"explorership"}}`,
+              `{"username":"${account}","type":"explorespace","command":{"tr_var1":"${planet.id}","tr_var2":"${targetPoint.x}","tr_var3":"${targetPoint.y}","tr_var4":"explorership"}}`
             );
           } else {
             console.log("Can not find available explore point");
           }
-        },
-      ),
+        }
+      )
     )
     .catch(error => {
       console.error(error);
@@ -662,7 +662,7 @@ setInterval(() => {
     customJson,
     function(err, result) {
       console.log(err, result);
-    },
+    }
   );
 }, 1 * 20 * 1000);
 
@@ -687,7 +687,7 @@ setInterval(() => {
     customJson,
     function(err, result) {
       console.log(err, result);
-    },
+    }
   );
 }, 1 * 50 * 1000);
 
@@ -704,7 +704,7 @@ setInterval(() => {
     customJson,
     function(err, result) {
       console.log(err, result);
-    },
+    }
   );
 }, 1 * 30 * 1000);
 
@@ -721,6 +721,6 @@ setInterval(() => {
     customJson,
     function(err, result) {
       console.log(err, result);
-    },
+    }
   );
 }, 1 * 15 * 1000);
