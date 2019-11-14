@@ -16,8 +16,8 @@ const buildPlanetArray = [];
 //탐험 관련 계정
 const explorePlanetArray = [
   {
-    name: "A",
-    id: "P-ZLRD1LQB8N4",
+    name: "C",
+    id: "P-ZB851KT0DIO",
     exploreCnt: 5,
     explorerDirection: {
       xminus: true,
@@ -503,7 +503,10 @@ async function loadSchedulerJob(planet) {
             const shipCnt = accountFleet.data.filter(f => f.type == "corvette");
             const targetPlanetInfo = attackList[attackIdx];
             attackArray.push(
-              `{"username":"${account}","type":"attack","command":{"tr_var1":{"corvette":{"pos":1,"n":${shipCnt.length}}},"tr_var2":${targetPlanetInfo.x},"tr_var3":${targetPlanetInfo.y},"tr_var4":"${planet.id}"}}`
+              `{"username":"${account}","type":"attack","command":{"tr_var1":{"corvette":{"pos":1,"n":${shipCnt.length -
+                50}}},"tr_var2":${targetPlanetInfo.x},"tr_var3":${
+                targetPlanetInfo.y
+              },"tr_var4":"${planet.id}"}}`
             );
             attackIdx++;
           }
