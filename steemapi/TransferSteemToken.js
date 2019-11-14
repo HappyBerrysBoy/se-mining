@@ -113,9 +113,20 @@ const jjson = {
       RPCPort: 5000,
       P2PPort: 5001,
       signingKey: "STM7GgggvHRecenH3jBfwmVNKgUGNS59FQBeS1zf4r19SpZYioUWs",
-      enabled: true,
-    },
-  },
+      enabled: true
+    }
+  }
+};
+
+const voteWitness = {
+  id: "ssc-testnet1",
+  json: {
+    contractName: "witnesses",
+    contractAction: "approve",
+    contractPayload: {
+      witness: "sct.ssc"
+    }
+  }
 };
 
 // setInterval(async () => {
@@ -123,7 +134,7 @@ const jjson = {
 // const account = sendList.shift();
 console.log(kkey, aacc, JSON.stringify(jjson));
 
-transferSteem(kkey, aacc, aacc, "0.001 STEEM", JSON.stringify(jjson))
+transferSteem(kkey, aacc, aacc, "0.001 STEEM", JSON.stringify(voteWitness))
   .then(result => console.log(result))
   .catch(e => console.log(e));
 // }, 3000);
@@ -132,7 +143,7 @@ function transferSteem(wif, from, to, amount, memo) {
   return new Promise((resolve, reject) => {
     steem.broadcast.transfer(wif, from, to, `${amount}`, memo, function(
       err,
-      result,
+      result
     ) {
       // console.log(err, result);
       resolve(result);

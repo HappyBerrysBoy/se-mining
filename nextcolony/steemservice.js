@@ -68,13 +68,13 @@ const skillUpArray = [
 
 let attackIdx = 0;
 const attackList = [
-  { id: "P-Z3TXPUXUCYO", x: -544, y: 143 },
   { id: "P-ZNYQLE6J81C", x: -543, y: 126 },
   { id: "P-ZAIUWOOL62O", x: -545, y: 115 },
   { id: "P-Z39X5A042K0", x: -531, y: 106 },
   { id: "P-ZTY87WKC52O", x: -546, y: 117 },
   { id: "P-Z2DEL2ENL34", x: -528, y: 110 },
-  { id: "P-Z4F8YZE0XJ4", x: -543, y: 122 }
+  { id: "P-Z4F8YZE0XJ4", x: -543, y: 122 },
+  { id: "P-Z3TXPUXUCYO", x: -544, y: 143 }
 ];
 
 let buildArray = [];
@@ -501,14 +501,14 @@ async function loadSchedulerJob(planet) {
           if (!attackCnt) {
             console.log(accountFleet);
             const shipCnt = accountFleet.data.filter(f => f.type == "corvette");
-            const targetPlanetInfo = attackList[attackIdx];
-            attackArray.push(
-              `{"username":"${account}","type":"attack","command":{"tr_var1":{"corvette":{"pos":1,"n":${shipCnt.length -
-                50}}},"tr_var2":${targetPlanetInfo.x},"tr_var3":${
-                targetPlanetInfo.y
-              },"tr_var4":"${planet.id}"}}`
-            );
-            attackIdx++;
+
+            if (shipCnt.length > 0) {
+              const targetPlanetInfo = attackList[attackIdx];
+              attackArray.push(
+                `{"username":"${account}","type":"attack","command":{"tr_var1":{"corvette":{"pos":1,"n":${shipCnt.length}}},"tr_var2":${targetPlanetInfo.x},"tr_var3":${targetPlanetInfo.y},"tr_var4":"${planet.id}"}}`
+              );
+              attackIdx++;
+            }
           }
         }
       )
