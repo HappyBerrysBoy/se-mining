@@ -4,8 +4,8 @@ const key = require("../key.json");
 
 const account = "steemservice";
 const postingkey = key.steemservice_posting;
-const mineMinLevel = 11;
-const mineGapVal = 0;
+const mineMinLevel = 13;
+const mineGapVal = 7;
 const shipyardArray = [
   { name: "A", id: "P-ZLRD1LQB8N4", ship: ["explorership"] }
 ];
@@ -71,9 +71,9 @@ const attackList = [
   { id: "P-Z3TXPUXUCYO", x: -544, y: 143 },
   { id: "P-ZNYQLE6J81C", x: -543, y: 126 },
   { id: "P-ZAIUWOOL62O", x: -545, y: 115 },
+  { id: "P-Z39X5A042K0", x: -531, y: 106 },
   { id: "P-ZTY87WKC52O", x: -546, y: 117 },
   { id: "P-Z2DEL2ENL34", x: -528, y: 110 },
-  { id: "P-Z39X5A042K0", x: -531, y: 106 },
   { id: "P-Z4F8YZE0XJ4", x: -543, y: 122 }
 ];
 
