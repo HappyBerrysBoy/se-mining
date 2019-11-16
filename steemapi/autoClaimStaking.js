@@ -34,7 +34,8 @@ const accountList = [
   }
 ];
 
-setInterval(doClaimStaking, 60 * 1000);
+doClaimStaking();
+setInterval(doClaimStaking, 10 * 60 * 1000);
 
 async function doClaimStaking() {
   console.log("[start claim and staking]");
