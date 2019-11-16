@@ -307,6 +307,12 @@ const fleetMission = account => {
   );
 };
 
+const loadFleet = (account, planetId) => {
+  return axios.get(
+    `https://api.nextcolony.io/loadfleet?user=${account}&planetid=${planetId}`
+  );
+};
+
 function chkAvailExplorePoint(array, point) {
   return !array.some(function(element) {
     return point.x === element.x && point.y === element.y;
@@ -404,7 +410,8 @@ async function loadSchedulerJob(planet) {
       loadplanet(planet.id),
       loadGalaxy(planet.posx, planet.posy),
       loadskills(account),
-      fleetMission(account)
+      fleetMission(account),
+      loadFleet(account, planet.id)
     ]) // axios.all로 여러 개의 request를 보내고
     .then(
       await axios.spread(
@@ -416,7 +423,8 @@ async function loadSchedulerJob(planet) {
           loadPlanetData,
           loadGalaxy,
           skillInfo,
-          fleetMission
+          fleetMission,
+          accountFleet
         ) => {
           // response를 spread로 받는다
           // Build 관련 내용들
@@ -568,8 +576,16 @@ async function loadSchedulerJob(planet) {
             l => l.type == "explorespace" && l.from_planet.id == planet.id
           );
 
+          const shipCnt = accountFleet.data.filter(
+            f => f.type == "explorership"
+          );
+
           // 행성당 제한한 횟수보다 많이 보낼 수 없음
-          if (exploreMissions.length >= explorePlanet[0].exploreCnt) return;
+          if (
+            shipCnt.length == 0 ||
+            exploreMissions.length >= explorePlanet[0].exploreCnt
+          )
+            return;
 
           const data = loadGalaxy.data;
           const area = data.area;

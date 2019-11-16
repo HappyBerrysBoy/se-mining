@@ -41,6 +41,7 @@ const explorePlanetArray = [
 
 const defaultSkillUpList = [
   { name: "missioncontrol", target: 20 },
+  { name: "Corvette", target: 20 },
   { name: "Explorer", target: 20 },
   { name: "uraniummine", target: 14 },
   { name: "coppermine", target: 13 },
@@ -68,12 +69,13 @@ const skillUpArray = [
 
 let attackIdx = 0;
 const attackList = [
+  { id: "P-ZNYQLE6J81C", x: -546, y: 105 },
+  { id: "P-ZNYQLE6J81C", x: -519, y: 114 },
   { id: "P-ZNYQLE6J81C", x: -543, y: 126 },
   { id: "P-ZAIUWOOL62O", x: -545, y: 115 },
+  { id: "P-Z2DEL2ENL34", x: -528, y: 110 },
   { id: "P-Z39X5A042K0", x: -531, y: 106 },
   { id: "P-ZTY87WKC52O", x: -546, y: 117 },
-  { id: "P-Z2DEL2ENL34", x: -528, y: 110 },
-  { id: "P-Z4F8YZE0XJ4", x: -543, y: 122 },
   { id: "P-Z3TXPUXUCYO", x: -544, y: 143 }
 ];
 
@@ -451,8 +453,15 @@ async function loadSchedulerJob(planet) {
               l => l.type == "explorespace" && l.from_planet.id == planet.id
             );
 
+            const shipCnt = accountFleet.data.filter(
+              f => f.type == "explorership"
+            );
+
             // 행성당 제한한 횟수보다 많이 보낼 수 없음
-            if (exploreMissions.length < explorePlanet[0].exploreCnt) {
+            if (
+              shipCnt.length > 0 &&
+              exploreMissions.length < explorePlanet[0].exploreCnt
+            ) {
               const data = loadGalaxy.data;
               const area = data.area;
               const explore = data.explore;
