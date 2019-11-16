@@ -79,7 +79,7 @@ async function stakingToken(list) {
             data.key,
             data.account,
             data.symbol,
-            bal.balance + ""
+            bal.balance.toFixed(3)
           );
           console.log(
             `[staking completed]:${data.account}, ${data.symbol}, ${bal.balance}`
