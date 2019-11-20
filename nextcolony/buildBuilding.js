@@ -192,8 +192,8 @@ const explorePlanetArray = [
     }
   },
   {
-    name: "BB",
-    id: "P-ZETAMQ1EK6O",
+    name: "BC",
+    id: "P-ZQUBXLVO3VK",
     exploreCnt: 37,
     explorerDirection: {
       xminus: true,
