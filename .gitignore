@@ -11,6 +11,7 @@ key.json
 /config/blockConfig.ini
 config/blockConfig.ini
 *blockConfig.ini
+TransferSteemToken.js
 
 # Editor directories and files
 .idea
