@@ -249,7 +249,7 @@ let shipArray = [];
 
 const exceptPoint = [{ x: -10, y: -170 }];
 const maxBuildQty = {
-  base: -1,
+  base: 12,
   shipyard: 17,
   researchcenter: 12,
   coalmine: 16,

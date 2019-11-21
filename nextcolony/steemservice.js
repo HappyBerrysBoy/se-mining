@@ -87,7 +87,7 @@ let attackArray = [];
 
 const exceptPoint = [{ x: -10, y: -170 }];
 const maxBuildQty = {
-  base: -1,
+  base: 12,
   shipyard: 13,
   researchcenter: 8,
   coalmine: 12,
