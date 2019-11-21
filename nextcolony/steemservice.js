@@ -386,7 +386,7 @@ async function loadSchedulerJob(planet) {
           if (targetPlanet.length) {
             const targetSkill = targetPlanet.filter(s => s.target);
 
-            console.log(targetSkill);
+            // console.log(targetSkill);
 
             skillInfo.data.forEach(skill => {
               const targetInfo = targetSkill.filter(t => t.name == skill.name);
