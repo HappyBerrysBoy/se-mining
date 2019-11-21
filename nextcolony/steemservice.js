@@ -45,6 +45,7 @@ const defaultSkillUpList = [
   { name: "Explorer", target: 20 },
   { name: "uraniummine", target: 14 },
   { name: "coppermine", target: 13 },
+  { name: "base", target: 20 },
   { name: "oremine", target: 13 },
   { name: "coalmine", target: 13 },
   { name: "coaldepot", target: 10 },
@@ -87,7 +88,7 @@ let attackArray = [];
 
 const exceptPoint = [{ x: -10, y: -170 }];
 const maxBuildQty = {
-  base: 12,
+  base: 16,
   shipyard: 13,
   researchcenter: 8,
   coalmine: 12,

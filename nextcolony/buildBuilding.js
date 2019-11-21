@@ -210,6 +210,7 @@ const defaultSkillUpList = [
   { name: "Battlecruiser", target: 20 },
   { name: "Carrier", target: 0 },
   { name: "Dreadnought", target: 0 },
+  { name: "base", target: 20 },
   { name: "missioncontrol", target: 0 },
   { name: "uraniumbooster", target: 20 },
   { name: "copperbooster", target: 20 },
