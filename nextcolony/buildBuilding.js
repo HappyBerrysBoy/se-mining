@@ -192,6 +192,39 @@ const explorePlanetArray = [
     }
   },
   {
+    name: "ZP",
+    id: "P-ZIMAVHPXVYO",
+    exploreCnt: 38,
+    explorerDirection: {
+      xminus: true,
+      xplus: true,
+      yminus: true,
+      yplus: true
+    }
+  },
+  {
+    name: "BA",
+    id: "P-Z92DPZ1W8N4",
+    exploreCnt: 37,
+    explorerDirection: {
+      xminus: true,
+      xplus: true,
+      yminus: true,
+      yplus: true
+    }
+  },
+  {
+    name: "BB",
+    id: "P-ZETAMQ1EK6O",
+    exploreCnt: 37,
+    explorerDirection: {
+      xminus: true,
+      xplus: true,
+      yminus: true,
+      yplus: true
+    }
+  },
+  {
     name: "BC",
     id: "P-ZQUBXLVO3VK",
     exploreCnt: 37,
