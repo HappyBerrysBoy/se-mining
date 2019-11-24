@@ -4,10 +4,10 @@ const key = require("../key.json");
 
 const account = "steemservice";
 const postingkey = key.steemservice_posting;
-const mineMinLevel = 13;
-const mineGapVal = 7;
+const mineMinLevel = 12;
+const mineGapVal = 5;
 const shipyardArray = [
-  { name: "A", id: "P-ZLRD1LQB8N4", ship: ["explorership"] }
+  // { name: "A", id: "P-ZLRD1LQB8N4", ship: ["explorership"] }
 ];
 
 // 리스트에 포함되면 업글 안함
@@ -21,7 +21,7 @@ const explorePlanetArray = [
     exploreCnt: 5,
     explorerDirection: {
       xminus: true,
-      xplus: false,
+      xplus: true,
       yminus: true,
       yplus: true
     }
@@ -32,7 +32,7 @@ const explorePlanetArray = [
     exploreCnt: 5,
     explorerDirection: {
       xminus: true,
-      xplus: false,
+      xplus: true,
       yminus: true,
       yplus: true
     }
@@ -43,11 +43,11 @@ const defaultSkillUpList = [
   { name: "missioncontrol", target: 20 },
   { name: "Corvette", target: 20 },
   { name: "Explorer", target: 20 },
-  { name: "uraniummine", target: 14 },
-  { name: "coppermine", target: 13 },
+  { name: "uraniummine", target: 16 },
+  { name: "coppermine", target: 14 },
   { name: "base", target: 20 },
-  { name: "oremine", target: 13 },
-  { name: "coalmine", target: 13 },
+  { name: "oremine", target: 14 },
+  { name: "coalmine", target: 14 },
   { name: "coaldepot", target: 10 },
   { name: "oredepot", target: 10 },
   { name: "uraniumdepot", target: 10 },
@@ -91,10 +91,10 @@ const maxBuildQty = {
   base: 16,
   shipyard: 13,
   researchcenter: 8,
-  coalmine: 12,
-  oremine: 12,
-  coppermine: 12,
-  uraniummine: 14,
+  coalmine: 14,
+  oremine: 14,
+  coppermine: 14,
+  uraniummine: 16,
   coaldepot: 9,
   oredepot: 9,
   copperdepot: 9,

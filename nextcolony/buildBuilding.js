@@ -192,8 +192,41 @@ const explorePlanetArray = [
     }
   },
   {
+    name: "ZQ",
+    id: "P-ZQDCCUZSUPC",
+    exploreCnt: 4,
+    explorerDirection: {
+      xminus: true,
+      xplus: true,
+      yminus: true,
+      yplus: true
+    }
+  },
+  {
     name: "ZP",
     id: "P-ZIMAVHPXVYO",
+    exploreCnt: 38,
+    explorerDirection: {
+      xminus: true,
+      xplus: true,
+      yminus: true,
+      yplus: true
+    }
+  },
+  {
+    name: "ZR",
+    id: "P-ZT4IDSNMOF4",
+    exploreCnt: 38,
+    explorerDirection: {
+      xminus: true,
+      xplus: true,
+      yminus: true,
+      yplus: true
+    }
+  },
+  {
+    name: "ZS",
+    id: "P-Z5BH0PN66XC",
     exploreCnt: 38,
     explorerDirection: {
       xminus: true,
@@ -283,7 +316,7 @@ let shipArray = [];
 
 const exceptPoint = [{ x: -10, y: -170 }];
 const maxBuildQty = {
-  base: 12,
+  base: 14,
   shipyard: 17,
   researchcenter: 12,
   coalmine: 16,
