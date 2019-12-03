@@ -4,10 +4,10 @@ const key = require("../key.json");
 
 const account = "steemservice";
 const postingkey = key.steemservice_posting;
-const mineMinLevel = 13;
-const mineGapVal = 7;
+const mineMinLevel = 12;
+const mineGapVal = 5;
 const shipyardArray = [
-  { name: "A", id: "P-ZLRD1LQB8N4", ship: ["explorership"] }
+  // { name: "A", id: "P-ZLRD1LQB8N4", ship: ["explorership"] }
 ];
 
 // 리스트에 포함되면 업글 안함
@@ -21,7 +21,7 @@ const explorePlanetArray = [
     exploreCnt: 5,
     explorerDirection: {
       xminus: true,
-      xplus: false,
+      xplus: true,
       yminus: true,
       yplus: true
     }
@@ -32,7 +32,7 @@ const explorePlanetArray = [
     exploreCnt: 5,
     explorerDirection: {
       xminus: true,
-      xplus: false,
+      xplus: true,
       yminus: true,
       yplus: true
     }
@@ -43,10 +43,11 @@ const defaultSkillUpList = [
   { name: "missioncontrol", target: 20 },
   { name: "Corvette", target: 20 },
   { name: "Explorer", target: 20 },
-  { name: "uraniummine", target: 14 },
-  { name: "coppermine", target: 13 },
-  { name: "oremine", target: 13 },
-  { name: "coalmine", target: 13 },
+  { name: "uraniummine", target: 16 },
+  { name: "coppermine", target: 14 },
+  { name: "base", target: 20 },
+  { name: "oremine", target: 14 },
+  { name: "coalmine", target: 14 },
   { name: "coaldepot", target: 10 },
   { name: "oredepot", target: 10 },
   { name: "uraniumdepot", target: 10 },
@@ -69,14 +70,14 @@ const skillUpArray = [
 
 let attackIdx = 0;
 const attackList = [
-  { id: "P-ZNYQLE6J81C", x: -546, y: 105 },
   { id: "P-ZNYQLE6J81C", x: -519, y: 114 },
   { id: "P-ZNYQLE6J81C", x: -543, y: 126 },
   { id: "P-ZAIUWOOL62O", x: -545, y: 115 },
   { id: "P-Z2DEL2ENL34", x: -528, y: 110 },
   { id: "P-Z39X5A042K0", x: -531, y: 106 },
   { id: "P-ZTY87WKC52O", x: -546, y: 117 },
-  { id: "P-Z3TXPUXUCYO", x: -544, y: 143 }
+  { id: "P-Z3TXPUXUCYO", x: -544, y: 143 },
+  { id: "P-ZNYQLE6J81C", x: -546, y: 105 }
 ];
 
 let buildArray = [];
@@ -87,13 +88,13 @@ let attackArray = [];
 
 const exceptPoint = [{ x: -10, y: -170 }];
 const maxBuildQty = {
-  base: -1,
+  base: 16,
   shipyard: 13,
   researchcenter: 8,
-  coalmine: 12,
-  oremine: 12,
-  coppermine: 12,
-  uraniummine: 14,
+  coalmine: 14,
+  oremine: 14,
+  coppermine: 14,
+  uraniummine: 16,
   coaldepot: 9,
   oredepot: 9,
   copperdepot: 9,
@@ -385,7 +386,7 @@ async function loadSchedulerJob(planet) {
           if (targetPlanet.length) {
             const targetSkill = targetPlanet.filter(s => s.target);
 
-            console.log(targetSkill);
+            // console.log(targetSkill);
 
             skillInfo.data.forEach(skill => {
               const targetInfo = targetSkill.filter(t => t.name == skill.name);

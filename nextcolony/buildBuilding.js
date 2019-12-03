@@ -232,8 +232,96 @@ const neverBuildPlanetArray = ["P-ZA01QNQO29C"];
 //탐험 관련 계정
 const explorePlanetArray = [
   {
+    name: "ZQ",
+    id: "P-ZTU05ZEX4E8",
+    exploreCnt: 38,
+    explorerDirection: {
+      xminus: true,
+      xplus: true,
+      yminus: true,
+      yplus: true
+    }
+  },
+  {
+    name: "ZQ",
+    id: "P-ZQDCCUZSUPC",
+    exploreCnt: 4,
+    explorerDirection: {
+      xminus: true,
+      xplus: true,
+      yminus: true,
+      yplus: true
+    }
+  },
+  {
     name: "ZP",
     id: "P-ZIMAVHPXVYO",
+    exploreCnt: 38,
+    explorerDirection: {
+      xminus: true,
+      xplus: true,
+      yminus: true,
+      yplus: true
+    }
+  },
+  {
+    name: "ZR",
+    id: "P-ZT4IDSNMOF4",
+    exploreCnt: 38,
+    explorerDirection: {
+      xminus: true,
+      xplus: true,
+      yminus: true,
+      yplus: true
+    }
+  },
+  {
+    name: "ZS",
+    id: "P-Z5BH0PN66XC",
+    exploreCnt: 38,
+    explorerDirection: {
+      xminus: true,
+      xplus: true,
+      yminus: true,
+      yplus: true
+    }
+  },
+  {
+    name: "ZU",
+    id: "P-ZRBBSC2MXTC",
+    exploreCnt: 38,
+    explorerDirection: {
+      xminus: true,
+      xplus: true,
+      yminus: true,
+      yplus: true
+    }
+  },
+  {
+    name: "ZV",
+    id: "P-ZAI2XZXWZ0G",
+    exploreCnt: 38,
+    explorerDirection: {
+      xminus: true,
+      xplus: true,
+      yminus: true,
+      yplus: true
+    }
+  },
+  {
+    name: "ZW",
+    id: "P-ZO71S20C4EO",
+    exploreCnt: 38,
+    explorerDirection: {
+      xminus: true,
+      xplus: true,
+      yminus: true,
+      yplus: true
+    }
+  },
+  {
+    name: "BA",
+    id: "P-Z92DPZ1W8N4",
     exploreCnt: 37,
     explorerDirection: {
       xminus: true,
@@ -285,17 +373,6 @@ const explorePlanetArray = [
       yminus: true,
       yplus: true
     }
-  },
-  {
-    name: "BA",
-    id: "P-Z92DPZ1W8N4",
-    exploreCnt: 37,
-    explorerDirection: {
-      xminus: true,
-      xplus: true,
-      yminus: true,
-      yplus: true
-    }
   }
 ];
 
@@ -305,6 +382,7 @@ const defaultSkillUpList = [
   { name: "Battlecruiser", target: 20 },
   { name: "Carrier", target: 0 },
   { name: "Dreadnought", target: 0 },
+  { name: "base", target: 20 },
   { name: "missioncontrol", target: 0 },
   { name: "uraniumbooster", target: 20 },
   { name: "copperbooster", target: 20 },
@@ -344,7 +422,7 @@ let shipArray = [];
 
 const exceptPoint = [{ x: -10, y: -170 }];
 const maxBuildQty = {
-  base: -1,
+  base: 14,
   shipyard: 17,
   researchcenter: 12,
   coalmine: 16,

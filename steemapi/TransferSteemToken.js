@@ -134,7 +134,7 @@ const voteWitness = {
 // const account = sendList.shift();
 console.log(kkey, aacc, JSON.stringify(jjson));
 
-transferSteem(kkey, aacc, aacc, "0.001 STEEM", JSON.stringify(voteWitness))
+transferSteem(kkey, aacc, aacc, "0.001 STEEM", JSON.stringify(jjson))
   .then(result => console.log(result))
   .catch(e => console.log(e));
 // }, 3000);
