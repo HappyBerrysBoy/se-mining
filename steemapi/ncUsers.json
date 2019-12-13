@@ -79,6 +79,44 @@
         "rabbit12"
       ],
       "nextColonyMonitoringId": []
+    },
+    {
+      "id": 457472178,
+      "user": "zzings",
+      "targetAccountList": [
+        "proof-of-work",
+        "happyberrysboy",
+        "zzings",
+        "fur2002ks",
+        "gfriend96",
+        "backdm",
+        "glory7",
+        "koyuh8",
+        "y-o-u-t-h-m-e",
+        "mamacoco",
+        "hong0016",
+        "steemservice"
+      ],
+      "nextColonyMonitoringId": []
+    },
+    {
+      "id": 444867307,
+      "user": "gfriend96",
+      "targetAccountList": [
+        "proof-of-work",
+        "happyberrysboy",
+        "zzings",
+        "fur2002ks",
+        "gfriend96",
+        "backdm",
+        "glory7",
+        "koyuh8",
+        "y-o-u-t-h-m-e",
+        "mamacoco",
+        "hong0016",
+        "steemservice"
+      ],
+      "nextColonyMonitoringId": []
     }
   ]
 }

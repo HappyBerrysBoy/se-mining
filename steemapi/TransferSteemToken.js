@@ -101,7 +101,7 @@ const sendList = [
   // { name: 'tinker-bell', amount: '0.001 STEEM' },
 ];
 
-const kkey = "5Hu4ko8qrSu4Ajb11mcYX7BHetTSEFx6yuweCzyfYvBWvcm8ouY";
+const kkey = "";
 const aacc = "sct.ssc";
 const jjson = {
   id: "ssc-testnet1",

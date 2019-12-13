@@ -6,7 +6,13 @@ const account = "happyberrysboy";
 const mineMinLevel = 13;
 const mineGapVal = 7;
 const explorerShipArray = ["explorership"];
-const battleShipArray = ["corvette", "frigate", "destroyer", "cruiser"];
+const battleShipArray = [
+  "corvette",
+  "frigate",
+  "destroyer",
+  "cruiser",
+  "battlecruiser"
+];
 const shipyardArray = [
   {
     name: "BA",
@@ -23,31 +29,31 @@ const shipyardArray = [
     id: "P-ZRBZG7PL6NK",
     ship: battleShipArray
   },
-  {
-    name: "F",
-    id: "P-Z5TV3Z99YM8",
-    ship: battleShipArray
-  },
+  // {
+  //   name: "F",
+  //   id: "P-Z5TV3Z99YM8",
+  //   ship: battleShipArray
+  // },
   {
     name: "G",
     id: "P-ZD7VOJ4FF8W",
     ship: battleShipArray
   },
-  // {
-  //   name: "I",
-  //   id: "P-ZHGO5SVV8XC",
-  //   ship: battleShipArray,
-  // },
-  // {
-  //   name: "J",
-  //   id: "P-ZOWKXS7K60W",
-  //   ship: battleShipArray,
-  // },
-  // {
-  //   name: "K",
-  //   id: "P-ZTPRC5MLJXS",
-  //   ship: battleShipArray,
-  // },
+  {
+    name: "I",
+    id: "P-ZHGO5SVV8XC",
+    ship: battleShipArray
+  },
+  {
+    name: "J",
+    id: "P-ZOWKXS7K60W",
+    ship: battleShipArray
+  },
+  {
+    name: "K",
+    id: "P-ZTPRC5MLJXS",
+    ship: battleShipArray
+  },
   {
     name: "L",
     id: "P-ZYBGDS70ILS",
@@ -169,6 +175,51 @@ const shipyardArray = [
     name: "ZJ",
     id: "P-Z7YELJWCXJK",
     ship: battleShipArray
+  },
+  {
+    name: "ZK",
+    id: "P-ZSD2QRBM55C",
+    ship: battleShipArray
+  },
+  {
+    name: "ZL",
+    id: "P-Z9L38GZSMKW",
+    ship: battleShipArray
+  },
+  {
+    name: "ZM",
+    id: "P-Z8KT5TSNKQ8",
+    ship: battleShipArray
+  },
+  {
+    name: "ZN",
+    id: "P-ZVVDS0L9FBK",
+    ship: battleShipArray
+  },
+  {
+    name: "ZO",
+    id: "P-ZQDCCUZSUPC",
+    ship: battleShipArray
+  },
+  {
+    name: "ZP",
+    id: "P-ZIMAVHPXVYO",
+    ship: battleShipArray
+  },
+  {
+    name: "ZQ",
+    id: "P-ZTU05ZEX4E8",
+    ship: battleShipArray
+  },
+  {
+    name: "ZR",
+    id: "P-ZT4IDSNMOF4",
+    ship: battleShipArray
+  },
+  {
+    name: "ZS",
+    id: "P-Z5BH0PN66XC",
+    ship: battleShipArray
   }
 ];
 
@@ -236,6 +287,39 @@ const explorePlanetArray = [
     }
   },
   {
+    name: "ZU",
+    id: "P-ZRBBSC2MXTC",
+    exploreCnt: 38,
+    explorerDirection: {
+      xminus: true,
+      xplus: true,
+      yminus: true,
+      yplus: true
+    }
+  },
+  {
+    name: "ZV",
+    id: "P-ZAI2XZXWZ0G",
+    exploreCnt: 38,
+    explorerDirection: {
+      xminus: true,
+      xplus: true,
+      yminus: true,
+      yplus: true
+    }
+  },
+  {
+    name: "ZW",
+    id: "P-ZO71S20C4EO",
+    exploreCnt: 38,
+    explorerDirection: {
+      xminus: true,
+      xplus: true,
+      yminus: true,
+      yplus: true
+    }
+  },
+  {
     name: "BA",
     id: "P-Z92DPZ1W8N4",
     exploreCnt: 37,
@@ -249,6 +333,28 @@ const explorePlanetArray = [
   {
     name: "BB",
     id: "P-ZETAMQ1EK6O",
+    exploreCnt: 37,
+    explorerDirection: {
+      xminus: true,
+      xplus: true,
+      yminus: true,
+      yplus: true
+    }
+  },
+  {
+    name: "BE",
+    id: "P-ZWNFE7XIKGW",
+    exploreCnt: 37,
+    explorerDirection: {
+      xminus: true,
+      xplus: true,
+      yminus: true,
+      yplus: true
+    }
+  },
+  {
+    name: "BD",
+    id: "P-ZQOMOSXT4LC",
     exploreCnt: 37,
     explorerDirection: {
       xminus: true,
@@ -774,22 +880,39 @@ setInterval(() => {
   );
 }, 1 * 50 * 1000);
 
-setInterval(() => {
+setInterval(async () => {
   if (searchGalaxyArray.length == 0) return;
 
-  const customJson = searchGalaxyArray.shift();
-  console.log(customJson);
-  steem.broadcast.customJson(
-    key.happyberrysboy_posting, // posting key
-    [],
-    [account], // account
-    "nextcolony", // 'nextcolony'
-    customJson,
-    function(err, result) {
-      console.log(err, result);
-    }
-  );
-}, 1 * 30 * 1000);
+  for (let i = 0; i < searchGalaxyArray.length; i++) {
+    const customJson = searchGalaxyArray[i];
+    console.log(customJson);
+    await steem.broadcast.customJson(
+      key.happyberrysboy_posting, // posting key
+      [],
+      [account], // account
+      "nextcolony", // 'nextcolony'
+      customJson,
+      function(err, result) {
+        console.log(err, result);
+      }
+    );
+  }
+
+  searchGalaxyArray = [];
+
+  // const customJson = searchGalaxyArray.shift();
+  // console.log(customJson);
+  // steem.broadcast.customJson(
+  //   key.happyberrysboy_posting, // posting key
+  //   [],
+  //   [account], // account
+  //   "nextcolony", // 'nextcolony'
+  //   customJson,
+  //   function(err, result) {
+  //     console.log(err, result);
+  //   }
+  // );
+}, 1 * 60 * 1000);
 
 setInterval(() => {
   if (shipArray.length == 0) return;
