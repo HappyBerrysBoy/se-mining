@@ -25,13 +25,13 @@ const accountList = [
     symbol: "AAA",
     key: key.happyberrys_aaa_active,
     remainToken: 0
-  },
-  {
-    account: "happy.report",
-    symbol: "SCT",
-    key: key.happy_report_active,
-    remainToken: 0
   }
+  // {
+  //   account: "happy.report",
+  //   symbol: "SCT",
+  //   key: key.happy_report_active,
+  //   remainToken: 0
+  // }
 ];
 
 doClaimStaking();

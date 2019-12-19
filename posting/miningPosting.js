@@ -1,6 +1,7 @@
 const steem = require("steem");
 const fs = require("fs");
 const key = require("../key.json");
+const { transferToken } = require("../steemapi.js");
 
 const miningTargetCoin = ["SCT", "ZZAN", "PAL", "ENG", "IV", "LEO", "SAGO"];
 
@@ -22,7 +23,7 @@ body += `# Last Day Steem Engine Mining Report \n<br>\n`;
 fs.readFile(
   `/home/ubuntu/workspace/se-mining/logs/mining(${dateString}).txt`,
   "utf8",
-  function(err, data) {
+  async function(err, data) {
     if (err) {
       console.log(err);
       return;
@@ -70,7 +71,7 @@ fs.readFile(
       tmp += "<br><br>\n";
 
       body += `### ${keyinfo} - Total Amount(${totalAmount.toFixed(
-        3,
+        3
       )}), Count(${value.length}) \n`;
       body += tmp;
     }
@@ -95,13 +96,13 @@ fs.readFile(
               "steemleo",
               "palnet",
               "sct-en",
-              "sct-mining",
+              "sct-mining"
             ],
             community: "busy",
             app: "steemcoinpan/0.1",
-            format: "markdown",
-          }),
-        },
+            format: "markdown"
+          })
+        }
       ],
       [
         "comment_options",
@@ -116,14 +117,15 @@ fs.readFile(
             [
               0,
               {
-                beneficiaries: [{ account: "happyberrysboy", weight: 10000 }],
-              },
-            ],
-          ],
-        },
-      ],
+                beneficiaries: [{ account: "happyberrysboy", weight: 10000 }]
+              }
+            ]
+          ]
+        }
+      ]
     ];
-    steem.broadcast.send(
+
+    await steem.broadcast.send(
       { operations: operations, extensions: [] },
       { posting: key.happy_report_posting },
       function(e, r) {
@@ -133,9 +135,32 @@ fs.readFile(
         }
 
         console.log(r);
-      },
+      }
     );
-  },
+
+    const jsonStr = {
+      contractName: "tokens",
+      contractAction: "transfer",
+      contractPayload: {
+        symbol: "SCT",
+        to: "sct.postingfee",
+        quantity: "0.001",
+        memo: "posting fee test"
+      }
+    };
+
+    await transferToken(key.happy_report_active, author, jsonStr)
+      .then(r => {
+        console.log(r);
+      })
+      .catch(c => {
+        console.log(c);
+      });
+
+    console.log(
+      `success for transferring from ${author} to sct.postingfee(amount:${1})`
+    );
+  }
 );
 
 Date.prototype.addHours = function(h) {

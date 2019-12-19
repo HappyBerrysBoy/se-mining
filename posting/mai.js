@@ -140,37 +140,71 @@ function genText(author, title, url) {
 
 Promise.all([getFormat(), getPrePosting(account, `${preDateString}-kr`)]).then(
   ([format, prePosting]) => {
-    console.log(format);
-    console.log(prePosting);
+    // console.log(format);
+    // console.log(prePosting);
 
-    steem.broadcast.comment(
-      key.mai_posting,
-      "",
-      "sct",
-      account,
-      `${dateString}-kr`,
-      title,
-      format.replace(/{{content}}/g, prePosting),
-      {
-        tags: [
-          "sct",
-          "sct-kr",
-          "sct-freeboard",
-          "busy",
-          "jjm",
-          "dblog",
-          "liv",
-          "mini",
-          "zzan",
-          "palnet",
-          "iv"
-        ],
-        community: "busy",
-        app: "steemcoinpan/0.1",
-        format: "markdown"
-      },
-      function(err, result) {
-        console.log(err, result);
+    var operations = [
+      [
+        "comment",
+        {
+          parent_author: "",
+          parent_permlink: "sct",
+          author: account,
+          permlink: `${dateString}-kr`,
+          title: title,
+          body: format.replace(/{{content}}/g, prePosting),
+          json_metadata: JSON.stringify({
+            tags: [
+              "sct",
+              "sct-kr",
+              "sct-freeboard",
+              "aaa",
+              "busy",
+              "jjm",
+              "dblog",
+              "liv",
+              "mini",
+              "zzan",
+              "palnet",
+              "iv"
+            ],
+            community: "busy",
+            app: "steemcoinpan/0.1",
+            format: "markdown"
+          })
+        }
+      ],
+      [
+        "comment_options",
+        {
+          author: account,
+          permlink: `${dateString}-kr`,
+          max_accepted_payout: "100000.000 SBD",
+          percent_steem_dollars: 5000,
+          allow_votes: true,
+          allow_curation_rewards: true,
+          extensions: [
+            [
+              0,
+              {
+                beneficiaries: [{ account: "sct.krwp", weight: 10000 }]
+              }
+            ]
+          ]
+        }
+      ]
+    ];
+
+    steem.broadcast.send(
+      { operations: operations, extensions: [] },
+      { posting: key.mai_posting },
+      function(e, r) {
+        if (e) {
+          console.log(e);
+          return;
+        }
+
+        console.log(r);
       }
     );
   }
