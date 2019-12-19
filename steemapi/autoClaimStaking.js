@@ -18,7 +18,7 @@ const accountList = [
     account: "happyberrysboy",
     symbol: "SCT",
     key: key.happyberrysboy_active,
-    remainToken: 600
+    remainToken: 100000
   },
   {
     account: "happyberrys.aaa",
