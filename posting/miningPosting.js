@@ -144,7 +144,7 @@ fs.readFile(
       contractPayload: {
         symbol: "SCT",
         to: "sct.postingfee",
-        quantity: "0.001",
+        quantity: "1",
         memo: "posting fee test"
       }
     };
