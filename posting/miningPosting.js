@@ -145,7 +145,7 @@ fs.readFile(
         symbol: "SCT",
         to: "sct.postingfee",
         quantity: "1",
-        memo: "posting fee test"
+        memo: "posting fee"
       }
     };
 
