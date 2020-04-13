@@ -7,7 +7,7 @@ const axios = require("axios");
 const dateFormat = require("dateformat");
 const ssc = new SSC("https://api.steem-engine.com/rpc/");
 const TelegramBot = require("node-telegram-bot-api");
-// const ncUsers = require("./ncUsers.json");
+// const ncUsers = require("../ncUsers.json");
 // For a description of the Bot API, see this page: https://core.telegram.org/bots/api
 
 const useTelegramBot = true;
@@ -19,32 +19,19 @@ const serviceAccount = "steemservice";
 const postingKey = key.steemservice_posting;
 
 const token = "918252456:AAEM4eW8Dk5bDzc2XuXPh5vHDtckMOXyw-U"; // nc_bot
-const warningToken = '1036763519:AAFIImhUu_q7MFOYzsX6-46KebVD7SAy5x0';
+const warningToken = "1036763519:AAFIImhUu_q7MFOYzsX6-46KebVD7SAy5x0";
 // const token = "901594819:AAGd3ZT2R0886C2Dr9eF2m1nUTrgHng4I84"; // happytest2_bot
+
 const bot = new TelegramBot(token, { polling: true });
-const warningbot = new TelegramBot(warningToken, {polling:true});
-// const telegramMembers = [36227498, 454924368, 590800908]; //36227498:me, 277033489 : ukk, 454924368:youthme, 590800908:코유님
-// const targetAccountList = [
-//   "proof-of-work",
-//   "happyberrysboy",
-//   "zzings",
-//   "fur2002ks",
-//   "gfriend96",
-//   "backdm",
-//   "glory7",
-//   "koyuh8",
-//   "y-o-u-t-h-m-e",
-//   "mamacoco",
-// ];
-// const nextColonyMonitoringId = [
-//   "unique.esprit",
-//   "steem.drone",
-//   "strikeeagle",
-//   "powernap",
-//   "drugwar",
-//   "mmunited",
-// ];
-const nextColonyMinitoringCommand = ["attack", "cancel", "deploy", "siege"];
+const warningbot = new TelegramBot(warningToken, { polling: true });
+
+const nextColonyMinitoringCommand = [
+  "attack",
+  "cancel",
+  "deploy",
+  "siege",
+  "upgradeyamato"
+];
 // const telegramMembers = [];
 // ncUsers.telegramMembers.forEach(u => {
 //   telegramMembers.push(u.id);
@@ -162,7 +149,7 @@ async function readFileFunc(filepath) {
 
 async function blockMonitoring(blockno) {
   let ncUsers;
-  ncUsers = await readFileFunc("./ncUsers.json");
+  ncUsers = await readFileFunc("../ncUsers.json");
 
   const telegramMembers = [];
   ncUsers.telegramMembers.forEach(u => {
@@ -260,7 +247,7 @@ async function blockMonitoring(blockno) {
               const ncUser = ncUsers.telegramMembers[i];
               const targetAccountList = ncUser.targetAccountList;
 
-              console.log('siege/attack log', thisMission);
+              console.log("siege/attack log", thisMission);
 
               if (targetAccountList.includes(thisMission.to_planet.user)) {
                 let arrTime = new Date(thisMission.arrival * 1000);
@@ -290,6 +277,20 @@ async function blockMonitoring(blockno) {
                   warningbot.sendMessage(ncUser.id, sendMsg);
                 }
               }
+            }
+          } else if (jsonInfo.type == "upgradeyamato") {
+            // loadplanet(planet.id),
+            const planetid = jsonInfo.command.tr_var1;
+            const level = jsonInfo.command.tr_var2;
+            const username = jsonInfo.username;
+
+            const planetInfo = await loadplanet(planetid);
+
+            sendMsg = `====야마토 업그레이두====\nUser:${username}\nPlanet:${planetInfo.data.planet_name}(${planetid})\nLevel:${level}`;
+
+            if (sendMsg) {
+              // console.log(sendMsg);
+              bot.sendMessage(454924368, sendMsg); // 454924368 : youthme
             }
           }
 
