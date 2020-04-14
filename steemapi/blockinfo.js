@@ -319,10 +319,12 @@ async function blockMonitoring(blockno) {
             const ncUser = ncUsers.telegramMembers[i];
             const nextColonyMonitoringId = ncUser.nextColonyMonitoringId;
 
-            console.log(
-              "nextcolony monitoringid",
-              ncUser + "," + jsonInfo.username + "," + jsonInfo.type
-            );
+            if (nextColonyMinitoringCommand.includes(jsonInfo.type)) {
+              console.log(
+                "nextcolony monitoringid",
+                ncUser.id + "," + jsonInfo.username + "," + jsonInfo.type
+              );
+            }
 
             if (
               nextColonyMonitoringId.includes(jsonInfo.username) &&
