@@ -290,7 +290,7 @@ async function blockMonitoring(blockno) {
 
             if (sendMsg) {
               // console.log(sendMsg);
-              yamatobot.sendMessage(36227498, sendMsg); // 454924368 : youthme
+              // yamatobot.sendMessage(36227498, sendMsg); // 454924368 : youthme
               yamatobot.sendMessage(454924368, sendMsg); // 454924368 : youthme
             }
           }
