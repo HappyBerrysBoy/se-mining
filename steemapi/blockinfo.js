@@ -7,7 +7,7 @@ const axios = require("axios");
 const dateFormat = require("dateformat");
 const ssc = new SSC("https://api.steem-engine.com/rpc/");
 const TelegramBot = require("node-telegram-bot-api");
-// const ncUsers = require("../ncUsers.json");
+// const ncUsers = require("./ncUsers.json");
 // For a description of the Bot API, see this page: https://core.telegram.org/bots/api
 
 const useTelegramBot = true;
@@ -20,18 +20,14 @@ const postingKey = key.steemservice_posting;
 
 const token = "918252456:AAEM4eW8Dk5bDzc2XuXPh5vHDtckMOXyw-U"; // nc_bot
 const warningToken = "1036763519:AAFIImhUu_q7MFOYzsX6-46KebVD7SAy5x0";
+const yamatoToken = "1229060737:AAGvC5jDS8kSKEwu4Hbn05F3nppCgGJg1hk";
 // const token = "901594819:AAGd3ZT2R0886C2Dr9eF2m1nUTrgHng4I84"; // happytest2_bot
 
 const bot = new TelegramBot(token, { polling: true });
 const warningbot = new TelegramBot(warningToken, { polling: true });
+const yamatobot = new TelegramBot(yamatoToken, { polling: true });
 
-const nextColonyMinitoringCommand = [
-  "attack",
-  "cancel",
-  "deploy",
-  "siege",
-  "upgradeyamato"
-];
+const nextColonyMinitoringCommand = ["attack", "cancel", "deploy", "siege"];
 // const telegramMembers = [];
 // ncUsers.telegramMembers.forEach(u => {
 //   telegramMembers.push(u.id);
@@ -123,7 +119,7 @@ const getContent = (author, permlink) => {
   });
 };
 
-fs.readFile("../config/blockConfig.ini", "utf8", function(err, data) {
+fs.readFile("./config/blockConfig.ini", "utf8", function(err, data) {
   if (err) console.log(err);
   const json = JSON.parse(data);
   console.log(json.lastReadSteemBlock);
@@ -149,7 +145,7 @@ async function readFileFunc(filepath) {
 
 async function blockMonitoring(blockno) {
   let ncUsers;
-  ncUsers = await readFileFunc("../ncUsers.json");
+  ncUsers = await readFileFunc("./ncUsers.json");
 
   const telegramMembers = [];
   ncUsers.telegramMembers.forEach(u => {
@@ -184,7 +180,7 @@ async function blockMonitoring(blockno) {
     console.log(e);
     console.log(`const { timestamp = null, transactions } = blockinfo error`);
     fs.appendFile(
-      "../logs/exceptions(" + dateString + ").txt",
+      "./logs/exceptions(" + dateString + ").txt",
       JSON.stringify(blockinfo) + "\n",
       err => {
         if (err) console.log(err);
@@ -285,12 +281,15 @@ async function blockMonitoring(blockno) {
             const username = jsonInfo.username;
 
             const planetInfo = await loadplanet(planetid);
+            const loca =
+              planetInfo.data.planet_corx + "," + planetInfo.data.planet_cory;
 
-            sendMsg = `====야마토 업그레이두====\nUser:${username}\nPlanet:${planetInfo.data.planet_name}(${planetid})\nLevel:${level}`;
+            sendMsg = `====야마토 업그레이두====\nUser:${username}\nLocation:(${loca})\nPlanet:${planetInfo.data.planet_name}(${planetid})\nLevel:${level}\nBlock:${jsonInfo.block}`;
 
             if (sendMsg) {
               // console.log(sendMsg);
-              bot.sendMessage(454924368, sendMsg); // 454924368 : youthme
+              yamatobot.sendMessage(36227498, sendMsg); // 454924368 : youthme
+              yamatobot.sendMessage(454924368, sendMsg); // 454924368 : youthme
             }
           }
 
@@ -390,7 +389,7 @@ async function blockMonitoring(blockno) {
           console.log("content :", jsonInfo);
 
           fs.appendFile(
-            "../logs/mining(" + dateString + ").txt",
+            "./logs/mining(" + dateString + ").txt",
             JSON.stringify(jsonInfo) + "\n",
             err => {
               if (err) console.log(err);
@@ -408,7 +407,7 @@ async function blockMonitoring(blockno) {
           // console.log('content :', content);
 
           fs.appendFile(
-            "../logs/sct_log_" + timestamp.split("T")[0] + ".txt",
+            "./logs/sct_log_" + timestamp.split("T")[0] + ".txt",
             JSON.stringify(content) + "\n",
             err => {
               if (err) console.log(err);
@@ -418,7 +417,7 @@ async function blockMonitoring(blockno) {
       } catch (e) {
         console.log(e);
         fs.appendFile(
-          "../logs/exceptions(" + dateString + ").txt",
+          "./logs/exceptions(" + dateString + ").txt",
           "retry count over\n",
           err => {
             if (err) console.log(err);
@@ -546,7 +545,7 @@ async function blockMonitoring(blockno) {
         const logJson = { content: content, result: body };
 
         fs.appendFile(
-          "../logs/happypick(" + dateString + ").txt",
+          "./logs/happypick(" + dateString + ").txt",
           JSON.stringify(logJson) + "\n",
           err => {
             if (err) console.log(err);
@@ -651,7 +650,7 @@ async function blockMonitoring(blockno) {
         const logJson = { content: content, result: body };
 
         fs.appendFile(
-          "../logs/happydice(" + dateString + ").txt",
+          "./logs/happydice(" + dateString + ").txt",
           JSON.stringify(logJson) + "\n",
           err => {
             if (err) console.log(err);
@@ -684,7 +683,7 @@ async function blockMonitoring(blockno) {
 
   blockno.lastReadSteemBlock += 1;
 
-  fs.writeFile("../config/blockConfig.ini", JSON.stringify(blockno), err => {
+  fs.writeFile("./config/blockConfig.ini", JSON.stringify(blockno), err => {
     if (err) console.log(err);
   });
 }
