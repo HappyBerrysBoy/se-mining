@@ -93,6 +93,12 @@ yamatobot.on("message", (msg) => {
   );
 });
 
+const loadGalaxy = (planetX, planetY) => {
+  return axios.get(
+    `https://api.nextcolony.io/loadgalaxy?x=${planetX}&y=${planetY}&height=1&width=1`
+  );
+};
+
 const fleetMission = (account) => {
   return axios.get(
     `https://api.nextcolony.io/loadfleetmission?user=${account}&active=1`
@@ -165,7 +171,7 @@ async function readFileFunc(filepath) {
 
 async function blockMonitoring(blockno) {
   let ncUsers;
-  ncUsers = await readFileFunc("./ncUsers.json");
+  ncUsers = await readFileFunc("../ncUsers.json");
 
   const telegramMembers = [];
   ncUsers.telegramMembers.forEach((u) => {
@@ -245,6 +251,11 @@ async function blockMonitoring(blockno) {
           if (jsonInfo.type == "siege" || jsonInfo.type == "attack") {
             const planetid = jsonInfo.command.tr_var4;
 
+            const targetPlanetInfo = await loadGalaxy(
+              jsonInfo.command.tr_var2,
+              jsonInfo.command.tr_var3
+            );
+
             const missions = await fleetPlanetMission(
               jsonInfo.username,
               planetid
@@ -263,28 +274,48 @@ async function blockMonitoring(blockno) {
 
               // console.log("siege/attack log", thisMission);
 
-              if (targetAccountList.includes(thisMission.to_planet.user)) {
-                let arrTime = new Date(thisMission.arrival * 1000);
-                let retTime = new Date(thisMission.return * 1000);
+              if (
+                targetAccountList.includes(
+                  targetPlanetInfo.data.planets[0].user
+                )
+              ) {
+                let arrTime = 0;
+                let retTime = 0;
 
-                sendMsg = `====비상비상====\nAccount:${
-                  jsonInfo.username
-                }  \nType:${jsonInfo.type}(${thisMission.id})\nArr:${dateFormat(
-                  arrTime,
-                  "mm/dd HH:MM:ss"
-                )}, Ret:${
-                  thisMission.return
-                    ? dateFormat(retTime, "mm/dd HH:MM:ss")
-                    : "-"
-                }  \nShips:${JSON.stringify(
-                  jsonInfo.command.tr_var1
-                )}  \nFrom:${planetid}(${thisMission.from_planet.name}, ${
-                  thisMission.start_x
-                }, ${thisMission.start_y})\nTo:${thisMission.to_planet.user}(${
-                  thisMission.to_planet.id
-                }(${thisMission.to_planet.name}), ${
-                  jsonInfo.command.tr_var2
-                }, ${jsonInfo.command.tr_var3})`;
+                if (thisMission) {
+                  arrTime = new Date(thisMission.arrival * 1000);
+                  retTime = new Date(thisMission.return * 1000);
+
+                  sendMsg = `====비상비상====\nAccount:${
+                    jsonInfo.username
+                  }  \nType:${jsonInfo.type}(${
+                    thisMission.id
+                  })\nArr:${dateFormat(arrTime, "mm/dd HH:MM:ss")}, Ret:${
+                    thisMission.return
+                      ? dateFormat(retTime, "mm/dd HH:MM:ss")
+                      : "-"
+                  }  \nShips:${JSON.stringify(
+                    jsonInfo.command.tr_var1
+                  )}  \nFrom:${planetid}(${thisMission.from_planet.name}, ${
+                    thisMission.start_x
+                  }, ${thisMission.start_y})\nTo:${
+                    thisMission.to_planet.user
+                  }(${thisMission.to_planet.id}(${
+                    thisMission.to_planet.name
+                  }), ${jsonInfo.command.tr_var2}, ${
+                    jsonInfo.command.tr_var3
+                  })`;
+                } else {
+                  sendMsg = `====비상비상====\nAccount:${
+                    jsonInfo.username
+                  }  \nType:${jsonInfo.type}\nShips:${JSON.stringify(
+                    jsonInfo.command.tr_var1
+                  )}  \nFrom:${planetid}\nTo:${
+                    targetPlanetInfo.data.planets[0].user
+                  }(${targetPlanetInfo.data.planets[0].id}, ${
+                    targetPlanetInfo.data.planets[0].x
+                  }, ${targetPlanetInfo.data.planets[0].y})`;
+                }
 
                 if (sendMsg) {
                   // console.log(ncUser.id, thisMission.to_planet.user, sendMsg);
