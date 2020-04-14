@@ -267,7 +267,7 @@ async function blockMonitoring(blockno) {
                 let arrTime = new Date(thisMission.arrival * 1000);
                 let retTime = new Date(thisMission.return * 1000);
 
-                sendMsg = `====상비상====\nAccount:${
+                sendMsg = `====비상비상====\nAccount:${
                   jsonInfo.username
                 }  \nType:${jsonInfo.type}(${thisMission.id})\nArr:${dateFormat(
                   arrTime,
@@ -287,7 +287,7 @@ async function blockMonitoring(blockno) {
                 }, ${jsonInfo.command.tr_var3})`;
 
                 if (sendMsg) {
-                  console.log(ncUser.id, thisMission.to_planet.user, sendMsg);
+                  // console.log(ncUser.id, thisMission.to_planet.user, sendMsg);
                   warningbot.sendMessage(ncUser.id, sendMsg);
                 }
               }
@@ -323,7 +323,7 @@ async function blockMonitoring(blockno) {
               nextColonyMonitoringId.includes(jsonInfo.username) &&
               nextColonyMinitoringCommand.includes(jsonInfo.type)
             ) {
-              console.log("monitoring id list", jsonInfo);
+              // console.log("monitoring id list", jsonInfo);
               // {"username":"strikeeagle","type":"siege","command":{"tr_var1":{"frigate1":{"pos":1,"n":30}},"tr_var2":-294,"tr_var3":116,"tr_var4":"P-ZBVFMCH4HEO"}}
 
               let sendMsg = "";
