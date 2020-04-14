@@ -298,22 +298,20 @@ async function blockMonitoring(blockno) {
             const level = jsonInfo.command.tr_var2;
             const username = jsonInfo.username;
 
-            if (username == "rivalzzz" || username == "mancer-sm-alt") {
-              return;
-            }
+            if (username != "rivalzzz" && username != "mancer-sm-alt") {
+              const planetInfo = await loadplanet(planetid);
+              const loca =
+                planetInfo.data.planet_corx + "," + planetInfo.data.planet_cory;
 
-            const planetInfo = await loadplanet(planetid);
-            const loca =
-              planetInfo.data.planet_corx + "," + planetInfo.data.planet_cory;
+              sendMsg = `====야마토 업그레이두====\nUser:${username}\nLocation:(${loca})\nPlanet:${planetInfo.data.planet_name}(${planetid})\nLevel:${level}\nBlock:${jsonInfo.block}`;
 
-            sendMsg = `====야마토 업그레이두====\nUser:${username}\nLocation:(${loca})\nPlanet:${planetInfo.data.planet_name}(${planetid})\nLevel:${level}\nBlock:${jsonInfo.block}`;
-
-            if (sendMsg) {
-              console.log(sendMsg);
-              yamatobot.sendMessage(454924368, sendMsg); // 454924368 : youthme
-              console.log("=====sent youthme=====");
-              yamatobot.sendMessage(36227498, sendMsg); // 454924368 : youthme
-              console.log("=====sent happyberrysboy=====");
+              if (sendMsg) {
+                console.log(sendMsg);
+                yamatobot.sendMessage(454924368, sendMsg); // 454924368 : youthme
+                console.log("=====sent youthme=====");
+                yamatobot.sendMessage(36227498, sendMsg); // 454924368 : youthme
+                console.log("=====sent happyberrysboy=====");
+              }
             }
           }
 
@@ -321,11 +319,16 @@ async function blockMonitoring(blockno) {
             const ncUser = ncUsers.telegramMembers[i];
             const nextColonyMonitoringId = ncUser.nextColonyMonitoringId;
 
+            console.log(
+              "nextcolony monitoringid",
+              ncUser + "," + jsonInfo.username + "," + jsonInfo.type
+            );
+
             if (
               nextColonyMonitoringId.includes(jsonInfo.username) &&
               nextColonyMinitoringCommand.includes(jsonInfo.type)
             ) {
-              console.log(jsonInfo);
+              console.log("monitoring id list", jsonInfo);
               // {"username":"strikeeagle","type":"siege","command":{"tr_var1":{"frigate1":{"pos":1,"n":30}},"tr_var2":-294,"tr_var3":116,"tr_var4":"P-ZBVFMCH4HEO"}}
 
               let sendMsg = "";
