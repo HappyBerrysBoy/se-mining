@@ -149,7 +149,7 @@ fs.readFile("../config/blockConfig.ini", "utf8", function (err, data) {
 async function getBlock(json) {
   console.log("start : " + json.lastReadSteemBlock);
 
-  setInterval(blockMonitoring, 1500, json);
+  setInterval(blockMonitoring, 500, json);
 }
 
 async function readFileFunc(filepath) {
@@ -267,7 +267,7 @@ async function blockMonitoring(blockno) {
                 let arrTime = new Date(thisMission.arrival * 1000);
                 let retTime = new Date(thisMission.return * 1000);
 
-                sendMsg = `====비상비상====\nAccount:${
+                sendMsg = `====상비상====\nAccount:${
                   jsonInfo.username
                 }  \nType:${jsonInfo.type}(${thisMission.id})\nArr:${dateFormat(
                   arrTime,
