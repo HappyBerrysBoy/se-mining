@@ -328,12 +328,16 @@ async function blockMonitoring(blockno) {
                   "," +
                   jsonInfo.username +
                   "," +
-                  jsonInfo.type
+                  jsonInfo.type +
+                  ", indexof " +
+                  nextColonyMonitoringId.indexOf(jsonInfo.username) +
+                  ", includes " +
+                  nextColonyMonitoringId.includes(jsonInfo.username)
               );
             }
 
             if (
-              nextColonyMonitoringId.includes(jsonInfo.username) &&
+              nextColonyMonitoringId.indexOf(jsonInfo.username) &&
               nextColonyMinitoringCommand.includes(jsonInfo.type)
             ) {
               console.log("monitoring id list", jsonInfo);
