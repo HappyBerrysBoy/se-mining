@@ -165,7 +165,7 @@ async function readFileFunc(filepath) {
 
 async function blockMonitoring(blockno) {
   let ncUsers;
-  ncUsers = await readFileFunc("../ncUsers.json");
+  ncUsers = await readFileFunc("./ncUsers.json");
 
   const telegramMembers = [];
   ncUsers.telegramMembers.forEach((u) => {
@@ -319,30 +319,8 @@ async function blockMonitoring(blockno) {
             const ncUser = ncUsers.telegramMembers[i];
             const nextColonyMonitoringId = ncUser.nextColonyMonitoringId;
 
-            if (nextColonyMinitoringCommand.includes(jsonInfo.type)) {
-              console.log(
-                "nextcolony monitoringid",
-                ncUser.id +
-                  "," +
-                  ncUser.user +
-                  "," +
-                  jsonInfo.username +
-                  "," +
-                  jsonInfo.type +
-                  ", indexof " +
-                  nextColonyMonitoringId.indexOf(jsonInfo.username) +
-                  ", includes " +
-                  nextColonyMonitoringId.includes(jsonInfo.username)
-              );
-
-              console.log(
-                `nextColonyMonitoringId list`,
-                nextColonyMonitoringId
-              );
-            }
-
             if (
-              nextColonyMonitoringId.indexOf(jsonInfo.username) > -1 &&
+              nextColonyMonitoringId.includes(jsonInfo.username) &&
               nextColonyMinitoringCommand.includes(jsonInfo.type)
             ) {
               console.log("monitoring id list", jsonInfo);
