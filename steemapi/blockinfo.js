@@ -334,6 +334,11 @@ async function blockMonitoring(blockno) {
                   ", includes " +
                   nextColonyMonitoringId.includes(jsonInfo.username)
               );
+
+              console.log(
+                `nextColonyMonitoringId list`,
+                nextColonyMonitoringId
+              );
             }
 
             if (
