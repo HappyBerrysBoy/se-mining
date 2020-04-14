@@ -7,7 +7,7 @@ const axios = require("axios");
 const dateFormat = require("dateformat");
 const ssc = new SSC("https://api.steem-engine.com/rpc/");
 const TelegramBot = require("node-telegram-bot-api");
-// const ncUsers = require("./ncUsers.json");
+// const ncUsers = require("../ncUsers.json");
 // For a description of the Bot API, see this page: https://core.telegram.org/bots/api
 
 const useTelegramBot = true;
@@ -33,7 +33,7 @@ const nextColonyMinitoringCommand = ["attack", "cancel", "deploy", "siege"];
 //   telegramMembers.push(u.id);
 // });
 
-bot.on("message", msg => {
+bot.on("message", (msg) => {
   console.log(
     `id:${msg.from.id},
     first_name:${msg.from.first_name},
@@ -53,7 +53,7 @@ bot.on("message", msg => {
   );
 });
 
-warningbot.on("message", msg => {
+warningbot.on("message", (msg) => {
   console.log(
     `id:${msg.from.id},
     first_name:${msg.from.first_name},
@@ -73,7 +73,7 @@ warningbot.on("message", msg => {
   );
 });
 
-const fleetMission = account => {
+const fleetMission = (account) => {
   return axios.get(
     `https://api.nextcolony.io/loadfleetmission?user=${account}&active=1`
   );
@@ -85,7 +85,7 @@ const fleetPlanetMission = (account, planet) => {
   );
 };
 
-const loadplanet = planetId => {
+const loadplanet = (planetId) => {
   return axios.get(`https://api.nextcolony.io/loadplanet?id=${planetId}`);
 };
 
@@ -119,7 +119,7 @@ const getContent = (author, permlink) => {
   });
 };
 
-fs.readFile("./config/blockConfig.ini", "utf8", function(err, data) {
+fs.readFile("../config/blockConfig.ini", "utf8", function (err, data) {
   if (err) console.log(err);
   const json = JSON.parse(data);
   console.log(json.lastReadSteemBlock);
@@ -134,21 +134,21 @@ async function getBlock(json) {
 
 async function readFileFunc(filepath) {
   return new Promise((resolve, reject) => {
-    fs.readFile(filepath, "utf8", function(err, data) {
+    fs.readFile(filepath, "utf8", function (err, data) {
       if (err) console.log(err);
       resolve(JSON.parse(data));
     });
-  }).then(r => {
+  }).then((r) => {
     return r;
   });
 }
 
 async function blockMonitoring(blockno) {
   let ncUsers;
-  ncUsers = await readFileFunc("./ncUsers.json");
+  ncUsers = await readFileFunc("../ncUsers.json");
 
   const telegramMembers = [];
-  ncUsers.telegramMembers.forEach(u => {
+  ncUsers.telegramMembers.forEach((u) => {
     telegramMembers.push(u.id);
   });
 
@@ -180,9 +180,9 @@ async function blockMonitoring(blockno) {
     console.log(e);
     console.log(`const { timestamp = null, transactions } = blockinfo error`);
     fs.appendFile(
-      "./logs/exceptions(" + dateString + ").txt",
+      "../logs/exceptions(" + dateString + ").txt",
       JSON.stringify(blockinfo) + "\n",
-      err => {
+      (err) => {
         if (err) console.log(err);
       }
     );
@@ -190,7 +190,7 @@ async function blockMonitoring(blockno) {
 
   // if (transactions.length == 0 && retryCount < 5) return;
 
-  transactions.forEach(async transaction => {
+  transactions.forEach(async (transaction) => {
     const { operations, signatures } = transaction;
     const action = operations[0][0];
     const content = operations[0][1];
@@ -198,9 +198,7 @@ async function blockMonitoring(blockno) {
     content.timestamp = timestamp;
 
     try {
-      let aa = JSON.stringify(content)
-        .toLowerCase()
-        .includes("sct");
+      let aa = JSON.stringify(content).toLowerCase().includes("sct");
     } catch (e) {
       console.log(e);
     }
@@ -212,12 +210,12 @@ async function blockMonitoring(blockno) {
         jsonInfo.block = blockno.lastReadSteemBlock;
 
         if (blockno.lastReadSteemBlock % 10 == 0) {
-          findPlanet().then(p => {
+          findPlanet().then((p) => {
             if (blockno.lastPlanetUser != p.data.planets[0].username) {
               const foundPlanet = p.data.planets[0];
               let sendMsg = `*******행성발견*******\n${foundPlanet.username}(${foundPlanet.id})\n${foundPlanet.name}(${foundPlanet.posx},${foundPlanet.posy})\n*********************\n`;
               blockno.lastPlanetUser = p.data.planets[0].username;
-              telegramMembers.forEach(m => bot.sendMessage(m, sendMsg));
+              telegramMembers.forEach((m) => bot.sendMessage(m, sendMsg));
             }
           });
         }
@@ -233,7 +231,7 @@ async function blockMonitoring(blockno) {
             );
 
             const thisMission = missions.data.find(
-              m =>
+              (m) =>
                 m.type == jsonInfo.type &&
                 m.end_x == jsonInfo.command.tr_var2 &&
                 m.end_y == jsonInfo.command.tr_var3
@@ -309,7 +307,7 @@ async function blockMonitoring(blockno) {
               if (jsonInfo.type == "cancel") {
                 const missions = await fleetMission(jsonInfo.username);
                 const target = missions.data.filter(
-                  m => m.id == jsonInfo.command.tr_var1
+                  (m) => m.id == jsonInfo.command.tr_var1
                 );
 
                 if (target.length) {
@@ -337,7 +335,7 @@ async function blockMonitoring(blockno) {
                 );
 
                 const thisMission = missions.data.find(
-                  m =>
+                  (m) =>
                     m.type == jsonInfo.type &&
                     m.end_x == jsonInfo.command.tr_var2 &&
                     m.end_y == jsonInfo.command.tr_var3
@@ -389,9 +387,9 @@ async function blockMonitoring(blockno) {
           console.log("content :", jsonInfo);
 
           fs.appendFile(
-            "./logs/mining(" + dateString + ").txt",
+            "../logs/mining(" + dateString + ").txt",
             JSON.stringify(jsonInfo) + "\n",
-            err => {
+            (err) => {
               if (err) console.log(err);
             }
           );
@@ -399,17 +397,13 @@ async function blockMonitoring(blockno) {
           // {"service":"SE_MINING","content":"key:json, content:{\"symbol\":\"PAL\",\"type\":\"mining\",\"N\":9,\"staked_mining_power\":2313.0000000000005,\"winner\":[\"bitcoinflood\",\"jongolson\",\"michealb\",\"nuthman\",\"aggroed\",\"dylanhobalart\",\"dylanhobalart\",\"videosteemit\",\"steinreich\"],\"claim_token_amount\":2.067,\"trx_id\":\"4654e524c287b4354981587aea3a62f133da8648\",\"block_num\":34084567,\"N_accounts\":166}","level":"info","message":"info","timestamp":"2019-06-25 01:42:46"}
         }
 
-        if (
-          JSON.stringify(content)
-            .toLowerCase()
-            .includes("sct")
-        ) {
+        if (JSON.stringify(content).toLowerCase().includes("sct")) {
           // console.log('content :', content);
 
           fs.appendFile(
-            "./logs/sct_log_" + timestamp.split("T")[0] + ".txt",
+            "../logs/sct_log_" + timestamp.split("T")[0] + ".txt",
             JSON.stringify(content) + "\n",
-            err => {
+            (err) => {
               if (err) console.log(err);
             }
           );
@@ -417,9 +411,9 @@ async function blockMonitoring(blockno) {
       } catch (e) {
         console.log(e);
         fs.appendFile(
-          "./logs/exceptions(" + dateString + ").txt",
+          "../logs/exceptions(" + dateString + ").txt",
           "retry count over\n",
-          err => {
+          (err) => {
             if (err) console.log(err);
           }
         );
@@ -435,10 +429,10 @@ async function blockMonitoring(blockno) {
 
         // 존재하는 포스팅 체크
         const postingInfo = await getContent(content.author, content.permlink)
-          .then(p => {
+          .then((p) => {
             return p;
           })
-          .catch(e => {
+          .catch((e) => {
             throw new Error(e);
           });
 
@@ -447,10 +441,7 @@ async function blockMonitoring(blockno) {
 
         const hdata = content.body.split(config.pickTag)[1].match(/\((.*?)\)/g);
         let pickCnt = parseInt(
-          content.body
-            .split(config.pickTag)[1]
-            .split("(")[0]
-            .trim()
+          content.body.split(config.pickTag)[1].split("(")[0].trim()
         );
 
         // 몇명 뽑는지 입력 안하면 1명으로 설정
@@ -458,10 +449,7 @@ async function blockMonitoring(blockno) {
           pickCnt = 1;
         }
 
-        const list = hdata[0]
-          .replace(/\(/g, "")
-          .replace(/\)/g, "")
-          .split(",");
+        const list = hdata[0].replace(/\(/g, "").replace(/\)/g, "").split(",");
 
         let pickAccount = [];
         let pickedNum = [];
@@ -537,7 +525,7 @@ async function blockMonitoring(blockno) {
           "",
           body,
           content.json_metadata,
-          function(err, result) {
+          function (err, result) {
             console.log(err, result);
           }
         );
@@ -545,9 +533,9 @@ async function blockMonitoring(blockno) {
         const logJson = { content: content, result: body };
 
         fs.appendFile(
-          "./logs/happypick(" + dateString + ").txt",
+          "../logs/happypick(" + dateString + ").txt",
           JSON.stringify(logJson) + "\n",
-          err => {
+          (err) => {
             if (err) console.log(err);
           }
         );
@@ -562,7 +550,7 @@ async function blockMonitoring(blockno) {
           "",
           e,
           content.json_metadata,
-          function(err, result) {
+          function (err, result) {
             console.log(err, result);
           }
         );
@@ -579,10 +567,10 @@ async function blockMonitoring(blockno) {
       try {
         // 존재하는 포스팅 체크
         const postingInfo = await getContent(content.author, content.permlink)
-          .then(p => {
+          .then((p) => {
             return p;
           })
-          .catch(e => {
+          .catch((e) => {
             throw new Error(e);
           });
 
@@ -617,7 +605,7 @@ async function blockMonitoring(blockno) {
             "",
             "올바르지 않은 숫자입니다.",
             content.json_metadata,
-            function(err, result) {
+            function (err, result) {
               console.log(err, result);
             }
           );
@@ -642,7 +630,7 @@ async function blockMonitoring(blockno) {
           "",
           body,
           content.json_metadata,
-          function(err, result) {
+          function (err, result) {
             console.log(err, result);
           }
         );
@@ -650,9 +638,9 @@ async function blockMonitoring(blockno) {
         const logJson = { content: content, result: body };
 
         fs.appendFile(
-          "./logs/happydice(" + dateString + ").txt",
+          "../logs/happydice(" + dateString + ").txt",
           JSON.stringify(logJson) + "\n",
-          err => {
+          (err) => {
             if (err) console.log(err);
           }
         );
@@ -672,7 +660,7 @@ async function blockMonitoring(blockno) {
           "",
           e,
           content.json_metadata,
-          function(err, result) {
+          function (err, result) {
             console.log(err, result);
           }
         );
@@ -683,7 +671,7 @@ async function blockMonitoring(blockno) {
 
   blockno.lastReadSteemBlock += 1;
 
-  fs.writeFile("./config/blockConfig.ini", JSON.stringify(blockno), err => {
+  fs.writeFile("../config/blockConfig.ini", JSON.stringify(blockno), (err) => {
     if (err) console.log(err);
   });
 }
