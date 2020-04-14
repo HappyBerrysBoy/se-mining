@@ -278,6 +278,10 @@ async function blockMonitoring(blockno) {
             const level = jsonInfo.command.tr_var2;
             const username = jsonInfo.username;
 
+            if (username == "rivalzzz" || username == "mancer-sm-alt") {
+              return;
+            }
+
             const planetInfo = await loadplanet(planetid);
             const loca =
               planetInfo.data.planet_corx + "," + planetInfo.data.planet_cory;
