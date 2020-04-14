@@ -149,7 +149,7 @@ fs.readFile("../config/blockConfig.ini", "utf8", function (err, data) {
 async function getBlock(json) {
   console.log("start : " + json.lastReadSteemBlock);
 
-  setInterval(blockMonitoring, 500, json);
+  setInterval(blockMonitoring, 1500, json);
 }
 
 async function readFileFunc(filepath) {
