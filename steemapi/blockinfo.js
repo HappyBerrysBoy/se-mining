@@ -322,7 +322,13 @@ async function blockMonitoring(blockno) {
             if (nextColonyMinitoringCommand.includes(jsonInfo.type)) {
               console.log(
                 "nextcolony monitoringid",
-                ncUser.id + "," + jsonInfo.username + "," + jsonInfo.type
+                ncUser.id +
+                  "," +
+                  ncUser.user +
+                  "," +
+                  jsonInfo.username +
+                  "," +
+                  jsonInfo.type
               );
             }
 
