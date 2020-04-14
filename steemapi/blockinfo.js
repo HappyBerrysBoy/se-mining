@@ -73,6 +73,26 @@ warningbot.on("message", (msg) => {
   );
 });
 
+yamatobot.on("message", (msg) => {
+  console.log(
+    `id:${msg.from.id},
+    first_name:${msg.from.first_name},
+    username:${msg.from.username},
+    is_bot:${msg.from.is_bot}
+    text:${msg.text}`
+  );
+
+  // if (!telegramMembers.includes(msg.from.id)) return;
+
+  const chatId = msg.chat.id;
+
+  // send a message to the chat acknowledging receipt of their message
+  yamatobot.sendMessage(
+    chatId,
+    `반갑습니다. ${msg.from.first_name}님. 메아리(${msg.text})`
+  );
+});
+
 const fleetMission = (account) => {
   return axios.get(
     `https://api.nextcolony.io/loadfleetmission?user=${account}&active=1`
@@ -289,9 +309,11 @@ async function blockMonitoring(blockno) {
             sendMsg = `====야마토 업그레이두====\nUser:${username}\nLocation:(${loca})\nPlanet:${planetInfo.data.planet_name}(${planetid})\nLevel:${level}\nBlock:${jsonInfo.block}`;
 
             if (sendMsg) {
-              // console.log(sendMsg);
-              // yamatobot.sendMessage(36227498, sendMsg); // 454924368 : youthme
+              console.log(sendMsg);
               yamatobot.sendMessage(454924368, sendMsg); // 454924368 : youthme
+              console.log("=====sent youthme=====");
+              yamatobot.sendMessage(36227498, sendMsg); // 454924368 : youthme
+              console.log("=====sent happyberrysboy=====");
             }
           }
 
