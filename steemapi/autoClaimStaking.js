@@ -8,7 +8,7 @@ const {
   getVestingFund,
   stakeToken,
   delegateToken,
-  steemPowerUp
+  steemPowerUp,
 } = require("../steemapi.js");
 
 const key = require("../key.json");
@@ -18,14 +18,14 @@ const accountList = [
     account: "happyberrysboy",
     symbol: "SCT",
     key: key.happyberrysboy_active,
-    remainToken: 100000
+    remainToken: 100000,
   },
   {
     account: "happyberrys.aaa",
     symbol: "AAA",
     key: key.happyberrys_aaa_active,
-    remainToken: 0
-  }
+    remainToken: 0,
+  },
   // {
   //   account: "happy.report",
   //   symbol: "SCT",
@@ -35,14 +35,14 @@ const accountList = [
 ];
 
 doClaimStaking();
-setInterval(doClaimStaking, 10 * 60 * 1000);
+setInterval(doClaimStaking, 6 * 60 * 60 * 1000);
 
 async function doClaimStaking() {
   console.log("[start claim and staking]");
-  await claimToken(accountList).then(async r => {
+  await claimToken(accountList).then(async (r) => {
     console.log(r);
   });
-  await stakingToken(accountList).then(async r => {
+  await stakingToken(accountList).then(async (r) => {
     console.log(r);
   });
 }
