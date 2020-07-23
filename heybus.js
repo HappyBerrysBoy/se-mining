@@ -322,7 +322,7 @@ async function checkBus(businfo) {
               );
             } else if (busstop.stationSeq == 6) {
               sendMsg(
-                `${busstop.plateNo}-${businfo.name}가 삼승자동차 정문을 지남~ 지금 시노대교~ 시노대교~ 오~`
+                `${busstop.plateNo}-${businfo.name}가 삼승자동차 정문을 지남~ 행복허자~~ 행복허자아~ 우리~ 아프지 말고우~`
               );
             }
           }
