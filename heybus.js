@@ -271,8 +271,8 @@ async function checkBus(businfo) {
           }
         }
       } catch (err) {
-        console.log(err);
-        throw "조회결과가 존재하지 않습니다.";
+        // console.log(err);
+        // throw "조회결과가 존재하지 않습니다.";
       }
     })
     .catch((err) => {
