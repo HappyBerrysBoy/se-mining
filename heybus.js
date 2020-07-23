@@ -142,10 +142,7 @@ const busstopList = {
   },
 };
 
-const sendlist = [
-  //1255537650,
-  36227498,
-];
+const sendlist = [1255537650, 36227498];
 
 const buslist = [
   { id: "71039", name: "20번버스", turningPoint: 19 },
@@ -222,11 +219,7 @@ async function checkBus(businfo) {
           if (businfo.id == "71039") {
             if (busstop.stationSeq <= 1) {
               sendMsg(
-                `${busstop.plateNo}-${
-                  businfo.name
-                }가 지금 막 바로 나옴!!!\r\n ${
-                  busstopList[businfo.id].busstopMap[busstop.stationSeq]
-                } 정거장!!`
+                `${busstop.plateNo}-${businfo.name}가 지금 막 바로 출발!!!!! 허리업!!!!`
               );
             } else if (busstop.stationSeq == 2) {
               sendMsg(
@@ -236,23 +229,25 @@ async function checkBus(businfo) {
                   busstopList[businfo.id].busstopMap[busstop.stationSeq]
                 } 얼른 준비하시게!!`
               );
-            } else if (busstop.stationSeq == 3) {
-              sendMsg(
-                `${busstop.plateNo}-${
-                  businfo.name
-                }가 지금 네번째 정거장!!!\r\n ${
-                  busstopList[businfo.id].busstopMap[busstop.stationSeq]
-                } 뛰어야 되려나!???`
-              );
-            } else if (busstop.stationSeq == 4) {
-              sendMsg(
-                `${busstop.plateNo}-${
-                  businfo.name
-                }가 지금 다섯번째 정거장!!!\r\n ${
-                  busstopList[businfo.id].busstopMap[busstop.stationSeq]
-                } 한정거장 남음!!!`
-              );
-            } else if (busstop.stationSeq > 36) {
+            }
+            // else if (busstop.stationSeq == 3) {
+            //   sendMsg(
+            //     `${busstop.plateNo}-${
+            //       businfo.name
+            //     }가 지금 네번째 정거장!!!\r\n ${
+            //       busstopList[businfo.id].busstopMap[busstop.stationSeq]
+            //     } 뛰어야 되려나!???`
+            //   );
+            // } else if (busstop.stationSeq == 4) {
+            //   sendMsg(
+            //     `${busstop.plateNo}-${
+            //       businfo.name
+            //     }가 지금 다섯번째 정거장!!!\r\n ${
+            //       busstopList[businfo.id].busstopMap[busstop.stationSeq]
+            //     } 한정거장 남음!!!`
+            //   );
+            // }
+            else if (busstop.stationSeq > 36) {
               sendMsg(
                 `${busstop.plateNo}-${businfo.name}가 오션시티 차고지에 대기`
               );
