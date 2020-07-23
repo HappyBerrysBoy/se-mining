@@ -140,6 +140,52 @@ const busstopList = {
       69: "용원사거리",
     },
   },
+  "71062": {
+    0: "신호부영2차아파트",
+    1: "의창수협",
+    2: "신호부영5차아파트",
+    3: "신호초등학교",
+    4: "녹산농협신호지소",
+    5: "신호윌아파트",
+    6: "삼성자동차남문",
+    7: "명지오션시티",
+    8: "퀸덤아파트1.2단지",
+    9: "명호초등학교",
+    10: "극동스타클래스109동",
+    11: "롯데캐슬아파트",
+    12: "호산나교회",
+    13: "남명초등학교",
+    14: "낙동강철새도래지",
+    15: "전등",
+    16: "진동",
+    17: "동리",
+    18: "명지새동네",
+    19: "을숙도",
+    20: "하단역",
+    21: "하단역",
+    22: "을숙도",
+    23: "부산현대미술관",
+    24: "명지시장",
+    25: "명지새동네",
+    26: "동리",
+    27: "진동",
+    28: "전등",
+    29: "행복마을",
+    30: "남명초등학교",
+    31: "호산나교회",
+    32: "롯데캐슬아파트",
+    33: "극동스타클래스109동",
+    34: "명호초등학교",
+    35: "퀸덤아파트1.2단지",
+    36: "명지오션시티",
+    37: "삼성자동차남문",
+    38: "신호윌아파트",
+    39: "녹산농협신호지소",
+    40: "신호초등학교",
+    41: "신호부영5차아파트",
+    42: "의창수협",
+    43: "신호부영2차아파트",
+  },
 };
 
 const sendlist = [1255537650, 36227498];
@@ -147,12 +193,13 @@ const sendlist = [1255537650, 36227498];
 const buslist = [
   { id: "71039", name: "20번버스", turningPoint: 19 },
   { id: "71030", name: "17번버스", turningPoint: 35 },
+  { id: "71062", name: "9-2번버스", turningPoint: 21 },
 ];
 
 //17번버스: https://map.naver.com/v5/api/bus/location?lang=ko&routeId=71030&caller=pc_map&dummy=${+new Date()}
 //20번버스: https://map.naver.com/v5/api/bus/location?lang=ko&routeId=71039&caller=pc_map&dummy=${+new Date()}
 
-// getBusstopInfo(71030);
+getBusstopInfo(71062);
 
 let botOn = false;
 let msgList = {};
@@ -166,13 +213,13 @@ bot.onText(/\/off/, async (m) => {
   msgList = {};
 });
 
-schedule.scheduleJob("*/10 * * * * *", async function () {
-  if (!botOn) return;
+// schedule.scheduleJob("*/10 * * * * *", async function () {
+//   if (!botOn) return;
 
-  for (const bus of buslist) {
-    checkBus(bus);
-  }
-});
+//   for (const bus of buslist) {
+//     checkBus(bus);
+//   }
+// });
 
 function sendMsg(msg) {
   const plateNo = msg.split("-")[0];
@@ -266,6 +313,16 @@ async function checkBus(businfo) {
                 `${busstop.plateNo}-${businfo.name}가 ${
                   busstopList[businfo.id].busstopMap[busstop.stationSeq]
                 } 지남, 신호대교진입!!! 잘 가고 있는가!?`
+              );
+            }
+          } else if (businfo.id == "71062") {
+            if (busstop.stationSeq == 4) {
+              sendMsg(
+                `${busstop.plateNo}-${businfo.name}가 윌더하이리히요!!! 곧 시노대교 시노대교~ 오~`
+              );
+            } else if (busstop.stationSeq == 6) {
+              sendMsg(
+                `${busstop.plateNo}-${businfo.name}가 삼승자동차 정문을 지남~ 지금 시노대교~ 시노대교~ 오~`
               );
             }
           }
