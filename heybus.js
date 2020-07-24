@@ -199,7 +199,7 @@ const buslist = [
 //17번버스: https://map.naver.com/v5/api/bus/location?lang=ko&routeId=71030&caller=pc_map&dummy=${+new Date()}
 //20번버스: https://map.naver.com/v5/api/bus/location?lang=ko&routeId=71039&caller=pc_map&dummy=${+new Date()}
 
-getBusstopInfo(71062);
+// getBusstopInfo(71062);
 
 let botOn = false;
 let msgList = {};
@@ -213,13 +213,13 @@ bot.onText(/\/off/, async (m) => {
   msgList = {};
 });
 
-// schedule.scheduleJob("*/10 * * * * *", async function () {
-//   if (!botOn) return;
+schedule.scheduleJob("*/10 * * * * *", async function () {
+  if (!botOn) return;
 
-//   for (const bus of buslist) {
-//     checkBus(bus);
-//   }
-// });
+  for (const bus of buslist) {
+    checkBus(bus);
+  }
+});
 
 function sendMsg(msg) {
   const plateNo = msg.split("-")[0];
