@@ -221,6 +221,10 @@ schedule.scheduleJob("*/10 * * * * *", async function () {
   }
 });
 
+schedule.scheduleJob("15 22 * * 0-5", async function () {
+  botOn = true;
+});
+
 function sendMsg(msg) {
   const plateNo = msg.split("-")[0];
   let thisMsg = "";
