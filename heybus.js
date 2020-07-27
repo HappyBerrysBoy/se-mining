@@ -223,6 +223,25 @@ schedule.scheduleJob("*/10 * * * * *", async function () {
 
 schedule.scheduleJob("15 22 * * 0-5", async function () {
   botOn = true;
+  const today = new Date();
+
+  let day = "";
+
+  if (today.getDay() == 0) {
+    day = "월요일";
+  } else if (today.getDay() == 1) {
+    day = "화요일";
+  } else if (today.getDay() == 2) {
+    day = "수요일";
+  } else if (today.getDay() == 3) {
+    day = "목요일";
+  } else if (today.getDay() == 4) {
+    day = "금요일";
+  } else if (today.getDay() == 5) {
+    day = "토요일";
+  }
+
+  sendMsgBot(`오늘은 즐거운 ${day}!! 출근 준비는 잘하고 있나요? ^^`);
 });
 
 function sendMsg(msg) {
