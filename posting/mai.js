@@ -25,7 +25,7 @@ let content = "";
 
 function getFormat() {
   return new Promise((resolve, reject) => {
-    steem.api.getContent(account, basePermlink, function(err, result) {
+    steem.api.getContent(account, basePermlink, function (err, result) {
       if (err) {
         console.log(err);
         return;
@@ -58,58 +58,63 @@ function noLink(body) {
 
 function getPrePosting(id, permlink) {
   return new Promise(async (resolve, reject) => {
-    await steem.api.getContentReplies(id, permlink, async function(
-      err,
-      result
-    ) {
-      if (err != null) {
-        return;
-      }
-
-      for (let i = 0; i < result.length; ++i) {
-        let cmt = result[i];
-
-        if (cmt.author.length <= 0 || cmt.author == null || cmt.author == "") {
-          continue;
+    await steem.api.getContentReplies(
+      id,
+      permlink,
+      async function (err, result) {
+        if (err != null) {
+          return;
         }
 
-        g_cmtMap.set(cmt.author, cmt.body);
-        link = "";
-        console.log("--" + cmt.json_metadata + "--");
-        if (
-          cmt.json_metadata == undefined ||
-          cmt.json_metadata == null ||
-          cmt.json_metadata == ""
-        ) {
-          link = noLink(cmt.body);
-        } else {
-          let jm = JSON.parse(cmt.json_metadata);
+        for (let i = 0; i < result.length; ++i) {
+          let cmt = result[i];
 
-          if (jm.links != undefined && jm.links.length > 0) {
-            link = jm.links[0];
-          } else {
-            link = noLink(cmt.body);
+          if (
+            cmt.author.length <= 0 ||
+            cmt.author == null ||
+            cmt.author == ""
+          ) {
+            continue;
           }
+
+          g_cmtMap.set(cmt.author, cmt.body);
+          link = "";
+          console.log("--" + cmt.json_metadata + "--");
+          if (
+            cmt.json_metadata == undefined ||
+            cmt.json_metadata == null ||
+            cmt.json_metadata == ""
+          ) {
+            link = noLink(cmt.body);
+          } else {
+            let jm = JSON.parse(cmt.json_metadata);
+
+            if (jm.links != undefined && jm.links.length > 0) {
+              link = jm.links[0];
+            } else {
+              link = noLink(cmt.body);
+            }
+          }
+
+          if (link == "") {
+            continue;
+          }
+
+          index = link.lastIndexOf("/");
+          pl = link.substring(index + 1);
+
+          await getPost(cmt.author, pl).then((txt) => (content += txt));
         }
 
-        if (link == "") {
-          continue;
-        }
-
-        index = link.lastIndexOf("/");
-        pl = link.substring(index + 1);
-
-        await getPost(cmt.author, pl).then(txt => (content += txt));
+        resolve(content);
       }
-
-      resolve(content);
-    });
+    );
   });
 }
 
 function getPost(author, permlink) {
-  return new Promise(resolve => {
-    steem.api.getContent(author, permlink, function(err, result) {
+  return new Promise((resolve) => {
+    steem.api.getContent(author, permlink, function (err, result) {
       if (result.root_title == "") {
         resolve("");
       }
@@ -138,8 +143,11 @@ function genText(author, title, url) {
   return txt;
 }
 
-Promise.all([getFormat(), getPrePosting(account, `${preDateString}-kr`)]).then(
-  ([format, prePosting]) => {
+module.exports = async () => {
+  Promise.all([
+    getFormat(),
+    getPrePosting(account, `${preDateString}-kr`),
+  ]).then(([format, prePosting]) => {
     // console.log(format);
     // console.log(prePosting);
 
@@ -166,13 +174,13 @@ Promise.all([getFormat(), getPrePosting(account, `${preDateString}-kr`)]).then(
               "mini",
               "zzan",
               "palnet",
-              "iv"
+              "iv",
             ],
             community: "busy",
             app: "steemcoinpan/0.1",
-            format: "markdown"
-          })
-        }
+            format: "markdown",
+          }),
+        },
       ],
       [
         "comment_options",
@@ -187,18 +195,18 @@ Promise.all([getFormat(), getPrePosting(account, `${preDateString}-kr`)]).then(
             [
               0,
               {
-                beneficiaries: [{ account: "sct.krwp", weight: 10000 }]
-              }
-            ]
-          ]
-        }
-      ]
+                beneficiaries: [{ account: "sct.krwp", weight: 10000 }],
+              },
+            ],
+          ],
+        },
+      ],
     ];
 
     steem.broadcast.send(
       { operations: operations, extensions: [] },
       { posting: key.mai_posting },
-      function(e, r) {
+      function (e, r) {
         if (e) {
           console.log(e);
           return;
@@ -207,5 +215,5 @@ Promise.all([getFormat(), getPrePosting(account, `${preDateString}-kr`)]).then(
         console.log(r);
       }
     );
-  }
-);
+  });
+};
