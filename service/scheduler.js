@@ -7,6 +7,6 @@ schedule.scheduleJob("0 13 * * *", async function () {
   maiPosting();
 });
 
-schedule.scheduleJob("*/1 * * * *", async function () {
-  console.log(new Date());
-});
+// schedule.scheduleJob("*/1 * * * *", async function () {
+//   console.log(new Date());
+// });

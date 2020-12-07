@@ -213,6 +213,8 @@ module.exports = async () => {
         }
 
         console.log(r);
+
+        console.log("ended maikuraki posting ========================");
       }
     );
   });
