@@ -195,7 +195,7 @@ module.exports = async () => {
             [
               0,
               {
-                beneficiaries: [{ account: "sct.krwp", weight: 10000 }],
+                // beneficiaries: [{ account: "sct.krwp", weight: 10000 }],
               },
             ],
           ],
