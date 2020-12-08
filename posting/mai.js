@@ -192,12 +192,12 @@ module.exports = async () => {
           allow_votes: true,
           allow_curation_rewards: true,
           extensions: [
-            [
-              0,
-              {
-                // beneficiaries: [{ account: "sct.krwp", weight: 10000 }],
-              },
-            ],
+            // [
+            //   0,
+            //   {
+            //     // beneficiaries: [{ account: "sct.krwp", weight: 10000 }],
+            //   },
+            // ],
           ],
         },
       ],
