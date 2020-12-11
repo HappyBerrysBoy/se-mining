@@ -2,16 +2,16 @@ const steem = require("steem");
 const steemapi = require("../steemapi.js");
 const key = require("../key.json");
 
-const date = new Date();
-date.setHours(date.getHours() + 9); // 9시간 추가
-date.setDate(date.getDate() + 1);
-const year = date.getFullYear() + "";
-const month = (date.getMonth() + 1 + "").padStart(2, "0");
-const day = (date.getDate() + "").padStart(2, "0");
-const permlink = `${year}-${month}-${day}-kr`;
-const account = "maikuraki";
-
 module.exports = async () => {
+  const date = new Date();
+  date.setHours(date.getHours() + 9); // 9시간 추가
+  date.setDate(date.getDate() + 1);
+  const year = date.getFullYear() + "";
+  const month = (date.getMonth() + 1 + "").padStart(2, "0");
+  const day = (date.getDate() + "").padStart(2, "0");
+  const permlink = `${year}-${month}-${day}-kr`;
+  const account = "maikuraki";
+
   const json = {
     contractName: "tokens",
     contractAction: "transfer",

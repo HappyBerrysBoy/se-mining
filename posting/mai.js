@@ -2,23 +2,8 @@ const steem = require("steem");
 const fs = require("fs");
 const key = require("../key.json");
 
-const date = new Date();
-date.setHours(date.getHours() + 9); // 9시간 추가
-const preYear = date.getFullYear() + "";
-const preMonth = (date.getMonth() + 1 + "").padStart(2, "0");
-const preDay = (date.getDate() + "").padStart(2, "0");
-const preDateString = `${preYear}-${preMonth}-${preDay}`;
-
-date.setDate(date.getDate() + 1);
-const year = date.getFullYear() + "";
-const month = (date.getMonth() + 1 + "").padStart(2, "0");
-const day = (date.getDate() + "").padStart(2, "0");
-const dateString = `${year}-${month}-${day}`;
-
-const title = `[${year}/${month}/${day}] KR 커뮤니티 출석부`;
 const account = "maikuraki";
 const basePermlink = "3wz6r8";
-
 let g_cmtMap = new Map();
 let g_linkSet = new Set();
 let content = "";
@@ -31,7 +16,7 @@ function getFormat() {
         return;
       }
 
-      console.log(result);
+      // console.log(result);
 
       const body = result.body;
       resolve(body);
@@ -144,6 +129,25 @@ function genText(author, title, url) {
 }
 
 module.exports = async () => {
+  const date = new Date();
+  date.setHours(date.getHours() + 9); // 9시간 추가
+  const preYear = date.getFullYear() + "";
+  const preMonth = (date.getMonth() + 1 + "").padStart(2, "0");
+  const preDay = (date.getDate() + "").padStart(2, "0");
+  const preDateString = `${preYear}-${preMonth}-${preDay}`;
+
+  console.log(`PreDateString :${date}`);
+
+  date.setDate(date.getDate() + 1);
+  const year = date.getFullYear() + "";
+  const month = (date.getMonth() + 1 + "").padStart(2, "0");
+  const day = (date.getDate() + "").padStart(2, "0");
+  const dateString = `${year}-${month}-${day}`;
+
+  console.log(`DateString :${date}`);
+
+  const title = `[${year}/${month}/${day}] KR 커뮤니티 출석부`;
+
   Promise.all([
     getFormat(),
     getPrePosting(account, `${preDateString}-kr`),
