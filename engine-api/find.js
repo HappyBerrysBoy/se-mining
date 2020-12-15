@@ -1,6 +1,6 @@
-const SSC = require('sscjs');
+const SSC = require("sscjs");
 
-const ssc = new SSC('https://api.steem-engine.com/rpc/');
+const ssc = new SSC("https://steemapi.cryptoempirebot.com/rpc/");
 // ssc.stream((err, res) => {
 // 	console.log(err, res);
 // });
@@ -22,7 +22,7 @@ const ssc = new SSC('https://api.steem-engine.com/rpc/');
 // example
 // See https://github.com/techfort/LokiJS/wiki/Query-Examples for the available params
 
-ssc.find('tokens', 'tokens', {}, 1000, 0, [], (err, result) => {
+ssc.find("tokens", "tokens", {}, 1000, 0, [], (err, result) => {
   console.log(err, result);
   /*
 	[

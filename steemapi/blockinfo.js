@@ -5,7 +5,7 @@ const key = require("../key.json");
 const SSC = require("sscjs");
 const axios = require("axios");
 const dateFormat = require("dateformat");
-const ssc = new SSC("https://api.steem-engine.com/rpc/");
+const ssc = new SSC("https://steemapi.cryptoempirebot.com/rpc/");
 const TelegramBot = require("node-telegram-bot-api");
 // const ncUsers = require("../ncUsers.json");
 // For a description of the Bot API, see this page: https://core.telegram.org/bots/api

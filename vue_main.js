@@ -1,8 +1,8 @@
 new Vue({
-  el: '#app',
+  el: "#app",
   data: {
     ssc: null,
-    title: '추억의 뽑기',
+    title: "추억의 뽑기",
     cntInRow: 13,
     lastNum: 168,
     numArray: [],
@@ -14,14 +14,14 @@ new Vue({
   },
   computed: {},
   created() {
-    this.ssc = new SSC('https://api.steem-engine.com/rpc/');
+    this.ssc = new SSC("https://steemapi.cryptoempirebot.com/rpc/");
   },
   mounted() {
     for (let i = 0; i < this.lastNum; i++) {
       this.numArray.push({
-        num: i + '',
+        num: i + "",
         position: i,
-        styling: 'alive',
+        styling: "alive",
         prize: Math.floor(Math.random() * 100),
       });
     }
@@ -30,29 +30,29 @@ new Vue({
   },
   methods: {
     pressNum(num) {
-      const account = $('#account').val();
+      const account = $("#account").val();
       if (!confirm(`${account}님 ${num}번을 정말로 뽑으시겠습니까?`)) {
         return;
       }
 
       const self = this;
 
-      const type = 'ppopki';
-      const json = { id: 'test', num: num, permlink: 'test' };
+      const type = "ppopki";
+      const json = { id: "test", num: num, permlink: "test" };
 
       if (window.steem_keychain) {
         steem_keychain.requestTransfer(
           account,
-          'anpigon',
+          "anpigon",
           parseFloat(0.001),
           `# ${num} 번을 뽑았어요!! 상품 10000스팀주세요!!`,
-          'STEEM',
-          function(response) {
+          "STEEM",
+          function (response) {
             console.log(response);
             alert(`Prize : ${self.numArray[num].prize} Steem`);
-            self.numArray[num].styling = 'dead';
+            self.numArray[num].styling = "dead";
           },
-          true,
+          true
         );
         // custom_json
         // window.steem_keychain.requestCustomJson(

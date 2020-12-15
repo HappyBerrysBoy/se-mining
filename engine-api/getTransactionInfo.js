@@ -1,6 +1,6 @@
-const SSC = require('sscjs');
+const SSC = require("sscjs");
 
-const ssc = new SSC('https://api.steem-engine.com/rpc/');
+const ssc = new SSC("https://steemapi.cryptoempirebot.com/rpc/");
 // ssc.stream((err, res) => {
 //   console.log(err, res);
 // });
@@ -16,7 +16,7 @@ const ssc = new SSC('https://api.steem-engine.com/rpc/');
 
 // example
 ssc.getTransactionInfo(
-  'b299d24be543cd50369dbc83cf6ce10e2e8abc9b',
+  "b299d24be543cd50369dbc83cf6ce10e2e8abc9b",
   (err, result) => {
     console.log(err, result);
     /*
@@ -37,5 +37,5 @@ ssc.getTransactionInfo(
 	    "logs": "{}"
 	}
 	*/
-  },
+  }
 );
