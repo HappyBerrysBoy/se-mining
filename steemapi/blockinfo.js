@@ -10,10 +10,10 @@ const TelegramBot = require("node-telegram-bot-api");
 // const ncUsers = require("../ncUsers.json");
 // For a description of the Bot API, see this page: https://core.telegram.org/bots/api
 
-const useTelegramBot = true;
-const useHappyDice = false;
+const useTelegramBot = false;
+const useHappyDice = true;
 const useHappyPick = true;
-const useMining = true;
+const useMining = false;
 
 const serviceAccount = "steemservice";
 const postingKey = key.steemservice_posting;
