@@ -235,7 +235,7 @@ async function blockMonitoring(blockno) {
         jsonInfo.timestamp = timestamp;
         jsonInfo.block = blockno.lastReadSteemBlock;
 
-        if (blockno.lastReadSteemBlock % 10 == 0) {
+        if (useTelegramBot && blockno.lastReadSteemBlock % 10 == 0) {
           findPlanet().then((p) => {
             if (blockno.lastPlanetUser != p.data.planets[0].username) {
               const foundPlanet = p.data.planets[0];
