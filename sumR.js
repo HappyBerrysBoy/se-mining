@@ -2,7 +2,7 @@ const steem = require("steem");
 const axios = require("axios");
 
 const steemApiUrl = "https://api.steemit.com";
-const steemEngineApiUrl = "https://api.steem-engine.com/rpc/contracts";
+const steemEngineApiUrl = "https://steemapi.cryptoempirebot.com/rpc/contracts";
 
 // const param = [{ tag: "mamacoco", limit: 51 }];
 
@@ -29,12 +29,12 @@ const sctrParam = {
     query: { symbol: "R" },
     limit: 1000,
     offset: 0,
-    indexes: []
+    indexes: [],
   },
-  id: 1
+  id: 1,
 };
 
-const result2 = axios.post(steemEngineApiUrl, sctrParam).then(r => {
+const result2 = axios.post(steemEngineApiUrl, sctrParam).then((r) => {
   console.log(r.data.result);
   console.log(r.data.result[r.data.result.length - 1]);
 });

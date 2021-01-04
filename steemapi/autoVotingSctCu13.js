@@ -1,14 +1,14 @@
 const steem = require("steem");
 const axios = require("axios");
 const SSC = require("sscjs");
-const ssc = new SSC("https://api.steem-engine.com/rpc/");
+const ssc = new SSC("https://steemapi.cryptoempirebot.com/rpc/");
 const key = require("../key.json");
 const cron = require("node-cron");
 const fs = require("fs");
 
 const discussionQueryforSteemEngine = {
   token: "SCT",
-  limit: 30
+  limit: 30,
 };
 let _votingList = new Array();
 let _whitelist = new Map();
@@ -17,33 +17,34 @@ const voter = "sct.cu13";
 const query = "get_discussions_by_created";
 const postingkey = key.sct_cu13_posting;
 
-fs.readFile(`./steemapi/whitelistForHappyberrysboy.json`, "utf8", function(
-  err,
-  data
-) {
-  if (err) {
-    console.log(err);
-    return;
-  }
-
-  data.split("\n").forEach(data => {
-    if (!data.trim().length) return;
-
-    const json = JSON.parse(data);
-
-    if (!_whitelist.has(json.key)) {
-      _whitelist.set(json.key, json.power);
+fs.readFile(
+  `./steemapi/whitelistForHappyberrysboy.json`,
+  "utf8",
+  function (err, data) {
+    if (err) {
+      console.log(err);
+      return;
     }
-  });
 
-  console.log(_whitelist);
-});
+    data.split("\n").forEach((data) => {
+      if (!data.trim().length) return;
 
-cron.schedule("*/20 * * * * *", function() {
+      const json = JSON.parse(data);
+
+      if (!_whitelist.has(json.key)) {
+        _whitelist.set(json.key, json.power);
+      }
+    });
+
+    console.log(_whitelist);
+  }
+);
+
+cron.schedule("*/20 * * * * *", function () {
   console.log(`start getScotDataAsync(query, discussionQueryforSteemEngine)`);
-  getPostingAsync(query, discussionQueryforSteemEngine).then(feedData => {
+  getPostingAsync(query, discussionQueryforSteemEngine).then((feedData) => {
     let result = new Array();
-    feedData.forEach(async content => {
+    feedData.forEach(async (content) => {
       const diffTime =
         (new Date().getTime() - new Date(content.created).getTime()) /
         (1000 * 60);
@@ -71,7 +72,7 @@ cron.schedule("*/20 * * * * *", function() {
             account: voter,
             author: content.author,
             permlink: content.permlink,
-            votingMana: _whitelist.get(content.author)
+            votingMana: _whitelist.get(content.author),
           };
           _votingList.push(tmp);
         }
@@ -80,7 +81,7 @@ cron.schedule("*/20 * * * * *", function() {
   });
 });
 
-cron.schedule("*/10 * * * * *", function() {
+cron.schedule("*/10 * * * * *", function () {
   const tmp = _votingList.shift();
 
   if (tmp != null) {
@@ -91,7 +92,7 @@ cron.schedule("*/10 * * * * *", function() {
       tmp.author,
       tmp.permlink,
       tmp.votingMana * 100,
-      function(err, result) {
+      function (err, result) {
         if (err);
         else if (result != null) {
           console.log(
@@ -112,19 +113,19 @@ cron.schedule("*/10 * * * * *", function() {
 });
 
 async function getPostingAsync(path, params) {
-  return callApi(`https://scot-api.steem-engine.com/${path}`, params);
+  return callApi(`https://scot-api.cryptoempirebot.com/${path}`, params);
 }
 
 async function callApi(url, params) {
   return await axios({
     url,
     method: "GET",
-    params
+    params,
   })
-    .then(response => {
+    .then((response) => {
       return response.data;
     })
-    .catch(err => {
+    .catch((err) => {
       console.error(`Could not fetch data, url: ${url}`);
       return {};
     });

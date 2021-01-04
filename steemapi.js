@@ -3,18 +3,18 @@ const steem = require("steem");
 const axios = require("axios");
 const getJSON = require("get-json");
 
-const ssc = new SSC("https://api.steem-engine.com/rpc/");
+const ssc = new SSC("https://steemapi.cryptoempirebot.com/rpc/");
 
 async function callApi(url, params) {
   return await axios({
     url,
     method: "GET",
-    params
+    params,
   })
-    .then(response => {
+    .then((response) => {
       return response.data;
     })
-    .catch(err => {
+    .catch((err) => {
       console.error(`Could not fetch data, url: ${url}`);
       return {};
     });
@@ -57,7 +57,7 @@ const steemapi = {
   decimalFloor: (num, digit) => {
     return Math.floor(num * Math.pow(10, digit)) / Math.pow(10, digit);
   },
-  getAccount: author => {
+  getAccount: (author) => {
     return new Promise((resolve, reject) => {
       steem.api.getAccounts([author], (err, data) => {
         if (err) {
@@ -100,7 +100,7 @@ const steemapi = {
         to,
         amount + " STEEM",
         memo,
-        function(err, result) {
+        function (err, result) {
           if (err) {
             console.log(err);
             reject(err);
@@ -119,7 +119,7 @@ const steemapi = {
         to,
         amount + " SBD",
         memo,
-        function(err, result) {
+        function (err, result) {
           if (err) {
             console.log(err);
             reject(err);
@@ -138,7 +138,7 @@ const steemapi = {
         [],
         "ssc-mainnet1",
         JSON.stringify(json),
-        function(err, result) {
+        function (err, result) {
           if (err) {
             console.log(err);
             reject(err);
@@ -155,10 +155,13 @@ const steemapi = {
     return callApi("https://apisct.cloud/price/");
   },
   getScotDataAsync: (path, params) => {
-    return callApi(`https://scot-api.steem-engine.com/${path}`, params);
+    return callApi(`https://scot-api.cryptoempirebot.com/${path}`, params);
   },
-  getScotTokenTransferAsync: params => {
-    return callApi(`https://api.steem-engine.com/accounts/history`, params);
+  getScotTokenTransferAsync: (params) => {
+    return callApi(
+      `https://steemapi.cryptoempirebot.com/accounts/history`,
+      params
+    );
   },
   getScotPrice: () => {
     return callApi("https://apisct.cloud/price");
@@ -185,7 +188,7 @@ const steemapi = {
         [account],
         "scot_claim_token",
         json,
-        function(err, result) {
+        function (err, result) {
           if (err) {
             // console.log(err);
             reject(err);
@@ -199,7 +202,7 @@ const steemapi = {
     });
   },
   checkPendingClaim: async (account, symbol) => {
-    let url = "https://scot-api.steem-engine.com/@" + account;
+    let url = "https://scot-api.cryptoempirebot.com/@" + account;
 
     let pendingToken = await getJSON(url);
     let tokens = await ssc.findOne("tokens", "tokens", { symbol: symbol });
@@ -210,7 +213,7 @@ const steemapi = {
     try {
       let result = await ssc.findOne("tokens", "balances", {
         account: account,
-        symbol: symbol
+        symbol: symbol,
       });
 
       if (result != null) {
@@ -225,7 +228,7 @@ const steemapi = {
   getDelegationToken: async (account, symbol) => {
     let result = await ssc.find("tokens", "delegations", {
       $or: [{ from: account }, { to: account }],
-      symbol: symbol
+      symbol: symbol,
     });
 
     if (result != null) {
@@ -239,7 +242,7 @@ const steemapi = {
       let jsonStr = {
         contractName: "tokens",
         contractAction: "stake",
-        contractPayload: { to: account, symbol: symbol, quantity: amount }
+        contractPayload: { to: account, symbol: symbol, quantity: amount },
       };
       let json = JSON.stringify(jsonStr);
 
@@ -249,7 +252,7 @@ const steemapi = {
         [],
         "ssc-mainnet1",
         json,
-        function(err, result) {
+        function (err, result) {
           if (err) {
             console.log(result);
             reject(err);
@@ -267,7 +270,7 @@ const steemapi = {
       let jsonStr = {
         contractName: "tokens",
         contractAction: "delegate",
-        contractPayload: { to: toAccount, symbol: symbol, quantity: amount }
+        contractPayload: { to: toAccount, symbol: symbol, quantity: amount },
       };
       let json = JSON.stringify(jsonStr);
 
@@ -277,7 +280,7 @@ const steemapi = {
         [],
         "ssc-mainnet1",
         json,
-        function(err, result) {
+        function (err, result) {
           if (err) {
             console.log(result);
             reject(err);
@@ -292,20 +295,24 @@ const steemapi = {
   },
   claimRewardBalance: async (wif, account, rs, rd, rv) => {
     return new Promise((resolve, reject) => {
-      steem.broadcast.claimRewardBalance(wif, account, rs, rd, rv, function(
-        err,
-        result
-      ) {
-        if (err) {
-          console.log("ERROR Claiming Rewards! :(");
-          console.log(err);
-          reject(err);
-          return;
-        }
+      steem.broadcast.claimRewardBalance(
+        wif,
+        account,
+        rs,
+        rd,
+        rv,
+        function (err, result) {
+          if (err) {
+            console.log("ERROR Claiming Rewards! :(");
+            console.log(err);
+            reject(err);
+            return;
+          }
 
-        console.log("Woot! Rewards Claimed!");
-        resolve(result);
-      });
+          console.log("Woot! Rewards Claimed!");
+          resolve(result);
+        }
+      );
     });
   }, //END steem.broadcast.claimRewardBalance
   getVestingFund: async () => {
@@ -320,32 +327,35 @@ const steemapi = {
   },
   steemPowerUp: (wif, account, amount) => {
     return new Promise((resolve, reject) => {
-      steem.broadcast.transferToVesting(wif, account, account, amount, function(
-        err,
-        result
-      ) {
-        if (err) {
-          console.log(result);
-          reject(err);
-          return;
-        }
+      steem.broadcast.transferToVesting(
+        wif,
+        account,
+        account,
+        amount,
+        function (err, result) {
+          if (err) {
+            console.log(result);
+            reject(err);
+            return;
+          }
 
-        console.log("success power up!");
-        resolve(result);
-      });
+          console.log("success power up!");
+          resolve(result);
+        }
+      );
     });
   },
-  getHolder: symbol => {
+  getHolder: (symbol) => {
     return new Promise(async (resolve, reject) => {
       await getScotHolder(symbol, 500, 0)
-        .then(results => {
+        .then((results) => {
           // let i = 0;
           // for(const result of results){
           //   console.log(`${++i} : ${result.account}, ${result.symbol}, ${result.balance} ${result.symbol} `)
           // }
           resolve(results);
         })
-        .catch(err => {
+        .catch((err) => {
           reject(err);
         });
     });
@@ -358,8 +368,8 @@ const steemapi = {
         contractPayload: {
           to: to_account,
           symbol: symbol,
-          quantity: amount + ""
-        }
+          quantity: amount + "",
+        },
       };
       let json = JSON.stringify(jsonStr);
 
@@ -369,7 +379,7 @@ const steemapi = {
         [],
         "ssc-mainnet1",
         json,
-        function(err, result) {
+        function (err, result) {
           if (err) {
             console.log(result);
             reject(err);
@@ -382,11 +392,11 @@ const steemapi = {
       );
     });
   },
-  getSteemVotingPower: account => {
+  getSteemVotingPower: (account) => {
     return new Promise(async (resolve, reject) => {
       await steemapi
         .getAccount(account)
-        .then(result => {
+        .then((result) => {
           // 마지막 보팅 시각
           const last_vote_time = result.last_vote_time;
 
@@ -407,26 +417,30 @@ const steemapi = {
           );
           resolve(current_power);
         })
-        .catch(err => {
+        .catch((err) => {
           reject(err);
         });
     });
   },
   scotVoting: async (wif, account, author, permlink, weight) => {
     return new Promise((resolve, reject) => {
-      steem.broadcast.vote(wif, account, author, permlink, weight, function(
-        err,
-        result
-      ) {
-        if (err) {
-          reject(err);
-          return;
-        } else if (result != null) {
-          resolve(result);
+      steem.broadcast.vote(
+        wif,
+        account,
+        author,
+        permlink,
+        weight,
+        function (err, result) {
+          if (err) {
+            reject(err);
+            return;
+          } else if (result != null) {
+            resolve(result);
+          }
         }
-      });
+      );
     });
-  }
+  },
 };
 
 // async function test(){

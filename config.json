@@ -1,6 +1,6 @@
 {
   "steemApi": "https://api.steemit.com",
-  "steemEngineApi": "https://api.steem-engine.com/rpc/",
+  "steemEngineApi": "https://steemapi.cryptoempirebot.com/rpc/",
   "blockConfigPath": "./config/blockConfig.ini",
   "pickTag": "#happy-pick",
   "diceTag": "#happy-dice",

@@ -1,6 +1,6 @@
-const SSC = require('sscjs');
+const SSC = require("sscjs");
 
-const ssc = new SSC('https://api.steem-engine.com/rpc/');
+const ssc = new SSC("https://steemapi.cryptoempirebot.com/rpc/");
 // ssc.stream((err, res) => {
 //   console.log(err, res);
 // });
@@ -14,7 +14,7 @@ const ssc = new SSC('https://api.steem-engine.com/rpc/');
 
 // getContractInfo(contract, callback  =  null)
 // example
-ssc.getContractInfo('tokens', (err, result) => {
+ssc.getContractInfo("tokens", (err, result) => {
   console.log(err, result);
   /*
 	{
