@@ -148,6 +148,8 @@ module.exports = async () => {
 
   const title = `[${year}/${month}/${day}] KR 커뮤니티 출석부`;
 
+  content = "";
+
   Promise.all([
     getFormat(),
     getPrePosting(account, `${preDateString}-kr`),
