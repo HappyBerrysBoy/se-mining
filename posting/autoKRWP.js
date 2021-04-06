@@ -5,14 +5,12 @@ var client = new dsteem.Client("https://api.steemit.com");
 const key = require("../key.json");
 const account = "happyberrysboy";
 
-const query = {
-  tag: account,
-  limit: 5,
-};
+module.exports = async () => {
+  const query = {
+    tag: account,
+    limit: 5,
+  };
 
-getScotDataAsync(query);
-
-async function getScotDataAsync(query) {
   var result = await client.database.getDiscussions("blog", query);
   const chkSctKrwp = result[0].active_votes.filter(
     (voter) => voter.voter == "sct.krwp"
@@ -42,4 +40,4 @@ async function getScotDataAsync(query) {
         console.log(c);
       });
   }
-}
+};
