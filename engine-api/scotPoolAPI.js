@@ -8,7 +8,7 @@ const ssc = new SSC("https://steemapi.cryptoempirebot.com/rpc/");
  * pending claim token 개수 확인
  */
 module.exports.checkPendingClaim = async function (account, symbol) {
-  let url = "https://scot-api.cryptoempirebot.com/@" + account;
+  let url = "https://scot-api.steem-engine.net/@" + account;
 
   let pendingToken = await getJSON(url);
   let tokens = await ssc.findOne("tokens", "tokens", { symbol: symbol });

@@ -155,7 +155,7 @@ const steemapi = {
     return callApi("https://apisct.cloud/price/");
   },
   getScotDataAsync: (path, params) => {
-    return callApi(`https://scot-api.cryptoempirebot.com/${path}`, params);
+    return callApi(`https://scot-api.steem-engine.net/${path}`, params);
   },
   getScotTokenTransferAsync: (params) => {
     return callApi(
@@ -202,7 +202,7 @@ const steemapi = {
     });
   },
   checkPendingClaim: async (account, symbol) => {
-    let url = "https://scot-api.cryptoempirebot.com/@" + account;
+    let url = "https://scot-api.steem-engine.net/@" + account;
 
     let pendingToken = await getJSON(url);
     let tokens = await ssc.findOne("tokens", "tokens", { symbol: symbol });
