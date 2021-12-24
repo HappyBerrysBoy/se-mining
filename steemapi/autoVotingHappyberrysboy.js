@@ -158,7 +158,7 @@ cron.schedule("*/10 * * * * *", function () {
 });
 
 async function getPostingAsync(path, params) {
-  return callApi(`https://scot-api.cryptoempirebot.com/${path}`, params);
+  return callApi(`https://scot-api.steem-engine.net/${path}`, params);
 }
 
 async function callApi(url, params) {
