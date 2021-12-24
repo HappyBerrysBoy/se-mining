@@ -3,6 +3,7 @@ const schedule = require("node-schedule");
 const TelegramBot = require("node-telegram-bot-api");
 const token = "1207462239:AAH5JQNj84DXzmk7rt4sd_N_blzHpE2Zbvw";
 const bot = new TelegramBot(token, { polling: true });
+const qs = require("qs");
 
 bot.on("message", (msg) => {
   console.log(
@@ -243,6 +244,34 @@ schedule.scheduleJob("15 22 * * 0-5", async function () {
 
   // sendMsgBot(`오늘은 즐거운 ${day}!! 출근 준비는 잘하고 있나요? ^^`);
 });
+
+schedule.scheduleJob("*/30 * * * * *", async function () {
+  jejudo();
+});
+
+process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = 0;
+
+function jejudo() {
+  const data = qs.stringify({
+    courseSeq: "242",
+    visitDt: "2022.01.22",
+    visitTm: "TIME1",
+  });
+
+  axios
+    .post("https://visithalla.jeju.go.kr/reservation/coursePersonAjax.do", data)
+    .then((r) => {
+      const reserveCnt = r.data.coursePerson.reserveCnt;
+      const limitCnt = r.data.coursePerson.limitCnt;
+
+      if (reserveCnt < limitCnt) {
+        sendMsgBot(`제주도 예약 언능하셈!!!\r\n예약자수:${reserveCnt}`);
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+}
 
 function sendMsg(msg) {
   const plateNo = msg.split("-")[0];
