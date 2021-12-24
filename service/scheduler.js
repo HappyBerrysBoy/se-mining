@@ -19,7 +19,7 @@ schedule.scheduleJob("1 13 * * *", async function () {
   });
 });
 
-schedule.scheduleJob("0 22 * * *", async function () {
+schedule.scheduleJob("0 19 * * *", async function () {
   autoKrwpBurn().then((result) => {
     console.log(result);
     console.log("sent..............krwp burn.................");
