@@ -23,7 +23,7 @@ bot.on("message", (msg) => {
 });
 
 const busstopList = {
-  "71039": {
+  71039: {
     busstopMap: {
       0: "오션초등학교",
       1: "한신휴플러스",
@@ -66,7 +66,7 @@ const busstopList = {
       38: "오션초등학교",
     },
   },
-  "71030": {
+  71030: {
     busstopMap: {
       0: "용원",
       1: "용원사거리",
@@ -140,7 +140,7 @@ const busstopList = {
       69: "용원사거리",
     },
   },
-  "71062": {
+  71062: {
     0: "신호부영2차아파트",
     1: "의창수협",
     2: "신호부영5차아파트",
@@ -222,7 +222,7 @@ schedule.scheduleJob("*/10 * * * * *", async function () {
 });
 
 schedule.scheduleJob("15 22 * * 0-5", async function () {
-  botOn = true;
+  // botOn = true;
   const today = new Date();
 
   let day = "";
@@ -241,7 +241,7 @@ schedule.scheduleJob("15 22 * * 0-5", async function () {
     day = "토요일";
   }
 
-  sendMsgBot(`오늘은 즐거운 ${day}!! 출근 준비는 잘하고 있나요? ^^`);
+  // sendMsgBot(`오늘은 즐거운 ${day}!! 출근 준비는 잘하고 있나요? ^^`);
 });
 
 function sendMsg(msg) {
