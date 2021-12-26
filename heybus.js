@@ -284,6 +284,7 @@ function jejudo(idx) {
       }
     })
     .catch((err) => {
+      sendMsgBot(`봇 에러 뜸! 체크 필요`);
       console.log(err);
     });
 }
