@@ -245,27 +245,42 @@ schedule.scheduleJob("15 22 * * 0-5", async function () {
   // sendMsgBot(`오늘은 즐거운 ${day}!! 출근 준비는 잘하고 있나요? ^^`);
 });
 
-schedule.scheduleJob("*/30 * * * * *", async function () {
-  jejudo();
+let callIdx = 0;
+
+schedule.scheduleJob("10 * * * * *", async function () {
+  jejudo("1");
+});
+schedule.scheduleJob("20 * * * * *", async function () {
+  jejudo("2");
+});
+schedule.scheduleJob("30 * * * * *", async function () {
+  jejudo("3");
 });
 
 process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = 0;
 
-function jejudo() {
+function jejudo(idx) {
   const data = qs.stringify({
     courseSeq: "242",
     visitDt: "2022.01.22",
-    visitTm: "TIME1",
+    visitTm: "TIME" + idx,
   });
 
   axios
     .post("https://visithalla.jeju.go.kr/reservation/coursePersonAjax.do", data)
     .then((r) => {
+      callIdx++;
       const reserveCnt = r.data.coursePerson.reserveCnt;
       const limitCnt = r.data.coursePerson.limitCnt;
 
+      if (callIdx % 400 == 0) {
+        sendMsgBot(`봇은 돌고 있어요..!!`);
+      }
+
       if (reserveCnt < limitCnt) {
-        sendMsgBot(`제주도 예약 언능하셈!!!\r\n예약자수:${reserveCnt}`);
+        sendMsgBot(
+          `${idx}번째 시간 제주도 예약 언능하셈!!!\r\n예약자수:${reserveCnt}`
+        );
       }
     })
     .catch((err) => {
