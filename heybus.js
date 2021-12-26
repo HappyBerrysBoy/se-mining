@@ -269,7 +269,6 @@ function jejudo(idx) {
   axios
     .post("https://visithalla.jeju.go.kr/reservation/coursePersonAjax.do", data)
     .then((r) => {
-      callIdx++;
       const reserveCnt = r.data.coursePerson.reserveCnt;
       const limitCnt = r.data.coursePerson.limitCnt;
 
@@ -282,6 +281,8 @@ function jejudo(idx) {
           `${idx}번째 시간 제주도 예약 언능하셈!!!\r\n예약자수:${reserveCnt}`
         );
       }
+
+      callIdx++;
     })
     .catch((err) => {
       sendMsgBot(`봇 에러 뜸! 체크 필요`);
