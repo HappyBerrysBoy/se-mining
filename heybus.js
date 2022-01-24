@@ -189,7 +189,7 @@ const busstopList = {
   },
 };
 
-const sendlist = [1255537650, 36227498];
+const sendlist = [1255537650, 36227498, 5292344781]; // 5292344781:박팀장님
 
 const buslist = [
   { id: "71039", name: "20번버스", turningPoint: 19 },
@@ -251,18 +251,28 @@ schedule.scheduleJob("10 * * * * *", async function () {
   jejudo("1");
 });
 schedule.scheduleJob("20 * * * * *", async function () {
-  jejudo("2");
+  jejudo("3");
 });
 schedule.scheduleJob("30 * * * * *", async function () {
-  jejudo("3");
+  jejudo("5");
 });
 
 process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = 0;
 
+function getEnteranceTime(idx) {
+  if (idx === "1") {
+    return "06~08";
+  } else if (idx === "3") {
+    return "08~10";
+  } else if (idx === "5") {
+    return "10~12";
+  }
+}
+
 function jejudo(idx) {
   const data = qs.stringify({
     courseSeq: "242",
-    visitDt: "2022.01.22",
+    visitDt: "2022.02.16",
     visitTm: "TIME" + idx,
   });
 
@@ -278,7 +288,9 @@ function jejudo(idx) {
 
       if (reserveCnt < limitCnt) {
         sendMsgBot(
-          `${idx}번째 시간 제주도 예약 언능하셈!!!\r\n예약자수:${reserveCnt}`
+          `${getEnteranceTime(
+            idx
+          )}시 입장가능 제주도 예약 언능하셈요!!!\r\n현재 예약자수:${reserveCnt}`
         );
       }
 
