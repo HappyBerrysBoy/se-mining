@@ -4,23 +4,189 @@ const TelegramBot = require("node-telegram-bot-api");
 const token = "1207462239:AAH5JQNj84DXzmk7rt4sd_N_blzHpE2Zbvw";
 const bot = new TelegramBot(token, { polling: true });
 const qs = require("qs");
+const { readConfigFile, writeConfigFile } = require("./commfunc.js");
+
+const memberFileName = "memberList.json";
+const adminID = 36227498;
+const mountainCourseMap = { 성판악: "242", 관음사: "244" };
+// const memberList = [1255537650, 36227498, 5292344781, 5117244716]; // 5292344781:박팀장님 ,5117244716:영옥대리
+// const memberMap = {
+//   1255537650: { name: "혀내", status: false },
+//   36227498: { name: "나!!", status: false },
+//   5292344781: { name: "박팀장님", status: false },
+//   5117244716: { name: "영옥대리", status: false },
+// };
 
 bot.on("message", (msg) => {
-  console.log(
-    `id:${msg.from.id},
-    first_name:${msg.from.first_name},
-    username:${msg.from.username},
-    is_bot:${msg.from.is_bot}
-    text:${msg.text}`
+  const content = `
+      Start Member
+      id:${msg.from.id},
+      first_name:${msg.from.first_name},
+      username:${msg.from.username},
+      is_bot:${msg.from.is_bot}
+      text:${msg.text}`;
+
+  console.log(content);
+
+  if (msg.text === "/start") {
+    sendMsgToAdmin(content);
+  }
+});
+
+bot.onText(/\/help/, async (m) => {
+  bot.sendMessage(
+    m.chat.id,
+    `✅ 한라산 알람 봇!!
+사용법은 아래와 같습니다.
+알람은 1개만 등록 가능합니다.(시간은 3개 모두 선택 가능)
+
+- 한라산 알람 켜기
+- 시간은 6시(5시30분) 출발은 "1", 8시 출발은 "2", 10시 출발은 "3", 모두다 등록시 all로 등록
+
+명령어:/켜기 날짜 시간 코스
+
+ex) /켜기 20220101 1 성판악
+ex) /켜기 20220101 all 성판악
+
+- 한라산 알람 끄기
+
+명령어:/끄기
+
+ex) /끄기 
+
+- 관리자 전용 명령어
+/register
+/status
+`
   );
+});
 
-  //   const chatId = msg.chat.id;
+bot.onText(/\/status/, async (m) => {
+  try {
+    const members = await readConfigFile(memberFileName).then((r) => {
+      return r;
+    });
 
-  // send a message to the chat acknowledging receipt of their message
-  //   bot.sendMessage(
-  //     chatId,
-  //     `반갑습니다. ${msg.from.first_name}님. 메아리(${msg.text})`
-  //   );
+    console.log("members", members);
+
+    let msg = "";
+    const keys = Object.keys(members);
+
+    keys.forEach((i) => {
+      msg += `${i} : ${members[i].name}(${members[i].status})\r\n`;
+    });
+
+    sendMsgToAdmin(msg);
+  } catch (err) {
+    console.log(err);
+  }
+});
+
+bot.onText(/\/register/, async (m) => {
+  try {
+    const commands = m.text.split(" ");
+    const id = commands[1].toUpperCase();
+    const name = commands[2].toUpperCase();
+
+    const members = await readConfigFile(memberFileName).then((r) => {
+      return r;
+    });
+
+    members[id] = { name, status: false };
+
+    await writeConfigFile(memberFileName, { ...members }).then((r) => {
+      return r;
+    });
+
+    sendMsgToAdmin(`${name}, ${id}`);
+  } catch (err) {
+    console.log(err);
+  }
+});
+
+bot.onText(/\/켜기/, async (m) => {
+  try {
+    const commands = m.text.split(" ");
+    const date = commands[1].toUpperCase();
+    const time = commands[2].toUpperCase();
+    const course = commands[3].toUpperCase();
+
+    const members = await readConfigFile(memberFileName).then((r) => {
+      return r;
+    });
+
+    console.log("members", members);
+
+    if (!members[m.chat.id]) {
+      bot.sendMessage(m.chat.id, "등록되지 않은 유저");
+      return;
+    }
+
+    const selCourse = mountainCourseMap[course];
+
+    if (!selCourse) {
+      bot.sendMessage(m.chat.id, "코스명이 잘못 되었습니다.");
+      return;
+    }
+
+    if ("1 2 3 all".indexOf(time.toLowerCase()) < 0) {
+      bot.sendMessage(
+        m.chat.id,
+        "시간 설정이 잘못되었습니다.(1, 2, 3, all) 중에 하나여야합니다."
+      );
+      return;
+    }
+
+    if (date.length !== 8) {
+      bot.sendMessage(m.chat.id, "날짜 길이는 8자리로 입력해야합니다.");
+      return;
+    }
+
+    let msg = "";
+    members[m.chat.id].status = true;
+    members[m.chat.id].date = date;
+    members[m.chat.id].time = time;
+    members[m.chat.id].course = course;
+
+    await writeConfigFile(memberFileName, { ...members }).then((r) => {
+      return r;
+    });
+
+    bot.sendMessage(m.chat.id, "알람 등록 완료!!");
+  } catch (err) {
+    console.log(err);
+    bot.sendMessage(m.chat.id, "알람 등록 실패!!");
+  }
+});
+
+bot.onText(/\/끄기/, async (m) => {
+  try {
+    const commands = m.text.split(" ");
+
+    const members = await readConfigFile(memberFileName).then((r) => {
+      return r;
+    });
+
+    if (!members[m.chat.id]) {
+      bot.sendMessage(m.chat.id, "등록되지 않은 유저");
+      return;
+    }
+
+    let msg = "";
+    members[m.chat.id].status = false;
+    members[m.chat.id].date = "";
+    members[m.chat.id].time = "";
+    members[m.chat.id].course = "";
+
+    await writeConfigFile(memberFileName, { ...members }).then((r) => {
+      return r;
+    });
+
+    bot.sendMessage(m.chat.id, "알람 끄기 완료!!");
+  } catch (err) {
+    console.log(err);
+    bot.sendMessage(m.chat.id, "알람 끄기 실패!!");
+  }
 });
 
 const busstopList = {
@@ -189,8 +355,6 @@ const busstopList = {
   },
 };
 
-const sendlist = [1255537650, 36227498, 5292344781]; // 5292344781:박팀장님
-
 const buslist = [
   { id: "71039", name: "20번버스", turningPoint: 19 },
   { id: "71030", name: "17번버스", turningPoint: 35 },
@@ -206,12 +370,18 @@ let botOn = false;
 let msgList = {};
 
 bot.onText(/\/on/, async (m) => {
-  botOn = true;
+  if ([36227498, 1255537650].includes(m.chat.id)) {
+    botOn = true;
+    sendBusMsg("버스 알람 봇 켜짐!!");
+  }
 });
 
 bot.onText(/\/off/, async (m) => {
-  botOn = false;
-  msgList = {};
+  if ([36227498, 1255537650].includes(m.chat.id)) {
+    botOn = false;
+    msgList = {};
+    sendBusMsg("버스 알람 봇 끔!!!!");
+  }
 });
 
 schedule.scheduleJob("*/10 * * * * *", async function () {
@@ -242,19 +412,42 @@ schedule.scheduleJob("15 22 * * 0-5", async function () {
     day = "토요일";
   }
 
-  // sendMsgBot(`오늘은 즐거운 ${day}!! 출근 준비는 잘하고 있나요? ^^`);
+  // sendBusMsg(`오늘은 즐거운 ${day}!! 출근 준비는 잘하고 있나요? ^^`);
 });
 
 let callIdx = 0;
 
+async function jejuAlarm(time) {
+  const members = await readConfigFile(memberFileName).then((r) => {
+    return r;
+  });
+
+  const keys = Object.keys(members);
+  const onList = keys.filter((key) => {
+    return members[key].status;
+  });
+
+  if (onList.length) {
+    for (let i = 0; i < onList.length; i++) {
+      const member = onList[i];
+      if (
+        members[member].time === time ||
+        members[member].time.toLowerCase() === "all"
+      ) {
+        jejudo(members[member].date, time, members[member].course, member);
+      }
+    }
+  }
+}
+
 schedule.scheduleJob("10 * * * * *", async function () {
-  jejudo("1");
+  jejuAlarm("1");
 });
 schedule.scheduleJob("20 * * * * *", async function () {
-  jejudo("3");
+  jejuAlarm("3");
 });
 schedule.scheduleJob("30 * * * * *", async function () {
-  jejudo("5");
+  jejuAlarm("5");
 });
 
 process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = 0;
@@ -269,35 +462,42 @@ function getEnteranceTime(idx) {
   }
 }
 
-function jejudo(idx) {
+async function jejudo(date, time, course, chatid) {
   const data = qs.stringify({
-    courseSeq: "242",
-    visitDt: "2022.02.16",
-    visitTm: "TIME" + idx,
+    courseSeq: mountainCourseMap[course],
+    visitDt: date,
+    visitTm: "TIME" + time,
   });
 
-  axios
+  await axios
     .post("https://visithalla.jeju.go.kr/reservation/coursePersonAjax.do", data)
     .then((r) => {
       const reserveCnt = r.data.coursePerson.reserveCnt;
       const limitCnt = r.data.coursePerson.limitCnt;
 
-      if (callIdx % 400 == 0) {
-        sendMsgBot(`봇은 돌고 있어요..!!`);
+      if (callIdx % 800 == 0) {
+        sendMsgToChatid(chatid, `봇은 돌고 있어요..!!`);
       }
 
       if (reserveCnt < limitCnt) {
-        sendMsgBot(
+        sendMsgToChatid(
+          chatid,
           `${getEnteranceTime(
-            idx
-          )}시 입장가능 제주도 예약 언능하셈요!!!\r\n현재 예약자수:${reserveCnt}`
+            time
+          )}시 입장가능(${date}, ${course}) 제주도 예약 언능하셈요!!!\r\n현재 예약자수:${reserveCnt}`
         );
       }
+      // else {
+      //   sendMsgToChatid(
+      //     chatid,
+      //     `${reserveCnt}/${limitCnt} 자리 음스효!(${time}, ${date}), ${course}`
+      //   );
+      // }
 
       callIdx++;
     })
     .catch((err) => {
-      sendMsgBot(`봇 에러 뜸! 체크 필요`);
+      sendMsgToAdmin(`봇 에러 뜸! 체크 필요`);
       console.log(err);
     });
 }
@@ -308,21 +508,28 @@ function sendMsg(msg) {
 
   if (Object.keys(msgList).indexOf(plateNo) == -1) {
     msgList[plateNo] = { msg: msg };
-    sendMsgBot(msg);
+    sendBusMsg(msg);
   } else {
     const preMsg = msgList[plateNo].msg;
 
     if (preMsg == msg) return;
 
     msgList[plateNo].msg = msg;
-    sendMsgBot(msg);
+    sendBusMsg(msg);
   }
 }
 
-function sendMsgBot(msg) {
-  for (const id of sendlist) {
-    bot.sendMessage(id, msg);
-  }
+function sendMsgToAdmin(msg) {
+  bot.sendMessage(adminID, msg);
+}
+
+function sendMsgToChatid(id, msg) {
+  bot.sendMessage(id, msg);
+}
+
+function sendBusMsg(msg) {
+  bot.sendMessage("1255537650", msg);
+  sendMsgToAdmin(msg);
 }
 
 async function checkBus(businfo) {
