@@ -44,6 +44,8 @@ fs.readFile(
   }
 );
 
+const votingGap = 4; // minutes
+
 cron.schedule("*/30 * * * * *", function () {
   console.log(`start getScotDataAsync(query, discussionQuery)`);
 
@@ -53,7 +55,7 @@ cron.schedule("*/30 * * * * *", function () {
       const diffTime =
         (new Date().getTime() - new Date(content.created).getTime()) /
         (1000 * 60);
-      if (diffTime < 200 && diffTime >= 0) {
+      if (diffTime < 200 && diffTime >= votingGap) {
         let isVoting = false;
         if (!_whitelist.has(content.author)) {
           return;
@@ -94,7 +96,7 @@ cron.schedule("*/20 * * * * *", function () {
         (new Date().getTime() - new Date(content.created).getTime()) /
         (1000 * 60);
 
-      if (diffTime < 200 && diffTime >= 0) {
+      if (diffTime < 200 && diffTime >= votingGap) {
         let isVoting = false;
         if (!_whitelist.has(content.author)) {
           return;
