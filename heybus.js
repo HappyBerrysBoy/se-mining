@@ -1,7 +1,7 @@
 const axios = require('axios');
 const schedule = require('node-schedule');
 const TelegramBot = require('node-telegram-bot-api');
-const token = '1207462239:AAH5JQNj84DXzmk7rt4sd_N_blzHpE2Zbvw';
+const token = '6062750533:AAHIPOo9z7ilDq3tW6uNUG-zi66c_dQC0Lk';
 const bot = new TelegramBot(token, { polling: true });
 const qs = require('qs');
 const { readConfigFile, writeConfigFile } = require('./commfunc.js');
